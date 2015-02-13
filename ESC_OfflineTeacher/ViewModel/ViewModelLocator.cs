@@ -12,7 +12,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
-using ESC_OfflineTeacher.Model;
+
 
 namespace ESC_OfflineTeacher.ViewModel
 {
@@ -28,15 +28,7 @@ namespace ESC_OfflineTeacher.ViewModel
         static ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-
-            if (ViewModelBase.IsInDesignModeStatic)
-            {
-                SimpleIoc.Default.Register<IDataService, Design.DesignDataService>();
-            }
-            else
-            {
-                SimpleIoc.Default.Register<IDataService, DataService>();
-            }
+            
 
             SimpleIoc.Default.Register<MainViewModel>();
         }
