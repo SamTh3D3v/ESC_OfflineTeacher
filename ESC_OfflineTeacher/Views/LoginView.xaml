@@ -4,9 +4,32 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.ignore.com"
-        mc:Ignorable="d ignore"
-        DataContext="{Binding ViewModelName, Source={StaticResource Locator}}">
+        mc:Ignorable="d ignore" Width="500" Height="140"
+        DataContext="{Binding LoginViewModel, Source={StaticResource Locator}}" >
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Skins/MainSkin.xaml" />
+                <ResourceDictionary Source="/Resources/Icons.xaml" />
+                <ResourceDictionary Source="../Resources/MainResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
 
-    <Grid>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="91*"/>
+            <ColumnDefinition Width="209*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Login" Grid.Column="0" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Center"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="Mot de passe" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Center" />
+        <TextBox BorderBrush="{DynamicResource TextBoxBorderBrush}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch"   TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Margin="5"/>
+        <PasswordBox x:Name="PBox"  Grid.Column="1" HorizontalAlignment="Stretch" Margin="5" Grid.Row="1" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+        <Button Content="Connexion" Grid.Row="2" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=PBox}" Grid.Column="1" Margin="5" Height="40" Width="150" VerticalAlignment="Top" Style="{StaticResource AccentedSquareButtonStyle}"/>
     </Grid>
 </Page>
