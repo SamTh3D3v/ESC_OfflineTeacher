@@ -24,12 +24,24 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <DataGrid Style="{StaticResource AzureDataGrid}" Grid.Row="0" AutoGenerateColumns="False">
+                    <DataGrid  Grid.Row="0" AutoGenerateColumns="False" ItemsSource="{Binding ListNotesExamins}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Genre"
-                                    Binding="{Binding Name}" />
-                            <controls:DataGridNumericUpDownColumn Header="Price" 
-                                                      Binding="{Binding Price}" 
+                            <DataGridTextColumn Header="Matricule"
+                                    Binding="{Binding Matricule}" />
+                            <DataGridTextColumn Header="Nom"
+                                    Binding="{Binding Nom}" />
+                            <DataGridTextColumn Header="Prenom"
+                                    Binding="{Binding Prenom}" />
+                            <controls:DataGridNumericUpDownColumn Header="EMD1" 
+                                                      Binding="{Binding NoteExamin}" 
+                                                      StringFormat="C" 
+                                                      Minimum="0" />
+                            <controls:DataGridNumericUpDownColumn Header="Participation" 
+                                                      Binding="{Binding NoteParticipation}" 
+                                                      StringFormat="C" 
+                                                      Minimum="0" />
+                            <controls:DataGridNumericUpDownColumn Header="Rattrapage" 
+                                                      Binding="{Binding NoteRattrapage}" 
                                                       StringFormat="C" 
                                                       Minimum="0" />
                         </DataGrid.Columns>
@@ -37,7 +49,27 @@
                 </Grid>
             </controls:MetroTabItem>
             <controls:MetroTabItem Header="Notes Dettes">
-                
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid  Grid.Row="0" AutoGenerateColumns="False" ItemsSource="{Binding ListNotesExamins}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Matricule"
+                                    Binding="{Binding Matricule}" />
+                            <DataGridTextColumn Header="Nom"
+                                    Binding="{Binding Nom}" />
+                            <DataGridTextColumn Header="Prenom"
+                                    Binding="{Binding Prenom}" />
+                            <controls:DataGridNumericUpDownColumn Header="EMD1" 
+                                                      Binding="{Binding NoteDette}" 
+                                                      StringFormat="C" 
+                                                      Minimum="0" />
+                            
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
             </controls:MetroTabItem>
         </controls:MetroAnimatedTabControl>
     </Grid>
