@@ -77,17 +77,13 @@
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\FrameNavigationService.cs" />
-    <Compile Include="ViewModel\NoteDettesViewModel.cs" />
-    <Compile Include="ViewModel\NoteExaminsViewModel.cs" />
+    <Compile Include="ViewModel\NoteViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\NotesDettesView.xaml.cs">
-      <DependentUpon>NotesDettesView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\NotesExaminsView.xaml.cs">
-      <DependentUpon>NotesExaminsView.xaml</DependentUpon>
+    <Compile Include="Views\NotesView.xaml.cs">
+      <DependentUpon>NotesView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -117,12 +113,8 @@
       <SubType>Form</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\NotesDettesView.xaml">
-      <SubType>Form</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\NotesExaminsView.xaml">
-      <SubType>Form</SubType>
+    <Page Include="Views\NotesView.xaml">
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

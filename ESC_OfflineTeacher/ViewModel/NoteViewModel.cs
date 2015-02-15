@@ -8,12 +8,12 @@ namespace ESC_OfflineTeacher.ViewModel
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public class NoteExaminsViewModel : ViewModelBase
+    public class NoteViewModel : ViewModelBase
     {
         /// <summary>
         /// Initializes a new instance of the NoteExaminsViewModel class.
         /// </summary>
-        public NoteExaminsViewModel()
+        public NoteViewModel()
         {
         }
     }

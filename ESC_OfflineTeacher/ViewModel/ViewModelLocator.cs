@@ -34,8 +34,7 @@ namespace ESC_OfflineTeacher.ViewModel
             SetupNavigation();
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<LoginViewModel>();
-            SimpleIoc.Default.Register<NoteExaminsViewModel>();
-            SimpleIoc.Default.Register<NoteDettesViewModel>();
+            SimpleIoc.Default.Register<NoteViewModel>();            
         }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
@@ -60,29 +59,18 @@ namespace ESC_OfflineTeacher.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
-        public NoteExaminsViewModel NoteExaminsViewModel
+        public NoteViewModel NoteViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<NoteExaminsViewModel>();
+                return ServiceLocator.Current.GetInstance<NoteViewModel>();
             }
-        }   
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
-            "CA1822:MarkMembersAsStatic",
-            Justification = "This non-static member is needed for data binding purposes.")]
-        public NoteDettesViewModel NoteDettesProperty
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<NoteDettesViewModel>();
-            }
-        }
+        }           
         private static void SetupNavigation()
         {
             var navigationService = new FrameNavigationService();
             navigationService.Configure("LoginView", new Uri("../Views/LoginView.xaml",UriKind.Relative));
-            navigationService.Configure("NotesView", new Uri("../Views/NotesDettesView.xaml", UriKind.Relative));
-            navigationService.Configure("DetesView", new Uri("../Views/NotesExaminsView.xaml", UriKind.Relative));
+            navigationService.Configure("Notes", new Uri("../Views/NotesView.xaml", UriKind.Relative));            
 
             SimpleIoc.Default.Register<IFrameNavigationService>(() => navigationService);
         }
