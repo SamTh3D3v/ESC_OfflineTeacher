@@ -12,6 +12,8 @@ namespace ESC_OfflineTeacher
         {
             InitializeComponent();
             Closing += (s, e) => ViewModelLocator.Cleanup();
+
+
         }
     }
 }

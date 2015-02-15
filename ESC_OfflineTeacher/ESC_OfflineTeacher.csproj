@@ -129,6 +129,7 @@
   <ItemGroup>
     <Folder Include="Design\" />
     <Folder Include="Model\" />
+    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\WindowsIcons-license.txt" />
