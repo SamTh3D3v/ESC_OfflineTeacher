@@ -75,88 +75,111 @@ GlowBrush="{DynamicResource AccentColorBrush}"
             </controls:DropDownButton>
             <TextBox Grid.Row="0" Grid.Column="1" Margin="1" BorderBrush="Black"></TextBox>
         </Grid>
-        <Border x:Name="FlyoutBorder" Grid.Row="0"  Width="{Binding Width, ElementName=NavFlyout}"  BorderThickness="0" Grid.Column="0" Grid.RowSpan="2">
-            <controls:Flyout  x:Name="NavFlyout"     IsOpen="True"  Header="Flyout"  Position="Left" Width="400" >                
-                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,0,50,0">
+        <controls:Flyout  x:Name="NavFlyout" Grid.Row="0"  Grid.Column="0" Grid.RowSpan="2"   IsOpen="True"  Header="Flyout"  Position="Left" Width="400" >
+            <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Margin="5" Background="{StaticResource AccentColorBrush}" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="Nombre des étudiants" HorizontalAlignment="Center"/>
+                    <Label Grid.Row="1" HorizontalAlignment="Center" Content="244" FontSize="20"/>
+                </Grid>
+
+                <Grid Grid.Row="1" Margin="5" Background="{StaticResource AccentColorBrush}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Spécialité" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <Label Content="Matiere" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 
-                    <Grid Grid.Row="0" Margin="5" Background="{StaticResource AccentColorBrush}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Label Content="Spécialité" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                        <Label Content="Matiere" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-
-                        <controls:DropDownButton  Grid.Row="0" Grid.Column="1" Margin="5"
+                    <controls:DropDownButton  Grid.Row="0" Grid.Column="1" Margin="5"
                  VerticalContentAlignment="Center"
                  HorizontalAlignment="Stretch"
                  Content="(2MC) Marketing et Communication"
                  DisplayMemberPath="Title"
                  HorizontalContentAlignment="Center"                                          
                  ItemsSource="{Binding SpecialitesList}">
-                        </controls:DropDownButton>
+                    </controls:DropDownButton>
 
-                        <controls:DropDownButton  Grid.Row="1" Grid.Column="1" Margin="5"
+                    <controls:DropDownButton  Grid.Row="1" Grid.Column="1" Margin="5"
                  VerticalContentAlignment="Center"
                  HorizontalAlignment="Stretch"
                  Content="Economie Managériale-2424"
                  DisplayMemberPath="Title"
                  HorizontalContentAlignment="Center"                                          
                  ItemsSource="{Binding MatieresList}">
-                        </controls:DropDownButton>
-                    </Grid>
+                    </controls:DropDownButton>
+                </Grid>
 
-                    <Grid Grid.Row="1" Margin="5" Background="{StaticResource AccentColorBrush}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Label Content="Semèstre" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                        <Label Content="Section" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                        <Label Content="Groupe" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                        <controls:DropDownButton  Grid.Row="0" Grid.Column="1" Margin="5"
+                <Grid Grid.Row="2" Margin="5" Background="{StaticResource AccentColorBrush}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Semèstre" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <Label Content="Section" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <Label Content="Groupe" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <controls:DropDownButton  Grid.Row="0" Grid.Column="1" Margin="5"
                  VerticalContentAlignment="Center"
                  HorizontalAlignment="Stretch"
                  Content="Quatrieme Semestre"
                  DisplayMemberPath="Title"
                  HorizontalContentAlignment="Center"                                          
                  ItemsSource="{Binding SemetresList}">
-                        </controls:DropDownButton>
-                        <controls:DropDownButton  Grid.Row="1" Grid.Column="1" Margin="5"
+                    </controls:DropDownButton>
+                    <controls:DropDownButton  Grid.Row="1" Grid.Column="1" Margin="5"
                  VerticalContentAlignment="Center"
                  HorizontalAlignment="Stretch"
                  Content="Quatrieme Semestre"
                  DisplayMemberPath="Title"
                  HorizontalContentAlignment="Center"                                          
                  ItemsSource="{Binding SectionList}">
-                        </controls:DropDownButton>
-                        <controls:DropDownButton  Grid.Row="2" Grid.Column="1" Margin="5"
+                    </controls:DropDownButton>
+                    <controls:DropDownButton  Grid.Row="2" Grid.Column="1" Margin="5"
                  VerticalContentAlignment="Center"
                  HorizontalAlignment="Stretch"
                  Content="Quatrieme Semestre"
                  DisplayMemberPath="Title"
                  HorizontalContentAlignment="Center"                                          
                  ItemsSource="{Binding GroupeList}">
-                        </controls:DropDownButton>
-                    </Grid>
+                    </controls:DropDownButton>
                 </Grid>
-            </controls:Flyout>
-        </Border>
-        
+
+                <Grid Grid.Row="3" Margin="5" Background="{StaticResource AccentColorBrush}" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Content="Examin" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <controls:DropDownButton  Grid.Row="0" Grid.Column="1" Margin="5"
+                 VerticalContentAlignment="Center"
+                 HorizontalAlignment="Stretch"
+                 Content="EMD1"
+                 DisplayMemberPath="Title"
+                 HorizontalContentAlignment="Center"                                          
+                 ItemsSource="{Binding ExaminsList}">
+                    </controls:DropDownButton>
+                </Grid>
+            </Grid>
+        </controls:Flyout>
         <Frame Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" NavigationUIVisibility="Hidden" Source="{Binding NavigationSource}" BorderBrush="Black" BorderThickness="2" Margin="2"></Frame>
 
     </Grid>
