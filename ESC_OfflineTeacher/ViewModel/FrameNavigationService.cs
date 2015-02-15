@@ -9,11 +9,11 @@ using System.Windows.Media;
 
 namespace ESC_OfflineTeacher.ViewModel
 {
-    class NavigationService : IFrameNavigationService
+    class FrameNavigationService : IFrameNavigationService
     {
         private readonly Dictionary<string, Uri> _pagesByKey;
         private readonly List<string> _historic; 
-        public NavigationService()
+        public FrameNavigationService()
         {
             _pagesByKey = new Dictionary<string, Uri>();
             _historic = new List<string>();
@@ -46,7 +46,7 @@ namespace ESC_OfflineTeacher.ViewModel
             {
                 if (!_pagesByKey.ContainsKey(pageKey))
                 {
-                    throw new ArgumentException(string.Format("No such page: {0}. Did you forget to call NavigationService.Configure?", pageKey), "pageKey");
+                    throw new ArgumentException(string.Format("No such page: {0} ", pageKey), "pageKey");
                 }
 
                 var frame = GetDescendantFromName(Application.Current.MainWindow, "MainFrame") as Frame;

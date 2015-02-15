@@ -79,10 +79,10 @@ namespace ESC_OfflineTeacher.ViewModel
         }
         private static void SetupNavigation()
         {
-            var navigationService = new NavigationService();
-            navigationService.Configure("LoginView", new Uri("../Views/LoginView.xaml"));
-            navigationService.Configure("NotesView", new Uri("../Views/NotesDettesView.xaml"));
-            navigationService.Configure("DetesView", new Uri("../Views/NotesExaminsView.xaml"));
+            var navigationService = new FrameNavigationService();
+            navigationService.Configure("LoginView", new Uri("../Views/LoginView.xaml",UriKind.Relative));
+            navigationService.Configure("NotesView", new Uri("../Views/NotesDettesView.xaml", UriKind.Relative));
+            navigationService.Configure("DetesView", new Uri("../Views/NotesExaminsView.xaml", UriKind.Relative));
 
             SimpleIoc.Default.Register<IFrameNavigationService>(() => navigationService);
         }

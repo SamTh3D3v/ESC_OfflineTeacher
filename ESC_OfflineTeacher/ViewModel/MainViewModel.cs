@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 
 
 namespace ESC_OfflineTeacher.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        #region Conts       
+        #region Conts
         #endregion
         #region Fields
+
+        private readonly IFrameNavigationService _navigationService;
         private bool _navigationSource;
         private ObservableCollection<String> _specialiteList;
         private ObservableCollection<String> _matiereList;
@@ -21,7 +24,7 @@ namespace ESC_OfflineTeacher.ViewModel
         private ObservableCollection<String> _rechercherParList;
         private String _searchText = "";
         #endregion
-        #region Properties               
+        #region Properties
         public bool NavigationSource
         {
             get
@@ -39,7 +42,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 _navigationSource = value;
                 RaisePropertyChanged();
             }
-        }           
+        }
         public ObservableCollection<String> SpecialiteList
         {
             get
@@ -57,7 +60,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 _specialiteList = value;
                 RaisePropertyChanged();
             }
-        }                 
+        }
         public ObservableCollection<String> MatiereList
         {
             get
@@ -75,7 +78,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 _matiereList = value;
                 RaisePropertyChanged();
             }
-        }                     
+        }
         public ObservableCollection<String> SemestreList
         {
             get
@@ -93,7 +96,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 _semestreList = value;
                 RaisePropertyChanged();
             }
-        }   
+        }
         public ObservableCollection<String> SectionList
         {
             get
@@ -111,7 +114,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 _sectionList = value;
                 RaisePropertyChanged();
             }
-        }      
+        }
         public ObservableCollection<String> GroupeList
         {
             get
@@ -129,7 +132,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 _groupeList = value;
                 RaisePropertyChanged();
             }
-        }      
+        }
         public ObservableCollection<String> ExaminList
         {
             get
@@ -165,7 +168,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 _nbEtudiants = value;
                 RaisePropertyChanged();
             }
-        }       
+        }
         public ObservableCollection<String> RechercherParList
         {
             get
@@ -183,7 +186,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 _rechercherParList = value;
                 RaisePropertyChanged();
             }
-        }  
+        }
         public String SearchText
         {
             get
@@ -203,11 +206,23 @@ namespace ESC_OfflineTeacher.ViewModel
             }
         }
         #endregion
-        #region Ctors and Methods
-        public MainViewModel()
+        #region Commands
+        private RelayCommand _mainWindowLoadedCommand;
+        public RelayCommand MainWindowLoadedCommand
         {
-
-        }  
-        #endregion            
+            get
+            {
+                return _mainWindowLoadedCommand
+                    ?? (_mainWindowLoadedCommand = new RelayCommand(
+                    () => _navigationService.NavigateTo("LoginView")));
+            }
+        }
+        #endregion
+        #region Ctors and Methods
+        public MainViewModel(IFrameNavigationService navigationService)
+        {
+            _navigationService = navigationService;
+        }
+        #endregion
     }
 }
