@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using ESC_OfflineTeacher.Annotations;
 
 namespace ESC_OfflineTeacher.ViewModel
 {
-    class FrameNavigationService : IFrameNavigationService
+    class FrameNavigationService : IFrameNavigationService,INotifyPropertyChanged
     {
         private readonly Dictionary<string, Uri> _pagesByKey;
         private readonly List<string> _historic; 
@@ -17,13 +20,27 @@ namespace ESC_OfflineTeacher.ViewModel
         {
             _pagesByKey = new Dictionary<string, Uri>();
             _historic = new List<string>();
-        }
-
+        }         
+        private string _currentPageKey  ;                
         public string CurrentPageKey
         {
-            get;
-            private set;
+            get
+            {
+                return _currentPageKey;
+            }
+
+            private  set
+            {
+                if (_currentPageKey == value)
+                {
+                    return;
+                }
+
+                _currentPageKey = value;
+                OnPropertyChanged("CurrentPageKey");
+            }
         }
+        
 
         public object Parameter { get; private set; }
         public void GoBack()
@@ -105,5 +122,13 @@ namespace ESC_OfflineTeacher.ViewModel
             return null;
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

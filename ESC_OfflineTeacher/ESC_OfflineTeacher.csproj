@@ -73,7 +73,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\FlyoutOpenConverter.cs" />
     <Compile Include="Model\EtudiantNote.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModel\IFrameNavigationService.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

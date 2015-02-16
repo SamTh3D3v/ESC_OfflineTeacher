@@ -11,7 +11,6 @@ namespace ESC_OfflineTeacher.ViewModel
         #region Conts
         #endregion
         #region Fields
-
         private readonly IFrameNavigationService _navigationService;
         private bool _navigationSource;
         private ObservableCollection<String> _specialiteList;
@@ -23,8 +22,15 @@ namespace ESC_OfflineTeacher.ViewModel
         private String _nbEtudiants;
         private ObservableCollection<String> _rechercherParList;
         private String _searchText = "";
+        private bool _sideBarIsOpen;
         #endregion
         #region Properties
+
+        public IFrameNavigationService FrameNavigationService
+        {
+            get { return _navigationService; }
+        }
+
         public bool NavigationSource
         {
             get
@@ -204,6 +210,24 @@ namespace ESC_OfflineTeacher.ViewModel
                 _searchText = value;
                 RaisePropertyChanged();
             }
+        }               
+        public bool SideBarIsOpen 
+        {
+            get
+            {
+                return _sideBarIsOpen;
+            }
+
+            set
+            {
+                if (_sideBarIsOpen == value)
+                {
+                    return;
+                }
+
+                _sideBarIsOpen = value;
+                RaisePropertyChanged();
+            }
         }
         #endregion
         #region Commands
@@ -214,7 +238,10 @@ namespace ESC_OfflineTeacher.ViewModel
             {
                 return _mainWindowLoadedCommand
                     ?? (_mainWindowLoadedCommand = new RelayCommand(
-                    () => _navigationService.NavigateTo("LoginView")));
+                        () =>
+                        {
+                            _navigationService.NavigateTo("LoginView");                            
+                        }));
             }
         }
         #endregion

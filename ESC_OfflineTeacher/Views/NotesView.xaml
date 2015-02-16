@@ -64,8 +64,8 @@
                                     Binding="{Binding Prenom}" />
                             <controls:DataGridNumericUpDownColumn Header="EMD1" 
                                                       Binding="{Binding NoteDette}" 
-                                                      StringFormat="C" 
-                                                      Minimum="0" />
+                                                      StringFormat="N" 
+                                                      Minimum="0" Maximum="20" />
                             
                         </DataGrid.Columns>
                     </DataGrid>

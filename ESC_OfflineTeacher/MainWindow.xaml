@@ -72,12 +72,12 @@
                  HorizontalAlignment="Stretch"
                  Content="Rechercher par"
                  DisplayMemberPath="Matricule"
-                 HorizontalContentAlignment="Center"                                       
+                 HorizontalContentAlignment="Center"                                        
                  ItemsSource="{Binding RechercherParList}">
             </controls:DropDownButton>
             <TextBox Grid.Row="0" Text="{Binding SearchText,Mode=TwoWay}" Grid.Column="1" Margin="1" BorderBrush="Black"></TextBox>
         </Grid>
-        <controls:Flyout  x:Name="NavFlyout" Grid.Row="0"  Grid.Column="0" Grid.RowSpan="2"   IsOpen="True"  Header="Flyout"  Position="Left" Width="400" >
+        <controls:Flyout  x:Name="NavFlyout" Grid.Row="0"  Grid.Column="0" Grid.RowSpan="2"   IsOpen="{Binding FrameNavigationService.CurrentPageKey,Converter={StaticResource FlyoutOpenConverter},Mode=OneWay}"  Header="Flyout"  Position="Left" Width="400" >
             <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
