@@ -12,7 +12,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Skins/MainSkin.xaml" />
                 <ResourceDictionary Source="/Resources/Icons.xaml" />
-                <ResourceDictionary Source="../Resources/MainResourceDictionary.xaml"/>                
+                <ResourceDictionary Source="../Resources/MainResourceDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
@@ -21,10 +21,29 @@
             <controls:MetroTabItem Header="Notes Examins">
                 <Grid>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <DataGrid  Grid.Row="0" AutoGenerateColumns="False" ItemsSource="{Binding ListNotesExamins}">
+                    <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <controls:DropDownButton  Grid.Row="0" Grid.Column="0" Margin="2"
+                            VerticalContentAlignment="Center"
+                            HorizontalAlignment="Stretch"
+                            Content="Rechercher par"
+                            DisplayMemberPath="Matricule"
+                            HorizontalContentAlignment="Center"                                        
+                            ItemsSource="{Binding RechercherParList}">
+                        </controls:DropDownButton>
+                        <TextBox Grid.Row="0" Text="{Binding SearchText,Mode=TwoWay}" Grid.Column="1" Margin="1" BorderBrush="Black"></TextBox>
+                    </Grid>
+                    <DataGrid  Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding ListNotesExamins}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Matricule"
                                     Binding="{Binding Matricule}" />
@@ -51,10 +70,29 @@
             <controls:MetroTabItem Header="Notes Dettes">
                 <Grid>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <DataGrid  Grid.Row="0" AutoGenerateColumns="False" ItemsSource="{Binding ListNotesExamins}">
+                    <Grid  Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <controls:DropDownButton  Grid.Row="0" Grid.Column="0" Margin="2"
+                             VerticalContentAlignment="Center"
+                             HorizontalAlignment="Stretch"
+                             Content="Rechercher par"
+                             DisplayMemberPath="Matricule"
+                             HorizontalContentAlignment="Center"                                        
+                             ItemsSource="{Binding RechercherParList}">
+                        </controls:DropDownButton>
+                        <TextBox Grid.Row="0" Text="{Binding SearchText,Mode=TwoWay}" Grid.Column="1" Margin="1" BorderBrush="Black"></TextBox>
+                    </Grid>
+                    <DataGrid  Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding ListNotesExamins}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Matricule"
                                     Binding="{Binding Matricule}" />
@@ -66,12 +104,12 @@
                                                       Binding="{Binding NoteDette}" 
                                                       StringFormat="N" 
                                                       Minimum="0" Maximum="20" />
-                            
+
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
             </controls:MetroTabItem>
         </controls:MetroAnimatedTabControl>
     </Grid>
-    
+
 </Page>

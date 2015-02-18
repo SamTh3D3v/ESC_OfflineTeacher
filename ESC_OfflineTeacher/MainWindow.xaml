@@ -51,33 +51,14 @@
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
     <Grid x:Name="LayoutRoot">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+        <Grid.RowDefinitions>            
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Column="1" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <controls:DropDownButton  Grid.Row="0" Grid.Column="0" Margin="2"
-                 VerticalContentAlignment="Center"
-                 HorizontalAlignment="Stretch"
-                 Content="Rechercher par"
-                 DisplayMemberPath="Matricule"
-                 HorizontalContentAlignment="Center"                                        
-                 ItemsSource="{Binding RechercherParList}">
-            </controls:DropDownButton>
-            <TextBox Grid.Row="0" Text="{Binding SearchText,Mode=TwoWay}" Grid.Column="1" Margin="1" BorderBrush="Black"></TextBox>
-        </Grid>
-        <controls:Flyout  x:Name="NavFlyout" Grid.Row="0"  Grid.Column="0" Grid.RowSpan="2"   IsOpen="{Binding FrameNavigationService.CurrentPageKey,Converter={StaticResource FlyoutOpenConverter},Mode=OneWay}"  Header="Flyout"  Position="Left" Width="400" >
+        </Grid.ColumnDefinitions>        
+        <controls:Flyout  x:Name="NavFlyout" Grid.Row="0"  Grid.Column="0"   IsOpen="{Binding FrameNavigationService.CurrentPageKey,Converter={StaticResource FlyoutOpenConverter},Mode=OneWay}"  Header="Flyout"  Position="Left" Width="400" >
             <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -178,7 +159,7 @@
                 </Grid>
             </Grid>
         </controls:Flyout>
-        <Frame Grid.Row="1" x:Name="MainFrame" VerticalContentAlignment="Center"
+        <Frame Grid.Row="0" x:Name="MainFrame" VerticalContentAlignment="Center"
                HorizontalContentAlignment="Center" Grid.Column="1" VerticalAlignment="Stretch" 
                HorizontalAlignment="Stretch" NavigationUIVisibility="Hidden" BorderBrush="Black" 
                BorderThickness="2" Margin="2"/>
