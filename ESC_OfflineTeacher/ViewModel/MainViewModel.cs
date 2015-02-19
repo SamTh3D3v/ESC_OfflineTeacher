@@ -243,7 +243,7 @@ namespace ESC_OfflineTeacher.ViewModel
                             _navigationService.NavigateTo("LoginView");                            
                         }));
             }
-        }
+        }        
         #endregion
         #region Ctors and Methods
         public MainViewModel(IFrameNavigationService navigationService)

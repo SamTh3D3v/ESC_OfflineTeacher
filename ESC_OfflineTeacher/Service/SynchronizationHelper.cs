@@ -44,9 +44,9 @@ namespace ESC_OfflineTeacher.Service
         {
 
             SyncResults results;
-            results = SynchronizeProductsEmployees();
+            results = SynchronizeEtudiantProfMat();
             worker.ReportProgress(0, results);
-            results = SynchronizeEmployeeSales();
+            results = SynchronizeNote();
             worker.ReportProgress(0, results);
         }
 

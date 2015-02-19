@@ -51,7 +51,7 @@
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
     <Grid x:Name="LayoutRoot">
-        <Grid.RowDefinitions>            
+        <Grid.RowDefinitions>                        
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -159,7 +159,8 @@
                 </Grid>
             </Grid>
         </controls:Flyout>
-        <Frame Grid.Row="0" x:Name="MainFrame" VerticalContentAlignment="Center"
+        
+        <Frame Grid.Row="0"  x:Name="MainFrame" VerticalContentAlignment="Center"
                HorizontalContentAlignment="Center" Grid.Column="1" VerticalAlignment="Stretch" 
                HorizontalAlignment="Stretch" NavigationUIVisibility="Hidden" BorderBrush="Black" 
                BorderThickness="2" Margin="2"/>

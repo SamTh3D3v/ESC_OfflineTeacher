@@ -17,7 +17,15 @@
         </ResourceDictionary>
     </Page.Resources>
     <Grid>
-        <controls:MetroAnimatedTabControl>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0">
+            <Button x:Name="btnSync" Content="Synchronize" HorizontalAlignment="Left"  Width="75" Command="{Binding SyncCommand}"/>
+            <Button x:Name="btnInsert" Content="Insert Record" HorizontalAlignment="Left"  Width="111" />
+        </StackPanel>
+        <controls:MetroAnimatedTabControl Grid.Row="1">
             <controls:MetroTabItem Header="Notes Examins">
                 <Grid>
                     <Grid.RowDefinitions>
