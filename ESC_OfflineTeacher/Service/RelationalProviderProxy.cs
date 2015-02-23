@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using Microsoft.Synchronization;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using Microsoft.Synchronization.Data;
 using System.IO;
-using ServiceInterface;
+using Microsoft.Synchronization.FeedSync;
+using SyncLibrary;
+
 
 namespace ESC_OfflineTeacher.Service
 {
@@ -16,8 +19,7 @@ namespace ESC_OfflineTeacher.Service
         protected string scopeName;
         protected DirectoryInfo localBatchingDirectory;
         protected bool disposed = false;
-        ISyncService proxy;
-        protected string serviceURL;
+        ISyncService proxy;        
 
         private string batchingDirectory =
             Environment.ExpandEnvironmentVariables("%TEMP%");
@@ -49,12 +51,19 @@ namespace ESC_OfflineTeacher.Service
             }
         }
 
-        public RelationalProviderProxy(string scopeName, string serviceURL)
+        public RelationalProviderProxy(string scopeName)
         {
             this.scopeName = scopeName;
-            this.serviceURL = serviceURL;
-            this.CreateProxy();
-            this.proxy.Initialize(scopeName);
+            proxy = new SyncService();
+            try
+            {
+                this.proxy.Initialize(scopeName);
+            }
+            catch (Exception ex)
+            {
+                
+                Debug.WriteLine(ex.Message);
+            }
 
         }
 
@@ -227,18 +236,19 @@ namespace ESC_OfflineTeacher.Service
             throw new NotImplementedException();
         }
 
-        protected void CreateProxy()
-        {
-            WSHttpBinding binding = new WSHttpBinding();
-            //BasicHttpBinding binding = new BasicHttpBinding();
-            binding.ReaderQuotas.MaxArrayLength = 10485760;
-            binding.MaxReceivedMessageSize = 10485760;
-            binding.Security.Mode = SecurityMode.None;
-            binding.ReliableSession.Enabled = true;
-            ChannelFactory<ISyncService> factory =
-                new ChannelFactory<ISyncService>(binding, new EndpointAddress(serviceURL));
-            this.proxy = factory.CreateChannel();
-        }
+        //protected void CreateProxy()
+        //{                                   
+        //    WSHttpBinding binding = new WSHttpBinding();
+        //    //BasicHttpBinding binding = new BasicHttpBinding();
+        //    binding.ReaderQuotas.MaxArrayLength = 10485760;
+        //    binding.MaxReceivedMessageSize = 10485760;
+        //    binding.Security.Mode = SecurityMode.None;
+        //    binding.ReliableSession.Enabled = true;
+        //    ChannelFactory<ISyncService> factory =
+        //        new ChannelFactory<ISyncService>(binding, new EndpointAddress("http://localhost:8733/Design_Time_Addresses/WcfSyncService/Service1/"));
+        //    this.proxy = factory.CreateChannel();
+            
+        //}
 
         public DbSyncScopeDescription GetScopeDescription()
         {

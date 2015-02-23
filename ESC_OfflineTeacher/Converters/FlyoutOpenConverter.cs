@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 
 namespace ESC_OfflineTeacher.Converters
@@ -16,7 +17,7 @@ namespace ESC_OfflineTeacher.Converters
             {
                 return null;
             }
-            return (value.ToString() == "Notes");
+            return (value.ToString() == "Notes")?Visibility.Visible:Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

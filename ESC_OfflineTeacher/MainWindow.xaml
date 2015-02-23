@@ -56,10 +56,11 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>        
-        <controls:Flyout  x:Name="NavFlyout" Grid.Row="0"  Grid.Column="0"   IsOpen="{Binding FrameNavigationService.CurrentPageKey,Converter={StaticResource FlyoutOpenConverter},Mode=OneWay}"  Header="Flyout"  Position="Left" Width="400" >
-            <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Border  x:Name="NavFlyout" Grid.Row="0"  Grid.Column="0"   Visibility="{Binding FrameNavigationService.CurrentPageKey,Converter={StaticResource FlyoutOpenConverter}}"   Width="400" >
+            <Grid Background="WhiteSmoke" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -67,7 +68,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0" Margin="5" Background="{StaticResource AccentColorBrush}" >
+                <Grid  Grid.Row="0" Margin="5" Background="{StaticResource AccentColorBrush}" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -75,7 +76,7 @@
                     <Label Grid.Row="0" Content="Nombre des étudiants" HorizontalAlignment="Center"/>
                     <Label Grid.Row="1" HorizontalAlignment="Center" Content="{Binding NbEtdiants}" FontSize="20"/>
                 </Grid>
-                <Grid Grid.Row="1" Margin="5" Background="{StaticResource AccentColorBrush}">
+                <Grid  Grid.Row="1" Margin="5" Background="{StaticResource AccentColorBrush}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -158,10 +159,10 @@
                     </controls:DropDownButton>
                 </Grid>
             </Grid>
-        </controls:Flyout>
-        
+        </Border>
+        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center"/>
         <Frame Grid.Row="0"  x:Name="MainFrame" VerticalContentAlignment="Center"
-               HorizontalContentAlignment="Center" Grid.Column="1" VerticalAlignment="Stretch" 
+               HorizontalContentAlignment="Center" Grid.Column="2" VerticalAlignment="Stretch" 
                HorizontalAlignment="Stretch" NavigationUIVisibility="Hidden" BorderBrush="Black" 
                BorderThickness="2" Margin="2"/>
     </Grid>

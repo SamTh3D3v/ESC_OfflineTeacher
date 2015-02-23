@@ -5,22 +5,32 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESC_OfflineTeacher", "ESC_OfflineTeacher\ESC_OfflineTeacher.csproj", "{552177FB-1089-4BC4-B074-E3E6370125FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceInterface", "ServiceInterface\ServiceInterface.csproj", "{467279DE-8089-4902-8600-861E231972AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncLibrary", "SyncLibrary\SyncLibrary.csproj", "{5AEF7747-4766-4AFD-9509-71241DEC734E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{552177FB-1089-4BC4-B074-E3E6370125FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{552177FB-1089-4BC4-B074-E3E6370125FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{552177FB-1089-4BC4-B074-E3E6370125FC}.Debug|x64.ActiveCfg = Debug|x64
+		{552177FB-1089-4BC4-B074-E3E6370125FC}.Debug|x64.Build.0 = Debug|x64
 		{552177FB-1089-4BC4-B074-E3E6370125FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{552177FB-1089-4BC4-B074-E3E6370125FC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{467279DE-8089-4902-8600-861E231972AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{467279DE-8089-4902-8600-861E231972AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{467279DE-8089-4902-8600-861E231972AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{467279DE-8089-4902-8600-861E231972AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{552177FB-1089-4BC4-B074-E3E6370125FC}.Release|x64.ActiveCfg = Release|x64
+		{552177FB-1089-4BC4-B074-E3E6370125FC}.Release|x64.Build.0 = Release|x64
+		{5AEF7747-4766-4AFD-9509-71241DEC734E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AEF7747-4766-4AFD-9509-71241DEC734E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AEF7747-4766-4AFD-9509-71241DEC734E}.Debug|x64.ActiveCfg = Debug|x64
+		{5AEF7747-4766-4AFD-9509-71241DEC734E}.Debug|x64.Build.0 = Debug|x64
+		{5AEF7747-4766-4AFD-9509-71241DEC734E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AEF7747-4766-4AFD-9509-71241DEC734E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AEF7747-4766-4AFD-9509-71241DEC734E}.Release|x64.ActiveCfg = Release|x64
+		{5AEF7747-4766-4AFD-9509-71241DEC734E}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

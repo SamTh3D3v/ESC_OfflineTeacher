@@ -93,26 +93,20 @@ namespace ESC_OfflineTeacher.ViewModel
         public NoteViewModel(IFrameNavigationService navigationService)
         {
             _navigationService = navigationService;
-            this.backgroundWorker1 =
-                new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorker1 =new BackgroundWorker();
             this.backgroundWorker1.WorkerReportsProgress = true;
             // Register the various BackgroundWorker events
-            this.backgroundWorker1.DoWork
-                += new System.ComponentModel.DoWorkEventHandler(
-                    this.backgroundWorker1_DoWork);
-            this.backgroundWorker1.ProgressChanged
-                += new System.ComponentModel.ProgressChangedEventHandler(
-                    this.backgroundWorker1_ProgressChanged);
-            this.backgroundWorker1.RunWorkerCompleted
-                += new System.ComponentModel.RunWorkerCompletedEventHandler(
-                    this.backgroundWorker1_RunWorkerCompleted);
-            //GenerateFakeData();  //For Test purpuses
+            this.backgroundWorker1.DoWork+= new DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged+= new ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted+= new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+
+            GenerateFakeData();  //For Test purpuses
         }
         // Method to start syncthonization in background
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            System.ComponentModel.BackgroundWorker worker;
-            worker = (System.ComponentModel.BackgroundWorker)sender;
+            BackgroundWorker worker;
+            worker = (BackgroundWorker)sender;
             SynchronizationHelper syncHelper = (SynchronizationHelper)e.Argument;
             syncHelper.SynchronizeAsync(worker, e);
 

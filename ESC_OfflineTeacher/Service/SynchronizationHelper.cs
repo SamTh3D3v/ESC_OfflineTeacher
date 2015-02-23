@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Text;
 using System.Data.SqlClient;
 using System.Data;
@@ -38,11 +40,8 @@ namespace ESC_OfflineTeacher.Service
 
     class SynchronizationHelper
     {
-        public void SynchronizeAsync(
-            System.ComponentModel.BackgroundWorker worker,
-            System.ComponentModel.DoWorkEventArgs e)
+        public void SynchronizeAsync(BackgroundWorker worker,DoWorkEventArgs e)
         {
-
             SyncResults results;
             results = SynchronizeEtudiantProfMat();
             worker.ReportProgress(0, results);
@@ -57,16 +56,11 @@ namespace ESC_OfflineTeacher.Service
         {
             SyncResults results = null;
             // Create the SQL CE Sync Provider for the given scope name
-            SqlCeSyncProvider localProvider =
-                ConfigureCESyncProvider("EtudiantProfMat");
+            SqlCeSyncProvider localProvider =ConfigureCESyncProvider("EtudiantProfMat");
             // Create the remote provider for the given scope name
-            RelationalProviderProxy destinationProxy =
-                new RelationalProviderProxy("EtudiantProfMat",
-                    Properties.Settings.Default.ServiceUrl);
+            RelationalProviderProxy destinationProxy =new RelationalProviderProxy("EtudiantProfMat");
             // Synchronize and collect results
-            results = new SyncResults("EtudiantProfMat",
-                SynchronizeProviders(localProvider, destinationProxy,
-                SyncDirectionOrder.Download));
+            results = new SyncResults("EtudiantProfMat",SynchronizeProviders(localProvider, destinationProxy,SyncDirectionOrder.Download));
             destinationProxy.Dispose();
             localProvider.Dispose();
             return results;
@@ -76,16 +70,19 @@ namespace ESC_OfflineTeacher.Service
         {
             SyncResults results = null;
             // Create the SQL CE Sync Provider for the given scope name
-            SqlCeSyncProvider localProvider =
-                ConfigureCESyncProvider("Note");
+            SqlCeSyncProvider localProvider =ConfigureCESyncProvider("Note");
             // Create the remote provider for the given scope name
-            RelationalProviderProxy destinationProxy =
-                new RelationalProviderProxy("Note",
-                    Properties.Settings.Default.ServiceUrl);
+            RelationalProviderProxy destinationProxy =new RelationalProviderProxy("Note");
             // Synchronize and collect results
-            results = new SyncResults("Note",
-                SynchronizeProviders(localProvider,
-                destinationProxy, SyncDirectionOrder.UploadAndDownload));
+            try
+            {
+                results = new SyncResults("Note", SynchronizeProviders(localProvider, destinationProxy, SyncDirectionOrder.DownloadAndUpload));
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception >>"+ex.Message);
+                
+            }
             destinationProxy.Dispose();
             localProvider.Dispose();
             return results;
@@ -119,9 +116,7 @@ namespace ESC_OfflineTeacher.Service
         /// <param name="localProvider">Local store provider</param>
         /// <param name="remoteProvider">Remote store provider</param>
         /// <returns></returns>
-        private SyncOperationStatistics SynchronizeProviders(
-            KnowledgeSyncProvider localProvider, KnowledgeSyncProvider remoteProvider,
-            SyncDirectionOrder direction)
+        private SyncOperationStatistics SynchronizeProviders(KnowledgeSyncProvider localProvider, KnowledgeSyncProvider remoteProvider,SyncDirectionOrder direction)
         {
             SyncOrchestrator orchestrator = new SyncOrchestrator();
             orchestrator.LocalProvider = localProvider;
@@ -153,8 +148,7 @@ namespace ESC_OfflineTeacher.Service
                 {
                     //create a reference to the server proxy
                     RelationalProviderProxy serverProxy =
-                        new RelationalProviderProxy(scopeName,
-                            Properties.Settings.Default.ServiceUrl);
+                        new RelationalProviderProxy(scopeName);
 
                     //retrieve the scope description from the server
                     DbSyncScopeDescription scopeDesc = serverProxy.GetScopeDescription();

@@ -26,7 +26,7 @@ namespace ESC_OfflineTeacher.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=G:\\ITComp Projects\\ESC\\ESC_OfflineTeacher\\ESC_OfflineTeacher\\DataBase" +
+        [global::System.Configuration.DefaultSettingValueAttribute("data source=G:\\ITComp Projects\\ESC\\ESC_OfflineTeacher\\ESC_OfflineTeacher\\DataBase" +
             "\\ClientDB.sdf")]
         public string DBConnection {
             get {
@@ -36,7 +36,7 @@ namespace ESC_OfflineTeacher.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost/SyncService/SqlWebSyncService.svc")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:8733/Design_Time_Addresses/WcfSyncService/Service1/")]
         public string ServiceUrl {
             get {
                 return ((string)(this["ServiceUrl"]));

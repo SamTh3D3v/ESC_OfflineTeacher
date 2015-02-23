@@ -6,7 +6,7 @@
       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:ignore="http://www.ignore.com"
         mc:Ignorable="d ignore"
-        DataContext="{Binding NoteViewModel, Source={StaticResource Locator}}">
+        DataContext="{Binding NoteViewModel, Source={StaticResource Locator}}" Background="WhiteSmoke">
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -16,10 +16,10 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
-    <Grid>
+    <Grid Background="WhiteSmoke">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0">
             <Button x:Name="btnSync" Content="Synchronize" HorizontalAlignment="Left"  Width="75" Command="{Binding SyncCommand}"/>
