@@ -29,6 +29,7 @@ namespace ESC_OfflineTeacher.ViewModel
         // Create a BackgroundWorker object to synchronize without blocking
         // the UI thread
         private BackgroundWorker backgroundWorker1;
+        private LocalSGSDBEntities _context;
 
         private ObservableCollection<SPECIALITE> _specialiteList;
         private ObservableCollection<MATIERE> _matiereList;
@@ -36,7 +37,7 @@ namespace ESC_OfflineTeacher.ViewModel
         private ObservableCollection<SECTION> _sectionList;
         private ObservableCollection<GROUPE> _groupeList;
         private ObservableCollection<EXAMEN> _examinList;
-        private String _nbEtudiants="";
+        private String _nbEtudiants = "";
         private string _currentYear = "";
         private ObservableCollection<String> _rechercherParList;
         private String _searchText = "";
@@ -318,12 +319,12 @@ namespace ESC_OfflineTeacher.ViewModel
 
                 _selectedSpecialite = value;
                 RaisePropertyChanged();
-                using (var context = new LocalSGSDBEntities())
-                {
-                    var cy = int.Parse(CurrentYear);             
-                    var speMat = context.ENS_SPEMAT.Where(x =>x.ANNEE_UNIVERSITAIRE==cy && x.ID_ENSEIGNANT == LoggedInTeacher.ID_ENSEIGNANT && x.ID_SPECIALITE==_selectedSpecialite.ID_SPECIALITE).ToList();
-                    MatiereList = new ObservableCollection<MATIERE>(speMat.Select(x => x.MATIERE).ToList());
-                }
+
+                var cy = int.Parse(CurrentYear);
+                var speMat = _context.ENS_SPEMAT.Where(x => x.ANNEE_UNIVERSITAIRE == cy && x.ID_ENSEIGNANT == LoggedInTeacher.ID_ENSEIGNANT && x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE).ToList();
+                MatiereList = new ObservableCollection<MATIERE>(speMat.Select(x => x.MATIERE).ToList());
+                SectionList = new ObservableCollection<SECTION>(_context.SECTIONS.Where(x => x.ANNEE_UNIVERSITAIRE == cy && x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE));
+
             }
         }
         public MATIERE SelectedMatiere
@@ -343,7 +344,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 _selectedMatiere = value;
                 RaisePropertyChanged();
             }
-        }  
+        }
         public MODES_ETUDES SelectedSemester
         {
             get
@@ -361,7 +362,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 _selectedSemester = value;
                 RaisePropertyChanged();
             }
-        }      
+        }
         public SECTION SelectedSection
         {
             get
@@ -378,6 +379,11 @@ namespace ESC_OfflineTeacher.ViewModel
 
                 _selectedSection = value;
                 RaisePropertyChanged();
+                if (_selectedSection != null)
+                    GroupeList = new ObservableCollection<GROUPE>(_selectedSection.GROUPES);
+                else
+                    GroupeList = new ObservableCollection<GROUPE>();
+
             }
         }
         public GROUPE SelectedGroupe
@@ -397,7 +403,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 _selectedGroupe = value;
                 RaisePropertyChanged();
             }
-        }        
+        }
         public EXAMEN SelectedExamin
         {
             get
@@ -428,17 +434,17 @@ namespace ESC_OfflineTeacher.ViewModel
                     () =>
                     {
                         // Check if sync is already in progress
-              //          if (!backgroundWorker1.IsBusy)
-              //          {
+                        //          if (!backgroundWorker1.IsBusy)
+                        //          {
 
-              //              Debug.WriteLine(
-              //"Starting Data Synchronization Process...\r\n Please wait till the process compeletes.\r\n");
-              //              Application.Current.MainWindow.Cursor = Cursors.Wait;
+                        //              Debug.WriteLine(
+                        //"Starting Data Synchronization Process...\r\n Please wait till the process compeletes.\r\n");
+                        //              Application.Current.MainWindow.Cursor = Cursors.Wait;
 
-              //              SynchronizationHelper syncHelper = new SynchronizationHelper();
-              //              // Start synchronization
-              //              backgroundWorker1.RunWorkerAsync(syncHelper);
-              //          }
+                        //              SynchronizationHelper syncHelper = new SynchronizationHelper();
+                        //              // Start synchronization
+                        //              backgroundWorker1.RunWorkerAsync(syncHelper);
+                        //          }
                         //using (LocalSGSDBEntities context = new LocalSGSDBEntities())
                         //{
                         //    CurrentYear = context.ANNEES.Max(x => x.ANNEE_UNIVERSITAIRE).ToString(CultureInfo.InvariantCulture);
@@ -457,15 +463,12 @@ namespace ESC_OfflineTeacher.ViewModel
                     ?? (_noteViewLoadedCommand = new RelayCommand(
                     () =>
                     {
-                        //Load lists
-                        using (LocalSGSDBEntities context = new LocalSGSDBEntities())
-                        {
-                            CurrentYear = context.ANNEES.Max(x => x.ANNEE_UNIVERSITAIRE).ToString(CultureInfo.InvariantCulture);
-                            LoggedInTeacher = context.ENSEIGNANTS.First(x => x.ID_ENSEIGNANT == 2);
-                            var cy = int.Parse(CurrentYear);
-                            var speMat = context.ENS_SPEMAT.Where(x => x.ANNEE_UNIVERSITAIRE == cy && x.ID_ENSEIGNANT == LoggedInTeacher.ID_ENSEIGNANT).ToList();
-                            SpecialiteList = new ObservableCollection<SPECIALITE>(speMat.Select(x => x.SPECIALITE).ToList()); 
-                        }
+                        //Load lists                       
+                        CurrentYear = _context.ANNEES.Max(x => x.ANNEE_UNIVERSITAIRE).ToString(CultureInfo.InvariantCulture);
+                        LoggedInTeacher = _context.ENSEIGNANTS.First(x => x.ID_ENSEIGNANT == 2);
+                        var cy = int.Parse(CurrentYear);
+                        var speMat = _context.ENS_SPEMAT.Where(x => x.ANNEE_UNIVERSITAIRE == cy && x.ID_ENSEIGNANT == LoggedInTeacher.ID_ENSEIGNANT).ToList();
+                        SpecialiteList = new ObservableCollection<SPECIALITE>(speMat.Select(x => x.SPECIALITE).ToList());
                     }));
             }
         }
@@ -474,6 +477,7 @@ namespace ESC_OfflineTeacher.ViewModel
         public NoteViewModel(IFrameNavigationService navigationService)
         {
             _navigationService = navigationService;
+            _context = new LocalSGSDBEntities();
             //this.backgroundWorker1 =new BackgroundWorker();
             //this.backgroundWorker1.WorkerReportsProgress = true;
             //// Register the various BackgroundWorker events
@@ -483,10 +487,10 @@ namespace ESC_OfflineTeacher.ViewModel
 
             //ESCLocalDbSyncAgent
             //    LocalSGSDBEntities dEntities=new LocalSGSDBEntities();
-            
+
 
             GenerateFakeData();  //For Test purpuses
-            
+
         }
         // Method to start syncthonization in background
         //private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -528,20 +532,20 @@ namespace ESC_OfflineTeacher.ViewModel
 
 
         // Method to format the SyncResults for display
-//        private void DisplayStats(SyncResults results)
-//        {
+        //        private void DisplayStats(SyncResults results)
+        //        {
 
-//            TimeSpan diff =
-//                results.Stats.SyncEndTime.Subtract(results.Stats.SyncStartTime);
+        //            TimeSpan diff =
+        //                results.Stats.SyncEndTime.Subtract(results.Stats.SyncStartTime);
 
-//            Debug.WriteLine(
-//                string.Format(
-//"{4}:  - Total Time To Synchronize = {0}:{1}:{2}:{3}\r\nTotal Records Uploaded: {5}  Total Records Downloaded: {6}\r\n",
-//               diff.Hours, diff.Minutes, diff.Seconds,
-//               diff.Milliseconds, results.Message,
-//               results.Stats.UploadChangesTotal,
-//               results.Stats.DownloadChangesTotal));
-//        }
+        //            Debug.WriteLine(
+        //                string.Format(
+        //"{4}:  - Total Time To Synchronize = {0}:{1}:{2}:{3}\r\nTotal Records Uploaded: {5}  Total Records Downloaded: {6}\r\n",
+        //               diff.Hours, diff.Minutes, diff.Seconds,
+        //               diff.Milliseconds, results.Message,
+        //               results.Stats.UploadChangesTotal,
+        //               results.Stats.DownloadChangesTotal));
+        //        }
 
         private void GenerateFakeData()
         {
