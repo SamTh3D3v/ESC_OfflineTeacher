@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:ignore="http://www.ignore.com"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:command="http://www.galasoft.ch/mvvmlight"
         mc:Ignorable="d ignore"
-        DataContext="{Binding NoteViewModel, Source={StaticResource Locator}}" Background="WhiteSmoke">
+        DataContext="{Binding NoteViewModel, Source={StaticResource Locator}}" Background="WhiteSmoke" >
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -16,16 +18,136 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <command:EventToCommand Command="{Binding Mode=OneWay,Path=NoteViewLoadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid Background="WhiteSmoke">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0">
-            <Button x:Name="btnSync" Content="Synchronize" HorizontalAlignment="Left"  Width="75" Command="{Binding SyncCommand}"/>
-            <Button x:Name="btnInsert" Content="Insert Record" HorizontalAlignment="Left"  Width="111" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Border  x:Name="NavFlyout" Grid.Row="0" Grid.RowSpan="2"  Grid.Column="0"   Visibility="{Binding FrameNavigationService.CurrentPageKey,Converter={StaticResource FlyoutOpenConverter}}"   Width="400" >
+            <Grid Background="WhiteSmoke" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid  Grid.Row="0" Margin="5" Background="{StaticResource AccentColorBrush}" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="Année Universitaire" HorizontalAlignment="Center"/>
+                    <Label Grid.Row="1" HorizontalAlignment="Center" Content="{Binding CurrentYear}" FontSize="20" Foreground="White"/>
+                </Grid>
+                <Grid  Grid.Row="1" Margin="5" Background="{StaticResource AccentColorBrush}" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="Nombre des étudiants" HorizontalAlignment="Center"/>
+                    <Label Grid.Row="1" HorizontalAlignment="Center" Content="{Binding NbEtdiants}" FontSize="20" Foreground="White"/>
+                </Grid>
+                <Grid  Grid.Row="2" Margin="5" Background="{StaticResource AccentColorBrush}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Spécialité" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <Label Content="Matiere" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+                    <ComboBox  Grid.Row="0" Grid.Column="1" Margin="5"
+                         VerticalContentAlignment="Center"
+                         HorizontalAlignment="Stretch"                 
+                         DisplayMemberPath="DESIGNATION_LATIN"
+                         HorizontalContentAlignment="Center"                                
+                         ItemsSource="{Binding SpecialiteList}"
+                         SelectedItem="{Binding SelectedSpecialite,Mode=TwoWay}">
+                    </ComboBox>
+                    <ComboBox  Grid.Row="1" Grid.Column="1" Margin="5"
+                         VerticalContentAlignment="Center"
+                         HorizontalAlignment="Stretch"                 
+                         DisplayMemberPath="DESIGNATION_LATIN"
+                         HorizontalContentAlignment="Center"                                          
+                         ItemsSource="{Binding MatiereList}"
+                         SelectedItem="{Binding SelectedMatiere}">
+                    </ComboBox>
+                </Grid>
+                <Grid Grid.Row="3" Margin="5" Background="{StaticResource AccentColorBrush}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Semèstre" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <Label Content="Section" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <Label Content="Groupe" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <ComboBox  Grid.Row="0" Grid.Column="1" Margin="5"
+                       VerticalContentAlignment="Center"
+                       HorizontalAlignment="Stretch"                 
+                       DisplayMemberPath="DESIGNATION_LATIN"
+                       HorizontalContentAlignment="Center"                               
+                       ItemsSource="{Binding SemestreList}"
+                       SelectedItem="{Binding SelectedSemester,Mode=TwoWay}">
+                    </ComboBox>
+                    <ComboBox  Grid.Row="1" Grid.Column="1" Margin="5"
+                       VerticalContentAlignment="Center"
+                       HorizontalAlignment="Stretch"                 
+                       DisplayMemberPath="DESIGNATION_SECTION"
+                       HorizontalContentAlignment="Center"                                          
+                       ItemsSource="{Binding SectionList}"
+                       SelectedItem="{Binding SelectedSection,Mode=TwoWay}">
+                    </ComboBox>
+                    <ComboBox Grid.Row="2" Grid.Column="1" Margin="5"
+                       VerticalContentAlignment="Center"
+                       HorizontalAlignment="Stretch"                 
+                       DisplayMemberPath="DESIGNATION_GROUPE"
+                       HorizontalContentAlignment="Center"                                          
+                       ItemsSource="{Binding GroupeList}"
+                       SelectedItem="{Binding SelectedGroupe,Mode=TwoWay}">
+                    </ComboBox>
+                </Grid>
+                <Grid Grid.Row="4" Margin="5" Background="{StaticResource AccentColorBrush}" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Content="Examin" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <ComboBox  Grid.Row="0" Grid.Column="1" Margin="5"
+                       VerticalContentAlignment="Center"
+                       HorizontalAlignment="Stretch"                 
+                       DisplayMemberPath="DESIGNATION_LATIN"
+                       HorizontalContentAlignment="Center"                                          
+                       ItemsSource="{Binding ExaminList}"
+                       SelectedItem="{Binding SelectedExamin,Mode=TwoWay}">
+                    </ComboBox>
+                </Grid>
+            </Grid>
+        </Border>
+        <GridSplitter Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Width="5" HorizontalAlignment="Center"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="2">
+            <Button ToolTip="Exporter les modification" Content="Synchronize"  Command="{Binding SyncCommand}"/>
         </StackPanel>
-        <controls:MetroAnimatedTabControl Grid.Row="1">
+        <controls:MetroAnimatedTabControl Grid.Row="1" Grid.Column="2">
             <controls:MetroTabItem Header="Notes Examins">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -73,6 +195,25 @@
                                                       Minimum="0" />
                         </DataGrid.Columns>
                     </DataGrid>
+
+                    <StackPanel Grid.Row="2"  Orientation="Horizontal" HorizontalAlignment="Right" >
+                        <Button ToolTip="Enregistrer les modification" Width="55" Height="55" VerticalAlignment="Top" Command="{Binding SaveComand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+                            <Rectangle Width="20" Height="20">
+                                <Rectangle.Fill>
+                                    <VisualBrush Stretch="Fill"
+                                     Visual="{StaticResource appbar_save}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Button>
+                        <Button ToolTip="Annuler les changement" Width="55" Height="55" VerticalAlignment="Top" Command="{Binding SaveComand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+                            <Rectangle Width="20" Height="20">
+                                <Rectangle.Fill>
+                                    <VisualBrush Stretch="Fill"
+                                     Visual="{StaticResource appbar_delete}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Button>
+                    </StackPanel>
                 </Grid>
             </controls:MetroTabItem>
             <controls:MetroTabItem Header="Notes Dettes">

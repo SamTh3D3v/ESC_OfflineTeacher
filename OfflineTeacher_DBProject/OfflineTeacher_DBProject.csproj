@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B8B56E81-6095-4B37-A782-F20B5EC93D05}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OfflineTeacher_DBProject</RootNamespace>
+    <AssemblyName>OfflineTeacher_DBProject</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Synchronization, Version=1.0.0.0" />
+    <Reference Include="Microsoft.Synchronization.Data, Version=2.0.0.0" />
+    <Reference Include="Microsoft.Synchronization.Data.Server, Version=2.0.0.0" />
+    <Reference Include="Microsoft.Synchronization.Data.SqlServerCe, Version=2.0.0.0" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ESCDataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ESCDataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ESCLocalDb.cs">
+      <DependentUpon>ESCLocalDb.sync</DependentUpon>
+    </Compile>
+    <Compile Include="ESCLocalDb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ESCLocalDb.sync</DependentUpon>
+    </Compile>
+    <Compile Include="OfflineTeacherHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="SynchronisationHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <EntityDeploy Include="ESCDataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ESCDataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ESCLocalDb.sync">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSyncGenerator</Generator>
+      <LastGenOutput>ESCLocalDb.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SGSDB.sdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SQLScripts\ESCLocalDataCache.dbo.ANNEES.sql" />
+    <Content Include="SQLScripts\ESCLocalDataCache.dbo.ENSEIGNANTS.sql" />
+    <Content Include="SQLScripts\ESCLocalDataCache.dbo.ETUDIANTS.sql" />
+    <Content Include="SQLScripts\ESCLocalDataCache.dbo.EXAMENS.sql" />
+    <Content Include="SQLScripts\ESCLocalDataCache.dbo.GROUPES.sql" />
+    <Content Include="SQLScripts\ESCLocalDataCache.dbo.MATIERES.sql" />
+    <Content Include="SQLScripts\ESCLocalDataCache.dbo.MODES_ETUDES.sql" />
+    <Content Include="SQLScripts\ESCLocalDataCache.dbo.NOTE.sql" />
+    <Content Include="SQLScripts\ESCLocalDataCache.dbo.NOTES_EXAMEN.sql" />
+    <Content Include="SQLScripts\ESCLocalDataCache.dbo.NOTE_DETTE.sql" />
+    <Content Include="SQLScripts\ESCLocalDataCache.dbo.SECTIONS.sql" />
+    <Content Include="SQLScripts\ESCLocalDataCache.dbo.SPECIALITES.sql" />
+    <Content Include="SQLScripts\ESCLocalDataCache.dbo.SPECIALITES_ANNEES_MODES_ETUDES.sql" />
+    <Content Include="SQLScripts\ESCLocalDataCache.dbo.SPECIALITES_MATIERES.sql" />
+    <Content Include="SQLScripts\ESCLocalDb.dbo.ANNEES.sql" />
+    <Content Include="SQLScripts\ESCLocalDb.dbo.CATEGORIES.sql" />
+    <Content Include="SQLScripts\ESCLocalDb.dbo.ENSEIGNANTS.sql" />
+    <Content Include="SQLScripts\ESCLocalDb.dbo.ENS_SPEMAT.sql" />
+    <Content Include="SQLScripts\ESCLocalDb.dbo.ETUDIANTS.sql" />
+    <Content Include="SQLScripts\ESCLocalDb.dbo.EXAMENS.sql" />
+    <Content Include="SQLScripts\ESCLocalDb.dbo.EXAMENS_ANNEES_MODES_ETUDES.sql" />
+    <Content Include="SQLScripts\ESCLocalDb.dbo.GROUPES.sql" />
+    <Content Include="SQLScripts\ESCLocalDb.dbo.MATIERES.sql" />
+    <Content Include="SQLScripts\ESCLocalDb.dbo.MODES_ETUDES.sql" />
+    <Content Include="SQLScripts\ESCLocalDb.dbo.NOTE.sql" />
+    <Content Include="SQLScripts\ESCLocalDb.dbo.NOTES_EXAMEN.sql" />
+    <Content Include="SQLScripts\ESCLocalDb.dbo.NOTE_DETTE.sql" />
+    <Content Include="SQLScripts\ESCLocalDb.dbo.SECTIONS.sql" />
+    <Content Include="SQLScripts\ESCLocalDb.dbo.SPECIALITES.sql" />
+    <Content Include="SQLScripts\ESCLocalDb.dbo.SPECIALITES_ANNEES_MODES_ETUDES.sql" />
+    <Content Include="SQLScripts\ESCLocalDb.dbo.SPECIALITES_MATIERES.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDataCache.dbo.ANNEES.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDataCache.dbo.ENSEIGNANTS.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDataCache.dbo.ETUDIANTS.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDataCache.dbo.EXAMENS.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDataCache.dbo.GROUPES.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDataCache.dbo.MATIERES.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDataCache.dbo.MODES_ETUDES.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDataCache.dbo.NOTE.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDataCache.dbo.NOTES_EXAMEN.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDataCache.dbo.NOTE_DETTE.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDataCache.dbo.SECTIONS.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDataCache.dbo.SPECIALITES.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDataCache.dbo.SPECIALITES_ANNEES_MODES_ETUDES.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDataCache.dbo.SPECIALITES_MATIERES.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDb.dbo.ANNEES.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDb.dbo.CATEGORIES.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDb.dbo.ENSEIGNANTS.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDb.dbo.ENS_SPEMAT.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDb.dbo.ETUDIANTS.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDb.dbo.EXAMENS.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDb.dbo.EXAMENS_ANNEES_MODES_ETUDES.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDb.dbo.GROUPES.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDb.dbo.MATIERES.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDb.dbo.MODES_ETUDES.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDb.dbo.NOTE.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDb.dbo.NOTES_EXAMEN.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDb.dbo.NOTE_DETTE.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDb.dbo.SECTIONS.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDb.dbo.SPECIALITES.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDb.dbo.SPECIALITES_ANNEES_MODES_ETUDES.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDb.dbo.SPECIALITES_MATIERES.undo.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.SQL.Server.Compact.3.5">
+      <Visible>False</Visible>
+      <ProductName>SQL Server Compact 3.5 SP2</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

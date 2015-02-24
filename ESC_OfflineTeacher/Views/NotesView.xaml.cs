@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using OfflineTeacher_DBProject;
 
 namespace ESC_OfflineTeacher.Views
 {
@@ -15,5 +16,7 @@ namespace ESC_OfflineTeacher.Views
         {
             InitializeComponent();
         }
+
+     
     }
 }
