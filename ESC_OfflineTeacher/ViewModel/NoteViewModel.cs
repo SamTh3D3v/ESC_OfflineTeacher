@@ -49,6 +49,10 @@ namespace ESC_OfflineTeacher.ViewModel
         private SECTION _selectedSection;
         private GROUPE _selectedGroupe;
         private EXAMEN _selectedExamen;
+
+
+        private IEnumerable<GROUPE> _allGroupesList;
+        private IEnumerable<SECTION> _allSectionsList;
         #endregion
         #region Properties
         public string CurrentYear
@@ -321,9 +325,25 @@ namespace ESC_OfflineTeacher.ViewModel
                 RaisePropertyChanged();
 
                 var cy = int.Parse(CurrentYear);
-                var speMat = _context.ENS_SPEMAT.Where(x => x.ANNEE_UNIVERSITAIRE == cy && x.ID_ENSEIGNANT == LoggedInTeacher.ID_ENSEIGNANT && x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE).ToList();
-                MatiereList = new ObservableCollection<MATIERE>(speMat.Select(x => x.MATIERE).ToList());
-                SectionList = new ObservableCollection<SECTION>(_context.SECTIONS.Where(x => x.ANNEE_UNIVERSITAIRE == cy && x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE));
+                if (_selectedSpecialite != null)
+                {
+                    var matiereInUserSpecialite = _context.USERS_SPECIALITES.Where(x => x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == LoggedInTeacher.ID_USER && x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE).Select(x => x.MATIERE).Distinct();
+                    MatiereList = new ObservableCollection<MATIERE>(matiereInUserSpecialite.ToList());
+                    var groupeList =
+                   _context.USERS_SPECIALITES.Where(
+                       x =>
+                           x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == _loggedInTeacher.ID_USER &&
+                           x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE).Select(x => x.GROUPE).Distinct().ToList();
+
+                    SectionList = new ObservableCollection<SECTION>(groupeList.Select(x => x.SECTION).Distinct());
+                }
+                else
+                {
+                    MatiereList = new ObservableCollection<MATIERE>();
+                    SectionList = new ObservableCollection<SECTION>();
+                    GroupeList = new ObservableCollection<GROUPE>();
+                    ListNotesExamins = new ObservableCollection<EtudiantNote>();
+                }
 
                 //set the semesters and the needed exam for this year 
                 var modeEtudes =
@@ -331,6 +351,7 @@ namespace ESC_OfflineTeacher.ViewModel
                         x => x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE &&
                              x.ANNEE_UNIVERSITAIRE == cy).ToList();
                 SemestreList = new ObservableCollection<MODES_ETUDES>(modeEtudes.Select(x => x.MODES_ETUDES).Distinct().ToList());
+                RefreshNoteStudentList();
 
             }
         }
@@ -350,6 +371,7 @@ namespace ESC_OfflineTeacher.ViewModel
 
                 _selectedMatiere = value;
                 RaisePropertyChanged();
+                RefreshNoteStudentList();
             }
         }
         public MODES_ETUDES SelectedSemester
@@ -371,8 +393,9 @@ namespace ESC_OfflineTeacher.ViewModel
                 var cy = int.Parse(CurrentYear);
                 var modeEtudes =
                     _context.EXAMENS_ANNEES_MODES_ETUDES.Where(x => x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE &&
-                             x.ANNEE_UNIVERSITAIRE == cy && x.ID_MODE_ETUDE==_selectedSemester.ID_MODE_ETUDE).ToList();
+                             x.ANNEE_UNIVERSITAIRE == cy && x.ID_MODE_ETUDE == _selectedSemester.ID_MODE_ETUDE).ToList();
                 ExaminList = new ObservableCollection<EXAMEN>(modeEtudes.Select(x => x.EXAMEN).ToList());
+                RefreshNoteStudentList();
             }
         }
         public SECTION SelectedSection
@@ -392,9 +415,21 @@ namespace ESC_OfflineTeacher.ViewModel
                 _selectedSection = value;
                 RaisePropertyChanged();
                 if (_selectedSection != null)
-                    GroupeList = new ObservableCollection<GROUPE>(_selectedSection.GROUPES);
+                {
+                    var cy = int.Parse(CurrentYear);
+                    GroupeList =
+                        new ObservableCollection<GROUPE>(_context.USERS_SPECIALITES.Where(
+                            x =>
+                                x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == _loggedInTeacher.ID_USER &&
+                                x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE).Select(x => x.GROUPE).Distinct());
+                    RefreshNoteStudentList();
+                }
                 else
+                {
                     GroupeList = new ObservableCollection<GROUPE>();
+                    ListNotesExamins = new ObservableCollection<EtudiantNote>();
+                }
+
 
             }
         }
@@ -414,6 +449,7 @@ namespace ESC_OfflineTeacher.ViewModel
 
                 _selectedGroupe = value;
                 RaisePropertyChanged();
+                RefreshNoteStudentList();
             }
         }
         public EXAMEN SelectedExamin
@@ -432,6 +468,7 @@ namespace ESC_OfflineTeacher.ViewModel
 
                 _selectedExamen = value;
                 RaisePropertyChanged();
+                RefreshNoteStudentList();
             }
         }
         #endregion
@@ -475,12 +512,14 @@ namespace ESC_OfflineTeacher.ViewModel
                     ?? (_noteViewLoadedCommand = new RelayCommand(
                     () =>
                     {
-                        //Load lists                       
-                        CurrentYear = _context.ANNEES.Max(x => x.ANNEE_UNIVERSITAIRE).ToString(CultureInfo.InvariantCulture);
+                        //the loggin is using a wcf service where the returned data is of USER type
                         LoggedInTeacher = _context.ENSEIGNANTS.First(x => x.ID_ENSEIGNANT == 2);
+                        CurrentYear = _context.ANNEES.Max(x => x.ANNEE_UNIVERSITAIRE).ToString(CultureInfo.InvariantCulture);
+
                         var cy = int.Parse(CurrentYear);
-                        var speMat = _context.ENS_SPEMAT.Where(x => x.ANNEE_UNIVERSITAIRE == cy && x.ID_ENSEIGNANT == LoggedInTeacher.ID_ENSEIGNANT).ToList();
-                        SpecialiteList = new ObservableCollection<SPECIALITE>(speMat.Select(x => x.SPECIALITE).ToList());
+                        var userSpecialite = _context.USERS_SPECIALITES.Where(x => x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == LoggedInTeacher.ID_USER).ToList();
+                        SpecialiteList = new ObservableCollection<SPECIALITE>(userSpecialite.Select(x => x.SPECIALITE).Distinct().ToList());
+
                     }));
             }
         }
@@ -500,8 +539,8 @@ namespace ESC_OfflineTeacher.ViewModel
             //ESCLocalDbSyncAgent
             //    LocalSGSDBEntities dEntities=new LocalSGSDBEntities();
 
-
-            GenerateFakeData();  //For Test purpuses
+            ListNotesExamins = new ObservableCollection<EtudiantNote>();
+            //GenerateFakeData();  //For Test purpuses
 
         }
         // Method to start syncthonization in background
@@ -630,25 +669,36 @@ namespace ESC_OfflineTeacher.ViewModel
 
         private void RefreshNoteStudentList()
         {
-            if (SelectedMatiere!=null && SelectedExamin!=null)
+            if (SelectedMatiere != null && SelectedExamin != null)
             {
                 var cy = int.Parse(CurrentYear);
-                ListNotesExamins=new ObservableCollection<EtudiantNote>(_context.NOTES_EXAMEN.Where(x => x.ANNEE_UNIVERSITAIRE == cy &&
-                                                 x.ID_MATIERE == SelectedMatiere.ID_MATIERE &&
-                                                 x.ID_EXAMEN == SelectedExamin.ID_EXAMEN)
-                    .Join(_context.ETUDIANTS, noteExamin => noteExamin.ID_ETUDIANT,
-                        etudiant => etudiant.ID_ETUDIANT, (noteExamin, etudiant) => new EtudiantNote()
-                        {
-                            Matricule = etudiant.MATRICULE,
-                            Nom = etudiant.NOM,
-                            Prenom = etudiant.PRENOM,
-                            NoteExamin = noteExamin.NOTE
-                        }).ToList());
+                ListNotesExamins =
+                    new ObservableCollection<EtudiantNote>(_context.NOTES_EXAMEN.Where(
+                        x => x.ANNEE_UNIVERSITAIRE == cy &&
+                             x.ID_MATIERE == SelectedMatiere.ID_MATIERE &&
+                             x.ID_EXAMEN == SelectedExamin.ID_EXAMEN).Select(x => new EtudiantNote()
+                             {
+                                 Nom = x.ETUDIANT.NOM,
+                                 Prenom = x.ETUDIANT.PRENOM,
+                                 NoteExamin = x.NOTE
+                             }));
+
+                //ListNotesExamins = new ObservableCollection<EtudiantNote>(_context.NOTES_EXAMEN.Where(x => x.ANNEE_UNIVERSITAIRE == cy &&
+                //                                 x.ID_MATIERE == SelectedMatiere.ID_MATIERE &&
+                //                                 x.ID_EXAMEN == SelectedExamin.ID_EXAMEN)
+                //    .Join(_context.ETUDIANTS, noteExamin => noteExamin.ID_ETUDIANT,
+                //        etudiant => etudiant.ID_ETUDIANT, (noteExamin, etudiant) => new EtudiantNote()
+                //        {
+                //            Matricule = etudiant.MATRICULE,
+                //            Nom = etudiant.NOM,
+                //            Prenom = etudiant.PRENOM,
+                //            NoteExamin = noteExamin.NOTE
+                //        }).ToList());
             }
         }
         #endregion
 
 
     }
-    
+
 }
