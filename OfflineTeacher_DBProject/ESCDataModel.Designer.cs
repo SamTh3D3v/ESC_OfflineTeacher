@@ -54,6 +54,11 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_UserSpecialite_Groupe", "GROUPE", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.GROUPE), "USERS_SPECIALITES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.USERS_SPECIALITES), true)]
 [assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_UserSpecialite_Matiere", "MATIERE", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.MATIERE), "USERS_SPECIALITES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.USERS_SPECIALITES), true)]
 [assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_UserSpecialite_Specialite", "SPECIALITE", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.SPECIALITE), "USERS_SPECIALITES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.USERS_SPECIALITES), true)]
+[assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_Etude_Annee", "ANNEE", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.ANNEE), "ETUDE", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.ETUDE), true)]
+[assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_Etude_Etudiant", "ETUDIANT", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.ETUDIANT), "ETUDE", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.ETUDE), true)]
+[assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_Etude_Groupe", "GROUPE", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(OfflineTeacher_DBProject.GROUPE), "ETUDE", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.ETUDE), true)]
+[assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_Etude_Section", "SECTION", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(OfflineTeacher_DBProject.SECTION), "ETUDE", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.ETUDE), true)]
+[assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_Etude_Specialite", "SPECIALITE", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(OfflineTeacher_DBProject.SPECIALITE), "ETUDE", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.ETUDE), true)]
 
 #endregion
 
@@ -440,6 +445,22 @@ namespace OfflineTeacher_DBProject
             }
         }
         private ObjectSet<USERS_SPECIALITES> _USERS_SPECIALITES;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ETUDE> ETUDES
+        {
+            get
+            {
+                if ((_ETUDES == null))
+                {
+                    _ETUDES = base.CreateObjectSet<ETUDE>("ETUDES");
+                }
+                return _ETUDES;
+            }
+        }
+        private ObjectSet<ETUDE> _ETUDES;
 
         #endregion
 
@@ -611,6 +632,14 @@ namespace OfflineTeacher_DBProject
         public void AddToUSERS_SPECIALITES(USERS_SPECIALITES uSERS_SPECIALITES)
         {
             base.AddObject("USERS_SPECIALITES", uSERS_SPECIALITES);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ETUDES EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToETUDES(ETUDE eTUDE)
+        {
+            base.AddObject("ETUDES", eTUDE);
         }
 
         #endregion
@@ -1272,6 +1301,28 @@ namespace OfflineTeacher_DBProject
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<USERS_SPECIALITES>("SGSDBModel.Relation_UserSpecialite_Annee", "USERS_SPECIALITES", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_Etude_Annee", "ETUDE")]
+        public EntityCollection<ETUDE> ETUDES
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ETUDE>("SGSDBModel.Relation_Etude_Annee", "ETUDE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ETUDE>("SGSDBModel.Relation_Etude_Annee", "ETUDE", value);
                 }
             }
         }
@@ -2785,6 +2836,934 @@ namespace OfflineTeacher_DBProject
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ENS_SPEMAT>("SGSDBModel.Relation_EnsSpeMat_Enseigant", "ENS_SPEMAT", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SGSDBModel", Name="ETUDE")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class ETUDE : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new ETUDE object.
+        /// </summary>
+        /// <param name="iD_ETUDIANT">Initial value of the ID_ETUDIANT property.</param>
+        /// <param name="aNNEE_UNIVERSITAIRE">Initial value of the ANNEE_UNIVERSITAIRE property.</param>
+        public static ETUDE CreateETUDE(global::System.Int32 iD_ETUDIANT, global::System.Int32 aNNEE_UNIVERSITAIRE)
+        {
+            ETUDE eTUDE = new ETUDE();
+            eTUDE.ID_ETUDIANT = iD_ETUDIANT;
+            eTUDE.ANNEE_UNIVERSITAIRE = aNNEE_UNIVERSITAIRE;
+            return eTUDE;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID_ETUDIANT
+        {
+            get
+            {
+                return _ID_ETUDIANT;
+            }
+            set
+            {
+                if (_ID_ETUDIANT != value)
+                {
+                    OnID_ETUDIANTChanging(value);
+                    ReportPropertyChanging("ID_ETUDIANT");
+                    _ID_ETUDIANT = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID_ETUDIANT");
+                    OnID_ETUDIANTChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID_ETUDIANT;
+        partial void OnID_ETUDIANTChanging(global::System.Int32 value);
+        partial void OnID_ETUDIANTChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ANNEE_UNIVERSITAIRE
+        {
+            get
+            {
+                return _ANNEE_UNIVERSITAIRE;
+            }
+            set
+            {
+                if (_ANNEE_UNIVERSITAIRE != value)
+                {
+                    OnANNEE_UNIVERSITAIREChanging(value);
+                    ReportPropertyChanging("ANNEE_UNIVERSITAIRE");
+                    _ANNEE_UNIVERSITAIRE = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ANNEE_UNIVERSITAIRE");
+                    OnANNEE_UNIVERSITAIREChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ANNEE_UNIVERSITAIRE;
+        partial void OnANNEE_UNIVERSITAIREChanging(global::System.Int32 value);
+        partial void OnANNEE_UNIVERSITAIREChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> ID_SPECIALITE
+        {
+            get
+            {
+                return _ID_SPECIALITE;
+            }
+            set
+            {
+                OnID_SPECIALITEChanging(value);
+                ReportPropertyChanging("ID_SPECIALITE");
+                _ID_SPECIALITE = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ID_SPECIALITE");
+                OnID_SPECIALITEChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _ID_SPECIALITE;
+        partial void OnID_SPECIALITEChanging(Nullable<global::System.Int32> value);
+        partial void OnID_SPECIALITEChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ETAT_ETUDIANT
+        {
+            get
+            {
+                return _ETAT_ETUDIANT;
+            }
+            set
+            {
+                OnETAT_ETUDIANTChanging(value);
+                ReportPropertyChanging("ETAT_ETUDIANT");
+                _ETAT_ETUDIANT = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ETAT_ETUDIANT");
+                OnETAT_ETUDIANTChanged();
+            }
+        }
+        private global::System.String _ETAT_ETUDIANT;
+        partial void OnETAT_ETUDIANTChanging(global::System.String value);
+        partial void OnETAT_ETUDIANTChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> ID_SECTION
+        {
+            get
+            {
+                return _ID_SECTION;
+            }
+            set
+            {
+                OnID_SECTIONChanging(value);
+                ReportPropertyChanging("ID_SECTION");
+                _ID_SECTION = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ID_SECTION");
+                OnID_SECTIONChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _ID_SECTION;
+        partial void OnID_SECTIONChanging(Nullable<global::System.Int32> value);
+        partial void OnID_SECTIONChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> ID_GROUPE
+        {
+            get
+            {
+                return _ID_GROUPE;
+            }
+            set
+            {
+                OnID_GROUPEChanging(value);
+                ReportPropertyChanging("ID_GROUPE");
+                _ID_GROUPE = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ID_GROUPE");
+                OnID_GROUPEChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _ID_GROUPE;
+        partial void OnID_GROUPEChanging(Nullable<global::System.Int32> value);
+        partial void OnID_GROUPEChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Double> MOYENNE_JUIN
+        {
+            get
+            {
+                return _MOYENNE_JUIN;
+            }
+            set
+            {
+                OnMOYENNE_JUINChanging(value);
+                ReportPropertyChanging("MOYENNE_JUIN");
+                _MOYENNE_JUIN = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("MOYENNE_JUIN");
+                OnMOYENNE_JUINChanged();
+            }
+        }
+        private Nullable<global::System.Double> _MOYENNE_JUIN;
+        partial void OnMOYENNE_JUINChanging(Nullable<global::System.Double> value);
+        partial void OnMOYENNE_JUINChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> RATTRAPAGE
+        {
+            get
+            {
+                return _RATTRAPAGE;
+            }
+            set
+            {
+                OnRATTRAPAGEChanging(value);
+                ReportPropertyChanging("RATTRAPAGE");
+                _RATTRAPAGE = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("RATTRAPAGE");
+                OnRATTRAPAGEChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _RATTRAPAGE;
+        partial void OnRATTRAPAGEChanging(Nullable<global::System.Boolean> value);
+        partial void OnRATTRAPAGEChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Double> MOYENNE_SEPT
+        {
+            get
+            {
+                return _MOYENNE_SEPT;
+            }
+            set
+            {
+                OnMOYENNE_SEPTChanging(value);
+                ReportPropertyChanging("MOYENNE_SEPT");
+                _MOYENNE_SEPT = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("MOYENNE_SEPT");
+                OnMOYENNE_SEPTChanged();
+            }
+        }
+        private Nullable<global::System.Double> _MOYENNE_SEPT;
+        partial void OnMOYENNE_SEPTChanging(Nullable<global::System.Double> value);
+        partial void OnMOYENNE_SEPTChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String RESULTAT
+        {
+            get
+            {
+                return _RESULTAT;
+            }
+            set
+            {
+                OnRESULTATChanging(value);
+                ReportPropertyChanging("RESULTAT");
+                _RESULTAT = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("RESULTAT");
+                OnRESULTATChanged();
+            }
+        }
+        private global::System.String _RESULTAT;
+        partial void OnRESULTATChanging(global::System.String value);
+        partial void OnRESULTATChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> RANG
+        {
+            get
+            {
+                return _RANG;
+            }
+            set
+            {
+                OnRANGChanging(value);
+                ReportPropertyChanging("RANG");
+                _RANG = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("RANG");
+                OnRANGChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _RANG;
+        partial void OnRANGChanging(Nullable<global::System.Int32> value);
+        partial void OnRANGChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> NIVEAU
+        {
+            get
+            {
+                return _NIVEAU;
+            }
+            set
+            {
+                OnNIVEAUChanging(value);
+                ReportPropertyChanging("NIVEAU");
+                _NIVEAU = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("NIVEAU");
+                OnNIVEAUChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _NIVEAU;
+        partial void OnNIVEAUChanging(Nullable<global::System.Int32> value);
+        partial void OnNIVEAUChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Double> MOYENNE_PASSAGE
+        {
+            get
+            {
+                return _MOYENNE_PASSAGE;
+            }
+            set
+            {
+                OnMOYENNE_PASSAGEChanging(value);
+                ReportPropertyChanging("MOYENNE_PASSAGE");
+                _MOYENNE_PASSAGE = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("MOYENNE_PASSAGE");
+                OnMOYENNE_PASSAGEChanged();
+            }
+        }
+        private Nullable<global::System.Double> _MOYENNE_PASSAGE;
+        partial void OnMOYENNE_PASSAGEChanging(Nullable<global::System.Double> value);
+        partial void OnMOYENNE_PASSAGEChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> CLASSEMENT
+        {
+            get
+            {
+                return _CLASSEMENT;
+            }
+            set
+            {
+                OnCLASSEMENTChanging(value);
+                ReportPropertyChanging("CLASSEMENT");
+                _CLASSEMENT = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CLASSEMENT");
+                OnCLASSEMENTChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _CLASSEMENT;
+        partial void OnCLASSEMENTChanging(Nullable<global::System.Int32> value);
+        partial void OnCLASSEMENTChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> DOCUMENT_REMIS
+        {
+            get
+            {
+                return _DOCUMENT_REMIS;
+            }
+            set
+            {
+                OnDOCUMENT_REMISChanging(value);
+                ReportPropertyChanging("DOCUMENT_REMIS");
+                _DOCUMENT_REMIS = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DOCUMENT_REMIS");
+                OnDOCUMENT_REMISChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _DOCUMENT_REMIS;
+        partial void OnDOCUMENT_REMISChanging(Nullable<global::System.Boolean> value);
+        partial void OnDOCUMENT_REMISChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> RACHETE
+        {
+            get
+            {
+                return _RACHETE;
+            }
+            set
+            {
+                OnRACHETEChanging(value);
+                ReportPropertyChanging("RACHETE");
+                _RACHETE = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("RACHETE");
+                OnRACHETEChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _RACHETE;
+        partial void OnRACHETEChanging(Nullable<global::System.Boolean> value);
+        partial void OnRACHETEChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> ETAT_PRECEDENT
+        {
+            get
+            {
+                return _ETAT_PRECEDENT;
+            }
+            set
+            {
+                OnETAT_PRECEDENTChanging(value);
+                ReportPropertyChanging("ETAT_PRECEDENT");
+                _ETAT_PRECEDENT = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ETAT_PRECEDENT");
+                OnETAT_PRECEDENTChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _ETAT_PRECEDENT;
+        partial void OnETAT_PRECEDENTChanging(Nullable<global::System.Int32> value);
+        partial void OnETAT_PRECEDENTChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Double> MOYENNE_GENERALE
+        {
+            get
+            {
+                return _MOYENNE_GENERALE;
+            }
+            set
+            {
+                OnMOYENNE_GENERALEChanging(value);
+                ReportPropertyChanging("MOYENNE_GENERALE");
+                _MOYENNE_GENERALE = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("MOYENNE_GENERALE");
+                OnMOYENNE_GENERALEChanged();
+            }
+        }
+        private Nullable<global::System.Double> _MOYENNE_GENERALE;
+        partial void OnMOYENNE_GENERALEChanging(Nullable<global::System.Double> value);
+        partial void OnMOYENNE_GENERALEChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Double> NOTE_ASSIDUITE
+        {
+            get
+            {
+                return _NOTE_ASSIDUITE;
+            }
+            set
+            {
+                OnNOTE_ASSIDUITEChanging(value);
+                ReportPropertyChanging("NOTE_ASSIDUITE");
+                _NOTE_ASSIDUITE = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("NOTE_ASSIDUITE");
+                OnNOTE_ASSIDUITEChanged();
+            }
+        }
+        private Nullable<global::System.Double> _NOTE_ASSIDUITE;
+        partial void OnNOTE_ASSIDUITEChanging(Nullable<global::System.Double> value);
+        partial void OnNOTE_ASSIDUITEChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Double> MOYENNE_EXAMEN_SORTIE
+        {
+            get
+            {
+                return _MOYENNE_EXAMEN_SORTIE;
+            }
+            set
+            {
+                OnMOYENNE_EXAMEN_SORTIEChanging(value);
+                ReportPropertyChanging("MOYENNE_EXAMEN_SORTIE");
+                _MOYENNE_EXAMEN_SORTIE = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("MOYENNE_EXAMEN_SORTIE");
+                OnMOYENNE_EXAMEN_SORTIEChanged();
+            }
+        }
+        private Nullable<global::System.Double> _MOYENNE_EXAMEN_SORTIE;
+        partial void OnMOYENNE_EXAMEN_SORTIEChanging(Nullable<global::System.Double> value);
+        partial void OnMOYENNE_EXAMEN_SORTIEChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Double> MOYENNE_STAGE
+        {
+            get
+            {
+                return _MOYENNE_STAGE;
+            }
+            set
+            {
+                OnMOYENNE_STAGEChanging(value);
+                ReportPropertyChanging("MOYENNE_STAGE");
+                _MOYENNE_STAGE = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("MOYENNE_STAGE");
+                OnMOYENNE_STAGEChanged();
+            }
+        }
+        private Nullable<global::System.Double> _MOYENNE_STAGE;
+        partial void OnMOYENNE_STAGEChanging(Nullable<global::System.Double> value);
+        partial void OnMOYENNE_STAGEChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Double> CREDIT
+        {
+            get
+            {
+                return _CREDIT;
+            }
+            set
+            {
+                OnCREDITChanging(value);
+                ReportPropertyChanging("CREDIT");
+                _CREDIT = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CREDIT");
+                OnCREDITChanged();
+            }
+        }
+        private Nullable<global::System.Double> _CREDIT;
+        partial void OnCREDITChanging(Nullable<global::System.Double> value);
+        partial void OnCREDITChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Double> POINTS
+        {
+            get
+            {
+                return _POINTS;
+            }
+            set
+            {
+                OnPOINTSChanging(value);
+                ReportPropertyChanging("POINTS");
+                _POINTS = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("POINTS");
+                OnPOINTSChanged();
+            }
+        }
+        private Nullable<global::System.Double> _POINTS;
+        partial void OnPOINTSChanging(Nullable<global::System.Double> value);
+        partial void OnPOINTSChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Double> MOYENNE_GENERALE_NOTATION_LETTRE
+        {
+            get
+            {
+                return _MOYENNE_GENERALE_NOTATION_LETTRE;
+            }
+            set
+            {
+                OnMOYENNE_GENERALE_NOTATION_LETTREChanging(value);
+                ReportPropertyChanging("MOYENNE_GENERALE_NOTATION_LETTRE");
+                _MOYENNE_GENERALE_NOTATION_LETTRE = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("MOYENNE_GENERALE_NOTATION_LETTRE");
+                OnMOYENNE_GENERALE_NOTATION_LETTREChanged();
+            }
+        }
+        private Nullable<global::System.Double> _MOYENNE_GENERALE_NOTATION_LETTRE;
+        partial void OnMOYENNE_GENERALE_NOTATION_LETTREChanging(Nullable<global::System.Double> value);
+        partial void OnMOYENNE_GENERALE_NOTATION_LETTREChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> LastEditDate
+        {
+            get
+            {
+                return _LastEditDate;
+            }
+            set
+            {
+                OnLastEditDateChanging(value);
+                ReportPropertyChanging("LastEditDate");
+                _LastEditDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LastEditDate");
+                OnLastEditDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _LastEditDate;
+        partial void OnLastEditDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnLastEditDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> CreationDate
+        {
+            get
+            {
+                return _CreationDate;
+            }
+            set
+            {
+                OnCreationDateChanging(value);
+                ReportPropertyChanging("CreationDate");
+                _CreationDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreationDate");
+                OnCreationDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _CreationDate;
+        partial void OnCreationDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnCreationDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int64> C__sysChangeTxBsn
+        {
+            get
+            {
+                return _C__sysChangeTxBsn;
+            }
+            set
+            {
+                OnC__sysChangeTxBsnChanging(value);
+                ReportPropertyChanging("C__sysChangeTxBsn");
+                _C__sysChangeTxBsn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("C__sysChangeTxBsn");
+                OnC__sysChangeTxBsnChanged();
+            }
+        }
+        private Nullable<global::System.Int64> _C__sysChangeTxBsn;
+        partial void OnC__sysChangeTxBsnChanging(Nullable<global::System.Int64> value);
+        partial void OnC__sysChangeTxBsnChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int64> C__sysInsertTxBsn
+        {
+            get
+            {
+                return _C__sysInsertTxBsn;
+            }
+            set
+            {
+                OnC__sysInsertTxBsnChanging(value);
+                ReportPropertyChanging("C__sysInsertTxBsn");
+                _C__sysInsertTxBsn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("C__sysInsertTxBsn");
+                OnC__sysInsertTxBsnChanged();
+            }
+        }
+        private Nullable<global::System.Int64> _C__sysInsertTxBsn;
+        partial void OnC__sysInsertTxBsnChanging(Nullable<global::System.Int64> value);
+        partial void OnC__sysInsertTxBsnChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Guid> C__sysTrackingContext
+        {
+            get
+            {
+                return _C__sysTrackingContext;
+            }
+            set
+            {
+                OnC__sysTrackingContextChanging(value);
+                ReportPropertyChanging("C__sysTrackingContext");
+                _C__sysTrackingContext = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("C__sysTrackingContext");
+                OnC__sysTrackingContextChanged();
+            }
+        }
+        private Nullable<global::System.Guid> _C__sysTrackingContext;
+        partial void OnC__sysTrackingContextChanging(Nullable<global::System.Guid> value);
+        partial void OnC__sysTrackingContextChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_Etude_Annee", "ANNEE")]
+        public ANNEE ANNEE
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ANNEE>("SGSDBModel.Relation_Etude_Annee", "ANNEE").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ANNEE>("SGSDBModel.Relation_Etude_Annee", "ANNEE").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<ANNEE> ANNEEReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ANNEE>("SGSDBModel.Relation_Etude_Annee", "ANNEE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ANNEE>("SGSDBModel.Relation_Etude_Annee", "ANNEE", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_Etude_Etudiant", "ETUDIANT")]
+        public ETUDIANT ETUDIANT
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ETUDIANT>("SGSDBModel.Relation_Etude_Etudiant", "ETUDIANT").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ETUDIANT>("SGSDBModel.Relation_Etude_Etudiant", "ETUDIANT").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<ETUDIANT> ETUDIANTReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ETUDIANT>("SGSDBModel.Relation_Etude_Etudiant", "ETUDIANT");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ETUDIANT>("SGSDBModel.Relation_Etude_Etudiant", "ETUDIANT", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_Etude_Groupe", "GROUPE")]
+        public GROUPE GROUPE
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GROUPE>("SGSDBModel.Relation_Etude_Groupe", "GROUPE").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GROUPE>("SGSDBModel.Relation_Etude_Groupe", "GROUPE").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<GROUPE> GROUPEReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GROUPE>("SGSDBModel.Relation_Etude_Groupe", "GROUPE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<GROUPE>("SGSDBModel.Relation_Etude_Groupe", "GROUPE", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_Etude_Section", "SECTION")]
+        public SECTION SECTION
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SECTION>("SGSDBModel.Relation_Etude_Section", "SECTION").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SECTION>("SGSDBModel.Relation_Etude_Section", "SECTION").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<SECTION> SECTIONReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SECTION>("SGSDBModel.Relation_Etude_Section", "SECTION");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SECTION>("SGSDBModel.Relation_Etude_Section", "SECTION", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_Etude_Specialite", "SPECIALITE")]
+        public SPECIALITE SPECIALITE
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SPECIALITE>("SGSDBModel.Relation_Etude_Specialite", "SPECIALITE").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SPECIALITE>("SGSDBModel.Relation_Etude_Specialite", "SPECIALITE").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<SPECIALITE> SPECIALITEReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SPECIALITE>("SGSDBModel.Relation_Etude_Specialite", "SPECIALITE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SPECIALITE>("SGSDBModel.Relation_Etude_Specialite", "SPECIALITE", value);
                 }
             }
         }
@@ -4453,6 +5432,28 @@ namespace OfflineTeacher_DBProject
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_Etude_Etudiant", "ETUDE")]
+        public EntityCollection<ETUDE> ETUDES
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ETUDE>("SGSDBModel.Relation_Etude_Etudiant", "ETUDE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ETUDE>("SGSDBModel.Relation_Etude_Etudiant", "ETUDE", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -5558,6 +6559,28 @@ namespace OfflineTeacher_DBProject
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<USERS_SPECIALITES>("SGSDBModel.Relation_UserSpecialite_Groupe", "USERS_SPECIALITES", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_Etude_Groupe", "ETUDE")]
+        public EntityCollection<ETUDE> ETUDES
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ETUDE>("SGSDBModel.Relation_Etude_Groupe", "ETUDE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ETUDE>("SGSDBModel.Relation_Etude_Groupe", "ETUDE", value);
                 }
             }
         }
@@ -8589,6 +9612,28 @@ namespace OfflineTeacher_DBProject
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_Etude_Section", "ETUDE")]
+        public EntityCollection<ETUDE> ETUDES
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ETUDE>("SGSDBModel.Relation_Etude_Section", "ETUDE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ETUDE>("SGSDBModel.Relation_Etude_Section", "ETUDE", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -9171,6 +10216,28 @@ namespace OfflineTeacher_DBProject
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<USERS_SPECIALITES>("SGSDBModel.Relation_UserSpecialite_Specialite", "USERS_SPECIALITES", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_Etude_Specialite", "ETUDE")]
+        public EntityCollection<ETUDE> ETUDES
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ETUDE>("SGSDBModel.Relation_Etude_Specialite", "ETUDE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ETUDE>("SGSDBModel.Relation_Etude_Specialite", "ETUDE", value);
                 }
             }
         }

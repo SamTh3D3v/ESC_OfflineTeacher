@@ -60,6 +60,8 @@ namespace OfflineTeacher_DBProject {
         
         private USERS_SPECIALITESSyncTable _uSERS_SPECIALITESSyncTable;
         
+        private ETUDESSyncTable _eTUDESSyncTable;
+        
         partial void OnInitialized();
         
         public ESCLocalDbSyncAgent() {
@@ -285,6 +287,18 @@ namespace OfflineTeacher_DBProject {
         }
         
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public ETUDESSyncTable ETUDES {
+            get {
+                return this._eTUDESSyncTable;
+            }
+            set {
+                this.Configuration.SyncTables.Remove(this._eTUDESSyncTable);
+                this._eTUDESSyncTable = value;
+                this.Configuration.SyncTables.Add(this._eTUDESSyncTable);
+            }
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitializeSyncProviders() {
             // Create SyncProviders.
             this.RemoteProvider = new ESCLocalDbServerSyncProvider();
@@ -348,6 +362,9 @@ namespace OfflineTeacher_DBProject {
             this._uSERS_SPECIALITESSyncTable = new USERS_SPECIALITESSyncTable();
             this._uSERS_SPECIALITESSyncTable.SyncGroup = new Microsoft.Synchronization.Data.SyncGroup("USERS_SPECIALITESSyncTableSyncGroup");
             this.Configuration.SyncTables.Add(this._uSERS_SPECIALITESSyncTable);
+            this._eTUDESSyncTable = new ETUDESSyncTable();
+            this._eTUDESSyncTable.SyncGroup = new Microsoft.Synchronization.Data.SyncGroup("ETUDESSyncTableSyncGroup");
+            this.Configuration.SyncTables.Add(this._eTUDESSyncTable);
         }
         
         public partial class ANNEESSyncTable : Microsoft.Synchronization.Data.SyncTable {
@@ -634,6 +651,22 @@ namespace OfflineTeacher_DBProject {
             [System.Diagnostics.DebuggerNonUserCodeAttribute()]
             private void InitializeTableOptions() {
                 this.TableName = "USERS_SPECIALITES";
+                this.CreationOption = Microsoft.Synchronization.Data.TableCreationOption.DropExistingOrCreateNewTable;
+            }
+        }
+        
+        public partial class ETUDESSyncTable : Microsoft.Synchronization.Data.SyncTable {
+            
+            partial void OnInitialized();
+            
+            public ETUDESSyncTable() {
+                this.InitializeTableOptions();
+                this.OnInitialized();
+            }
+            
+            [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitializeTableOptions() {
+                this.TableName = "ETUDES";
                 this.CreationOption = Microsoft.Synchronization.Data.TableCreationOption.DropExistingOrCreateNewTable;
             }
         }
@@ -2415,6 +2448,119 @@ namespace OfflineTeacher_DBProject {
         }
     }
     
+    public partial class ETUDESSyncAdapter : Microsoft.Synchronization.Data.Server.SyncAdapter {
+        
+        partial void OnInitialized();
+        
+        public ETUDESSyncAdapter() {
+            this.InitializeCommands();
+            this.InitializeAdapterProperties();
+            this.OnInitialized();
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitializeCommands() {
+            // ETUDESSyncTableInsertCommand command.
+            this.InsertCommand = new System.Data.SqlClient.SqlCommand();
+            this.InsertCommand.CommandText = @"INSERT INTO dbo.ETUDES ([ID_ETUDIANT], [ANNEE_UNIVERSITAIRE], [ID_SPECIALITE], [ETAT_ETUDIANT], [ID_SECTION], [ID_GROUPE], [MOYENNE_JUIN], [RATTRAPAGE], [MOYENNE_SEPT], [RESULTAT], [RANG], [NIVEAU], [MOYENNE_PASSAGE], [CLASSEMENT], [DOCUMENT_REMIS], [RACHETE], [ETAT_PRECEDENT], [MOYENNE_GENERALE], [NOTE_ASSIDUITE], [MOYENNE_EXAMEN_SORTIE], [MOYENNE_GENERALE_NOTATION_LETTRE], [LastEditDate], [CreationDate]) VALUES (@ID_ETUDIANT, @ANNEE_UNIVERSITAIRE, @ID_SPECIALITE, @ETAT_ETUDIANT, @ID_SECTION, @ID_GROUPE, @MOYENNE_JUIN, @RATTRAPAGE, @MOYENNE_SEPT, @RESULTAT, @RANG, @NIVEAU, @MOYENNE_PASSAGE, @CLASSEMENT, @DOCUMENT_REMIS, @RACHETE, @ETAT_PRECEDENT, @MOYENNE_GENERALE, @NOTE_ASSIDUITE, @MOYENNE_EXAMEN_SORTIE, @MOYENNE_GENERALE_NOTATION_LETTRE, @LastEditDate, @CreationDate) SET @sync_row_count = @@rowcount";
+            this.InsertCommand.CommandType = System.Data.CommandType.Text;
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ID_ETUDIANT", System.Data.SqlDbType.Int));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ANNEE_UNIVERSITAIRE", System.Data.SqlDbType.Int));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ID_SPECIALITE", System.Data.SqlDbType.Int));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ETAT_ETUDIANT", System.Data.SqlDbType.VarChar));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ID_SECTION", System.Data.SqlDbType.Int));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ID_GROUPE", System.Data.SqlDbType.Int));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@MOYENNE_JUIN", System.Data.SqlDbType.Float));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@RATTRAPAGE", System.Data.SqlDbType.Bit));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@MOYENNE_SEPT", System.Data.SqlDbType.Float));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@RESULTAT", System.Data.SqlDbType.VarChar));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@RANG", System.Data.SqlDbType.Int));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@NIVEAU", System.Data.SqlDbType.Int));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@MOYENNE_PASSAGE", System.Data.SqlDbType.Float));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@CLASSEMENT", System.Data.SqlDbType.Int));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@DOCUMENT_REMIS", System.Data.SqlDbType.Bit));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@RACHETE", System.Data.SqlDbType.Bit));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ETAT_PRECEDENT", System.Data.SqlDbType.Int));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@MOYENNE_GENERALE", System.Data.SqlDbType.Float));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@NOTE_ASSIDUITE", System.Data.SqlDbType.Float));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@MOYENNE_EXAMEN_SORTIE", System.Data.SqlDbType.Float));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@MOYENNE_GENERALE_NOTATION_LETTRE", System.Data.SqlDbType.Float));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@LastEditDate", System.Data.SqlDbType.DateTime));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@CreationDate", System.Data.SqlDbType.DateTime));
+            System.Data.SqlClient.SqlParameter insertcommand_sync_row_countParameter = new System.Data.SqlClient.SqlParameter("@sync_row_count", System.Data.SqlDbType.Int);
+            insertcommand_sync_row_countParameter.Direction = System.Data.ParameterDirection.Output;
+            this.InsertCommand.Parameters.Add(insertcommand_sync_row_countParameter);
+            // ETUDESSyncTableDeleteCommand command.
+            this.DeleteCommand = new System.Data.SqlClient.SqlCommand();
+            this.DeleteCommand.CommandText = "DELETE FROM dbo.ETUDES WHERE ([ID_ETUDIANT] = @ID_ETUDIANT AND [ANNEE_UNIVERSITAI" +
+                "RE] = @ANNEE_UNIVERSITAIRE) AND (@sync_force_write = 1 OR ([LastEditDate] <= @sy" +
+                "nc_last_received_anchor)) SET @sync_row_count = @@rowcount";
+            this.DeleteCommand.CommandType = System.Data.CommandType.Text;
+            this.DeleteCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ID_ETUDIANT", System.Data.SqlDbType.Int));
+            this.DeleteCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ANNEE_UNIVERSITAIRE", System.Data.SqlDbType.Int));
+            this.DeleteCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@sync_force_write", System.Data.SqlDbType.Bit));
+            this.DeleteCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@sync_last_received_anchor", System.Data.SqlDbType.DateTime));
+            System.Data.SqlClient.SqlParameter deletecommand_sync_row_countParameter = new System.Data.SqlClient.SqlParameter("@sync_row_count", System.Data.SqlDbType.Int);
+            deletecommand_sync_row_countParameter.Direction = System.Data.ParameterDirection.Output;
+            this.DeleteCommand.Parameters.Add(deletecommand_sync_row_countParameter);
+            // ETUDESSyncTableUpdateCommand command.
+            this.UpdateCommand = new System.Data.SqlClient.SqlCommand();
+            this.UpdateCommand.CommandText = @"UPDATE dbo.ETUDES SET [ID_SPECIALITE] = @ID_SPECIALITE, [ETAT_ETUDIANT] = @ETAT_ETUDIANT, [ID_SECTION] = @ID_SECTION, [ID_GROUPE] = @ID_GROUPE, [MOYENNE_JUIN] = @MOYENNE_JUIN, [RATTRAPAGE] = @RATTRAPAGE, [MOYENNE_SEPT] = @MOYENNE_SEPT, [RESULTAT] = @RESULTAT, [RANG] = @RANG, [NIVEAU] = @NIVEAU, [MOYENNE_PASSAGE] = @MOYENNE_PASSAGE, [CLASSEMENT] = @CLASSEMENT, [DOCUMENT_REMIS] = @DOCUMENT_REMIS, [RACHETE] = @RACHETE, [ETAT_PRECEDENT] = @ETAT_PRECEDENT, [MOYENNE_GENERALE] = @MOYENNE_GENERALE, [NOTE_ASSIDUITE] = @NOTE_ASSIDUITE, [MOYENNE_EXAMEN_SORTIE] = @MOYENNE_EXAMEN_SORTIE, [MOYENNE_GENERALE_NOTATION_LETTRE] = @MOYENNE_GENERALE_NOTATION_LETTRE, [LastEditDate] = @LastEditDate, [CreationDate] = @CreationDate WHERE ([ID_ETUDIANT] = @ID_ETUDIANT AND [ANNEE_UNIVERSITAIRE] = @ANNEE_UNIVERSITAIRE) AND (@sync_force_write = 1 OR ([LastEditDate] <= @sync_last_received_anchor)) SET @sync_row_count = @@rowcount";
+            this.UpdateCommand.CommandType = System.Data.CommandType.Text;
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ID_SPECIALITE", System.Data.SqlDbType.Int));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ETAT_ETUDIANT", System.Data.SqlDbType.VarChar));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ID_SECTION", System.Data.SqlDbType.Int));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ID_GROUPE", System.Data.SqlDbType.Int));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@MOYENNE_JUIN", System.Data.SqlDbType.Float));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@RATTRAPAGE", System.Data.SqlDbType.Bit));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@MOYENNE_SEPT", System.Data.SqlDbType.Float));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@RESULTAT", System.Data.SqlDbType.VarChar));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@RANG", System.Data.SqlDbType.Int));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@NIVEAU", System.Data.SqlDbType.Int));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@MOYENNE_PASSAGE", System.Data.SqlDbType.Float));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@CLASSEMENT", System.Data.SqlDbType.Int));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@DOCUMENT_REMIS", System.Data.SqlDbType.Bit));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@RACHETE", System.Data.SqlDbType.Bit));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ETAT_PRECEDENT", System.Data.SqlDbType.Int));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@MOYENNE_GENERALE", System.Data.SqlDbType.Float));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@NOTE_ASSIDUITE", System.Data.SqlDbType.Float));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@MOYENNE_EXAMEN_SORTIE", System.Data.SqlDbType.Float));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@MOYENNE_GENERALE_NOTATION_LETTRE", System.Data.SqlDbType.Float));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@LastEditDate", System.Data.SqlDbType.DateTime));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@CreationDate", System.Data.SqlDbType.DateTime));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ID_ETUDIANT", System.Data.SqlDbType.Int));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ANNEE_UNIVERSITAIRE", System.Data.SqlDbType.Int));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@sync_force_write", System.Data.SqlDbType.Bit));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@sync_last_received_anchor", System.Data.SqlDbType.DateTime));
+            System.Data.SqlClient.SqlParameter updatecommand_sync_row_countParameter = new System.Data.SqlClient.SqlParameter("@sync_row_count", System.Data.SqlDbType.Int);
+            updatecommand_sync_row_countParameter.Direction = System.Data.ParameterDirection.Output;
+            this.UpdateCommand.Parameters.Add(updatecommand_sync_row_countParameter);
+            // ETUDESSyncTableSelectConflictUpdatedRowsCommand command.
+            this.SelectConflictUpdatedRowsCommand = new System.Data.SqlClient.SqlCommand();
+            this.SelectConflictUpdatedRowsCommand.CommandText = @"SELECT [ID_ETUDIANT], [ANNEE_UNIVERSITAIRE], [ID_SPECIALITE], [ETAT_ETUDIANT], [ID_SECTION], [ID_GROUPE], [MOYENNE_JUIN], [RATTRAPAGE], [MOYENNE_SEPT], [RESULTAT], [RANG], [NIVEAU], [MOYENNE_PASSAGE], [CLASSEMENT], [DOCUMENT_REMIS], [RACHETE], [ETAT_PRECEDENT], [MOYENNE_GENERALE], [NOTE_ASSIDUITE], [MOYENNE_EXAMEN_SORTIE], [MOYENNE_STAGE], [CREDIT], [POINTS], [MOYENNE_GENERALE_NOTATION_LETTRE], [LastEditDate], [CreationDate] FROM dbo.ETUDES WHERE ([ID_ETUDIANT] = @ID_ETUDIANT AND [ANNEE_UNIVERSITAIRE] = @ANNEE_UNIVERSITAIRE)";
+            this.SelectConflictUpdatedRowsCommand.CommandType = System.Data.CommandType.Text;
+            this.SelectConflictUpdatedRowsCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ID_ETUDIANT", System.Data.SqlDbType.Int));
+            this.SelectConflictUpdatedRowsCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ANNEE_UNIVERSITAIRE", System.Data.SqlDbType.Int));
+            // ETUDESSyncTableSelectIncrementalInsertsCommand command.
+            this.SelectIncrementalInsertsCommand = new System.Data.SqlClient.SqlCommand();
+            this.SelectIncrementalInsertsCommand.CommandText = @"SELECT [ID_ETUDIANT], [ANNEE_UNIVERSITAIRE], [ID_SPECIALITE], [ETAT_ETUDIANT], [ID_SECTION], [ID_GROUPE], [MOYENNE_JUIN], [RATTRAPAGE], [MOYENNE_SEPT], [RESULTAT], [RANG], [NIVEAU], [MOYENNE_PASSAGE], [CLASSEMENT], [DOCUMENT_REMIS], [RACHETE], [ETAT_PRECEDENT], [MOYENNE_GENERALE], [NOTE_ASSIDUITE], [MOYENNE_EXAMEN_SORTIE], [MOYENNE_STAGE], [CREDIT], [POINTS], [MOYENNE_GENERALE_NOTATION_LETTRE], [LastEditDate], [CreationDate] FROM dbo.ETUDES WHERE ([CreationDate] > @sync_last_received_anchor AND [CreationDate] <= @sync_new_received_anchor)";
+            this.SelectIncrementalInsertsCommand.CommandType = System.Data.CommandType.Text;
+            this.SelectIncrementalInsertsCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@sync_last_received_anchor", System.Data.SqlDbType.DateTime));
+            this.SelectIncrementalInsertsCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@sync_new_received_anchor", System.Data.SqlDbType.DateTime));
+            // ETUDESSyncTableSelectIncrementalUpdatesCommand command.
+            this.SelectIncrementalUpdatesCommand = new System.Data.SqlClient.SqlCommand();
+            this.SelectIncrementalUpdatesCommand.CommandText = @"SELECT [ID_ETUDIANT], [ANNEE_UNIVERSITAIRE], [ID_SPECIALITE], [ETAT_ETUDIANT], [ID_SECTION], [ID_GROUPE], [MOYENNE_JUIN], [RATTRAPAGE], [MOYENNE_SEPT], [RESULTAT], [RANG], [NIVEAU], [MOYENNE_PASSAGE], [CLASSEMENT], [DOCUMENT_REMIS], [RACHETE], [ETAT_PRECEDENT], [MOYENNE_GENERALE], [NOTE_ASSIDUITE], [MOYENNE_EXAMEN_SORTIE], [MOYENNE_STAGE], [CREDIT], [POINTS], [MOYENNE_GENERALE_NOTATION_LETTRE], [LastEditDate], [CreationDate] FROM dbo.ETUDES WHERE ([LastEditDate] > @sync_last_received_anchor AND [LastEditDate] <= @sync_new_received_anchor AND [CreationDate] <= @sync_last_received_anchor)";
+            this.SelectIncrementalUpdatesCommand.CommandType = System.Data.CommandType.Text;
+            this.SelectIncrementalUpdatesCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@sync_last_received_anchor", System.Data.SqlDbType.DateTime));
+            this.SelectIncrementalUpdatesCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@sync_new_received_anchor", System.Data.SqlDbType.DateTime));
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitializeAdapterProperties() {
+            this.TableName = "ETUDES";
+        }
+    }
+    
     public partial class ESCLocalDbServerSyncProvider : Microsoft.Synchronization.Data.Server.DbServerSyncProvider {
         
         private ANNEESSyncAdapter _aNNEESSyncAdapter;
@@ -2452,6 +2598,8 @@ namespace OfflineTeacher_DBProject {
         private ENS_SPEMATSyncAdapter _eNS_SPEMATSyncAdapter;
         
         private USERS_SPECIALITESSyncAdapter _uSERS_SPECIALITESSyncAdapter;
+        
+        private ETUDESSyncAdapter _eTUDESSyncAdapter;
         
         partial void OnInitialized();
         
@@ -2651,6 +2799,16 @@ namespace OfflineTeacher_DBProject {
         }
         
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public ETUDESSyncAdapter ETUDESSyncAdapter {
+            get {
+                return this._eTUDESSyncAdapter;
+            }
+            set {
+                this._eTUDESSyncAdapter = value;
+            }
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitializeConnection(string connectionString) {
             this.Connection = new System.Data.SqlClient.SqlConnection(connectionString);
         }
@@ -2694,6 +2852,8 @@ namespace OfflineTeacher_DBProject {
             this.SyncAdapters.Add(this._eNS_SPEMATSyncAdapter);
             this._uSERS_SPECIALITESSyncAdapter = new USERS_SPECIALITESSyncAdapter();
             this.SyncAdapters.Add(this._uSERS_SPECIALITESSyncAdapter);
+            this._eTUDESSyncAdapter = new ETUDESSyncAdapter();
+            this.SyncAdapters.Add(this._eTUDESSyncAdapter);
         }
         
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]

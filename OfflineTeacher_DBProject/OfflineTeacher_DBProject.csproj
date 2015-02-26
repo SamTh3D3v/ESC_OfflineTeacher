@@ -93,7 +93,9 @@
     <Compile Include="SynchronisationHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="ESCDataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ESCDataModel.Designer.cs</LastGenOutput>
@@ -130,6 +132,7 @@
     <Content Include="SQLScripts\ESCLocalDb.dbo.CATEGORIES.sql" />
     <Content Include="SQLScripts\ESCLocalDb.dbo.ENSEIGNANTS.sql" />
     <Content Include="SQLScripts\ESCLocalDb.dbo.ENS_SPEMAT.sql" />
+    <Content Include="SQLScripts\ESCLocalDb.dbo.ETUDES.sql" />
     <Content Include="SQLScripts\ESCLocalDb.dbo.ETUDIANTS.sql" />
     <Content Include="SQLScripts\ESCLocalDb.dbo.EXAMENS.sql" />
     <Content Include="SQLScripts\ESCLocalDb.dbo.EXAMENS_ANNEES_MODES_ETUDES.sql" />
@@ -162,6 +165,7 @@
     <Content Include="SQLUndoScripts\ESCLocalDb.dbo.CATEGORIES.undo.sql" />
     <Content Include="SQLUndoScripts\ESCLocalDb.dbo.ENSEIGNANTS.undo.sql" />
     <Content Include="SQLUndoScripts\ESCLocalDb.dbo.ENS_SPEMAT.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDb.dbo.ETUDES.undo.sql" />
     <Content Include="SQLUndoScripts\ESCLocalDb.dbo.ETUDIANTS.undo.sql" />
     <Content Include="SQLUndoScripts\ESCLocalDb.dbo.EXAMENS.undo.sql" />
     <Content Include="SQLUndoScripts\ESCLocalDb.dbo.EXAMENS_ANNEES_MODES_ETUDES.undo.sql" />
