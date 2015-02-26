@@ -20,6 +20,7 @@ using System.Xml.Serialization;
 #region EDM Relationship Metadata
 
 [assembly: EdmRelationshipAttribute("SGSDBModel", "C__syncArticles_FK", "C__syncSubscriptions", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.C__syncSubscriptions), "C__syncArticles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.C__syncArticles), true)]
+[assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_EnsSpeMat_Annee", "ANNEES", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.ANNEE), "ENS_SPEMAT", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.ENS_SPEMAT), true)]
 [assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_ExamAnneeModeEtude_Annee", "ANNEES", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.ANNEE), "EXAMENS_ANNEES_MODES_ETUDES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.EXAMENS_ANNEES_MODES_ETUDES), true)]
 [assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_Note_AnneeUniversitaire", "ANNEES", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.ANNEE), "NOTE", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.NOTE), true)]
 [assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_NoteDette_Annee", "ANNEES", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.ANNEE), "NOTE_DETTE", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.NOTE_DETTE), true)]
@@ -29,6 +30,12 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_SpeciliteAnneeModeEtude_Annee", "ANNEES", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.ANNEE), "SPECIALITES_ANNEES_MODES_ETUDES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.SPECIALITES_ANNEES_MODES_ETUDES), true)]
 [assembly: EdmRelationshipAttribute("SGSDBModel", "RelationSpeciliteMatiere_Annee", "ANNEES", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.ANNEE), "SPECIALITES_MATIERES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.SPECIALITES_MATIERES), true)]
 [assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_SpecialiteMatiere_Categorie", "CATEGORIES", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(OfflineTeacher_DBProject.CATEGORy), "SPECIALITES_MATIERES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.SPECIALITES_MATIERES), true)]
+[assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_EnsSpeMat_Enseigant", "ENSEIGNANTS", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.ENSEIGNANT), "ENS_SPEMAT", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.ENS_SPEMAT), true)]
+[assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_EnsSpeMat_Matiere", "MATIERES", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.MATIERE), "ENS_SPEMAT", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.ENS_SPEMAT), true)]
+[assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_EnsSpeMat_Specialite", "SPECIALITES", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.SPECIALITE), "ENS_SPEMAT", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.ENS_SPEMAT), true)]
+[assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_Note_Etudiant", "ETUDIANTS", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.ETUDIANT), "NOTE", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.NOTE), true)]
+[assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_NoteDette_Etudiant", "ETUDIANTS", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.ETUDIANT), "NOTE_DETTE", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.NOTE_DETTE), true)]
+[assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_NoteExamin_Etudiant", "ETUDIANTS", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.ETUDIANT), "NOTES_EXAMEN", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.NOTES_EXAMEN), true)]
 [assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_ExaminAnneeModeEtude_Examin", "EXAMENS", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.EXAMEN), "EXAMENS_ANNEES_MODES_ETUDES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.EXAMENS_ANNEES_MODES_ETUDES), true)]
 [assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_NoteExamin_Examin", "EXAMENS", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.EXAMEN), "NOTES_EXAMEN", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.NOTES_EXAMEN), true)]
 [assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_ExaminAnneeModeEtude_ModeEtude", "MODES_ETUDES", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.MODES_ETUDES), "EXAMENS_ANNEES_MODES_ETUDES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.EXAMENS_ANNEES_MODES_ETUDES), true)]
@@ -43,10 +50,10 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_Section_Specialite", "SPECIALITES", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(OfflineTeacher_DBProject.SPECIALITE), "SECTIONS", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.SECTION), true)]
 [assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_SpeciliteAnneeModeEtude_Specilite", "SPECIALITES", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.SPECIALITE), "SPECIALITES_ANNEES_MODES_ETUDES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.SPECIALITES_ANNEES_MODES_ETUDES), true)]
 [assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_SpeciliteMatiere_Specialite", "SPECIALITES", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.SPECIALITE), "SPECIALITES_MATIERES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.SPECIALITES_MATIERES), true)]
-[assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_EnsSpeMat_Annee", "ANNEE", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.ANNEE), "ENS_SPEMAT", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.ENS_SPEMAT), true)]
-[assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_EnsSpeMat_Enseigant", "ENSEIGNANT", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.ENSEIGNANT), "ENS_SPEMAT", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.ENS_SPEMAT), true)]
-[assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_EnsSpeMat_Matiere", "MATIERE", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.MATIERE), "ENS_SPEMAT", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.ENS_SPEMAT), true)]
-[assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_EnsSpeMat_Specialite", "SPECIALITE", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.SPECIALITE), "ENS_SPEMAT", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.ENS_SPEMAT), true)]
+[assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_UserSpecialite_Annee", "ANNEE", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.ANNEE), "USERS_SPECIALITES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.USERS_SPECIALITES), true)]
+[assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_UserSpecialite_Groupe", "GROUPE", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.GROUPE), "USERS_SPECIALITES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.USERS_SPECIALITES), true)]
+[assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_UserSpecialite_Matiere", "MATIERE", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.MATIERE), "USERS_SPECIALITES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.USERS_SPECIALITES), true)]
+[assembly: EdmRelationshipAttribute("SGSDBModel", "Relation_UserSpecialite_Specialite", "SPECIALITE", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfflineTeacher_DBProject.SPECIALITE), "USERS_SPECIALITES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfflineTeacher_DBProject.USERS_SPECIALITES), true)]
 
 #endregion
 
@@ -57,32 +64,32 @@ namespace OfflineTeacher_DBProject
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    public partial class LocalSGSDBEntities : ObjectContext
+    public partial class LocalDbEntities : ObjectContext
     {
         #region Constructors
     
         /// <summary>
-        /// Initializes a new LocalSGSDBEntities object using the connection string found in the 'LocalSGSDBEntities' section of the application configuration file.
+        /// Initializes a new LocalDbEntities object using the connection string found in the 'LocalDbEntities' section of the application configuration file.
         /// </summary>
-        public LocalSGSDBEntities() : base("name=LocalSGSDBEntities", "LocalSGSDBEntities")
+        public LocalDbEntities() : base("name=LocalDbEntities", "LocalDbEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new LocalSGSDBEntities object.
+        /// Initialize a new LocalDbEntities object.
         /// </summary>
-        public LocalSGSDBEntities(string connectionString) : base(connectionString, "LocalSGSDBEntities")
+        public LocalDbEntities(string connectionString) : base(connectionString, "LocalDbEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new LocalSGSDBEntities object.
+        /// Initialize a new LocalDbEntities object.
         /// </summary>
-        public LocalSGSDBEntities(EntityConnection connection) : base(connection, "LocalSGSDBEntities")
+        public LocalDbEntities(EntityConnection connection) : base(connection, "LocalDbEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
@@ -177,6 +184,22 @@ namespace OfflineTeacher_DBProject
             }
         }
         private ObjectSet<CATEGORy> _CATEGORIES;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ENS_SPEMAT> ENS_SPEMAT
+        {
+            get
+            {
+                if ((_ENS_SPEMAT == null))
+                {
+                    _ENS_SPEMAT = base.CreateObjectSet<ENS_SPEMAT>("ENS_SPEMAT");
+                }
+                return _ENS_SPEMAT;
+            }
+        }
+        private ObjectSet<ENS_SPEMAT> _ENS_SPEMAT;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -405,18 +428,18 @@ namespace OfflineTeacher_DBProject
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<ENS_SPEMAT> ENS_SPEMAT
+        public ObjectSet<USERS_SPECIALITES> USERS_SPECIALITES
         {
             get
             {
-                if ((_ENS_SPEMAT == null))
+                if ((_USERS_SPECIALITES == null))
                 {
-                    _ENS_SPEMAT = base.CreateObjectSet<ENS_SPEMAT>("ENS_SPEMAT");
+                    _USERS_SPECIALITES = base.CreateObjectSet<USERS_SPECIALITES>("USERS_SPECIALITES");
                 }
-                return _ENS_SPEMAT;
+                return _USERS_SPECIALITES;
             }
         }
-        private ObjectSet<ENS_SPEMAT> _ENS_SPEMAT;
+        private ObjectSet<USERS_SPECIALITES> _USERS_SPECIALITES;
 
         #endregion
 
@@ -460,6 +483,14 @@ namespace OfflineTeacher_DBProject
         public void AddToCATEGORIES(CATEGORy cATEGORy)
         {
             base.AddObject("CATEGORIES", cATEGORy);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ENS_SPEMAT EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToENS_SPEMAT(ENS_SPEMAT eNS_SPEMAT)
+        {
+            base.AddObject("ENS_SPEMAT", eNS_SPEMAT);
         }
     
         /// <summary>
@@ -575,11 +606,11 @@ namespace OfflineTeacher_DBProject
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the ENS_SPEMAT EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the USERS_SPECIALITES EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToENS_SPEMAT(ENS_SPEMAT eNS_SPEMAT)
+        public void AddToUSERS_SPECIALITES(USERS_SPECIALITES uSERS_SPECIALITES)
         {
-            base.AddObject("ENS_SPEMAT", eNS_SPEMAT);
+            base.AddObject("USERS_SPECIALITES", uSERS_SPECIALITES);
         }
 
         #endregion
@@ -1031,6 +1062,28 @@ namespace OfflineTeacher_DBProject
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_EnsSpeMat_Annee", "ENS_SPEMAT")]
+        public EntityCollection<ENS_SPEMAT> ENS_SPEMAT
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ENS_SPEMAT>("SGSDBModel.Relation_EnsSpeMat_Annee", "ENS_SPEMAT");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ENS_SPEMAT>("SGSDBModel.Relation_EnsSpeMat_Annee", "ENS_SPEMAT", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_ExamAnneeModeEtude_Annee", "EXAMENS_ANNEES_MODES_ETUDES")]
         public EntityCollection<EXAMENS_ANNEES_MODES_ETUDES> EXAMENS_ANNEES_MODES_ETUDES
         {
@@ -1207,18 +1260,18 @@ namespace OfflineTeacher_DBProject
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_EnsSpeMat_Annee", "ENS_SPEMAT")]
-        public EntityCollection<ENS_SPEMAT> ENS_SPEMAT
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_UserSpecialite_Annee", "USERS_SPECIALITES")]
+        public EntityCollection<USERS_SPECIALITES> USERS_SPECIALITES
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ENS_SPEMAT>("SGSDBModel.Relation_EnsSpeMat_Annee", "ENS_SPEMAT");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<USERS_SPECIALITES>("SGSDBModel.Relation_UserSpecialite_Annee", "USERS_SPECIALITES");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ENS_SPEMAT>("SGSDBModel.Relation_EnsSpeMat_Annee", "ENS_SPEMAT", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<USERS_SPECIALITES>("SGSDBModel.Relation_UserSpecialite_Annee", "USERS_SPECIALITES", value);
                 }
             }
         }
@@ -2113,16 +2166,16 @@ namespace OfflineTeacher_DBProject
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_EnsSpeMat_Annee", "ANNEE")]
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_EnsSpeMat_Annee", "ANNEES")]
         public ANNEE ANNEE
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ANNEE>("SGSDBModel.Relation_EnsSpeMat_Annee", "ANNEE").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ANNEE>("SGSDBModel.Relation_EnsSpeMat_Annee", "ANNEES").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ANNEE>("SGSDBModel.Relation_EnsSpeMat_Annee", "ANNEE").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ANNEE>("SGSDBModel.Relation_EnsSpeMat_Annee", "ANNEES").Value = value;
             }
         }
         /// <summary>
@@ -2134,13 +2187,13 @@ namespace OfflineTeacher_DBProject
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ANNEE>("SGSDBModel.Relation_EnsSpeMat_Annee", "ANNEE");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ANNEE>("SGSDBModel.Relation_EnsSpeMat_Annee", "ANNEES");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ANNEE>("SGSDBModel.Relation_EnsSpeMat_Annee", "ANNEE", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ANNEE>("SGSDBModel.Relation_EnsSpeMat_Annee", "ANNEES", value);
                 }
             }
         }
@@ -2151,16 +2204,16 @@ namespace OfflineTeacher_DBProject
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_EnsSpeMat_Enseigant", "ENSEIGNANT")]
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_EnsSpeMat_Enseigant", "ENSEIGNANTS")]
         public ENSEIGNANT ENSEIGNANT
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ENSEIGNANT>("SGSDBModel.Relation_EnsSpeMat_Enseigant", "ENSEIGNANT").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ENSEIGNANT>("SGSDBModel.Relation_EnsSpeMat_Enseigant", "ENSEIGNANTS").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ENSEIGNANT>("SGSDBModel.Relation_EnsSpeMat_Enseigant", "ENSEIGNANT").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ENSEIGNANT>("SGSDBModel.Relation_EnsSpeMat_Enseigant", "ENSEIGNANTS").Value = value;
             }
         }
         /// <summary>
@@ -2172,13 +2225,13 @@ namespace OfflineTeacher_DBProject
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ENSEIGNANT>("SGSDBModel.Relation_EnsSpeMat_Enseigant", "ENSEIGNANT");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ENSEIGNANT>("SGSDBModel.Relation_EnsSpeMat_Enseigant", "ENSEIGNANTS");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ENSEIGNANT>("SGSDBModel.Relation_EnsSpeMat_Enseigant", "ENSEIGNANT", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ENSEIGNANT>("SGSDBModel.Relation_EnsSpeMat_Enseigant", "ENSEIGNANTS", value);
                 }
             }
         }
@@ -2189,16 +2242,16 @@ namespace OfflineTeacher_DBProject
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_EnsSpeMat_Matiere", "MATIERE")]
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_EnsSpeMat_Matiere", "MATIERES")]
         public MATIERE MATIERE
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MATIERE>("SGSDBModel.Relation_EnsSpeMat_Matiere", "MATIERE").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MATIERE>("SGSDBModel.Relation_EnsSpeMat_Matiere", "MATIERES").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MATIERE>("SGSDBModel.Relation_EnsSpeMat_Matiere", "MATIERE").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MATIERE>("SGSDBModel.Relation_EnsSpeMat_Matiere", "MATIERES").Value = value;
             }
         }
         /// <summary>
@@ -2210,13 +2263,13 @@ namespace OfflineTeacher_DBProject
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MATIERE>("SGSDBModel.Relation_EnsSpeMat_Matiere", "MATIERE");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MATIERE>("SGSDBModel.Relation_EnsSpeMat_Matiere", "MATIERES");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<MATIERE>("SGSDBModel.Relation_EnsSpeMat_Matiere", "MATIERE", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<MATIERE>("SGSDBModel.Relation_EnsSpeMat_Matiere", "MATIERES", value);
                 }
             }
         }
@@ -2227,16 +2280,16 @@ namespace OfflineTeacher_DBProject
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_EnsSpeMat_Specialite", "SPECIALITE")]
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_EnsSpeMat_Specialite", "SPECIALITES")]
         public SPECIALITE SPECIALITE
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SPECIALITE>("SGSDBModel.Relation_EnsSpeMat_Specialite", "SPECIALITE").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SPECIALITE>("SGSDBModel.Relation_EnsSpeMat_Specialite", "SPECIALITES").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SPECIALITE>("SGSDBModel.Relation_EnsSpeMat_Specialite", "SPECIALITE").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SPECIALITE>("SGSDBModel.Relation_EnsSpeMat_Specialite", "SPECIALITES").Value = value;
             }
         }
         /// <summary>
@@ -2248,13 +2301,13 @@ namespace OfflineTeacher_DBProject
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SPECIALITE>("SGSDBModel.Relation_EnsSpeMat_Specialite", "SPECIALITE");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SPECIALITE>("SGSDBModel.Relation_EnsSpeMat_Specialite", "SPECIALITES");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SPECIALITE>("SGSDBModel.Relation_EnsSpeMat_Specialite", "SPECIALITE", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SPECIALITE>("SGSDBModel.Relation_EnsSpeMat_Specialite", "SPECIALITES", value);
                 }
             }
         }
@@ -2770,7 +2823,7 @@ namespace OfflineTeacher_DBProject
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Int32 ID_ETUDIANT
         {
@@ -2780,11 +2833,14 @@ namespace OfflineTeacher_DBProject
             }
             set
             {
-                OnID_ETUDIANTChanging(value);
-                ReportPropertyChanging("ID_ETUDIANT");
-                _ID_ETUDIANT = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ID_ETUDIANT");
-                OnID_ETUDIANTChanged();
+                if (_ID_ETUDIANT != value)
+                {
+                    OnID_ETUDIANTChanging(value);
+                    ReportPropertyChanging("ID_ETUDIANT");
+                    _ID_ETUDIANT = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID_ETUDIANT");
+                    OnID_ETUDIANTChanged();
+                }
             }
         }
         private global::System.Int32 _ID_ETUDIANT;
@@ -2794,7 +2850,7 @@ namespace OfflineTeacher_DBProject
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String MATRICULE
         {
@@ -2804,14 +2860,11 @@ namespace OfflineTeacher_DBProject
             }
             set
             {
-                if (_MATRICULE != value)
-                {
-                    OnMATRICULEChanging(value);
-                    ReportPropertyChanging("MATRICULE");
-                    _MATRICULE = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("MATRICULE");
-                    OnMATRICULEChanged();
-                }
+                OnMATRICULEChanging(value);
+                ReportPropertyChanging("MATRICULE");
+                _MATRICULE = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("MATRICULE");
+                OnMATRICULEChanged();
             }
         }
         private global::System.String _MATRICULE;
@@ -4333,6 +4386,76 @@ namespace OfflineTeacher_DBProject
         #endregion
 
     
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_Note_Etudiant", "NOTE")]
+        public EntityCollection<NOTE> NOTEs
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<NOTE>("SGSDBModel.Relation_Note_Etudiant", "NOTE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<NOTE>("SGSDBModel.Relation_Note_Etudiant", "NOTE", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_NoteDette_Etudiant", "NOTE_DETTE")]
+        public EntityCollection<NOTE_DETTE> NOTE_DETTE
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<NOTE_DETTE>("SGSDBModel.Relation_NoteDette_Etudiant", "NOTE_DETTE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<NOTE_DETTE>("SGSDBModel.Relation_NoteDette_Etudiant", "NOTE_DETTE", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_NoteExamin_Etudiant", "NOTES_EXAMEN")]
+        public EntityCollection<NOTES_EXAMEN> NOTES_EXAMEN
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<NOTES_EXAMEN>("SGSDBModel.Relation_NoteExamin_Etudiant", "NOTES_EXAMEN");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<NOTES_EXAMEN>("SGSDBModel.Relation_NoteExamin_Etudiant", "NOTES_EXAMEN", value);
+                }
+            }
+        }
+
+        #endregion
+
     }
     
     /// <summary>
@@ -5416,6 +5539,28 @@ namespace OfflineTeacher_DBProject
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_UserSpecialite_Groupe", "USERS_SPECIALITES")]
+        public EntityCollection<USERS_SPECIALITES> USERS_SPECIALITES
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<USERS_SPECIALITES>("SGSDBModel.Relation_UserSpecialite_Groupe", "USERS_SPECIALITES");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<USERS_SPECIALITES>("SGSDBModel.Relation_UserSpecialite_Groupe", "USERS_SPECIALITES", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -5808,6 +5953,28 @@ namespace OfflineTeacher_DBProject
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_EnsSpeMat_Matiere", "ENS_SPEMAT")]
+        public EntityCollection<ENS_SPEMAT> ENS_SPEMAT
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ENS_SPEMAT>("SGSDBModel.Relation_EnsSpeMat_Matiere", "ENS_SPEMAT");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ENS_SPEMAT>("SGSDBModel.Relation_EnsSpeMat_Matiere", "ENS_SPEMAT", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_Note_Matiere", "NOTE")]
         public EntityCollection<NOTE> NOTEs
         {
@@ -5896,18 +6063,18 @@ namespace OfflineTeacher_DBProject
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_EnsSpeMat_Matiere", "ENS_SPEMAT")]
-        public EntityCollection<ENS_SPEMAT> ENS_SPEMAT
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_UserSpecialite_Matiere", "USERS_SPECIALITES")]
+        public EntityCollection<USERS_SPECIALITES> USERS_SPECIALITES
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ENS_SPEMAT>("SGSDBModel.Relation_EnsSpeMat_Matiere", "ENS_SPEMAT");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<USERS_SPECIALITES>("SGSDBModel.Relation_UserSpecialite_Matiere", "USERS_SPECIALITES");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ENS_SPEMAT>("SGSDBModel.Relation_EnsSpeMat_Matiere", "ENS_SPEMAT", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<USERS_SPECIALITES>("SGSDBModel.Relation_UserSpecialite_Matiere", "USERS_SPECIALITES", value);
                 }
             }
         }
@@ -6864,6 +7031,44 @@ namespace OfflineTeacher_DBProject
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_Note_Etudiant", "ETUDIANTS")]
+        public ETUDIANT ETUDIANT
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ETUDIANT>("SGSDBModel.Relation_Note_Etudiant", "ETUDIANTS").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ETUDIANT>("SGSDBModel.Relation_Note_Etudiant", "ETUDIANTS").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<ETUDIANT> ETUDIANTReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ETUDIANT>("SGSDBModel.Relation_Note_Etudiant", "ETUDIANTS");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ETUDIANT>("SGSDBModel.Relation_Note_Etudiant", "ETUDIANTS", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_Note_Matiere", "MATIERES")]
         public MATIERE MATIERE
         {
@@ -7520,6 +7725,44 @@ namespace OfflineTeacher_DBProject
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_NoteDette_Etudiant", "ETUDIANTS")]
+        public ETUDIANT ETUDIANT
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ETUDIANT>("SGSDBModel.Relation_NoteDette_Etudiant", "ETUDIANTS").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ETUDIANT>("SGSDBModel.Relation_NoteDette_Etudiant", "ETUDIANTS").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<ETUDIANT> ETUDIANTReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ETUDIANT>("SGSDBModel.Relation_NoteDette_Etudiant", "ETUDIANTS");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ETUDIANT>("SGSDBModel.Relation_NoteDette_Etudiant", "ETUDIANTS", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_NoteDette_Matiere", "MATIERES")]
         public MATIERE MATIERE
         {
@@ -7878,6 +8121,44 @@ namespace OfflineTeacher_DBProject
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ANNEE>("SGSDBModel.Relation_NoteExamin_Annee", "ANNEES", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_NoteExamin_Etudiant", "ETUDIANTS")]
+        public ETUDIANT ETUDIANT
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ETUDIANT>("SGSDBModel.Relation_NoteExamin_Etudiant", "ETUDIANTS").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ETUDIANT>("SGSDBModel.Relation_NoteExamin_Etudiant", "ETUDIANTS").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<ETUDIANT> ETUDIANTReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ETUDIANT>("SGSDBModel.Relation_NoteExamin_Etudiant", "ETUDIANTS");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ETUDIANT>("SGSDBModel.Relation_NoteExamin_Etudiant", "ETUDIANTS", value);
                 }
             }
         }
@@ -8768,6 +9049,28 @@ namespace OfflineTeacher_DBProject
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_EnsSpeMat_Specialite", "ENS_SPEMAT")]
+        public EntityCollection<ENS_SPEMAT> ENS_SPEMAT
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ENS_SPEMAT>("SGSDBModel.Relation_EnsSpeMat_Specialite", "ENS_SPEMAT");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ENS_SPEMAT>("SGSDBModel.Relation_EnsSpeMat_Specialite", "ENS_SPEMAT", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_ExaminAnneeModeEtude_Specilite", "EXAMENS_ANNEES_MODES_ETUDES")]
         public EntityCollection<EXAMENS_ANNEES_MODES_ETUDES> EXAMENS_ANNEES_MODES_ETUDES
         {
@@ -8856,18 +9159,18 @@ namespace OfflineTeacher_DBProject
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_EnsSpeMat_Specialite", "ENS_SPEMAT")]
-        public EntityCollection<ENS_SPEMAT> ENS_SPEMAT
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_UserSpecialite_Specialite", "USERS_SPECIALITES")]
+        public EntityCollection<USERS_SPECIALITES> USERS_SPECIALITES
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ENS_SPEMAT>("SGSDBModel.Relation_EnsSpeMat_Specialite", "ENS_SPEMAT");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<USERS_SPECIALITES>("SGSDBModel.Relation_UserSpecialite_Specialite", "USERS_SPECIALITES");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ENS_SPEMAT>("SGSDBModel.Relation_EnsSpeMat_Specialite", "ENS_SPEMAT", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<USERS_SPECIALITES>("SGSDBModel.Relation_UserSpecialite_Specialite", "USERS_SPECIALITES", value);
                 }
             }
         }
@@ -10092,6 +10395,455 @@ namespace OfflineTeacher_DBProject
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SPECIALITE>("SGSDBModel.Relation_SpeciliteMatiere_Specialite", "SPECIALITES", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SGSDBModel", Name="USERS_SPECIALITES")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class USERS_SPECIALITES : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new USERS_SPECIALITES object.
+        /// </summary>
+        /// <param name="aNNEE_UNIVERSITAIRE">Initial value of the ANNEE_UNIVERSITAIRE property.</param>
+        /// <param name="iD_SPECIALITE">Initial value of the ID_SPECIALITE property.</param>
+        /// <param name="iD_USER">Initial value of the ID_USER property.</param>
+        /// <param name="iD_MATIERE">Initial value of the ID_MATIERE property.</param>
+        /// <param name="iD_GROUPE">Initial value of the ID_GROUPE property.</param>
+        public static USERS_SPECIALITES CreateUSERS_SPECIALITES(global::System.Int32 aNNEE_UNIVERSITAIRE, global::System.Int32 iD_SPECIALITE, global::System.Int32 iD_USER, global::System.Int32 iD_MATIERE, global::System.Int32 iD_GROUPE)
+        {
+            USERS_SPECIALITES uSERS_SPECIALITES = new USERS_SPECIALITES();
+            uSERS_SPECIALITES.ANNEE_UNIVERSITAIRE = aNNEE_UNIVERSITAIRE;
+            uSERS_SPECIALITES.ID_SPECIALITE = iD_SPECIALITE;
+            uSERS_SPECIALITES.ID_USER = iD_USER;
+            uSERS_SPECIALITES.ID_MATIERE = iD_MATIERE;
+            uSERS_SPECIALITES.ID_GROUPE = iD_GROUPE;
+            return uSERS_SPECIALITES;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ANNEE_UNIVERSITAIRE
+        {
+            get
+            {
+                return _ANNEE_UNIVERSITAIRE;
+            }
+            set
+            {
+                if (_ANNEE_UNIVERSITAIRE != value)
+                {
+                    OnANNEE_UNIVERSITAIREChanging(value);
+                    ReportPropertyChanging("ANNEE_UNIVERSITAIRE");
+                    _ANNEE_UNIVERSITAIRE = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ANNEE_UNIVERSITAIRE");
+                    OnANNEE_UNIVERSITAIREChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ANNEE_UNIVERSITAIRE;
+        partial void OnANNEE_UNIVERSITAIREChanging(global::System.Int32 value);
+        partial void OnANNEE_UNIVERSITAIREChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID_SPECIALITE
+        {
+            get
+            {
+                return _ID_SPECIALITE;
+            }
+            set
+            {
+                if (_ID_SPECIALITE != value)
+                {
+                    OnID_SPECIALITEChanging(value);
+                    ReportPropertyChanging("ID_SPECIALITE");
+                    _ID_SPECIALITE = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID_SPECIALITE");
+                    OnID_SPECIALITEChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID_SPECIALITE;
+        partial void OnID_SPECIALITEChanging(global::System.Int32 value);
+        partial void OnID_SPECIALITEChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID_USER
+        {
+            get
+            {
+                return _ID_USER;
+            }
+            set
+            {
+                if (_ID_USER != value)
+                {
+                    OnID_USERChanging(value);
+                    ReportPropertyChanging("ID_USER");
+                    _ID_USER = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID_USER");
+                    OnID_USERChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID_USER;
+        partial void OnID_USERChanging(global::System.Int32 value);
+        partial void OnID_USERChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID_MATIERE
+        {
+            get
+            {
+                return _ID_MATIERE;
+            }
+            set
+            {
+                if (_ID_MATIERE != value)
+                {
+                    OnID_MATIEREChanging(value);
+                    ReportPropertyChanging("ID_MATIERE");
+                    _ID_MATIERE = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID_MATIERE");
+                    OnID_MATIEREChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID_MATIERE;
+        partial void OnID_MATIEREChanging(global::System.Int32 value);
+        partial void OnID_MATIEREChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID_GROUPE
+        {
+            get
+            {
+                return _ID_GROUPE;
+            }
+            set
+            {
+                if (_ID_GROUPE != value)
+                {
+                    OnID_GROUPEChanging(value);
+                    ReportPropertyChanging("ID_GROUPE");
+                    _ID_GROUPE = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID_GROUPE");
+                    OnID_GROUPEChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID_GROUPE;
+        partial void OnID_GROUPEChanging(global::System.Int32 value);
+        partial void OnID_GROUPEChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> LastEditDate
+        {
+            get
+            {
+                return _LastEditDate;
+            }
+            set
+            {
+                OnLastEditDateChanging(value);
+                ReportPropertyChanging("LastEditDate");
+                _LastEditDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LastEditDate");
+                OnLastEditDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _LastEditDate;
+        partial void OnLastEditDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnLastEditDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> CreationDate
+        {
+            get
+            {
+                return _CreationDate;
+            }
+            set
+            {
+                OnCreationDateChanging(value);
+                ReportPropertyChanging("CreationDate");
+                _CreationDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreationDate");
+                OnCreationDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _CreationDate;
+        partial void OnCreationDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnCreationDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int64> C__sysChangeTxBsn
+        {
+            get
+            {
+                return _C__sysChangeTxBsn;
+            }
+            set
+            {
+                OnC__sysChangeTxBsnChanging(value);
+                ReportPropertyChanging("C__sysChangeTxBsn");
+                _C__sysChangeTxBsn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("C__sysChangeTxBsn");
+                OnC__sysChangeTxBsnChanged();
+            }
+        }
+        private Nullable<global::System.Int64> _C__sysChangeTxBsn;
+        partial void OnC__sysChangeTxBsnChanging(Nullable<global::System.Int64> value);
+        partial void OnC__sysChangeTxBsnChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int64> C__sysInsertTxBsn
+        {
+            get
+            {
+                return _C__sysInsertTxBsn;
+            }
+            set
+            {
+                OnC__sysInsertTxBsnChanging(value);
+                ReportPropertyChanging("C__sysInsertTxBsn");
+                _C__sysInsertTxBsn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("C__sysInsertTxBsn");
+                OnC__sysInsertTxBsnChanged();
+            }
+        }
+        private Nullable<global::System.Int64> _C__sysInsertTxBsn;
+        partial void OnC__sysInsertTxBsnChanging(Nullable<global::System.Int64> value);
+        partial void OnC__sysInsertTxBsnChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Guid> C__sysTrackingContext
+        {
+            get
+            {
+                return _C__sysTrackingContext;
+            }
+            set
+            {
+                OnC__sysTrackingContextChanging(value);
+                ReportPropertyChanging("C__sysTrackingContext");
+                _C__sysTrackingContext = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("C__sysTrackingContext");
+                OnC__sysTrackingContextChanged();
+            }
+        }
+        private Nullable<global::System.Guid> _C__sysTrackingContext;
+        partial void OnC__sysTrackingContextChanging(Nullable<global::System.Guid> value);
+        partial void OnC__sysTrackingContextChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_UserSpecialite_Annee", "ANNEE")]
+        public ANNEE ANNEE
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ANNEE>("SGSDBModel.Relation_UserSpecialite_Annee", "ANNEE").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ANNEE>("SGSDBModel.Relation_UserSpecialite_Annee", "ANNEE").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<ANNEE> ANNEEReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ANNEE>("SGSDBModel.Relation_UserSpecialite_Annee", "ANNEE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ANNEE>("SGSDBModel.Relation_UserSpecialite_Annee", "ANNEE", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_UserSpecialite_Groupe", "GROUPE")]
+        public GROUPE GROUPE
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GROUPE>("SGSDBModel.Relation_UserSpecialite_Groupe", "GROUPE").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GROUPE>("SGSDBModel.Relation_UserSpecialite_Groupe", "GROUPE").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<GROUPE> GROUPEReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GROUPE>("SGSDBModel.Relation_UserSpecialite_Groupe", "GROUPE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<GROUPE>("SGSDBModel.Relation_UserSpecialite_Groupe", "GROUPE", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_UserSpecialite_Matiere", "MATIERE")]
+        public MATIERE MATIERE
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MATIERE>("SGSDBModel.Relation_UserSpecialite_Matiere", "MATIERE").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MATIERE>("SGSDBModel.Relation_UserSpecialite_Matiere", "MATIERE").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<MATIERE> MATIEREReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MATIERE>("SGSDBModel.Relation_UserSpecialite_Matiere", "MATIERE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<MATIERE>("SGSDBModel.Relation_UserSpecialite_Matiere", "MATIERE", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SGSDBModel", "Relation_UserSpecialite_Specialite", "SPECIALITE")]
+        public SPECIALITE SPECIALITE
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SPECIALITE>("SGSDBModel.Relation_UserSpecialite_Specialite", "SPECIALITE").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SPECIALITE>("SGSDBModel.Relation_UserSpecialite_Specialite", "SPECIALITE").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<SPECIALITE> SPECIALITEReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SPECIALITE>("SGSDBModel.Relation_UserSpecialite_Specialite", "SPECIALITE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SPECIALITE>("SGSDBModel.Relation_UserSpecialite_Specialite", "SPECIALITE", value);
                 }
             }
         }

@@ -16,6 +16,20 @@ namespace ESC_OfflineTeacher
 
         }
 
-       
+
+        private void SettingsButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (DisconnectFlyout.IsOpen)            
+                DisconnectFlyout.IsOpen = false;            
+            SettingsFlyout.IsOpen=(!SettingsFlyout.IsOpen);
+
+        }
+
+        private void UserButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (SettingsFlyout.IsOpen)
+                SettingsFlyout.IsOpen = false;  
+            DisconnectFlyout.IsOpen = (!SettingsFlyout.IsOpen);
+        }
     }
 }

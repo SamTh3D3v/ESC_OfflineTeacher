@@ -33,8 +33,21 @@
     </i:Interaction.Triggers>
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
-            <Button Content="settings" />
-            <Button>
+            <Button Click="SettingsButton_OnClick">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="20" Height="20"
+                   Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill"
+                         Visual="{StaticResource appbar_settings}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Margin="4 0 0 0"
+                   VerticalAlignment="Center"
+                   Text="Paramètre" />
+                </StackPanel>
+            </Button>
+            <Button Click="UserButton_OnClick">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="20" Height="20"
                    Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
@@ -45,20 +58,51 @@
                     </Rectangle>
                     <TextBlock Margin="4 0 0 0"
                    VerticalAlignment="Center"
-                   Text="Elhamer Oussama" />
+                   Text="{Binding LoggedInUser.NOM_LATIN}" />
                 </StackPanel>
             </Button>
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
+    <controls:MetroWindow.Flyouts>
+        <controls:FlyoutsControl >
+            <controls:Flyout x:Name="SettingsFlyout" Header="Settings" Position="Top" Height="300" Theme="Dark">
+
+            </controls:Flyout>
+            <controls:Flyout x:Name="DisconnectFlyout" Header="Information"  Position="Top"  Height="300" Theme="Accent">
+                <Grid  Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="200"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="1">
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Width="20" Height="20"
+                   Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Stretch="Fill"
+                         Visual="{StaticResource appbar_disconnect}" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                            <TextBlock Margin="4 0 0 0"
+                   VerticalAlignment="Center"
+                   Text="Déconnexion" />
+                        </StackPanel>
+                    </Button>
+
+                </Grid>
+            </controls:Flyout>
+        </controls:FlyoutsControl>
+    </controls:MetroWindow.Flyouts>
+
     <Grid x:Name="LayoutRoot">
-        <Grid.RowDefinitions>                        
+        <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>               
-        <Frame Grid.Row="0"  x:Name="MainFrame" VerticalContentAlignment="Center"
-               HorizontalContentAlignment="Center" Grid.Column="2" VerticalAlignment="Stretch" 
+        </Grid.ColumnDefinitions>
+        <Frame Grid.Row="0" Grid.Column="0"  x:Name="MainFrame" VerticalContentAlignment="Center"
+               HorizontalContentAlignment="Center" VerticalAlignment="Stretch" 
                HorizontalAlignment="Stretch" NavigationUIVisibility="Hidden" BorderBrush="Black" 
                BorderThickness="2" Margin="2"/>
     </Grid>

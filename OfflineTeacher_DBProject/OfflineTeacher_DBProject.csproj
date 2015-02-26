@@ -143,6 +143,7 @@
     <Content Include="SQLScripts\ESCLocalDb.dbo.SPECIALITES.sql" />
     <Content Include="SQLScripts\ESCLocalDb.dbo.SPECIALITES_ANNEES_MODES_ETUDES.sql" />
     <Content Include="SQLScripts\ESCLocalDb.dbo.SPECIALITES_MATIERES.sql" />
+    <Content Include="SQLScripts\ESCLocalDb.dbo.USERS_SPECIALITES.sql" />
     <Content Include="SQLUndoScripts\ESCLocalDataCache.dbo.ANNEES.undo.sql" />
     <Content Include="SQLUndoScripts\ESCLocalDataCache.dbo.ENSEIGNANTS.undo.sql" />
     <Content Include="SQLUndoScripts\ESCLocalDataCache.dbo.ETUDIANTS.undo.sql" />
@@ -174,6 +175,7 @@
     <Content Include="SQLUndoScripts\ESCLocalDb.dbo.SPECIALITES.undo.sql" />
     <Content Include="SQLUndoScripts\ESCLocalDb.dbo.SPECIALITES_ANNEES_MODES_ETUDES.undo.sql" />
     <Content Include="SQLUndoScripts\ESCLocalDb.dbo.SPECIALITES_MATIERES.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDb.dbo.USERS_SPECIALITES.undo.sql" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">

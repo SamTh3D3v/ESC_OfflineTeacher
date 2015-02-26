@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using OfflineTeacher_DBProject;
 
 
 namespace ESC_OfflineTeacher.ViewModel
@@ -13,6 +15,8 @@ namespace ESC_OfflineTeacher.ViewModel
         #region Fields
         private readonly IFrameNavigationService _navigationService;
         private bool _navigationSource;
+       
+        private ENSEIGNANT _loggedInUser  ;
       
         #endregion
         #region Properties
@@ -40,6 +44,24 @@ namespace ESC_OfflineTeacher.ViewModel
                 RaisePropertyChanged();
             }
         }
+        public ENSEIGNANT LoggedInUser
+        {
+            get
+            {
+                return _loggedInUser;
+            }
+
+            set
+            {
+                if (_loggedInUser == value)
+                {
+                    return;
+                }
+
+                _loggedInUser = value;
+                RaisePropertyChanged();
+            }
+        }
        
         #endregion
         #region Commands
@@ -52,7 +74,12 @@ namespace ESC_OfflineTeacher.ViewModel
                     ?? (_mainWindowLoadedCommand = new RelayCommand(
                         () =>
                         {
-                            _navigationService.NavigateTo("LoginView");                            
+                            _navigationService.NavigateTo("LoginView");
+                            using (var context=new LocalDbEntities())
+                            {
+                                LoggedInUser = context.ENSEIGNANTS.First(x => x.ID_ENSEIGNANT == 2);
+                            }
+                         
                         }));
             }
         }        

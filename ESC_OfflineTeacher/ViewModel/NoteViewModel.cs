@@ -29,11 +29,11 @@ namespace ESC_OfflineTeacher.ViewModel
         // Create a BackgroundWorker object to synchronize without blocking
         // the UI thread
         private BackgroundWorker backgroundWorker1;
-        private LocalSGSDBEntities _context;
+        private LocalDbEntities _context;
 
         private ObservableCollection<SPECIALITE> _specialiteList;
         private ObservableCollection<MATIERE> _matiereList;
-        private ObservableCollection<String> _semestreList;
+        private ObservableCollection<MODES_ETUDES> _semestreList;
         private ObservableCollection<SECTION> _sectionList;
         private ObservableCollection<GROUPE> _groupeList;
         private ObservableCollection<EXAMEN> _examinList;
@@ -141,7 +141,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 RaisePropertyChanged();
             }
         }
-        public ObservableCollection<string> SemestreList
+        public ObservableCollection<MODES_ETUDES> SemestreList
         {
             get
             {
@@ -325,6 +325,13 @@ namespace ESC_OfflineTeacher.ViewModel
                 MatiereList = new ObservableCollection<MATIERE>(speMat.Select(x => x.MATIERE).ToList());
                 SectionList = new ObservableCollection<SECTION>(_context.SECTIONS.Where(x => x.ANNEE_UNIVERSITAIRE == cy && x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE));
 
+                //set the semesters and the needed exam for this year 
+                var modeEtudes =
+                    _context.EXAMENS_ANNEES_MODES_ETUDES.Where(
+                        x => x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE &&
+                             x.ANNEE_UNIVERSITAIRE == cy).ToList();
+                SemestreList = new ObservableCollection<MODES_ETUDES>(modeEtudes.Select(x => x.MODES_ETUDES).Distinct().ToList());
+
             }
         }
         public MATIERE SelectedMatiere
@@ -361,6 +368,11 @@ namespace ESC_OfflineTeacher.ViewModel
 
                 _selectedSemester = value;
                 RaisePropertyChanged();
+                var cy = int.Parse(CurrentYear);
+                var modeEtudes =
+                    _context.EXAMENS_ANNEES_MODES_ETUDES.Where(x => x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE &&
+                             x.ANNEE_UNIVERSITAIRE == cy && x.ID_MODE_ETUDE==_selectedSemester.ID_MODE_ETUDE).ToList();
+                ExaminList = new ObservableCollection<EXAMEN>(modeEtudes.Select(x => x.EXAMEN).ToList());
             }
         }
         public SECTION SelectedSection
@@ -477,7 +489,7 @@ namespace ESC_OfflineTeacher.ViewModel
         public NoteViewModel(IFrameNavigationService navigationService)
         {
             _navigationService = navigationService;
-            _context = new LocalSGSDBEntities();
+            _context = new LocalDbEntities();
             //this.backgroundWorker1 =new BackgroundWorker();
             //this.backgroundWorker1.WorkerReportsProgress = true;
             //// Register the various BackgroundWorker events
@@ -615,8 +627,28 @@ namespace ESC_OfflineTeacher.ViewModel
             ListNotesDettes = new ObservableCollection<EtudiantNote>(ListNotesExamins);
             #endregion
         }
+
+        private void RefreshNoteStudentList()
+        {
+            if (SelectedMatiere!=null && SelectedExamin!=null)
+            {
+                var cy = int.Parse(CurrentYear);
+                ListNotesExamins=new ObservableCollection<EtudiantNote>(_context.NOTES_EXAMEN.Where(x => x.ANNEE_UNIVERSITAIRE == cy &&
+                                                 x.ID_MATIERE == SelectedMatiere.ID_MATIERE &&
+                                                 x.ID_EXAMEN == SelectedExamin.ID_EXAMEN)
+                    .Join(_context.ETUDIANTS, noteExamin => noteExamin.ID_ETUDIANT,
+                        etudiant => etudiant.ID_ETUDIANT, (noteExamin, etudiant) => new EtudiantNote()
+                        {
+                            Matricule = etudiant.MATRICULE,
+                            Nom = etudiant.NOM,
+                            Prenom = etudiant.PRENOM,
+                            NoteExamin = noteExamin.NOTE
+                        }).ToList());
+            }
+        }
         #endregion
 
 
     }
+    
 }

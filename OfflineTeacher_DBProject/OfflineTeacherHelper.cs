@@ -12,7 +12,7 @@ namespace OfflineTeacher_DBProject
         public String GetYear()
         {
             String res = "";
-            using (LocalSGSDBEntities context = new LocalSGSDBEntities())
+            using (LocalDbEntities context = new LocalDbEntities())
             {
                 res = context.ANNEES.Max(x => x.ANNEE_UNIVERSITAIRE).ToString(CultureInfo.InvariantCulture);
             }

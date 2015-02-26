@@ -26,6 +26,7 @@
           <EntitySet Name="SPECIALITES" EntityType="SGSDBModel.Store.SPECIALITES" store:Type="Tables" />
           <EntitySet Name="SPECIALITES_ANNEES_MODES_ETUDES" EntityType="SGSDBModel.Store.SPECIALITES_ANNEES_MODES_ETUDES" store:Type="Tables" />
           <EntitySet Name="SPECIALITES_MATIERES" EntityType="SGSDBModel.Store.SPECIALITES_MATIERES" store:Type="Tables" />
+          <EntitySet Name="USERS_SPECIALITES" EntityType="SGSDBModel.Store.USERS_SPECIALITES" store:Type="Tables" />
           <AssociationSet Name="__syncArticles_FK" Association="SGSDBModel.Store.__syncArticles_FK">
             <End Role="__syncSubscriptions" EntitySet="__syncSubscriptions" />
             <End Role="__syncArticles" EntitySet="__syncArticles" />
@@ -70,6 +71,10 @@
             <End Role="ANNEES" EntitySet="ANNEES" />
             <End Role="NOTE" EntitySet="NOTE" />
           </AssociationSet>
+          <AssociationSet Name="Relation_Note_Etudiant" Association="SGSDBModel.Store.Relation_Note_Etudiant">
+            <End Role="ETUDIANTS" EntitySet="ETUDIANTS" />
+            <End Role="NOTE" EntitySet="NOTE" />
+          </AssociationSet>
           <AssociationSet Name="Relation_Note_Matiere" Association="SGSDBModel.Store.Relation_Note_Matiere">
             <End Role="MATIERES" EntitySet="MATIERES" />
             <End Role="NOTE" EntitySet="NOTE" />
@@ -82,12 +87,20 @@
             <End Role="ANNEES" EntitySet="ANNEES" />
             <End Role="NOTE_DETTE" EntitySet="NOTE_DETTE" />
           </AssociationSet>
+          <AssociationSet Name="Relation_NoteDette_Etudiant" Association="SGSDBModel.Store.Relation_NoteDette_Etudiant">
+            <End Role="ETUDIANTS" EntitySet="ETUDIANTS" />
+            <End Role="NOTE_DETTE" EntitySet="NOTE_DETTE" />
+          </AssociationSet>
           <AssociationSet Name="Relation_NoteDette_Matiere" Association="SGSDBModel.Store.Relation_NoteDette_Matiere">
             <End Role="MATIERES" EntitySet="MATIERES" />
             <End Role="NOTE_DETTE" EntitySet="NOTE_DETTE" />
           </AssociationSet>
           <AssociationSet Name="Relation_NoteExamin_Annee" Association="SGSDBModel.Store.Relation_NoteExamin_Annee">
             <End Role="ANNEES" EntitySet="ANNEES" />
+            <End Role="NOTES_EXAMEN" EntitySet="NOTES_EXAMEN" />
+          </AssociationSet>
+          <AssociationSet Name="Relation_NoteExamin_Etudiant" Association="SGSDBModel.Store.Relation_NoteExamin_Etudiant">
+            <End Role="ETUDIANTS" EntitySet="ETUDIANTS" />
             <End Role="NOTES_EXAMEN" EntitySet="NOTES_EXAMEN" />
           </AssociationSet>
           <AssociationSet Name="Relation_NoteExamin_Examin" Association="SGSDBModel.Store.Relation_NoteExamin_Examin">
@@ -133,6 +146,22 @@
           <AssociationSet Name="Relation_SpeciliteMatiere_Specialite" Association="SGSDBModel.Store.Relation_SpeciliteMatiere_Specialite">
             <End Role="SPECIALITES" EntitySet="SPECIALITES" />
             <End Role="SPECIALITES_MATIERES" EntitySet="SPECIALITES_MATIERES" />
+          </AssociationSet>
+          <AssociationSet Name="Relation_UserSpecialite_Annee" Association="SGSDBModel.Store.Relation_UserSpecialite_Annee">
+            <End Role="ANNEES" EntitySet="ANNEES" />
+            <End Role="USERS_SPECIALITES" EntitySet="USERS_SPECIALITES" />
+          </AssociationSet>
+          <AssociationSet Name="Relation_UserSpecialite_Groupe" Association="SGSDBModel.Store.Relation_UserSpecialite_Groupe">
+            <End Role="GROUPES" EntitySet="GROUPES" />
+            <End Role="USERS_SPECIALITES" EntitySet="USERS_SPECIALITES" />
+          </AssociationSet>
+          <AssociationSet Name="Relation_UserSpecialite_Matiere" Association="SGSDBModel.Store.Relation_UserSpecialite_Matiere">
+            <End Role="MATIERES" EntitySet="MATIERES" />
+            <End Role="USERS_SPECIALITES" EntitySet="USERS_SPECIALITES" />
+          </AssociationSet>
+          <AssociationSet Name="Relation_UserSpecialite_Specialite" Association="SGSDBModel.Store.Relation_UserSpecialite_Specialite">
+            <End Role="SPECIALITES" EntitySet="SPECIALITES" />
+            <End Role="USERS_SPECIALITES" EntitySet="USERS_SPECIALITES" />
           </AssociationSet>
           <AssociationSet Name="RelationSpeciliteMatiere_Annee" Association="SGSDBModel.Store.RelationSpeciliteMatiere_Annee">
             <End Role="ANNEES" EntitySet="ANNEES" />
@@ -237,7 +266,7 @@
         </EntityType>
         <EntityType Name="ETUDIANTS">
           <Key>
-            <PropertyRef Name="MATRICULE" />
+            <PropertyRef Name="ID_ETUDIANT" />
           </Key>
           <Property Name="ID_ETUDIANT" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="MATRICULE" Type="nvarchar" Nullable="false" MaxLength="10" />
@@ -545,6 +574,25 @@
           <Property Name="__sysInsertTxBsn" Type="bigint" />
           <Property Name="__sysTrackingContext" Type="uniqueidentifier" />
         </EntityType>
+        <EntityType Name="USERS_SPECIALITES">
+          <Key>
+            <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
+            <PropertyRef Name="ID_SPECIALITE" />
+            <PropertyRef Name="ID_USER" />
+            <PropertyRef Name="ID_MATIERE" />
+            <PropertyRef Name="ID_GROUPE" />
+          </Key>
+          <Property Name="ANNEE_UNIVERSITAIRE" Type="int" Nullable="false" />
+          <Property Name="ID_SPECIALITE" Type="int" Nullable="false" />
+          <Property Name="ID_USER" Type="int" Nullable="false" />
+          <Property Name="ID_MATIERE" Type="int" Nullable="false" />
+          <Property Name="ID_GROUPE" Type="int" Nullable="false" />
+          <Property Name="LastEditDate" Type="datetime" />
+          <Property Name="CreationDate" Type="datetime" />
+          <Property Name="__sysChangeTxBsn" Type="bigint" />
+          <Property Name="__sysInsertTxBsn" Type="bigint" />
+          <Property Name="__sysTrackingContext" Type="uniqueidentifier" />
+        </EntityType>
         <Association Name="__syncArticles_FK">
           <End Role="__syncSubscriptions" Type="SGSDBModel.Store.__syncSubscriptions" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -679,6 +727,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="Relation_Note_Etudiant">
+          <End Role="ETUDIANTS" Type="SGSDBModel.Store.ETUDIANTS" Multiplicity="1" />
+          <End Role="NOTE" Type="SGSDBModel.Store.NOTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ETUDIANTS">
+              <PropertyRef Name="ID_ETUDIANT" />
+            </Principal>
+            <Dependent Role="NOTE">
+              <PropertyRef Name="ID_ETUDIANT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="Relation_Note_Matiere">
           <End Role="MATIERES" Type="SGSDBModel.Store.MATIERES" Multiplicity="1" />
           <End Role="NOTE" Type="SGSDBModel.Store.NOTE" Multiplicity="*" />
@@ -715,6 +775,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="Relation_NoteDette_Etudiant">
+          <End Role="ETUDIANTS" Type="SGSDBModel.Store.ETUDIANTS" Multiplicity="1" />
+          <End Role="NOTE_DETTE" Type="SGSDBModel.Store.NOTE_DETTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ETUDIANTS">
+              <PropertyRef Name="ID_ETUDIANT" />
+            </Principal>
+            <Dependent Role="NOTE_DETTE">
+              <PropertyRef Name="ID_ETUDIANT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="Relation_NoteDette_Matiere">
           <End Role="MATIERES" Type="SGSDBModel.Store.MATIERES" Multiplicity="1" />
           <End Role="NOTE_DETTE" Type="SGSDBModel.Store.NOTE_DETTE" Multiplicity="*" />
@@ -736,6 +808,18 @@
             </Principal>
             <Dependent Role="NOTES_EXAMEN">
               <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Relation_NoteExamin_Etudiant">
+          <End Role="ETUDIANTS" Type="SGSDBModel.Store.ETUDIANTS" Multiplicity="1" />
+          <End Role="NOTES_EXAMEN" Type="SGSDBModel.Store.NOTES_EXAMEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ETUDIANTS">
+              <PropertyRef Name="ID_ETUDIANT" />
+            </Principal>
+            <Dependent Role="NOTES_EXAMEN">
+              <PropertyRef Name="ID_ETUDIANT" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -871,6 +955,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="Relation_UserSpecialite_Annee">
+          <End Role="ANNEES" Type="SGSDBModel.Store.ANNEES" Multiplicity="1" />
+          <End Role="USERS_SPECIALITES" Type="SGSDBModel.Store.USERS_SPECIALITES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ANNEES">
+              <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
+            </Principal>
+            <Dependent Role="USERS_SPECIALITES">
+              <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Relation_UserSpecialite_Groupe">
+          <End Role="GROUPES" Type="SGSDBModel.Store.GROUPES" Multiplicity="1" />
+          <End Role="USERS_SPECIALITES" Type="SGSDBModel.Store.USERS_SPECIALITES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GROUPES">
+              <PropertyRef Name="ID_GROUPE" />
+            </Principal>
+            <Dependent Role="USERS_SPECIALITES">
+              <PropertyRef Name="ID_GROUPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Relation_UserSpecialite_Matiere">
+          <End Role="MATIERES" Type="SGSDBModel.Store.MATIERES" Multiplicity="1" />
+          <End Role="USERS_SPECIALITES" Type="SGSDBModel.Store.USERS_SPECIALITES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MATIERES">
+              <PropertyRef Name="ID_MATIERE" />
+            </Principal>
+            <Dependent Role="USERS_SPECIALITES">
+              <PropertyRef Name="ID_MATIERE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Relation_UserSpecialite_Specialite">
+          <End Role="SPECIALITES" Type="SGSDBModel.Store.SPECIALITES" Multiplicity="1" />
+          <End Role="USERS_SPECIALITES" Type="SGSDBModel.Store.USERS_SPECIALITES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPECIALITES">
+              <PropertyRef Name="ID_SPECIALITE" />
+            </Principal>
+            <Dependent Role="USERS_SPECIALITES">
+              <PropertyRef Name="ID_SPECIALITE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="RelationSpeciliteMatiere_Annee">
           <End Role="ANNEES" Type="SGSDBModel.Store.ANNEES" Multiplicity="1" />
           <End Role="SPECIALITES_MATIERES" Type="SGSDBModel.Store.SPECIALITES_MATIERES" Multiplicity="*" />
@@ -886,13 +1018,14 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="SGSDBModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
-        <EntityContainer Name="LocalSGSDBEntities" annotation:LazyLoadingEnabled="true">
+      <Schema Namespace="SGSDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="LocalDbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__syncArticles" EntityType="SGSDBModel.C__syncArticles" />
           <EntitySet Name="C__syncSubscriptions" EntityType="SGSDBModel.C__syncSubscriptions" />
           <EntitySet Name="C__syncTransactions" EntityType="SGSDBModel.C__syncTransactions" />
           <EntitySet Name="ANNEES" EntityType="SGSDBModel.ANNEE" />
           <EntitySet Name="CATEGORIES" EntityType="SGSDBModel.CATEGORy" />
+          <EntitySet Name="ENS_SPEMAT" EntityType="SGSDBModel.ENS_SPEMAT" />
           <EntitySet Name="ENSEIGNANTS" EntityType="SGSDBModel.ENSEIGNANT" />
           <EntitySet Name="ETUDIANTS" EntityType="SGSDBModel.ETUDIANT" />
           <EntitySet Name="EXAMENS" EntityType="SGSDBModel.EXAMEN" />
@@ -910,6 +1043,10 @@
           <AssociationSet Name="C__syncArticles_FK" Association="SGSDBModel.C__syncArticles_FK">
             <End Role="C__syncSubscriptions" EntitySet="C__syncSubscriptions" />
             <End Role="C__syncArticles" EntitySet="C__syncArticles" />
+          </AssociationSet>
+          <AssociationSet Name="Relation_EnsSpeMat_Annee" Association="SGSDBModel.Relation_EnsSpeMat_Annee">
+            <End Role="ANNEES" EntitySet="ANNEES" />
+            <End Role="ENS_SPEMAT" EntitySet="ENS_SPEMAT" />
           </AssociationSet>
           <AssociationSet Name="Relation_ExamAnneeModeEtude_Annee" Association="SGSDBModel.Relation_ExamAnneeModeEtude_Annee">
             <End Role="ANNEES" EntitySet="ANNEES" />
@@ -946,6 +1083,30 @@
           <AssociationSet Name="Relation_SpecialiteMatiere_Categorie" Association="SGSDBModel.Relation_SpecialiteMatiere_Categorie">
             <End Role="CATEGORIES" EntitySet="CATEGORIES" />
             <End Role="SPECIALITES_MATIERES" EntitySet="SPECIALITES_MATIERES" />
+          </AssociationSet>
+          <AssociationSet Name="Relation_EnsSpeMat_Enseigant" Association="SGSDBModel.Relation_EnsSpeMat_Enseigant">
+            <End Role="ENSEIGNANTS" EntitySet="ENSEIGNANTS" />
+            <End Role="ENS_SPEMAT" EntitySet="ENS_SPEMAT" />
+          </AssociationSet>
+          <AssociationSet Name="Relation_EnsSpeMat_Matiere" Association="SGSDBModel.Relation_EnsSpeMat_Matiere">
+            <End Role="MATIERES" EntitySet="MATIERES" />
+            <End Role="ENS_SPEMAT" EntitySet="ENS_SPEMAT" />
+          </AssociationSet>
+          <AssociationSet Name="Relation_EnsSpeMat_Specialite" Association="SGSDBModel.Relation_EnsSpeMat_Specialite">
+            <End Role="SPECIALITES" EntitySet="SPECIALITES" />
+            <End Role="ENS_SPEMAT" EntitySet="ENS_SPEMAT" />
+          </AssociationSet>
+          <AssociationSet Name="Relation_Note_Etudiant" Association="SGSDBModel.Relation_Note_Etudiant">
+            <End Role="ETUDIANTS" EntitySet="ETUDIANTS" />
+            <End Role="NOTE" EntitySet="NOTEs" />
+          </AssociationSet>
+          <AssociationSet Name="Relation_NoteDette_Etudiant" Association="SGSDBModel.Relation_NoteDette_Etudiant">
+            <End Role="ETUDIANTS" EntitySet="ETUDIANTS" />
+            <End Role="NOTE_DETTE" EntitySet="NOTE_DETTE" />
+          </AssociationSet>
+          <AssociationSet Name="Relation_NoteExamin_Etudiant" Association="SGSDBModel.Relation_NoteExamin_Etudiant">
+            <End Role="ETUDIANTS" EntitySet="ETUDIANTS" />
+            <End Role="NOTES_EXAMEN" EntitySet="NOTES_EXAMEN" />
           </AssociationSet>
           <AssociationSet Name="Relation_ExaminAnneeModeEtude_Examin" Association="SGSDBModel.Relation_ExaminAnneeModeEtude_Examin">
             <End Role="EXAMENS" EntitySet="EXAMENS" />
@@ -1003,22 +1164,22 @@
             <End Role="SPECIALITES" EntitySet="SPECIALITES" />
             <End Role="SPECIALITES_MATIERES" EntitySet="SPECIALITES_MATIERES" />
           </AssociationSet>
-          <EntitySet Name="ENS_SPEMAT" EntityType="SGSDBModel.ENS_SPEMAT" />
-          <AssociationSet Name="Relation_EnsSpeMat_Annee" Association="SGSDBModel.Relation_EnsSpeMat_Annee">
+          <EntitySet Name="USERS_SPECIALITES" EntityType="SGSDBModel.USERS_SPECIALITES" />
+          <AssociationSet Name="Relation_UserSpecialite_Annee" Association="SGSDBModel.Relation_UserSpecialite_Annee">
             <End Role="ANNEE" EntitySet="ANNEES" />
-            <End Role="ENS_SPEMAT" EntitySet="ENS_SPEMAT" />
+            <End Role="USERS_SPECIALITES" EntitySet="USERS_SPECIALITES" />
           </AssociationSet>
-          <AssociationSet Name="Relation_EnsSpeMat_Enseigant" Association="SGSDBModel.Relation_EnsSpeMat_Enseigant">
-            <End Role="ENSEIGNANT" EntitySet="ENSEIGNANTS" />
-            <End Role="ENS_SPEMAT" EntitySet="ENS_SPEMAT" />
+          <AssociationSet Name="Relation_UserSpecialite_Groupe" Association="SGSDBModel.Relation_UserSpecialite_Groupe">
+            <End Role="GROUPE" EntitySet="GROUPES" />
+            <End Role="USERS_SPECIALITES" EntitySet="USERS_SPECIALITES" />
           </AssociationSet>
-          <AssociationSet Name="Relation_EnsSpeMat_Matiere" Association="SGSDBModel.Relation_EnsSpeMat_Matiere">
+          <AssociationSet Name="Relation_UserSpecialite_Matiere" Association="SGSDBModel.Relation_UserSpecialite_Matiere">
             <End Role="MATIERE" EntitySet="MATIERES" />
-            <End Role="ENS_SPEMAT" EntitySet="ENS_SPEMAT" />
+            <End Role="USERS_SPECIALITES" EntitySet="USERS_SPECIALITES" />
           </AssociationSet>
-          <AssociationSet Name="Relation_EnsSpeMat_Specialite" Association="SGSDBModel.Relation_EnsSpeMat_Specialite">
+          <AssociationSet Name="Relation_UserSpecialite_Specialite" Association="SGSDBModel.Relation_UserSpecialite_Specialite">
             <End Role="SPECIALITE" EntitySet="SPECIALITES" />
-            <End Role="ENS_SPEMAT" EntitySet="ENS_SPEMAT" />
+            <End Role="USERS_SPECIALITES" EntitySet="USERS_SPECIALITES" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__syncArticles">
@@ -1066,6 +1227,7 @@
           <Property Name="C__sysChangeTxBsn" Type="Int64" />
           <Property Name="C__sysInsertTxBsn" Type="Int64" />
           <Property Name="C__sysTrackingContext" Type="Guid" />
+          <NavigationProperty Name="ENS_SPEMAT" Relationship="SGSDBModel.Relation_EnsSpeMat_Annee" FromRole="ANNEES" ToRole="ENS_SPEMAT" />
           <NavigationProperty Name="EXAMENS_ANNEES_MODES_ETUDES" Relationship="SGSDBModel.Relation_ExamAnneeModeEtude_Annee" FromRole="ANNEES" ToRole="EXAMENS_ANNEES_MODES_ETUDES" />
           <NavigationProperty Name="NOTEs" Relationship="SGSDBModel.Relation_Note_AnneeUniversitaire" FromRole="ANNEES" ToRole="NOTE" />
           <NavigationProperty Name="NOTE_DETTE" Relationship="SGSDBModel.Relation_NoteDette_Annee" FromRole="ANNEES" ToRole="NOTE_DETTE" />
@@ -1074,7 +1236,7 @@
           <NavigationProperty Name="SECTIONS" Relationship="SGSDBModel.Relation_Section_Annee" FromRole="ANNEES" ToRole="SECTIONS" />
           <NavigationProperty Name="SPECIALITES_ANNEES_MODES_ETUDES" Relationship="SGSDBModel.Relation_SpeciliteAnneeModeEtude_Annee" FromRole="ANNEES" ToRole="SPECIALITES_ANNEES_MODES_ETUDES" />
           <NavigationProperty Name="SPECIALITES_MATIERES" Relationship="SGSDBModel.RelationSpeciliteMatiere_Annee" FromRole="ANNEES" ToRole="SPECIALITES_MATIERES" />
-          <NavigationProperty Name="ENS_SPEMAT" Relationship="SGSDBModel.Relation_EnsSpeMat_Annee" FromRole="ANNEE" ToRole="ENS_SPEMAT" />
+          <NavigationProperty Name="USERS_SPECIALITES" Relationship="SGSDBModel.Relation_UserSpecialite_Annee" FromRole="ANNEE" ToRole="USERS_SPECIALITES" />
         </EntityType>
         <EntityType Name="CATEGORy">
           <Key>
@@ -1089,6 +1251,27 @@
           <Property Name="C__sysInsertTxBsn" Type="Int64" />
           <Property Name="C__sysTrackingContext" Type="Guid" />
           <NavigationProperty Name="SPECIALITES_MATIERES" Relationship="SGSDBModel.Relation_SpecialiteMatiere_Categorie" FromRole="CATEGORIES" ToRole="SPECIALITES_MATIERES" />
+        </EntityType>
+        <EntityType Name="ENS_SPEMAT">
+          <Key>
+            <PropertyRef Name="ID_ENSEIGNANT" />
+            <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
+            <PropertyRef Name="ID_SPECIALITE" />
+            <PropertyRef Name="ID_MATIERE" />
+          </Key>
+          <Property Name="ID_ENSEIGNANT" Type="Int32" Nullable="false" />
+          <Property Name="ANNEE_UNIVERSITAIRE" Type="Int32" Nullable="false" />
+          <Property Name="ID_SPECIALITE" Type="Int32" Nullable="false" />
+          <Property Name="ID_MATIERE" Type="Int32" Nullable="false" />
+          <Property Name="LastEditDate" Type="DateTime" />
+          <Property Name="CreationDate" Type="DateTime" />
+          <Property Name="C__sysChangeTxBsn" Type="Int64" />
+          <Property Name="C__sysInsertTxBsn" Type="Int64" />
+          <Property Name="C__sysTrackingContext" Type="Guid" />
+          <NavigationProperty Name="ANNEE" Relationship="SGSDBModel.Relation_EnsSpeMat_Annee" FromRole="ENS_SPEMAT" ToRole="ANNEES" />
+          <NavigationProperty Name="ENSEIGNANT" Relationship="SGSDBModel.Relation_EnsSpeMat_Enseigant" FromRole="ENS_SPEMAT" ToRole="ENSEIGNANTS" />
+          <NavigationProperty Name="MATIERE" Relationship="SGSDBModel.Relation_EnsSpeMat_Matiere" FromRole="ENS_SPEMAT" ToRole="MATIERES" />
+          <NavigationProperty Name="SPECIALITE" Relationship="SGSDBModel.Relation_EnsSpeMat_Specialite" FromRole="ENS_SPEMAT" ToRole="SPECIALITES" />
         </EntityType>
         <EntityType Name="ENSEIGNANT">
           <Key>
@@ -1111,11 +1294,11 @@
           <Property Name="C__sysChangeTxBsn" Type="Int64" />
           <Property Name="C__sysInsertTxBsn" Type="Int64" />
           <Property Name="C__sysTrackingContext" Type="Guid" />
-          <NavigationProperty Name="ENS_SPEMAT" Relationship="SGSDBModel.Relation_EnsSpeMat_Enseigant" FromRole="ENSEIGNANT" ToRole="ENS_SPEMAT" />
+          <NavigationProperty Name="ENS_SPEMAT" Relationship="SGSDBModel.Relation_EnsSpeMat_Enseigant" FromRole="ENSEIGNANTS" ToRole="ENS_SPEMAT" />
         </EntityType>
         <EntityType Name="ETUDIANT">
           <Key>
-            <PropertyRef Name="MATRICULE" />
+            <PropertyRef Name="ID_ETUDIANT" />
           </Key>
           <Property Name="ID_ETUDIANT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MATRICULE" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
@@ -1182,6 +1365,9 @@
           <Property Name="C__sysChangeTxBsn" Type="Int64" />
           <Property Name="C__sysInsertTxBsn" Type="Int64" />
           <Property Name="C__sysTrackingContext" Type="Guid" />
+          <NavigationProperty Name="NOTEs" Relationship="SGSDBModel.Relation_Note_Etudiant" FromRole="ETUDIANTS" ToRole="NOTE" />
+          <NavigationProperty Name="NOTE_DETTE" Relationship="SGSDBModel.Relation_NoteDette_Etudiant" FromRole="ETUDIANTS" ToRole="NOTE_DETTE" />
+          <NavigationProperty Name="NOTES_EXAMEN" Relationship="SGSDBModel.Relation_NoteExamin_Etudiant" FromRole="ETUDIANTS" ToRole="NOTES_EXAMEN" />
         </EntityType>
         <EntityType Name="EXAMEN">
           <Key>
@@ -1237,6 +1423,7 @@
           <Property Name="C__sysInsertTxBsn" Type="Int64" />
           <Property Name="C__sysTrackingContext" Type="Guid" />
           <NavigationProperty Name="SECTION" Relationship="SGSDBModel.Relation_Groupe_Section" FromRole="GROUPES" ToRole="SECTIONS" />
+          <NavigationProperty Name="USERS_SPECIALITES" Relationship="SGSDBModel.Relation_UserSpecialite_Groupe" FromRole="GROUPE" ToRole="USERS_SPECIALITES" />
         </EntityType>
         <EntityType Name="MATIERE">
           <Key>
@@ -1256,11 +1443,12 @@
           <Property Name="C__sysChangeTxBsn" Type="Int64" />
           <Property Name="C__sysInsertTxBsn" Type="Int64" />
           <Property Name="C__sysTrackingContext" Type="Guid" />
+          <NavigationProperty Name="ENS_SPEMAT" Relationship="SGSDBModel.Relation_EnsSpeMat_Matiere" FromRole="MATIERES" ToRole="ENS_SPEMAT" />
           <NavigationProperty Name="NOTEs" Relationship="SGSDBModel.Relation_Note_Matiere" FromRole="MATIERES" ToRole="NOTE" />
           <NavigationProperty Name="NOTE_DETTE" Relationship="SGSDBModel.Relation_NoteDette_Matiere" FromRole="MATIERES" ToRole="NOTE_DETTE" />
           <NavigationProperty Name="NOTES_EXAMEN" Relationship="SGSDBModel.Relation_NoteExamin_Matiere" FromRole="MATIERES" ToRole="NOTES_EXAMEN" />
           <NavigationProperty Name="SPECIALITES_MATIERES" Relationship="SGSDBModel.Relation_SpeciliteMatiere_Matiere" FromRole="MATIERES" ToRole="SPECIALITES_MATIERES" />
-          <NavigationProperty Name="ENS_SPEMAT" Relationship="SGSDBModel.Relation_EnsSpeMat_Matiere" FromRole="MATIERE" ToRole="ENS_SPEMAT" />
+          <NavigationProperty Name="USERS_SPECIALITES" Relationship="SGSDBModel.Relation_UserSpecialite_Matiere" FromRole="MATIERE" ToRole="USERS_SPECIALITES" />
         </EntityType>
         <EntityType Name="MODES_ETUDES">
           <Key>
@@ -1308,6 +1496,7 @@
           <Property Name="C__sysInsertTxBsn" Type="Int64" />
           <Property Name="C__sysTrackingContext" Type="Guid" />
           <NavigationProperty Name="ANNEE" Relationship="SGSDBModel.Relation_Note_AnneeUniversitaire" FromRole="NOTE" ToRole="ANNEES" />
+          <NavigationProperty Name="ETUDIANT" Relationship="SGSDBModel.Relation_Note_Etudiant" FromRole="NOTE" ToRole="ETUDIANTS" />
           <NavigationProperty Name="MATIERE" Relationship="SGSDBModel.Relation_Note_Matiere" FromRole="NOTE" ToRole="MATIERES" />
         </EntityType>
         <EntityType Name="NOTE_DETTE">
@@ -1339,6 +1528,7 @@
           <Property Name="C__sysTrackingContext" Type="Guid" />
           <NavigationProperty Name="ANNEE" Relationship="SGSDBModel.Relation_NoteDette_Annee" FromRole="NOTE_DETTE" ToRole="ANNEES" />
           <NavigationProperty Name="ANNEE1" Relationship="SGSDBModel.Relation_NoteDette_AnneeDette" FromRole="NOTE_DETTE" ToRole="ANNEES" />
+          <NavigationProperty Name="ETUDIANT" Relationship="SGSDBModel.Relation_NoteDette_Etudiant" FromRole="NOTE_DETTE" ToRole="ETUDIANTS" />
           <NavigationProperty Name="MATIERE" Relationship="SGSDBModel.Relation_NoteDette_Matiere" FromRole="NOTE_DETTE" ToRole="MATIERES" />
         </EntityType>
         <EntityType Name="NOTES_EXAMEN">
@@ -1359,6 +1549,7 @@
           <Property Name="C__sysInsertTxBsn" Type="Int64" />
           <Property Name="C__sysTrackingContext" Type="Guid" />
           <NavigationProperty Name="ANNEE" Relationship="SGSDBModel.Relation_NoteExamin_Annee" FromRole="NOTES_EXAMEN" ToRole="ANNEES" />
+          <NavigationProperty Name="ETUDIANT" Relationship="SGSDBModel.Relation_NoteExamin_Etudiant" FromRole="NOTES_EXAMEN" ToRole="ETUDIANTS" />
           <NavigationProperty Name="EXAMEN" Relationship="SGSDBModel.Relation_NoteExamin_Examin" FromRole="NOTES_EXAMEN" ToRole="EXAMENS" />
           <NavigationProperty Name="MATIERE" Relationship="SGSDBModel.Relation_NoteExamin_Matiere" FromRole="NOTES_EXAMEN" ToRole="MATIERES" />
         </EntityType>
@@ -1400,11 +1591,12 @@
           <Property Name="C__sysChangeTxBsn" Type="Int64" />
           <Property Name="C__sysInsertTxBsn" Type="Int64" />
           <Property Name="C__sysTrackingContext" Type="Guid" />
+          <NavigationProperty Name="ENS_SPEMAT" Relationship="SGSDBModel.Relation_EnsSpeMat_Specialite" FromRole="SPECIALITES" ToRole="ENS_SPEMAT" />
           <NavigationProperty Name="EXAMENS_ANNEES_MODES_ETUDES" Relationship="SGSDBModel.Relation_ExaminAnneeModeEtude_Specilite" FromRole="SPECIALITES" ToRole="EXAMENS_ANNEES_MODES_ETUDES" />
           <NavigationProperty Name="SECTIONS" Relationship="SGSDBModel.Relation_Section_Specialite" FromRole="SPECIALITES" ToRole="SECTIONS" />
           <NavigationProperty Name="SPECIALITES_ANNEES_MODES_ETUDES" Relationship="SGSDBModel.Relation_SpeciliteAnneeModeEtude_Specilite" FromRole="SPECIALITES" ToRole="SPECIALITES_ANNEES_MODES_ETUDES" />
           <NavigationProperty Name="SPECIALITES_MATIERES" Relationship="SGSDBModel.Relation_SpeciliteMatiere_Specialite" FromRole="SPECIALITES" ToRole="SPECIALITES_MATIERES" />
-          <NavigationProperty Name="ENS_SPEMAT" Relationship="SGSDBModel.Relation_EnsSpeMat_Specialite" FromRole="SPECIALITE" ToRole="ENS_SPEMAT" />
+          <NavigationProperty Name="USERS_SPECIALITES" Relationship="SGSDBModel.Relation_UserSpecialite_Specialite" FromRole="SPECIALITE" ToRole="USERS_SPECIALITES" />
         </EntityType>
         <EntityType Name="SPECIALITES_ANNEES_MODES_ETUDES">
           <Key>
@@ -1473,6 +1665,18 @@
             </Principal>
             <Dependent Role="C__syncArticles">
               <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Relation_EnsSpeMat_Annee">
+          <End Role="ANNEES" Type="SGSDBModel.ANNEE" Multiplicity="1" />
+          <End Role="ENS_SPEMAT" Type="SGSDBModel.ENS_SPEMAT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ANNEES">
+              <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
+            </Principal>
+            <Dependent Role="ENS_SPEMAT">
+              <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1581,6 +1785,78 @@
             </Principal>
             <Dependent Role="SPECIALITES_MATIERES">
               <PropertyRef Name="ID_CATEGORIE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Relation_EnsSpeMat_Enseigant">
+          <End Role="ENSEIGNANTS" Type="SGSDBModel.ENSEIGNANT" Multiplicity="1" />
+          <End Role="ENS_SPEMAT" Type="SGSDBModel.ENS_SPEMAT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ENSEIGNANTS">
+              <PropertyRef Name="ID_ENSEIGNANT" />
+            </Principal>
+            <Dependent Role="ENS_SPEMAT">
+              <PropertyRef Name="ID_ENSEIGNANT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Relation_EnsSpeMat_Matiere">
+          <End Role="MATIERES" Type="SGSDBModel.MATIERE" Multiplicity="1" />
+          <End Role="ENS_SPEMAT" Type="SGSDBModel.ENS_SPEMAT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MATIERES">
+              <PropertyRef Name="ID_MATIERE" />
+            </Principal>
+            <Dependent Role="ENS_SPEMAT">
+              <PropertyRef Name="ID_MATIERE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Relation_EnsSpeMat_Specialite">
+          <End Role="SPECIALITES" Type="SGSDBModel.SPECIALITE" Multiplicity="1" />
+          <End Role="ENS_SPEMAT" Type="SGSDBModel.ENS_SPEMAT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPECIALITES">
+              <PropertyRef Name="ID_SPECIALITE" />
+            </Principal>
+            <Dependent Role="ENS_SPEMAT">
+              <PropertyRef Name="ID_SPECIALITE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Relation_Note_Etudiant">
+          <End Role="ETUDIANTS" Type="SGSDBModel.ETUDIANT" Multiplicity="1" />
+          <End Role="NOTE" Type="SGSDBModel.NOTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ETUDIANTS">
+              <PropertyRef Name="ID_ETUDIANT" />
+            </Principal>
+            <Dependent Role="NOTE">
+              <PropertyRef Name="ID_ETUDIANT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Relation_NoteDette_Etudiant">
+          <End Role="ETUDIANTS" Type="SGSDBModel.ETUDIANT" Multiplicity="1" />
+          <End Role="NOTE_DETTE" Type="SGSDBModel.NOTE_DETTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ETUDIANTS">
+              <PropertyRef Name="ID_ETUDIANT" />
+            </Principal>
+            <Dependent Role="NOTE_DETTE">
+              <PropertyRef Name="ID_ETUDIANT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Relation_NoteExamin_Etudiant">
+          <End Role="ETUDIANTS" Type="SGSDBModel.ETUDIANT" Multiplicity="1" />
+          <End Role="NOTES_EXAMEN" Type="SGSDBModel.NOTES_EXAMEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ETUDIANTS">
+              <PropertyRef Name="ID_ETUDIANT" />
+            </Principal>
+            <Dependent Role="NOTES_EXAMEN">
+              <PropertyRef Name="ID_ETUDIANT" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1752,71 +2028,73 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="ENS_SPEMAT">
+        <EntityType Name="USERS_SPECIALITES">
           <Key>
-            <PropertyRef Name="ID_ENSEIGNANT" />
             <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
             <PropertyRef Name="ID_SPECIALITE" />
+            <PropertyRef Name="ID_USER" />
             <PropertyRef Name="ID_MATIERE" />
+            <PropertyRef Name="ID_GROUPE" />
           </Key>
-          <Property Type="Int32" Name="ID_ENSEIGNANT" Nullable="false" />
           <Property Type="Int32" Name="ANNEE_UNIVERSITAIRE" Nullable="false" />
           <Property Type="Int32" Name="ID_SPECIALITE" Nullable="false" />
+          <Property Type="Int32" Name="ID_USER" Nullable="false" />
           <Property Type="Int32" Name="ID_MATIERE" Nullable="false" />
+          <Property Type="Int32" Name="ID_GROUPE" Nullable="false" />
           <Property Type="DateTime" Name="LastEditDate" />
           <Property Type="DateTime" Name="CreationDate" />
           <Property Type="Int64" Name="C__sysChangeTxBsn" />
           <Property Type="Int64" Name="C__sysInsertTxBsn" />
           <Property Type="Guid" Name="C__sysTrackingContext" />
-          <NavigationProperty Name="ANNEE" Relationship="SGSDBModel.Relation_EnsSpeMat_Annee" FromRole="ENS_SPEMAT" ToRole="ANNEE" />
-          <NavigationProperty Name="ENSEIGNANT" Relationship="SGSDBModel.Relation_EnsSpeMat_Enseigant" FromRole="ENS_SPEMAT" ToRole="ENSEIGNANT" />
-          <NavigationProperty Name="MATIERE" Relationship="SGSDBModel.Relation_EnsSpeMat_Matiere" FromRole="ENS_SPEMAT" ToRole="MATIERE" />
-          <NavigationProperty Name="SPECIALITE" Relationship="SGSDBModel.Relation_EnsSpeMat_Specialite" FromRole="ENS_SPEMAT" ToRole="SPECIALITE" />
+          <NavigationProperty Name="ANNEE" Relationship="SGSDBModel.Relation_UserSpecialite_Annee" FromRole="USERS_SPECIALITES" ToRole="ANNEE" />
+          <NavigationProperty Name="GROUPE" Relationship="SGSDBModel.Relation_UserSpecialite_Groupe" FromRole="USERS_SPECIALITES" ToRole="GROUPE" />
+          <NavigationProperty Name="MATIERE" Relationship="SGSDBModel.Relation_UserSpecialite_Matiere" FromRole="USERS_SPECIALITES" ToRole="MATIERE" />
+          <NavigationProperty Name="SPECIALITE" Relationship="SGSDBModel.Relation_UserSpecialite_Specialite" FromRole="USERS_SPECIALITES" ToRole="SPECIALITE" />
         </EntityType>
-        <Association Name="Relation_EnsSpeMat_Annee">
+        <Association Name="Relation_UserSpecialite_Annee">
           <End Type="SGSDBModel.ANNEE" Role="ANNEE" Multiplicity="1" />
-          <End Type="SGSDBModel.ENS_SPEMAT" Role="ENS_SPEMAT" Multiplicity="*" />
+          <End Type="SGSDBModel.USERS_SPECIALITES" Role="USERS_SPECIALITES" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ANNEE">
               <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
             </Principal>
-            <Dependent Role="ENS_SPEMAT">
+            <Dependent Role="USERS_SPECIALITES">
               <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Relation_EnsSpeMat_Enseigant">
-          <End Type="SGSDBModel.ENSEIGNANT" Role="ENSEIGNANT" Multiplicity="1" />
-          <End Type="SGSDBModel.ENS_SPEMAT" Role="ENS_SPEMAT" Multiplicity="*" />
+        <Association Name="Relation_UserSpecialite_Groupe">
+          <End Type="SGSDBModel.GROUPE" Role="GROUPE" Multiplicity="1" />
+          <End Type="SGSDBModel.USERS_SPECIALITES" Role="USERS_SPECIALITES" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ENSEIGNANT">
-              <PropertyRef Name="ID_ENSEIGNANT" />
+            <Principal Role="GROUPE">
+              <PropertyRef Name="ID_GROUPE" />
             </Principal>
-            <Dependent Role="ENS_SPEMAT">
-              <PropertyRef Name="ID_ENSEIGNANT" />
+            <Dependent Role="USERS_SPECIALITES">
+              <PropertyRef Name="ID_GROUPE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Relation_EnsSpeMat_Matiere">
+        <Association Name="Relation_UserSpecialite_Matiere">
           <End Type="SGSDBModel.MATIERE" Role="MATIERE" Multiplicity="1" />
-          <End Type="SGSDBModel.ENS_SPEMAT" Role="ENS_SPEMAT" Multiplicity="*" />
+          <End Type="SGSDBModel.USERS_SPECIALITES" Role="USERS_SPECIALITES" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MATIERE">
               <PropertyRef Name="ID_MATIERE" />
             </Principal>
-            <Dependent Role="ENS_SPEMAT">
+            <Dependent Role="USERS_SPECIALITES">
               <PropertyRef Name="ID_MATIERE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Relation_EnsSpeMat_Specialite">
+        <Association Name="Relation_UserSpecialite_Specialite">
           <End Type="SGSDBModel.SPECIALITE" Role="SPECIALITE" Multiplicity="1" />
-          <End Type="SGSDBModel.ENS_SPEMAT" Role="ENS_SPEMAT" Multiplicity="*" />
+          <End Type="SGSDBModel.USERS_SPECIALITES" Role="USERS_SPECIALITES" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SPECIALITE">
               <PropertyRef Name="ID_SPECIALITE" />
             </Principal>
-            <Dependent Role="ENS_SPEMAT">
+            <Dependent Role="USERS_SPECIALITES">
               <PropertyRef Name="ID_SPECIALITE" />
             </Dependent>
           </ReferentialConstraint>
@@ -1826,7 +2104,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SGSDBModelStoreContainer" CdmEntityContainer="LocalSGSDBEntities">
+        <EntityContainerMapping StorageEntityContainer="SGSDBModelStoreContainer" CdmEntityContainer="LocalDbEntities">
           <EntitySetMapping Name="C__syncArticles">
             <EntityTypeMapping TypeName="SGSDBModel.C__syncArticles">
               <MappingFragment StoreEntitySet="__syncArticles">
@@ -1881,6 +2159,21 @@
                 <ScalarProperty Name="ID_CATEGORIE" ColumnName="ID_CATEGORIE" />
                 <ScalarProperty Name="DESIGNATION" ColumnName="DESIGNATION" />
                 <ScalarProperty Name="DESIGNATION_LATIN" ColumnName="DESIGNATION_LATIN" />
+                <ScalarProperty Name="LastEditDate" ColumnName="LastEditDate" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="C__sysChangeTxBsn" ColumnName="__sysChangeTxBsn" />
+                <ScalarProperty Name="C__sysInsertTxBsn" ColumnName="__sysInsertTxBsn" />
+                <ScalarProperty Name="C__sysTrackingContext" ColumnName="__sysTrackingContext" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ENS_SPEMAT">
+            <EntityTypeMapping TypeName="SGSDBModel.ENS_SPEMAT">
+              <MappingFragment StoreEntitySet="ENS_SPEMAT">
+                <ScalarProperty Name="ID_ENSEIGNANT" ColumnName="ID_ENSEIGNANT" />
+                <ScalarProperty Name="ANNEE_UNIVERSITAIRE" ColumnName="ANNEE_UNIVERSITAIRE" />
+                <ScalarProperty Name="ID_SPECIALITE" ColumnName="ID_SPECIALITE" />
+                <ScalarProperty Name="ID_MATIERE" ColumnName="ID_MATIERE" />
                 <ScalarProperty Name="LastEditDate" ColumnName="LastEditDate" />
                 <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
                 <ScalarProperty Name="C__sysChangeTxBsn" ColumnName="__sysChangeTxBsn" />
@@ -2220,18 +2513,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ENS_SPEMAT">
-            <EntityTypeMapping TypeName="SGSDBModel.ENS_SPEMAT">
-              <MappingFragment StoreEntitySet="ENS_SPEMAT">
+          <EntitySetMapping Name="USERS_SPECIALITES">
+            <EntityTypeMapping TypeName="SGSDBModel.USERS_SPECIALITES">
+              <MappingFragment StoreEntitySet="USERS_SPECIALITES">
                 <ScalarProperty Name="C__sysTrackingContext" ColumnName="__sysTrackingContext" />
                 <ScalarProperty Name="C__sysInsertTxBsn" ColumnName="__sysInsertTxBsn" />
                 <ScalarProperty Name="C__sysChangeTxBsn" ColumnName="__sysChangeTxBsn" />
                 <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
                 <ScalarProperty Name="LastEditDate" ColumnName="LastEditDate" />
+                <ScalarProperty Name="ID_GROUPE" ColumnName="ID_GROUPE" />
                 <ScalarProperty Name="ID_MATIERE" ColumnName="ID_MATIERE" />
+                <ScalarProperty Name="ID_USER" ColumnName="ID_USER" />
                 <ScalarProperty Name="ID_SPECIALITE" ColumnName="ID_SPECIALITE" />
                 <ScalarProperty Name="ANNEE_UNIVERSITAIRE" ColumnName="ANNEE_UNIVERSITAIRE" />
-                <ScalarProperty Name="ID_ENSEIGNANT" ColumnName="ID_ENSEIGNANT" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2255,300 +2549,326 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="ESCDataModel" ZoomLevel="55">
+      <Diagram Name="ESCDataModel" ZoomLevel="40">
         <EntityTypeShape EntityType="SGSDBModel.C__syncArticles" Width="1.5" PointX="3" PointY="0.875" Height="1.9802864583333335" IsExpanded="true" />
         <EntityTypeShape EntityType="SGSDBModel.C__syncSubscriptions" Width="1.5" PointX="0.75" PointY="1" Height="1.7879850260416674" IsExpanded="true" />
-        <EntityTypeShape EntityType="SGSDBModel.C__syncTransactions" Width="1.5" PointX="0.75" PointY="3.75" Height="1.211080729166667" IsExpanded="true" />
-        <EntityTypeShape EntityType="SGSDBModel.ANNEE" Width="1.5" PointX="0.75" PointY="17.875" Height="5.6340136718750031" IsExpanded="true" />
-        <EntityTypeShape EntityType="SGSDBModel.CATEGORy" Width="1.5" PointX="6.75" PointY="3" Height="2.7494921874999996" IsExpanded="true" />
-        <EntityTypeShape EntityType="SGSDBModel.ENSEIGNANT" Width="1.5" PointX="2.75" PointY="3.75" Height="4.2879036458333317" IsExpanded="true" />
-        <EntityTypeShape EntityType="SGSDBModel.ETUDIANT" Width="1.5" PointX="11.75" PointY="0.75" Height="13.518372395833332" IsExpanded="true" />
-        <EntityTypeShape EntityType="SGSDBModel.EXAMEN" Width="1.5" PointX="0.75" PointY="25" Height="3.326396484374996" IsExpanded="true" />
-        <EntityTypeShape EntityType="SGSDBModel.EXAMENS_ANNEES_MODES_ETUDES" Width="1.5" PointX="3.625" PointY="18.875" Height="4.0956022135416674" IsExpanded="true" />
-        <EntityTypeShape EntityType="SGSDBModel.GROUPE" Width="1.5" PointX="8.25" PointY="7.25" Height="2.7494921875000031" IsExpanded="true" />
-        <EntityTypeShape EntityType="SGSDBModel.MATIERE" Width="1.5" PointX="0.75" PointY="12.375" Height="4.4802050781250031" IsExpanded="true" />
-        <EntityTypeShape EntityType="SGSDBModel.MODES_ETUDES" Width="1.5" PointX="6.75" PointY="24.5" Height="3.9033007812500031" IsExpanded="true" />
-        <EntityTypeShape EntityType="SGSDBModel.NOTE" Width="1.5" PointX="6" PointY="18.125" Height="5.0571093750000031" IsExpanded="true" />
-        <EntityTypeShape EntityType="SGSDBModel.NOTE_DETTE" Width="1.5" PointX="3" PointY="11.875" Height="5.4417122395833388" IsExpanded="true" />
-        <EntityTypeShape EntityType="SGSDBModel.NOTES_EXAMEN" Width="1.5" PointX="3" PointY="23.875" Height="3.5186979166666674" IsExpanded="true" />
-        <EntityTypeShape EntityType="SGSDBModel.SECTION" Width="1.5" PointX="6" PointY="14" Height="3.3263964843750031" IsExpanded="true" />
-        <EntityTypeShape EntityType="SGSDBModel.SPECIALITE" Width="1.5" PointX="6.75" PointY="29.25" Height="5.0571093750000067" IsExpanded="true" />
-        <EntityTypeShape EntityType="SGSDBModel.SPECIALITES_ANNEES_MODES_ETUDES" Width="1.5" PointX="9" PointY="18.75" Height="3.7109993489583388" IsExpanded="true" />
-        <EntityTypeShape EntityType="SGSDBModel.SPECIALITES_MATIERES" Width="1.5" PointX="9" PointY="11.5" Height="6.4032194010416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="SGSDBModel.C__syncTransactions" Width="1.5" PointX="2.75" PointY="3.75" Height="1.211080729166667" IsExpanded="true" />
+        <EntityTypeShape EntityType="SGSDBModel.ANNEE" Width="1.5" PointX="0.75" PointY="20.375" Height="5.8263151041666674" IsExpanded="true" />
+        <EntityTypeShape EntityType="SGSDBModel.CATEGORy" Width="1.5" PointX="6.75" PointY="10.625" Height="2.7494921874999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="SGSDBModel.ENS_SPEMAT" Width="1.5" PointX="3" PointY="21.5" Height="3.5186979166666674" IsExpanded="true" />
+        <EntityTypeShape EntityType="SGSDBModel.ENSEIGNANT" Width="1.5" PointX="0.75" PointY="33.125" Height="4.480205078124996" IsExpanded="true" />
+        <EntityTypeShape EntityType="SGSDBModel.ETUDIANT" Width="1.5" PointX="0.75" PointY="5.5" Height="14.095276692708332" IsExpanded="true" />
+        <EntityTypeShape EntityType="SGSDBModel.EXAMEN" Width="1.5" PointX="3.75" PointY="9.625" Height="3.3263964843749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="SGSDBModel.EXAMENS_ANNEES_MODES_ETUDES" Width="1.5" PointX="6" PointY="21.25" Height="4.0956022135416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="SGSDBModel.GROUPE" Width="1.5" PointX="8.25" PointY="27" Height="2.7494921875000031" IsExpanded="true" />
+        <EntityTypeShape EntityType="SGSDBModel.MATIERE" Width="1.5" PointX="0.75" PointY="27.375" Height="4.672506510416671" IsExpanded="true" />
+        <EntityTypeShape EntityType="SGSDBModel.MODES_ETUDES" Width="1.5" PointX="6.75" PointY="5.125" Height="3.9033007812500031" IsExpanded="true" />
+        <EntityTypeShape EntityType="SGSDBModel.NOTE" Width="1.5" PointX="3" PointY="14.75" Height="5.2494108072916674" IsExpanded="true" />
+        <EntityTypeShape EntityType="SGSDBModel.NOTE_DETTE" Width="1.5" PointX="3" PointY="26.5" Height="5.634013671875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SGSDBModel.NOTES_EXAMEN" Width="1.5" PointX="6" PointY="16.5" Height="3.7109993489583388" IsExpanded="true" />
+        <EntityTypeShape EntityType="SGSDBModel.SECTION" Width="1.5" PointX="6" PointY="26.625" Height="3.3263964843750031" IsExpanded="true" />
+        <EntityTypeShape EntityType="SGSDBModel.SPECIALITE" Width="1.5" PointX="6.75" PointY="30.75" Height="5.2494108072916674" IsExpanded="true" />
+        <EntityTypeShape EntityType="SGSDBModel.SPECIALITES_ANNEES_MODES_ETUDES" Width="1.5" PointX="9" PointY="21.5" Height="3.7109993489583388" IsExpanded="true" />
+        <EntityTypeShape EntityType="SGSDBModel.SPECIALITES_MATIERES" Width="1.5" PointX="9" PointY="14.125" Height="6.4032194010416674" IsExpanded="true" />
         <AssociationConnector Association="SGSDBModel.C__syncArticles_FK" ManuallyRouted="false">
           <ConnectorPoint PointX="2.25" PointY="1.8939925130208337" />
           <ConnectorPoint PointX="3" PointY="1.8939925130208337" />
         </AssociationConnector>
+        <AssociationConnector Association="SGSDBModel.Relation_EnsSpeMat_Annee" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="23.357204121744793" />
+          <ConnectorPoint PointX="2.5572916666666665" PointY="23.357204121744793" />
+          <ConnectorPoint PointX="2.8802083333333335" PointY="23.357204121744793" />
+          <ConnectorPoint PointX="3" PointY="23.357204121744793" />
+        </AssociationConnector>
         <AssociationConnector Association="SGSDBModel.Relation_ExamAnneeModeEtude_Annee" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="20.922801106770834" />
-          <ConnectorPoint PointX="2.6354166666666665" PointY="20.922801106770834" />
-          <ConnectorPoint PointX="2.8020833333333335" PointY="20.922801106770834" />
-          <ConnectorPoint PointX="3.0260391666666666" PointY="20.922801106770834" />
-          <ConnectorPoint PointX="3.1927058333333336" PointY="20.922801106770834" />
-          <ConnectorPoint PointX="3.3385416666666665" PointY="20.922801106770834" />
-          <ConnectorPoint PointX="3.5052083333333335" PointY="20.922801106770834" />
-          <ConnectorPoint PointX="3.625" PointY="20.922801106770834" />
+          <ConnectorPoint PointX="2.25" PointY="25.213400065104167" />
+          <ConnectorPoint PointX="2.5572916666666665" PointY="25.213400065104167" />
+          <ConnectorPoint PointX="3.0208333333333335" PointY="25.213400065104167" />
+          <ConnectorPoint PointX="4.611368815104167" PointY="25.213400065104167" />
+          <ConnectorPoint PointX="4.778035481770833" PointY="25.213400065104167" />
+          <ConnectorPoint PointX="6" PointY="25.213400065104167" />
         </AssociationConnector>
         <AssociationConnector Association="SGSDBModel.Relation_Note_AnneeUniversitaire" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="18.46875" />
-          <ConnectorPoint PointX="2.6354166666666665" PointY="18.46875" />
-          <ConnectorPoint PointX="2.8020833333333335" PointY="18.46875" />
-          <ConnectorPoint PointX="3.0260391666666666" PointY="18.46875" />
-          <ConnectorPoint PointX="3.1927058333333336" PointY="18.46875" />
-          <ConnectorPoint PointX="6" PointY="18.46875" />
+          <ConnectorPoint PointX="2.2130769230769229" PointY="20.375" />
+          <ConnectorPoint PointX="2.65625" PointY="19.931826923076922" />
+          <ConnectorPoint PointX="2.65625" PointY="20.344313653445514" />
+          <ConnectorPoint PointX="2.6754494349011204" PointY="20.325114218544392" />
+          <ConnectorPoint PointX="2.8558005650988787" PointY="20.144763088346636" />
+          <ConnectorPoint PointX="3.0011528461538459" PointY="19.999410807291667" />
         </AssociationConnector>
         <AssociationConnector Association="SGSDBModel.Relation_NoteDette_Annee" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="18.1406225" />
-          <ConnectorPoint PointX="2.6354166666666665" PointY="18.1406225" />
-          <ConnectorPoint PointX="2.8020833333333335" PointY="18.1406225" />
-          <ConnectorPoint PointX="3.0260391666666666" PointY="18.1406225" />
-          <ConnectorPoint PointX="3.1927058333333336" PointY="18.1406225" />
-          <ConnectorPoint PointX="3.28125" PointY="18.1406225" />
-          <ConnectorPoint PointX="3.28125" PointY="17.316712239583339" />
+          <ConnectorPoint PointX="2.25" PointY="26.368230921073721" />
+          <ConnectorPoint PointX="2.484375" PointY="26.602605921073721" />
+          <ConnectorPoint PointX="2.484375" PointY="25.95783753846154" />
+          <ConnectorPoint PointX="2.5816994349011222" PointY="26.055161973362658" />
+          <ConnectorPoint PointX="2.9964255650988791" PointY="26.469888103560418" />
+          <ConnectorPoint PointX="3.026537461538461" PointY="26.5" />
         </AssociationConnector>
         <AssociationConnector Association="SGSDBModel.Relation_NoteDette_AnneeDette" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="23.189330618489585" />
-          <ConnectorPoint PointX="2.6354166666666665" PointY="23.189330618489585" />
-          <ConnectorPoint PointX="2.8020833333333335" PointY="23.189330618489585" />
-          <ConnectorPoint PointX="3.1093725" PointY="23.189330618489585" />
-          <ConnectorPoint PointX="3.1093725" PointY="17.316712239583339" />
+          <ConnectorPoint PointX="2.25" PointY="26.386692459535261" />
+          <ConnectorPoint PointX="2.53125" PointY="26.667942459535261" />
+          <ConnectorPoint PointX="2.53125" PointY="26.055480769230769" />
+          <ConnectorPoint PointX="2.5348244349011226" PointY="26.059055204131887" />
+          <ConnectorPoint PointX="2.9964255650988791" PointY="26.520656334329647" />
+          <ConnectorPoint PointX="3" PointY="26.524230769230769" />
         </AssociationConnector>
         <AssociationConnector Association="SGSDBModel.Relation_NoteExamin_Annee" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="18.6718775" />
-          <ConnectorPoint PointX="2.6354166666666665" PointY="18.6718775" />
-          <ConnectorPoint PointX="2.8020833333333335" PointY="18.6718775" />
-          <ConnectorPoint PointX="3.0260391666666666" PointY="18.6718775" />
-          <ConnectorPoint PointX="3.1927058333333336" PointY="18.6718775" />
-          <ConnectorPoint PointX="3.421875" PointY="18.6718775" />
-          <ConnectorPoint PointX="3.421875" PointY="23.875" />
+          <ConnectorPoint PointX="2.25" PointY="20.376152846153843" />
+          <ConnectorPoint PointX="2.5625" PointY="20.063652846153843" />
+          <ConnectorPoint PointX="2.5625" PointY="20.585999348958339" />
+          <ConnectorPoint PointX="2.6510416666666665" PointY="20.585999348958339" />
+          <ConnectorPoint PointX="3.0208333333333335" PointY="20.585999348958339" />
+          <ConnectorPoint PointX="4.822916666666667" PointY="20.585999348958339" />
+          <ConnectorPoint PointX="4.989583333333333" PointY="20.585999348958339" />
+          <ConnectorPoint PointX="5.6007692307692309" PointY="20.585999348958339" />
+          <ConnectorPoint PointX="6" PointY="20.18676857972757" />
         </AssociationConnector>
         <AssociationConnector Association="SGSDBModel.Relation_Section_Annee" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="17.876152846153843" />
-          <ConnectorPoint PointX="2.625" PointY="17.501152846153843" />
-          <ConnectorPoint PointX="2.625" PointY="17.701396484375003" />
-          <ConnectorPoint PointX="2.6354166666666665" PointY="17.701396484375003" />
-          <ConnectorPoint PointX="2.9427083333333335" PointY="17.701396484375003" />
-          <ConnectorPoint PointX="3.0260391666666666" PointY="17.701396484375003" />
-          <ConnectorPoint PointX="3.1927058333333336" PointY="17.701396484375003" />
-          <ConnectorPoint PointX="3.1979166666666665" PointY="17.701396484375003" />
-          <ConnectorPoint PointX="3.3645833333333335" PointY="17.701396484375003" />
-          <ConnectorPoint PointX="5.6261528461538468" PointY="17.701396484375003" />
-          <ConnectorPoint PointX="6.0011528461538459" PointY="17.326396484375003" />
+          <ConnectorPoint PointX="2.25" PointY="22.16145926139323" />
+          <ConnectorPoint PointX="2.5572916666666665" PointY="22.16145926139323" />
+          <ConnectorPoint PointX="2.7239583333333335" PointY="22.16145926139323" />
+          <ConnectorPoint PointX="2.75" PointY="22.16145926139323" />
+          <ConnectorPoint PointX="2.75" PointY="25.595602213541667" />
+          <ConnectorPoint PointX="2.7916666666666665" PointY="25.595602213541667" />
+          <ConnectorPoint PointX="3.0208333333333335" PointY="25.595602213541667" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="25.595602213541667" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="25.595602213541667" />
+          <ConnectorPoint PointX="6.75" PointY="25.595602213541667" />
+          <ConnectorPoint PointX="6.75" PointY="26.625" />
         </AssociationConnector>
         <AssociationConnector Association="SGSDBModel.Relation_SpeciliteAnneeModeEtude_Annee" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="23.472962239583335" />
-          <ConnectorPoint PointX="2.6354166666666665" PointY="23.472962239583335" />
-          <ConnectorPoint PointX="2.8020833333333335" PointY="23.472962239583335" />
-          <ConnectorPoint PointX="3.3385416666666665" PointY="23.472962239583335" />
-          <ConnectorPoint PointX="3.5052083333333335" PointY="23.472962239583335" />
-          <ConnectorPoint PointX="4.5885391666666671" PointY="23.472962239583335" />
-          <ConnectorPoint PointX="4.7552058333333331" PointY="23.472962239583335" />
-          <ConnectorPoint PointX="4.760416666666667" PointY="23.472962239583335" />
-          <ConnectorPoint PointX="4.927083333333333" PointY="23.472962239583335" />
-          <ConnectorPoint PointX="4.9322941666666669" PointY="23.472962239583335" />
-          <ConnectorPoint PointX="5.0989608333333329" PointY="23.472962239583335" />
-          <ConnectorPoint PointX="7.979166666666667" PointY="23.472962239583335" />
-          <ConnectorPoint PointX="8.1458333333333339" PointY="23.472962239583335" />
-          <ConnectorPoint PointX="8.6354166666666661" PointY="23.472962239583335" />
-          <ConnectorPoint PointX="8.8958333333333339" PointY="23.472962239583335" />
-          <ConnectorPoint PointX="9.2604141666666653" PointY="23.472962239583335" />
-          <ConnectorPoint PointX="9.4270808333333331" PointY="23.472962239583335" />
-          <ConnectorPoint PointX="9.75" PointY="23.472962239583335" />
-          <ConnectorPoint PointX="9.75" PointY="22.460999348958339" />
+          <ConnectorPoint PointX="2.25" PointY="25.950664067307692" />
+          <ConnectorPoint PointX="2.5572916666666665" PointY="25.950664067307692" />
+          <ConnectorPoint PointX="3.0208333333333335" PointY="25.950664067307692" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="25.950664067307692" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="25.950664067307692" />
+          <ConnectorPoint PointX="6.666666666666667" PointY="25.950664067307692" />
+          <ConnectorPoint PointX="6.833333333333333" PointY="25.950664067307692" />
+          <ConnectorPoint PointX="7.690104166666667" PointY="25.950664067307692" />
+          <ConnectorPoint PointX="7.856770833333333" PointY="25.950664067307692" />
+          <ConnectorPoint PointX="7.963541666666667" PointY="25.950664067307692" />
+          <ConnectorPoint PointX="8.1302083333333339" PointY="25.950664067307692" />
+          <ConnectorPoint PointX="9.5468725" PointY="25.950664067307692" />
+          <ConnectorPoint PointX="9.5468725" PointY="25.210999348958339" />
         </AssociationConnector>
         <AssociationConnector Association="SGSDBModel.RelationSpeciliteMatiere_Annee" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.5" PointY="17.875" />
-          <ConnectorPoint PointX="1.5" PointY="17.566712239583339" />
-          <ConnectorPoint PointX="2.4761072732371709" PointY="17.566712239583339" />
-          <ConnectorPoint PointX="2.6427739399038379" PointY="17.566712239583339" />
-          <ConnectorPoint PointX="2.7760416666666665" PointY="17.566712239583339" />
-          <ConnectorPoint PointX="2.9427083333333335" PointY="17.566712239583339" />
-          <ConnectorPoint PointX="3.0260391666666666" PointY="17.566712239583339" />
-          <ConnectorPoint PointX="3.1927058333333336" PointY="17.566712239583339" />
-          <ConnectorPoint PointX="3.1979166666666665" PointY="17.566712239583339" />
-          <ConnectorPoint PointX="3.3645833333333335" PointY="17.566712239583339" />
-          <ConnectorPoint PointX="5.6775037576121781" PointY="17.566712239583339" />
-          <ConnectorPoint PointX="5.8441704242788441" PointY="17.566712239583339" />
-          <ConnectorPoint PointX="7.6569824218750027" PointY="17.566712239583339" />
-          <ConnectorPoint PointX="7.8236490885416687" PointY="17.566712239583339" />
-          <ConnectorPoint PointX="7.979166666666667" PointY="17.566712239583339" />
-          <ConnectorPoint PointX="8.1458333333333339" PointY="17.566712239583339" />
-          <ConnectorPoint PointX="8.625" PointY="17.566712239583339" />
-          <ConnectorPoint PointX="8.625" PointY="13.91083173502604" />
-          <ConnectorPoint PointX="9" PointY="13.91083173502604" />
+          <ConnectorPoint PointX="2.25" PointY="20.428075923076921" />
+          <ConnectorPoint PointX="2.5973244349011204" PointY="20.0807514881758" />
+          <ConnectorPoint PointX="2.7151755650988791" PointY="19.962900357978043" />
+          <ConnectorPoint PointX="2.734375" PointY="19.943700923076921" />
+          <ConnectorPoint PointX="2.734375" PointY="20.903219401041667" />
+          <ConnectorPoint PointX="2.8541666666666665" PointY="20.903219401041667" />
+          <ConnectorPoint PointX="3.0208333333333335" PointY="20.903219401041667" />
+          <ConnectorPoint PointX="4.822916666666667" PointY="20.903219401041667" />
+          <ConnectorPoint PointX="4.989583333333333" PointY="20.903219401041667" />
+          <ConnectorPoint PointX="7.7646001117788428" PointY="20.903219401041667" />
+          <ConnectorPoint PointX="7.9312667784455089" PointY="20.903219401041667" />
+          <ConnectorPoint PointX="7.963541666666667" PointY="20.903219401041667" />
+          <ConnectorPoint PointX="8.1302083333333339" PointY="20.903219401041667" />
+          <ConnectorPoint PointX="8.6007692307692309" PointY="20.903219401041667" />
+          <ConnectorPoint PointX="8.72232443490112" PointY="20.781664196909777" />
+          <ConnectorPoint PointX="8.8401755650988783" PointY="20.66381306671202" />
+          <ConnectorPoint PointX="9" PointY="20.5039886318109" />
         </AssociationConnector>
         <AssociationConnector Association="SGSDBModel.Relation_SpecialiteMatiere_Categorie" ManuallyRouted="false">
-          <ConnectorPoint PointX="7.875" PointY="5.7494921875" />
-          <ConnectorPoint PointX="7.875" PointY="15.770024487304683" />
-          <ConnectorPoint PointX="7.979166666666667" PointY="15.770024487304683" />
-          <ConnectorPoint PointX="8.1458333333333339" PointY="15.770024487304683" />
-          <ConnectorPoint PointX="8.5416666666666661" PointY="15.770024487304683" />
-          <ConnectorPoint PointX="8.7083333333333339" PointY="15.770024487304683" />
-          <ConnectorPoint PointX="9" PointY="15.770024487304683" />
+          <ConnectorPoint PointX="7.90625" PointY="13.3744921875" />
+          <ConnectorPoint PointX="7.90625" PointY="15.28125" />
+          <ConnectorPoint PointX="8.5416666666666661" PointY="15.281249999999998" />
+          <ConnectorPoint PointX="8.8645833333333339" PointY="15.28125" />
+          <ConnectorPoint PointX="9" PointY="15.28125" />
+        </AssociationConnector>
+        <AssociationConnector Association="SGSDBModel.Relation_EnsSpeMat_Enseigant" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.2500000000000013" PointY="33.125" />
+          <ConnectorPoint PointX="2.875" PointY="32.5" />
+          <ConnectorPoint PointX="2.875" PointY="24.170275437500003" />
+          <ConnectorPoint PointX="3" PointY="24.170275437500003" />
+        </AssociationConnector>
+        <AssociationConnector Association="SGSDBModel.Relation_EnsSpeMat_Matiere" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.2246153846153844" PointY="27.375" />
+          <ConnectorPoint PointX="2.65625" PointY="26.943365384615383" />
+          <ConnectorPoint PointX="2.65625" PointY="22.728079191569009" />
+          <ConnectorPoint PointX="2.6666666666666665" PointY="22.728079191569009" />
+          <ConnectorPoint PointX="2.8802083333333335" PointY="22.728079191569009" />
+          <ConnectorPoint PointX="3" PointY="22.728079191569009" />
+        </AssociationConnector>
+        <AssociationConnector Association="SGSDBModel.Relation_EnsSpeMat_Specialite" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.7511528461538459" PointY="30.75" />
+          <ConnectorPoint PointX="6.3761528461538468" PointY="30.375" />
+          <ConnectorPoint PointX="4.875" PointY="30.375" />
+          <ConnectorPoint PointX="4.875" PointY="25.393697916666667" />
+          <ConnectorPoint PointX="4.5" PointY="25.018697916666667" />
+        </AssociationConnector>
+        <AssociationConnector Association="SGSDBModel.Relation_Note_Etudiant" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="17.172638346354166" />
+          <ConnectorPoint PointX="3" PointY="17.172638346354166" />
+        </AssociationConnector>
+        <AssociationConnector Association="SGSDBModel.Relation_NoteDette_Etudiant" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.2499999999999991" PointY="19.595276692708332" />
+          <ConnectorPoint PointX="2.6074740500854166" PointY="19.95275074279375" />
+          <ConnectorPoint PointX="2.8865690454674704" PointY="20.231845738175803" />
+          <ConnectorPoint PointX="2.9375" PointY="20.282776692708332" />
+          <ConnectorPoint PointX="2.9375" PointY="29.360374220552877" />
+          <ConnectorPoint PointX="3" PointY="29.360374220552877" />
+        </AssociationConnector>
+        <AssociationConnector Association="SGSDBModel.Relation_NoteExamin_Etudiant" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="14.06224609375" />
+          <ConnectorPoint PointX="4.822916666666667" PointY="14.06224609375" />
+          <ConnectorPoint PointX="4.989583333333333" PointY="14.06224609375" />
+          <ConnectorPoint PointX="5.0260441666666669" PointY="14.06224609375" />
+          <ConnectorPoint PointX="5.1927108333333329" PointY="14.06224609375" />
+          <ConnectorPoint PointX="6.34375" PointY="14.06224609375" />
+          <ConnectorPoint PointX="6.34375" PointY="16.5" />
         </AssociationConnector>
         <AssociationConnector Association="SGSDBModel.Relation_ExaminAnneeModeEtude_Examin" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="27.891297200520832" />
-          <ConnectorPoint PointX="4.5885391666666671" PointY="27.891297200520832" />
-          <ConnectorPoint PointX="4.7552058333333331" PointY="27.891297200520832" />
-          <ConnectorPoint PointX="4.84375" PointY="27.891297200520832" />
-          <ConnectorPoint PointX="4.84375" PointY="22.970602213541667" />
+          <ConnectorPoint PointX="4.90625" PointY="12.951396484375" />
+          <ConnectorPoint PointX="4.90625" PointY="21.34375" />
+          <ConnectorPoint PointX="6" PointY="21.34375" />
         </AssociationConnector>
         <AssociationConnector Association="SGSDBModel.Relation_NoteExamin_Examin" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="26.2598317275641" />
-          <ConnectorPoint PointX="3" PointY="26.2598317275641" />
+          <ConnectorPoint PointX="5.1093775" PointY="12.951396484375" />
+          <ConnectorPoint PointX="5.1093775" PointY="20.136455078125003" />
+          <ConnectorPoint PointX="6" PointY="20.136455078125003" />
         </AssociationConnector>
         <AssociationConnector Association="SGSDBModel.Relation_ExaminAnneeModeEtude_ModeEtude" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.75" PointY="28.147298990885417" />
-          <ConnectorPoint PointX="5.0156275" PointY="28.147298990885417" />
-          <ConnectorPoint PointX="5.0156275" PointY="22.970602213541667" />
+          <ConnectorPoint PointX="8.2257692307692309" PointY="9.0283007812500031" />
+          <ConnectorPoint PointX="8.625" PointY="9.4275315504807722" />
+          <ConnectorPoint PointX="8.625" PointY="20.625" />
+          <ConnectorPoint PointX="8.1261528461538433" PointY="20.625" />
+          <ConnectorPoint PointX="8.1058005650988783" PointY="20.645352281054965" />
+          <ConnectorPoint PointX="7.9879494349011209" PointY="20.763203411252722" />
+          <ConnectorPoint PointX="7.5" PointY="21.251152846153843" />
         </AssociationConnector>
         <AssociationConnector Association="SGSDBModel.Relation_ExaminAnneeModeEtude_Specilite" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.75" PointY="31.874705403645834" />
-          <ConnectorPoint PointX="4.6718725" PointY="31.874705403645834" />
-          <ConnectorPoint PointX="4.6718725" PointY="22.970602213541667" />
+          <ConnectorPoint PointX="7.7734375" PointY="30.75" />
+          <ConnectorPoint PointX="7.7734375" PointY="23.329630029847749" />
+          <ConnectorPoint PointX="7.5" PointY="23.329630029847749" />
         </AssociationConnector>
         <AssociationConnector Association="SGSDBModel.Relation_Groupe_Section" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.75" PointY="14" />
-          <ConnectorPoint PointX="6.75" PointY="8.6247460937500016" />
-          <ConnectorPoint PointX="7.791666666666667" PointY="8.6247460937500016" />
-          <ConnectorPoint PointX="7.958333333333333" PointY="8.6247460937500016" />
-          <ConnectorPoint PointX="8.25" PointY="8.6247460937500016" />
+          <ConnectorPoint PointX="7.5" PointY="28.470896809895834" />
+          <ConnectorPoint PointX="7.690104166666667" PointY="28.470896809895834" />
+          <ConnectorPoint PointX="7.856770833333333" PointY="28.470896809895834" />
+          <ConnectorPoint PointX="7.963541666666667" PointY="28.470896809895834" />
+          <ConnectorPoint PointX="8.1302083333333339" PointY="28.470896809895834" />
+          <ConnectorPoint PointX="8.25" PointY="28.470896809895834" />
         </AssociationConnector>
         <AssociationConnector Association="SGSDBModel.Relation_Note_Matiere" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="17.02212089503205" />
-          <ConnectorPoint PointX="2.78125" PointY="17.55337089503205" />
-          <ConnectorPoint PointX="2.78125" PointY="17.75" />
-          <ConnectorPoint PointX="3.0260391666666666" PointY="17.75" />
-          <ConnectorPoint PointX="3.1927058333333336" PointY="17.75" />
-          <ConnectorPoint PointX="3.1979166666666665" PointY="17.75" />
-          <ConnectorPoint PointX="3.3645833333333335" PointY="17.75" />
-          <ConnectorPoint PointX="5.6261528461538468" PointY="17.75" />
-          <ConnectorPoint PointX="6.0011528461538459" PointY="18.125" />
+          <ConnectorPoint PointX="2.2003846153846149" PointY="27.375" />
+          <ConnectorPoint PointX="2.5348244349011204" PointY="27.040560180483492" />
+          <ConnectorPoint PointX="2.6995505650988787" PointY="26.875834050285736" />
+          <ConnectorPoint PointX="2.796875" PointY="26.778509615384614" />
+          <ConnectorPoint PointX="2.796875" PointY="18.61727657682291" />
+          <ConnectorPoint PointX="3" PointY="18.61727657682291" />
         </AssociationConnector>
         <AssociationConnector Association="SGSDBModel.Relation_NoteDette_Matiere" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="14.599433829742143" />
-          <ConnectorPoint PointX="2.7760416666666665" PointY="14.599433829742143" />
-          <ConnectorPoint PointX="2.9427083333333335" PointY="14.599433829742143" />
-          <ConnectorPoint PointX="3" PointY="14.599433829742143" />
+          <ConnectorPoint PointX="2.25" PointY="30.809693946213937" />
+          <ConnectorPoint PointX="2.7916666666666665" PointY="30.809693946213937" />
+          <ConnectorPoint PointX="2.9583333333333335" PointY="30.809693946213937" />
+          <ConnectorPoint PointX="3" PointY="30.809693946213937" />
         </AssociationConnector>
         <AssociationConnector Association="SGSDBModel.Relation_NoteExamin_Matiere" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="17.04058243349359" />
-          <ConnectorPoint PointX="2.71875" PointY="17.50933243349359" />
-          <ConnectorPoint PointX="2.71875" PointY="25.634348958333334" />
-          <ConnectorPoint PointX="3" PointY="25.634348958333334" />
+          <ConnectorPoint PointX="2.2488461538461535" PointY="27.375" />
+          <ConnectorPoint PointX="2.6875" PointY="26.936346153846152" />
+          <ConnectorPoint PointX="2.6875" PointY="20.710999348958339" />
+          <ConnectorPoint PointX="2.7135416666666665" PointY="20.710999348958339" />
+          <ConnectorPoint PointX="3.0208333333333335" PointY="20.710999348958339" />
+          <ConnectorPoint PointX="4.822916666666667" PointY="20.710999348958339" />
+          <ConnectorPoint PointX="4.989583333333333" PointY="20.710999348958339" />
+          <ConnectorPoint PointX="5.52653746153846" PointY="20.710999348958339" />
+          <ConnectorPoint PointX="6.0265374615384619" PointY="20.210999348958339" />
         </AssociationConnector>
         <AssociationConnector Association="SGSDBModel.Relation_SpeciliteMatiere_Matiere" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.5" PointY="12.375" />
-          <ConnectorPoint PointX="1.5" PointY="11.65625" />
-          <ConnectorPoint PointX="2.7760416666666665" PointY="11.65625" />
-          <ConnectorPoint PointX="2.9427083333333335" PointY="11.65625" />
-          <ConnectorPoint PointX="6.666666666666667" PointY="11.65625" />
-          <ConnectorPoint PointX="6.833333333333333" PointY="11.65625" />
-          <ConnectorPoint PointX="7.791666666666667" PointY="11.65625" />
-          <ConnectorPoint PointX="7.958333333333333" PointY="11.65625" />
-          <ConnectorPoint PointX="9" PointY="11.65625" />
+          <ConnectorPoint PointX="2.25" PointY="27.414229769230765" />
+          <ConnectorPoint PointX="2.640625" PointY="27.023604769230765" />
+          <ConnectorPoint PointX="2.640625" PointY="20.965719401041667" />
+          <ConnectorPoint PointX="2.7135416666666665" PointY="20.965719401041667" />
+          <ConnectorPoint PointX="3.0208333333333335" PointY="20.965719401041667" />
+          <ConnectorPoint PointX="4.822916666666667" PointY="20.965719401041667" />
+          <ConnectorPoint PointX="4.989583333333333" PointY="20.965719401041667" />
+          <ConnectorPoint PointX="7.7021001117788428" PointY="20.965719401041667" />
+          <ConnectorPoint PointX="7.8687667784455089" PointY="20.965719401041667" />
+          <ConnectorPoint PointX="7.963541666666667" PointY="20.965719401041667" />
+          <ConnectorPoint PointX="8.1302083333333339" PointY="20.965719401041667" />
+          <ConnectorPoint PointX="8.5878836153846159" PointY="20.965719401041667" />
+          <ConnectorPoint PointX="8.72232443490112" PointY="20.831278581525162" />
+          <ConnectorPoint PointX="8.8401755650988783" PointY="20.713427451327405" />
+          <ConnectorPoint PointX="9.0253836153846159" PointY="20.528219401041667" />
         </AssociationConnector>
         <AssociationConnector Association="SGSDBModel.Relation_SpecialiteAnneeModeEtude_ModeEtude" ManuallyRouted="false">
-          <ConnectorPoint PointX="8.25" PointY="26.451650390625" />
-          <ConnectorPoint PointX="8.6354166666666661" PointY="26.451650390625" />
-          <ConnectorPoint PointX="8.8958333333333339" PointY="26.451650390625" />
-          <ConnectorPoint PointX="9.3437475" PointY="26.451650390625" />
-          <ConnectorPoint PointX="9.3437475" PointY="22.460999348958339" />
+          <ConnectorPoint PointX="8.25" PointY="8.9717613197115433" />
+          <ConnectorPoint PointX="8.78125" PointY="9.5030113197115433" />
+          <ConnectorPoint PointX="8.78125" PointY="23.355499674479169" />
+          <ConnectorPoint PointX="9" PointY="23.355499674479169" />
         </AssociationConnector>
         <AssociationConnector Association="SGSDBModel.Relation_SpecialiteMatiere_ModeEtude" ManuallyRouted="false">
-          <ConnectorPoint PointX="8.0625" PointY="24.5" />
-          <ConnectorPoint PointX="8.0625" PointY="12.78354086751302" />
-          <ConnectorPoint PointX="9" PointY="12.78354086751302" />
+          <ConnectorPoint PointX="8.25" PointY="7.017128159855778" />
+          <ConnectorPoint PointX="9.75" PointY="7.017128159855778" />
+          <ConnectorPoint PointX="9.75" PointY="14.125" />
         </AssociationConnector>
         <AssociationConnector Association="SGSDBModel.Relation_Section_Specialite" ManuallyRouted="false">
-          <ConnectorPoint PointX="8.25" PointY="29.275383615384616" />
-          <ConnectorPoint PointX="8.8125" PointY="28.712883615384612" />
-          <ConnectorPoint PointX="8.8125" PointY="17.701396484375003" />
-          <ConnectorPoint PointX="8.8020833333333339" PointY="17.701396484375003" />
-          <ConnectorPoint PointX="8.6354166666666661" PointY="17.701396484375003" />
-          <ConnectorPoint PointX="8.1458333333333339" PointY="17.701396484375003" />
-          <ConnectorPoint PointX="7.979166666666667" PointY="17.701396484375003" />
-          <ConnectorPoint PointX="7.875" PointY="17.701396484375003" />
-          <ConnectorPoint PointX="7.5" PointY="17.326396484375003" />
+          <ConnectorPoint PointX="7.1568289230769224" PointY="30.75" />
+          <ConnectorPoint PointX="7.1568289230769224" PointY="29.951396484375003" />
         </AssociationConnector>
         <AssociationConnector Association="SGSDBModel.Relation_SpeciliteAnneeModeEtude_Specilite" ManuallyRouted="false">
-          <ConnectorPoint PointX="8.25" PointY="31.937111249799671" />
-          <ConnectorPoint PointX="10.1562525" PointY="31.937111249799671" />
-          <ConnectorPoint PointX="10.1562525" PointY="22.460999348958339" />
+          <ConnectorPoint PointX="8.25" PointY="33.470856119791662" />
+          <ConnectorPoint PointX="10.125" PointY="33.470856119791662" />
+          <ConnectorPoint PointX="10.125" PointY="25.210999348958339" />
         </AssociationConnector>
         <AssociationConnector Association="SGSDBModel.Relation_SpeciliteMatiere_Specialite" ManuallyRouted="false">
-          <ConnectorPoint PointX="8.25" PointY="29.256922076923075" />
-          <ConnectorPoint PointX="8.71875" PointY="28.788172076923075" />
-          <ConnectorPoint PointX="8.71875" PointY="15.770024487304683" />
-          <ConnectorPoint PointX="9" PointY="15.770024487304683" />
+          <ConnectorPoint PointX="8.046875" PointY="30.75" />
+          <ConnectorPoint PointX="8.046875" PointY="15.890627499999994" />
+          <ConnectorPoint PointX="8.5416666666666661" PointY="15.890627499999992" />
+          <ConnectorPoint PointX="8.8645833333333339" PointY="15.890627499999994" />
+          <ConnectorPoint PointX="9" PointY="15.890627499999994" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="SGSDBModel.ENS_SPEMAT" Width="1.5" PointX="12" PointY="17.375" Height="3.5186979166666674" />
-        <AssociationConnector Association="SGSDBModel.Relation_EnsSpeMat_Annee" >
-          <ConnectorPoint PointX="2.25" PointY="17.990670950520833" />
-          <ConnectorPoint PointX="2.6354166666666665" PointY="17.990670950520833" />
-          <ConnectorPoint PointX="2.8020833333333335" PointY="17.990670950520833" />
-          <ConnectorPoint PointX="3.0260391666666666" PointY="17.990670950520833" />
-          <ConnectorPoint PointX="3.1927058333333336" PointY="17.990670950520833" />
-          <ConnectorPoint PointX="3.1979166666666665" PointY="17.990670950520833" />
-          <ConnectorPoint PointX="3.3645833333333335" PointY="17.990670950520833" />
-          <ConnectorPoint PointX="5.7834904633413471" PointY="17.990670950520833" />
-          <ConnectorPoint PointX="5.9501571300080132" PointY="17.990670950520833" />
-          <ConnectorPoint PointX="7.979166666666667" PointY="17.990670950520833" />
-          <ConnectorPoint PointX="8.1458333333333339" PointY="17.990670950520833" />
-          <ConnectorPoint PointX="8.4166666666666661" PointY="17.990670950520833" />
-          <ConnectorPoint PointX="8.5833333333333339" PointY="17.990670950520833" />
-          <ConnectorPoint PointX="8.6354166666666661" PointY="17.990670950520833" />
-          <ConnectorPoint PointX="8.8958333333333339" PointY="17.990670950520833" />
-          <ConnectorPoint PointX="12" PointY="17.990670950520833" />
+        <EntityTypeShape EntityType="SGSDBModel.USERS_SPECIALITES" Width="1.5" PointX="10.5" PointY="26.375" Height="3.7109993489583317" />
+        <AssociationConnector Association="SGSDBModel.Relation_UserSpecialite_Annee" >
+          <ConnectorPoint PointX="2.25" PointY="25.741880640424679" />
+          <ConnectorPoint PointX="2.5572916666666665" PointY="25.741880640424679" />
+          <ConnectorPoint PointX="3.0208333333333335" PointY="25.741880640424679" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="25.741880640424679" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="25.741880640424679" />
+          <ConnectorPoint PointX="6.666666666666667" PointY="25.741880640424679" />
+          <ConnectorPoint PointX="6.833333333333333" PointY="25.741880640424679" />
+          <ConnectorPoint PointX="7.690104166666667" PointY="25.741880640424679" />
+          <ConnectorPoint PointX="7.856770833333333" PointY="25.741880640424679" />
+          <ConnectorPoint PointX="7.963541666666667" PointY="25.741880640424679" />
+          <ConnectorPoint PointX="8.1302083333333339" PointY="25.741880640424679" />
+          <ConnectorPoint PointX="9.4635391666666653" PointY="25.741880640424679" />
+          <ConnectorPoint PointX="9.6302058333333331" PointY="25.741880640424679" />
+          <ConnectorPoint PointX="10.041666666666666" PointY="25.741880640424679" />
+          <ConnectorPoint PointX="10.208333333333334" PointY="25.741880640424679" />
+          <ConnectorPoint PointX="11.28125" PointY="25.741880640424679" />
+          <ConnectorPoint PointX="11.28125" PointY="26.375" />
         </AssociationConnector>
-        <AssociationConnector Association="SGSDBModel.Relation_EnsSpeMat_Enseigant" >
-          <ConnectorPoint PointX="2.859375" PointY="8.230205078125" />
-          <ConnectorPoint PointX="2.859375" PointY="18.021923450520827" />
-          <ConnectorPoint PointX="3.0260391666666666" PointY="18.021923450520827" />
-          <ConnectorPoint PointX="3.1927058333333336" PointY="18.021923450520827" />
-          <ConnectorPoint PointX="3.1979166666666665" PointY="18.021923450520827" />
-          <ConnectorPoint PointX="3.3645833333333335" PointY="18.021923450520827" />
-          <ConnectorPoint PointX="5.8147429633413408" PointY="18.021923450520827" />
-          <ConnectorPoint PointX="5.9814096300080069" PointY="18.021923450520827" />
-          <ConnectorPoint PointX="7.979166666666667" PointY="18.021923450520827" />
-          <ConnectorPoint PointX="8.1458333333333339" PointY="18.021923450520827" />
-          <ConnectorPoint PointX="8.4166666666666661" PointY="18.021923450520827" />
-          <ConnectorPoint PointX="8.5833333333333339" PointY="18.021923450520827" />
-          <ConnectorPoint PointX="8.6354166666666661" PointY="18.021923450520827" />
-          <ConnectorPoint PointX="8.8958333333333339" PointY="18.021923450520827" />
-          <ConnectorPoint PointX="12" PointY="18.021923450520827" />
+        <AssociationConnector Association="SGSDBModel.Relation_UserSpecialite_Groupe" >
+          <ConnectorPoint PointX="9.75" PointY="28.470896809895834" />
+          <ConnectorPoint PointX="10.041666666666666" PointY="28.470896809895834" />
+          <ConnectorPoint PointX="10.208333333333334" PointY="28.470896809895834" />
+          <ConnectorPoint PointX="10.5" PointY="28.470896809895834" />
         </AssociationConnector>
-        <AssociationConnector Association="SGSDBModel.Relation_EnsSpeMat_Matiere" >
-          <ConnectorPoint PointX="1.8749995" PointY="17.047506510416667" />
-          <ConnectorPoint PointX="1.8749995" PointY="17.625" />
-          <ConnectorPoint PointX="2.4178195128205098" PointY="17.625" />
-          <ConnectorPoint PointX="2.5844861794871767" PointY="17.625" />
-          <ConnectorPoint PointX="2.6354166666666665" PointY="17.625" />
-          <ConnectorPoint PointX="2.9427083333333335" PointY="17.625" />
-          <ConnectorPoint PointX="3.0260391666666666" PointY="17.625" />
-          <ConnectorPoint PointX="3.1927058333333336" PointY="17.625" />
-          <ConnectorPoint PointX="3.1979166666666665" PointY="17.625" />
-          <ConnectorPoint PointX="3.3645833333333335" PointY="17.625" />
-          <ConnectorPoint PointX="5.6192159971955169" PointY="17.625" />
-          <ConnectorPoint PointX="5.785882663862183" PointY="17.625" />
-          <ConnectorPoint PointX="7.7152701822916638" PointY="17.625" />
-          <ConnectorPoint PointX="7.88193684895833" PointY="17.625" />
-          <ConnectorPoint PointX="7.979166666666667" PointY="17.625" />
-          <ConnectorPoint PointX="8.1458333333333339" PointY="17.625" />
-          <ConnectorPoint PointX="8.5" PointY="17.625" />
-          <ConnectorPoint PointX="8.5" PointY="18.5" />
-          <ConnectorPoint PointX="8.6354166666666661" PointY="18.5" />
-          <ConnectorPoint PointX="8.8958333333333339" PointY="18.5" />
-          <ConnectorPoint PointX="11.625" PointY="18.5" />
-          <ConnectorPoint PointX="11.625" PointY="19.48906268359374" />
-          <ConnectorPoint PointX="12" PointY="19.48906268359374" />
+        <AssociationConnector Association="SGSDBModel.Relation_UserSpecialite_Matiere" >
+          <ConnectorPoint PointX="2.25" PointY="27.423460538461537" />
+          <ConnectorPoint PointX="2.59375" PointY="27.079710538461537" />
+          <ConnectorPoint PointX="2.59375" PointY="26" />
+          <ConnectorPoint PointX="2.6041666666666665" PointY="26" />
+          <ConnectorPoint PointX="3.0208333333333335" PointY="26" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="26" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="26" />
+          <ConnectorPoint PointX="6.666666666666667" PointY="26" />
+          <ConnectorPoint PointX="6.833333333333333" PointY="26" />
+          <ConnectorPoint PointX="7.690104166666667" PointY="26" />
+          <ConnectorPoint PointX="7.856770833333333" PointY="26" />
+          <ConnectorPoint PointX="7.963541666666667" PointY="26" />
+          <ConnectorPoint PointX="8.1302083333333339" PointY="26" />
+          <ConnectorPoint PointX="10.125" PointY="26" />
+          <ConnectorPoint PointX="10.5" PointY="26.375" />
         </AssociationConnector>
-        <AssociationConnector Association="SGSDBModel.Relation_EnsSpeMat_Specialite" >
-          <ConnectorPoint PointX="8.25" PointY="30.606247432592141" />
-          <ConnectorPoint PointX="10.072919166666667" PointY="30.606247432592141" />
-          <ConnectorPoint PointX="10.239585833333335" PointY="30.606247432592141" />
-          <ConnectorPoint PointX="12.75" PointY="30.606247432592141" />
-          <ConnectorPoint PointX="12.75" PointY="20.893697916666667" />
+        <AssociationConnector Association="SGSDBModel.Relation_UserSpecialite_Specialite" >
+          <ConnectorPoint PointX="8.25" PointY="32.079175559895837" />
+          <ConnectorPoint PointX="10.041666666666666" PointY="32.079175559895837" />
+          <ConnectorPoint PointX="10.208333333333334" PointY="32.079175559895837" />
+          <ConnectorPoint PointX="11.25" PointY="32.079175559895837" />
+          <ConnectorPoint PointX="11.25" PointY="30.085999348958332" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>
