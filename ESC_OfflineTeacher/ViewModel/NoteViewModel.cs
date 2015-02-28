@@ -11,6 +11,8 @@ using System.Windows.Input;
 using ESC_OfflineTeacher.Model;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Microsoft.Synchronization.Data;
+using Microsoft.Synchronization.Data.SqlServerCe;
 using OfflineTeacher_DBProject;
 
 
@@ -527,9 +529,40 @@ namespace ESC_OfflineTeacher.ViewModel
                         //    CurrentYear = context.ANNEES.Max(x => x.ANNEE_UNIVERSITAIRE).ToString(CultureInfo.InvariantCulture);
 
                         //}
+                        ESCLocalDbSyncAgent agent = new ESCLocalDbSyncAgent();
+                        agent.LocalProvider = new ESCLocalDbClientSyncProvider();
+                        agent.RemoteProvider = new ESCLocalDbServerSyncProvider();
+                        agent.SessionProgress += new EventHandler<Microsoft.Synchronization.SessionProgressEventArgs>(agent_SessionProgress);
+                        ((ESCLocalDbClientSyncProvider)agent.LocalProvider).ApplyChangeFailed += new EventHandler<Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs>(Local_ApplyChangeFailed);
+                        ((ESCLocalDbServerSyncProvider)agent.RemoteProvider).ApplyChangeFailed += new EventHandler<Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs>(Remote_ApplyChangeFailed);
+
+                        agent.Synchronize();
+                        //var syncHelper = new SyncHelper();
+
+                        //syncHelper.Agent.SessionProgress += new EventHandler<Microsoft.Synchronization.SessionProgressEventArgs>(agent_SessionProgress);
+                        //((ESCLocalDbClientSyncProvider)syncHelper.Agent.LocalProvider).ApplyChangeFailed += new EventHandler<Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs>(Local_ApplyChangeFailed);
+                        //((ESCLocalDbServerSyncProvider)syncHelper.Agent.RemoteProvider).ApplyChangeFailed += new EventHandler<Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs>(Remote_ApplyChangeFailed);
+
+                        //syncHelper.Sync();
+                         
+                         
 
                     }));
             }
+        }
+        static void agent_SessionProgress(object sender, Microsoft.Synchronization.SessionProgressEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        static void Local_ApplyChangeFailed(object sender, Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        static void Remote_ApplyChangeFailed(object sender, Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
         private RelayCommand _noteViewLoadedCommand;
         public RelayCommand NoteViewLoadedCommand
@@ -563,18 +596,14 @@ namespace ESC_OfflineTeacher.ViewModel
                         var cy = int.Parse(CurrentYear);
                         foreach (var etudiantNote in ListNotesExamins)
                         {
-                            _context.NOTES_EXAMEN.Where(
-                                x =>
-                                    x.ID_ETUDIANT == etudiantNote.IdEtudiant && x.ANNEE_UNIVERSITAIRE == cy &&
-                                    x.ID_MATIERE == SelectedMatiere.ID_MATIERE && x.ID_EXAMEN==_selectedExamen.ID_EXAMEN).First().NOTE =
+                            _context.NOTES_EXAMEN.First(x => x.ID_ETUDIANT == etudiantNote.IdEtudiant && x.ANNEE_UNIVERSITAIRE == cy &&
+                                                             x.ID_MATIERE == SelectedMatiere.ID_MATIERE && x.ID_EXAMEN==_selectedExamen.ID_EXAMEN).NOTE =
                                 etudiantNote.Note;
                         }
                         foreach (var etudiantNoteDette in ListNotesDettes)
                         {
-                            var n = _context.NOTE_DETTE.Where(
-                                x =>
-                                    x.ID_ETUDIANT == etudiantNoteDette.IdEtudiant && x.ANNEE_PASSAGE_DETTE == cy &&
-                                    x.ID_MATIERE == SelectedMatiere.ID_MATIERE).First();
+                            var n = _context.NOTE_DETTE.First(x => x.ID_ETUDIANT == etudiantNoteDette.IdEtudiant && x.ANNEE_PASSAGE_DETTE == cy &&
+                                                                   x.ID_MATIERE == SelectedMatiere.ID_MATIERE);
                             n.NOTE = etudiantNoteDette.Note;
                             n.NOTE_RATTRAPAGE = etudiantNoteDette.NoteRattrapage;
                         }
