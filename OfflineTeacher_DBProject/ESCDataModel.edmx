@@ -4,30 +4,30 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SGSDBModel.Store" Alias="Self" Provider="System.Data.SqlServerCe.3.5" ProviderManifestToken="3.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="SGSDBModel.Store" Alias="Self" Provider="System.Data.SqlServerCe.3.5" ProviderManifestToken="3.5" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="SGSDBModelStoreContainer">
-          <EntitySet Name="__syncArticles" EntityType="SGSDBModel.Store.__syncArticles" store:Type="Tables" />
-          <EntitySet Name="__syncSubscriptions" EntityType="SGSDBModel.Store.__syncSubscriptions" store:Type="Tables" />
-          <EntitySet Name="__syncTransactions" EntityType="SGSDBModel.Store.__syncTransactions" store:Type="Tables" />
-          <EntitySet Name="ANNEES" EntityType="SGSDBModel.Store.ANNEES" store:Type="Tables" />
-          <EntitySet Name="CATEGORIES" EntityType="SGSDBModel.Store.CATEGORIES" store:Type="Tables" />
-          <EntitySet Name="ENS_SPEMAT" EntityType="SGSDBModel.Store.ENS_SPEMAT" store:Type="Tables" />
-          <EntitySet Name="ENSEIGNANTS" EntityType="SGSDBModel.Store.ENSEIGNANTS" store:Type="Tables" />
-          <EntitySet Name="ETUDES" EntityType="SGSDBModel.Store.ETUDES" store:Type="Tables" />
-          <EntitySet Name="ETUDIANTS" EntityType="SGSDBModel.Store.ETUDIANTS" store:Type="Tables" />
-          <EntitySet Name="EXAMENS" EntityType="SGSDBModel.Store.EXAMENS" store:Type="Tables" />
-          <EntitySet Name="EXAMENS_ANNEES_MODES_ETUDES" EntityType="SGSDBModel.Store.EXAMENS_ANNEES_MODES_ETUDES" store:Type="Tables" />
-          <EntitySet Name="GROUPES" EntityType="SGSDBModel.Store.GROUPES" store:Type="Tables" />
-          <EntitySet Name="MATIERES" EntityType="SGSDBModel.Store.MATIERES" store:Type="Tables" />
-          <EntitySet Name="MODES_ETUDES" EntityType="SGSDBModel.Store.MODES_ETUDES" store:Type="Tables" />
-          <EntitySet Name="NOTE" EntityType="SGSDBModel.Store.NOTE" store:Type="Tables" />
-          <EntitySet Name="NOTE_DETTE" EntityType="SGSDBModel.Store.NOTE_DETTE" store:Type="Tables" />
-          <EntitySet Name="NOTES_EXAMEN" EntityType="SGSDBModel.Store.NOTES_EXAMEN" store:Type="Tables" />
-          <EntitySet Name="SECTIONS" EntityType="SGSDBModel.Store.SECTIONS" store:Type="Tables" />
-          <EntitySet Name="SPECIALITES" EntityType="SGSDBModel.Store.SPECIALITES" store:Type="Tables" />
-          <EntitySet Name="SPECIALITES_ANNEES_MODES_ETUDES" EntityType="SGSDBModel.Store.SPECIALITES_ANNEES_MODES_ETUDES" store:Type="Tables" />
-          <EntitySet Name="SPECIALITES_MATIERES" EntityType="SGSDBModel.Store.SPECIALITES_MATIERES" store:Type="Tables" />
-          <EntitySet Name="USERS_SPECIALITES" EntityType="SGSDBModel.Store.USERS_SPECIALITES" store:Type="Tables" />
+          <EntitySet Name="__syncArticles" EntityType="SGSDBModel.Store.__syncArticles" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="__syncSubscriptions" EntityType="SGSDBModel.Store.__syncSubscriptions" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="__syncTransactions" EntityType="SGSDBModel.Store.__syncTransactions" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="ANNEES" EntityType="SGSDBModel.Store.ANNEES" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="CATEGORIES" EntityType="SGSDBModel.Store.CATEGORIES" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="ENS_SPEMAT" EntityType="SGSDBModel.Store.ENS_SPEMAT" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="ENSEIGNANTS" EntityType="SGSDBModel.Store.ENSEIGNANTS" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="ETUDES" EntityType="SGSDBModel.Store.ETUDES" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="ETUDIANTS" EntityType="SGSDBModel.Store.ETUDIANTS" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="EXAMENS" EntityType="SGSDBModel.Store.EXAMENS" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="EXAMENS_ANNEES_MODES_ETUDES" EntityType="SGSDBModel.Store.EXAMENS_ANNEES_MODES_ETUDES" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="GROUPES" EntityType="SGSDBModel.Store.GROUPES" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="MATIERES" EntityType="SGSDBModel.Store.MATIERES" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="MODES_ETUDES" EntityType="SGSDBModel.Store.MODES_ETUDES" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="NOTE" EntityType="SGSDBModel.Store.NOTE" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="NOTE_DETTE" EntityType="SGSDBModel.Store.NOTE_DETTE" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="NOTES_EXAMEN" EntityType="SGSDBModel.Store.NOTES_EXAMEN" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SECTIONS" EntityType="SGSDBModel.Store.SECTIONS" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SPECIALITES" EntityType="SGSDBModel.Store.SPECIALITES" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SPECIALITES_ANNEES_MODES_ETUDES" EntityType="SGSDBModel.Store.SPECIALITES_ANNEES_MODES_ETUDES" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SPECIALITES_MATIERES" EntityType="SGSDBModel.Store.SPECIALITES_MATIERES" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="USERS_SPECIALITES" EntityType="SGSDBModel.Store.USERS_SPECIALITES" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
           <AssociationSet Name="__syncArticles_FK" Association="SGSDBModel.Store.__syncArticles_FK">
             <End Role="__syncSubscriptions" EntitySet="__syncSubscriptions" />
             <End Role="__syncArticles" EntitySet="__syncArticles" />
@@ -1134,7 +1134,7 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="SGSDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <Schema Namespace="SGSDBModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
         <EntityContainer Name="LocalDbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__syncArticles" EntityType="SGSDBModel.C__syncArticles" />
           <EntitySet Name="C__syncSubscriptions" EntityType="SGSDBModel.C__syncSubscriptions" />
@@ -3110,7 +3110,7 @@
           <ConnectorPoint PointX="9" PointY="15.890627499999994" />
         </AssociationConnector>
         <EntityTypeShape EntityType="SGSDBModel.USERS_SPECIALITES" Width="1.5" PointX="10.5" PointY="26.375" Height="3.7109993489583317" />
-        <AssociationConnector Association="SGSDBModel.Relation_UserSpecialite_Annee" >
+        <AssociationConnector Association="SGSDBModel.Relation_UserSpecialite_Annee">
           <ConnectorPoint PointX="2.25" PointY="25.797801106770834" />
           <ConnectorPoint PointX="2.5416666666666665" PointY="25.797801106770834" />
           <ConnectorPoint PointX="2.8645833333333335" PointY="25.797801106770834" />
@@ -3131,13 +3131,13 @@
           <ConnectorPoint PointX="11" PointY="25.797801106770834" />
           <ConnectorPoint PointX="11" PointY="26.375" />
         </AssociationConnector>
-        <AssociationConnector Association="SGSDBModel.Relation_UserSpecialite_Groupe" >
+        <AssociationConnector Association="SGSDBModel.Relation_UserSpecialite_Groupe">
           <ConnectorPoint PointX="9.75" PointY="28.542999674479166" />
           <ConnectorPoint PointX="10.041666666666666" PointY="28.542999674479166" />
           <ConnectorPoint PointX="10.208333333333334" PointY="28.542999674479166" />
           <ConnectorPoint PointX="10.5" PointY="28.542999674479166" />
         </AssociationConnector>
-        <AssociationConnector Association="SGSDBModel.Relation_UserSpecialite_Matiere" >
+        <AssociationConnector Association="SGSDBModel.Relation_UserSpecialite_Matiere">
           <ConnectorPoint PointX="2.25" PointY="27.430383615384613" />
           <ConnectorPoint PointX="2.5078125" PointY="27.172571115384613" />
           <ConnectorPoint PointX="2.5078125" PointY="26" />
@@ -3158,7 +3158,7 @@
           <ConnectorPoint PointX="10.125" PointY="26" />
           <ConnectorPoint PointX="10.5" PointY="26.375" />
         </AssociationConnector>
-        <AssociationConnector Association="SGSDBModel.Relation_UserSpecialite_Specialite" >
+        <AssociationConnector Association="SGSDBModel.Relation_UserSpecialite_Specialite">
           <ConnectorPoint PointX="8.25" PointY="32.5426182804362" />
           <ConnectorPoint PointX="10.041666666666666" PointY="32.5426182804362" />
           <ConnectorPoint PointX="10.208333333333334" PointY="32.5426182804362" />
@@ -3166,7 +3166,7 @@
           <ConnectorPoint PointX="11.25" PointY="30.085999348958332" />
         </AssociationConnector>
         <EntityTypeShape EntityType="SGSDBModel.ETUDE" Width="1.5" PointX="11.5" PointY="17.125" Height="7.5570279947916674" />
-        <AssociationConnector Association="SGSDBModel.Relation_Etude_Annee" >
+        <AssociationConnector Association="SGSDBModel.Relation_Etude_Annee">
           <ConnectorPoint PointX="2.25" PointY="21.139109700520834" />
           <ConnectorPoint PointX="2.5572916666666665" PointY="21.139109700520834" />
           <ConnectorPoint PointX="2.8645833333333335" PointY="21.139109700520834" />
@@ -3182,7 +3182,7 @@
           <ConnectorPoint PointX="8.8645833333333339" PointY="21.139109700520834" />
           <ConnectorPoint PointX="11.5" PointY="21.139109700520834" />
         </AssociationConnector>
-        <AssociationConnector Association="SGSDBModel.Relation_Etude_Etudiant" >
+        <AssociationConnector Association="SGSDBModel.Relation_Etude_Etudiant">
           <ConnectorPoint PointX="2.25" PointY="13.718366640625007" />
           <ConnectorPoint PointX="4.822916666666667" PointY="13.718366640625007" />
           <ConnectorPoint PointX="4.989583333333333" PointY="13.718366640625007" />
@@ -3197,14 +3197,14 @@
           <ConnectorPoint PointX="12.25" PointY="13.718366640625007" />
           <ConnectorPoint PointX="12.25" PointY="17.125" />
         </AssociationConnector>
-        <AssociationConnector Association="SGSDBModel.Relation_Etude_Groupe" >
+        <AssociationConnector Association="SGSDBModel.Relation_Etude_Groupe">
           <ConnectorPoint PointX="8.4375" PointY="27" />
           <ConnectorPoint PointX="8.4375" PointY="20.774285841048318" />
           <ConnectorPoint PointX="8.6463694574292465" PointY="20.774285841048318" />
           <ConnectorPoint PointX="8.8645833333333339" PointY="20.774285841048318" />
           <ConnectorPoint PointX="11.5" PointY="20.774285841048318" />
         </AssociationConnector>
-        <AssociationConnector Association="SGSDBModel.Relation_Etude_Section" >
+        <AssociationConnector Association="SGSDBModel.Relation_Etude_Section">
           <ConnectorPoint PointX="7.5" PointY="26.626152846153843" />
           <ConnectorPoint PointX="7.577790684901121" PointY="26.548362161252722" />
           <ConnectorPoint PointX="7.6956418150988792" PointY="26.430511031054966" />
@@ -3220,7 +3220,7 @@
           <ConnectorPoint PointX="8.8645833333333339" PointY="21.319557350260411" />
           <ConnectorPoint PointX="11.5" PointY="21.319557350260411" />
         </AssociationConnector>
-        <AssociationConnector Association="SGSDBModel.Relation_Etude_Specialite" >
+        <AssociationConnector Association="SGSDBModel.Relation_Etude_Specialite">
           <ConnectorPoint PointX="7.63671625" PointY="30.75" />
           <ConnectorPoint PointX="7.63671625" PointY="21.021162050781257" />
           <ConnectorPoint PointX="7.6466574620392533" PointY="21.021162050781257" />
