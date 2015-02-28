@@ -551,6 +551,32 @@ namespace ESC_OfflineTeacher.ViewModel
                     }));
             }
         }
+        private RelayCommand _saveCommand;
+        public RelayCommand SaveCommand
+        {
+            get
+            {
+                return _saveCommand
+                    ?? (_saveCommand = new RelayCommand(
+                    () =>
+                    {
+                        _context.SaveChanges();
+                    }));
+            }
+        }
+        private RelayCommand _cancelCommand;
+        public RelayCommand CancelCommand
+        {
+            get
+            {
+                return _cancelCommand
+                    ?? (_cancelCommand = new RelayCommand(
+                    () =>
+                    {
+                        
+                    }));
+            }
+        }
         #endregion
         #region Ctors and Methods
         public NoteViewModel(IFrameNavigationService navigationService)
