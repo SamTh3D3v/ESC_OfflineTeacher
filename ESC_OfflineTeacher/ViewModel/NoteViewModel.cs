@@ -53,10 +53,10 @@ namespace ESC_OfflineTeacher.ViewModel
         private IEnumerable<GROUPE> _allGroupesList;
         private IEnumerable<SECTION> _allSectionsList;
 
-        private ObservableCollection<String> _listExaminDette  ;
+        private ObservableCollection<String> _listExaminDette;
 
-      
-        
+
+
         #endregion
         #region Properties
         public string CurrentYear
@@ -560,6 +560,24 @@ namespace ESC_OfflineTeacher.ViewModel
                     ?? (_saveCommand = new RelayCommand(
                     () =>
                     {
+                        var cy = int.Parse(CurrentYear);
+                        foreach (var etudiantNote in ListNotesExamins)
+                        {
+                            _context.NOTES_EXAMEN.Where(
+                                x =>
+                                    x.ID_ETUDIANT == etudiantNote.IdEtudiant && x.ANNEE_UNIVERSITAIRE == cy &&
+                                    x.ID_MATIERE == SelectedMatiere.ID_MATIERE && x.ID_EXAMEN==_selectedExamen.ID_EXAMEN).First().NOTE =
+                                etudiantNote.Note;
+                        }
+                        foreach (var etudiantNoteDette in ListNotesDettes)
+                        {
+                            var n = _context.NOTE_DETTE.Where(
+                                x =>
+                                    x.ID_ETUDIANT == etudiantNoteDette.IdEtudiant && x.ANNEE_PASSAGE_DETTE == cy &&
+                                    x.ID_MATIERE == SelectedMatiere.ID_MATIERE).First();
+                            n.NOTE = etudiantNoteDette.Note;
+                            n.NOTE_RATTRAPAGE = etudiantNoteDette.NoteRattrapage;
+                        }
                         _context.SaveChanges();
                     }));
             }
@@ -573,7 +591,7 @@ namespace ESC_OfflineTeacher.ViewModel
                     ?? (_cancelCommand = new RelayCommand(
                     () =>
                     {
-                        
+
                     }));
             }
         }
@@ -593,9 +611,9 @@ namespace ESC_OfflineTeacher.ViewModel
             //ESCLocalDbSyncAgent
             //    LocalSGSDBEntities dEntities=new LocalSGSDBEntities();
 
-            ListNotesExamins = new ObservableCollection<EtudiantNote>(); 
-            ListNotesDettes=new ObservableCollection<EtudiantNoteDette>();
-            ListExaminDette=new ObservableCollection<string>()
+            ListNotesExamins = new ObservableCollection<EtudiantNote>();
+            ListNotesDettes = new ObservableCollection<EtudiantNoteDette>();
+            ListExaminDette = new ObservableCollection<string>()
             {
                 "Note",
                 "Rattrapage"
@@ -657,7 +675,7 @@ namespace ESC_OfflineTeacher.ViewModel
         //               results.Stats.DownloadChangesTotal));
         //        }
 
-       
+
 
         private void RefreshNoteStudentList()
         {
@@ -677,16 +695,17 @@ namespace ESC_OfflineTeacher.ViewModel
                                  specialite = etude.ID_SPECIALITE
                              }).Where(x => x.groupe == SelectedGroupe.ID_GROUPE).Select(x => new EtudiantNote()
                              {
+                                 IdEtudiant = x.etudiant.ID_ETUDIANT,
                                  Matricule = x.etudiant.MATRICULE,
                                  Nom = x.etudiant.NOM,
                                  Prenom = x.etudiant.PRENOM,
                                  Note = x.note
-                             }));               
+                             }));
             }
         }
         private void RefreshNoteDetteStudentList()
         {
-            if (SelectedMatiere != null  && SelectedGroupe != null)
+            if (SelectedMatiere != null && SelectedGroupe != null)
             {
                 var cy = int.Parse(CurrentYear);
                 ListNotesDettes =
@@ -696,12 +715,13 @@ namespace ESC_OfflineTeacher.ViewModel
                              {
                                  etudiant = note.ETUDIANT,
                                  note = note.NOTE,
-                                 noteRattrapage=note.NOTE_RATTRAPAGE,
+                                 noteRattrapage = note.NOTE_RATTRAPAGE,
                                  groupe = etude.ID_GROUPE,
                                  Section = etude.ID_SECTION,
                                  specialite = etude.ID_SPECIALITE
                              }).Where(x => x.groupe == SelectedGroupe.ID_GROUPE).Select(x => new EtudiantNoteDette()
                              {
+                                 IdEtudiant = x.etudiant.ID_ETUDIANT,
                                  Matricule = x.etudiant.MATRICULE,
                                  Nom = x.etudiant.NOM,
                                  Prenom = x.etudiant.PRENOM,
