@@ -176,23 +176,23 @@
                     <DataGrid  Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding ListNotesExamins}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Matricule"
-                                    Binding="{Binding Matricule}" />
+                                    Binding="{Binding Matricule}" MinWidth="100" />
                             <DataGridTextColumn Header="Nom"
-                                    Binding="{Binding Nom}" />
+                                    Binding="{Binding Nom}" MinWidth="150"/>
                             <DataGridTextColumn Header="Prenom"
-                                    Binding="{Binding Prenom}" />
-                            <controls:DataGridNumericUpDownColumn Header="EMD1" 
-                                                      Binding="{Binding NoteExamin}" 
-                                                      StringFormat="C" 
-                                                      Minimum="0" />
-                            <controls:DataGridNumericUpDownColumn Header="Participation" 
+                                    Binding="{Binding Prenom}" MinWidth="150"/>
+                            <controls:DataGridNumericUpDownColumn Header="NOTE" 
+                                                      Binding="{Binding Note}" 
+                                                      StringFormat="N" 
+                                                      Minimum="0" Maximum="20" MinWidth="40"/>
+                            <!--<controls:DataGridNumericUpDownColumn Header="Participation" 
                                                       Binding="{Binding NoteParticipation}" 
-                                                      StringFormat="C" 
-                                                      Minimum="0" />
+                                                      StringFormat="N" 
+                                                      Minimum="0" MinWidth="40"/>
                             <controls:DataGridNumericUpDownColumn Header="Rattrapage" 
                                                       Binding="{Binding NoteRattrapage}" 
-                                                      StringFormat="C" 
-                                                      Minimum="0" />
+                                                      StringFormat="N" 
+                                                      Minimum="0" MinWidth="40"/>-->
                         </DataGrid.Columns>
                     </DataGrid>
 
@@ -241,18 +241,22 @@
                         </controls:DropDownButton>
                         <TextBox Grid.Row="0" Text="{Binding SearchText,Mode=TwoWay}" Grid.Column="1" Margin="1" BorderBrush="Black"></TextBox>
                     </Grid>
-                    <DataGrid  Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding ListNotesExamins}">
+                    <DataGrid  Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding ListNotesDettes}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Matricule"
-                                    Binding="{Binding Matricule}" />
+                                    Binding="{Binding Matricule}" MinWidth="100"/>
                             <DataGridTextColumn Header="Nom"
-                                    Binding="{Binding Nom}" />
+                                    Binding="{Binding Nom}" MinWidth="150"/>
                             <DataGridTextColumn Header="Prenom"
-                                    Binding="{Binding Prenom}" />
-                            <controls:DataGridNumericUpDownColumn Header="EMD1" 
-                                                      Binding="{Binding NoteDette}" 
+                                    Binding="{Binding Prenom}" MinWidth="150"/>
+                            <controls:DataGridNumericUpDownColumn Header="NOTE" 
+                                                      Binding="{Binding Note}" 
                                                       StringFormat="N" 
-                                                      Minimum="0" Maximum="20" />
+                                                      Minimum="20"  />
+                            <controls:DataGridNumericUpDownColumn Header="RATTRAPAGE" 
+                                                      Binding="{Binding NoteRattrapage}" 
+                                                      StringFormat="N" 
+                                                      Minimum="20"  />
 
                         </DataGrid.Columns>
                     </DataGrid>

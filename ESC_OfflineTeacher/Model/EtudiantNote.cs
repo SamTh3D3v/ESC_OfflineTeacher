@@ -11,9 +11,14 @@ namespace ESC_OfflineTeacher.Model
         public string Matricule { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }
-        public double? NoteExamin { get; set; }
-        public double NoteRattrapage { get; set; }
-        public double NoteParticipation { get; set; }        
-        public double NoteDette { get; set; }        
+        public double? Note { get; set; }
+        //public double? NoteRattrapage { get; set; }
+        //public double? NoteParticipation { get; set; }        
+        //public double? NoteDette { get; set; }        
+    }
+
+    public class EtudiantNoteDette : EtudiantNote
+    {
+        public double? NoteRattrapage { get; set; }
     }
 }

@@ -20,12 +20,11 @@ namespace ESC_OfflineTeacher.ViewModel
     public class NoteViewModel : ViewModelBase
     {
         #region Consts
-
         #endregion
         #region Fields
         private readonly IFrameNavigationService _navigationService;
         private ObservableCollection<EtudiantNote> _listNotesExamins;
-        private ObservableCollection<EtudiantNote> _listNotesDettes;
+        private ObservableCollection<EtudiantNoteDette> _listNotesDettes;
         // Create a BackgroundWorker object to synchronize without blocking
         // the UI thread
         private BackgroundWorker backgroundWorker1;
@@ -53,6 +52,11 @@ namespace ESC_OfflineTeacher.ViewModel
 
         private IEnumerable<GROUPE> _allGroupesList;
         private IEnumerable<SECTION> _allSectionsList;
+
+        private ObservableCollection<String> _listExaminDette  ;
+
+      
+        
         #endregion
         #region Properties
         public string CurrentYear
@@ -91,7 +95,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 RaisePropertyChanged();
             }
         }
-        public ObservableCollection<EtudiantNote> ListNotesDettes
+        public ObservableCollection<EtudiantNoteDette> ListNotesDettes
         {
             get
             {
@@ -352,6 +356,7 @@ namespace ESC_OfflineTeacher.ViewModel
                              x.ANNEE_UNIVERSITAIRE == cy).ToList();
                 SemestreList = new ObservableCollection<MODES_ETUDES>(modeEtudes.Select(x => x.MODES_ETUDES).Distinct().ToList());
                 RefreshNoteStudentList();
+                RefreshNoteDetteStudentList();
 
             }
         }
@@ -372,6 +377,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 _selectedMatiere = value;
                 RaisePropertyChanged();
                 RefreshNoteStudentList();
+                RefreshNoteDetteStudentList();
             }
         }
         public MODES_ETUDES SelectedSemester
@@ -396,6 +402,7 @@ namespace ESC_OfflineTeacher.ViewModel
                              x.ANNEE_UNIVERSITAIRE == cy && x.ID_MODE_ETUDE == _selectedSemester.ID_MODE_ETUDE).ToList();
                 ExaminList = new ObservableCollection<EXAMEN>(modeEtudes.Select(x => x.EXAMEN).ToList());
                 RefreshNoteStudentList();
+                RefreshNoteDetteStudentList();
             }
         }
         public SECTION SelectedSection
@@ -423,6 +430,7 @@ namespace ESC_OfflineTeacher.ViewModel
                                 x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == _loggedInTeacher.ID_USER &&
                                 x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE).Select(x => x.GROUPE).Distinct());
                     RefreshNoteStudentList();
+                    RefreshNoteDetteStudentList();
                 }
                 else
                 {
@@ -450,6 +458,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 _selectedGroupe = value;
                 RaisePropertyChanged();
                 RefreshNoteStudentList();
+                RefreshNoteDetteStudentList();
             }
         }
         public EXAMEN SelectedExamin
@@ -469,6 +478,25 @@ namespace ESC_OfflineTeacher.ViewModel
                 _selectedExamen = value;
                 RaisePropertyChanged();
                 RefreshNoteStudentList();
+                RefreshNoteDetteStudentList();
+            }
+        }
+        public ObservableCollection<String> ListExaminDette
+        {
+            get
+            {
+                return _listExaminDette;
+            }
+
+            set
+            {
+                if (_listExaminDette == value)
+                {
+                    return;
+                }
+
+                _listExaminDette = value;
+                RaisePropertyChanged();
             }
         }
         #endregion
@@ -539,8 +567,13 @@ namespace ESC_OfflineTeacher.ViewModel
             //ESCLocalDbSyncAgent
             //    LocalSGSDBEntities dEntities=new LocalSGSDBEntities();
 
-            ListNotesExamins = new ObservableCollection<EtudiantNote>();
-            //GenerateFakeData();  //For Test purpuses
+            ListNotesExamins = new ObservableCollection<EtudiantNote>(); 
+            ListNotesDettes=new ObservableCollection<EtudiantNoteDette>();
+            ListExaminDette=new ObservableCollection<string>()
+            {
+                "Note",
+                "Rattrapage"
+            };
 
         }
         // Method to start syncthonization in background
@@ -598,102 +631,57 @@ namespace ESC_OfflineTeacher.ViewModel
         //               results.Stats.DownloadChangesTotal));
         //        }
 
-        private void GenerateFakeData()
-        {
-            #region fake Data
-            ListNotesExamins = new ObservableCollection<EtudiantNote>()
-            {
-                new EtudiantNote()
-                {
-                    Matricule = "070014",
-                    Nom="Meriem",
-                    Prenom ="Alichaoui"                     
-                },
-                 new EtudiantNote()
-                {
-                    Matricule = "070014",
-                    Nom="Meriem",
-                    Prenom ="Alichaoui"                     
-                },
-                 new EtudiantNote()
-                {
-                    Matricule = "070014",
-                    Nom="Meriem",
-                    Prenom ="Alichaoui"                     
-                },
-                 new EtudiantNote()
-                {
-                    Matricule = "070014",
-                    Nom="Meriem",
-                    Prenom ="Alichaoui"                     
-                },
-                 new EtudiantNote()
-                {
-                    Matricule = "070014",
-                    Nom="Meriem",
-                    Prenom ="Alichaoui"                     
-                },
-                 new EtudiantNote()
-                {
-                    Matricule = "070014",
-                    Nom="Meriem",
-                    Prenom ="Alichaoui"                     
-                },
-                 new EtudiantNote()
-                {
-                    Matricule = "070014",
-                    Nom="Meriem",
-                    Prenom ="Alichaoui"                     
-                },
-                 new EtudiantNote()
-                {
-                    Matricule = "070014",
-                    Nom="Meriem",
-                    Prenom ="Alichaoui"                     
-                }, new EtudiantNote()
-                {
-                    Matricule = "070014",
-                    Nom="Meriem",
-                    Prenom ="Alichaoui"                     
-                },
-                 new EtudiantNote()
-                {
-                    Matricule = "070014",
-                    Nom="Meriem",
-                    Prenom ="Alichaoui"                     
-                }
-            };
-            ListNotesDettes = new ObservableCollection<EtudiantNote>(ListNotesExamins);
-            #endregion
-        }
+       
 
         private void RefreshNoteStudentList()
         {
-            if (SelectedMatiere != null && SelectedExamin != null)
+            if (SelectedMatiere != null && SelectedExamin != null && SelectedGroupe != null)
             {
                 var cy = int.Parse(CurrentYear);
                 ListNotesExamins =
                     new ObservableCollection<EtudiantNote>(_context.NOTES_EXAMEN.Where(
                         x => x.ANNEE_UNIVERSITAIRE == cy &&
                              x.ID_MATIERE == SelectedMatiere.ID_MATIERE &&
-                             x.ID_EXAMEN == SelectedExamin.ID_EXAMEN).Select(x => new EtudiantNote()
+                             x.ID_EXAMEN == SelectedExamin.ID_EXAMEN).Join(_context.ETUDES, note => note.ID_ETUDIANT, etude => etude.ID_ETUDIANT, (note, etude) => new
                              {
-                                 Nom = x.ETUDIANT.NOM,
-                                 Prenom = x.ETUDIANT.PRENOM,
-                                 NoteExamin = x.NOTE
+                                 etudiant = note.ETUDIANT,
+                                 note = note.NOTE,
+                                 groupe = etude.ID_GROUPE,
+                                 Section = etude.ID_SECTION,
+                                 specialite = etude.ID_SPECIALITE
+                             }).Where(x => x.groupe == SelectedGroupe.ID_GROUPE).Select(x => new EtudiantNote()
+                             {
+                                 Matricule = x.etudiant.MATRICULE,
+                                 Nom = x.etudiant.NOM,
+                                 Prenom = x.etudiant.PRENOM,
+                                 Note = x.note
+                             }));               
+            }
+        }
+        private void RefreshNoteDetteStudentList()
+        {
+            if (SelectedMatiere != null  && SelectedGroupe != null)
+            {
+                var cy = int.Parse(CurrentYear);
+                ListNotesDettes =
+                    new ObservableCollection<EtudiantNoteDette>(_context.NOTE_DETTE.Where(
+                        x => x.ANNEE_PASSAGE_DETTE == cy &&
+                             x.ID_MATIERE == SelectedMatiere.ID_MATIERE).Join(_context.ETUDES, note => note.ID_ETUDIANT, etude => etude.ID_ETUDIANT, (note, etude) => new
+                             {
+                                 etudiant = note.ETUDIANT,
+                                 note = note.NOTE,
+                                 noteRattrapage=note.NOTE_RATTRAPAGE,
+                                 groupe = etude.ID_GROUPE,
+                                 Section = etude.ID_SECTION,
+                                 specialite = etude.ID_SPECIALITE
+                             }).Where(x => x.groupe == SelectedGroupe.ID_GROUPE).Select(x => new EtudiantNoteDette()
+                             {
+                                 Matricule = x.etudiant.MATRICULE,
+                                 Nom = x.etudiant.NOM,
+                                 Prenom = x.etudiant.PRENOM,
+                                 Note = x.note,
+                                 NoteRattrapage = x.noteRattrapage
                              }));
-
-                //ListNotesExamins = new ObservableCollection<EtudiantNote>(_context.NOTES_EXAMEN.Where(x => x.ANNEE_UNIVERSITAIRE == cy &&
-                //                                 x.ID_MATIERE == SelectedMatiere.ID_MATIERE &&
-                //                                 x.ID_EXAMEN == SelectedExamin.ID_EXAMEN)
-                //    .Join(_context.ETUDIANTS, noteExamin => noteExamin.ID_ETUDIANT,
-                //        etudiant => etudiant.ID_ETUDIANT, (noteExamin, etudiant) => new EtudiantNote()
-                //        {
-                //            Matricule = etudiant.MATRICULE,
-                //            Nom = etudiant.NOM,
-                //            Prenom = etudiant.PRENOM,
-                //            NoteExamin = noteExamin.NOTE
-                //        }).ToList());
             }
         }
         #endregion
