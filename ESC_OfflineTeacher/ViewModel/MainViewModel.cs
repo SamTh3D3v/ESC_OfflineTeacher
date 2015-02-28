@@ -15,7 +15,7 @@ namespace ESC_OfflineTeacher.ViewModel
         #region Fields
         private readonly IFrameNavigationService _navigationService;
         private bool _navigationSource;
-       
+        private ObservableCollection<SPECIALITE> _listSpeciliteEns;
         private ENSEIGNANT _loggedInUser  ;
       
         #endregion
@@ -25,7 +25,6 @@ namespace ESC_OfflineTeacher.ViewModel
         {
             get { return _navigationService; }
         }
-
         public bool NavigationSource
         {
             get
@@ -62,6 +61,24 @@ namespace ESC_OfflineTeacher.ViewModel
                 RaisePropertyChanged();
             }
         }
+        public ObservableCollection<SPECIALITE> ListSpeciliteEns
+        {
+            get
+            {
+                return _listSpeciliteEns;
+            }
+
+            set
+            {
+                if (_listSpeciliteEns == value)
+                {
+                    return;
+                }
+
+                _listSpeciliteEns = value;
+                RaisePropertyChanged();
+            }
+        }
        
         #endregion
         #region Commands
@@ -78,6 +95,7 @@ namespace ESC_OfflineTeacher.ViewModel
                             using (var context=new LocalDbEntities())
                             {
                                 LoggedInUser = context.ENSEIGNANTS.First(x => x.ID_ENSEIGNANT == 2);
+                                ListSpeciliteEns=new ObservableCollection<SPECIALITE>(context.ENS_SPEMAT.Where(x=>x.ID_ENSEIGNANT==LoggedInUser.ID_ENSEIGNANT).Select(x=>x.SPECIALITE).Distinct().ToList());
                             }
                          
                         }));

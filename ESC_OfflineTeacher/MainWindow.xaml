@@ -68,13 +68,28 @@
             <controls:Flyout x:Name="SettingsFlyout" Header="Settings" Position="Top" Height="300" Theme="Dark">
 
             </controls:Flyout>
-            <controls:Flyout x:Name="DisconnectFlyout" Header="Information"  Position="Top"  Height="300" Theme="Accent">
-                <Grid  Margin="5">
+            <controls:Flyout x:Name="DisconnectFlyout" Header="Information"    Position="Top"  Height="auto" Theme="Accent">
+                <Grid  Margin="5,40,5,5" HorizontalAlignment="Right">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="200"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Button Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="200"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="20,2,2,2" Content="Nom" Grid.Row="0" Grid.Column="0" Foreground="White"/>
+                    <Label Margin="2" Content="{Binding LoggedInUser.NOM_LATIN}" Grid.Row="0" Foreground="LightBlue" Grid.Column="1"/>
+
+                    <Label Margin="20,2,2,2" Content="Prenom" Grid.Row="1" Grid.Column="0" Foreground="White"/>
+                    <Label Margin="2" Content="{Binding LoggedInUser.PRENOM_LATIN}" Grid.Row="1" Foreground="LightBlue" Grid.Column="1"/>
+
+                    <Label Margin="20,2,2,2" Content="Specilité" Grid.Row="2" Grid.Column="0" Foreground="White"/>
+                    <ComboBox Margin="2"  ItemsSource="{Binding ListSpeciliteEns}" Foreground="LightBlue" DisplayMemberPath="DESIGNATION_LATIN" Grid.Row="2" Grid.Column="1"/>
+                    
+                    <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
                         <StackPanel Orientation="Horizontal">
                             <Rectangle Width="20" Height="20"
                    Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">

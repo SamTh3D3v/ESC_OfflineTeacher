@@ -529,6 +529,8 @@ namespace ESC_OfflineTeacher.ViewModel
                         //    CurrentYear = context.ANNEES.Max(x => x.ANNEE_UNIVERSITAIRE).ToString(CultureInfo.InvariantCulture);
 
                         //}
+                          Debug.WriteLine("Starting Data Synchronization Process...\r\n Please wait till the process compeletes.\r\n");
+                          Application.Current.MainWindow.Cursor = Cursors.Wait;
                         ESCLocalDbSyncAgent agent = new ESCLocalDbSyncAgent();
                         agent.LocalProvider = new ESCLocalDbClientSyncProvider();
                         agent.RemoteProvider = new ESCLocalDbServerSyncProvider();
@@ -537,22 +539,14 @@ namespace ESC_OfflineTeacher.ViewModel
                         ((ESCLocalDbServerSyncProvider)agent.RemoteProvider).ApplyChangeFailed += new EventHandler<Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs>(Remote_ApplyChangeFailed);
 
                         agent.Synchronize();
-                        //var syncHelper = new SyncHelper();
-
-                        //syncHelper.Agent.SessionProgress += new EventHandler<Microsoft.Synchronization.SessionProgressEventArgs>(agent_SessionProgress);
-                        //((ESCLocalDbClientSyncProvider)syncHelper.Agent.LocalProvider).ApplyChangeFailed += new EventHandler<Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs>(Local_ApplyChangeFailed);
-                        //((ESCLocalDbServerSyncProvider)syncHelper.Agent.RemoteProvider).ApplyChangeFailed += new EventHandler<Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs>(Remote_ApplyChangeFailed);
-
-                        //syncHelper.Sync();
-                         
-                         
+                        Debug.WriteLine("Data Synchronization Completed.");
+                        Application.Current.MainWindow.Cursor = Cursors.Arrow;
 
                     }));
             }
         }
         static void agent_SessionProgress(object sender, Microsoft.Synchronization.SessionProgressEventArgs e)
-        {
-            throw new NotImplementedException();
+        {           
         }
 
         static void Local_ApplyChangeFailed(object sender, Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs e)
