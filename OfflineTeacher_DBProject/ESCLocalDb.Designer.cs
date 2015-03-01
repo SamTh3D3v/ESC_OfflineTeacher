@@ -62,6 +62,8 @@ namespace OfflineTeacher_DBProject {
         
         private ETUDESSyncTable _eTUDESSyncTable;
         
+        private LOGSyncTable _lOGSyncTable;
+        
         partial void OnInitialized();
         
         public ESCLocalDbSyncAgent() {
@@ -299,6 +301,18 @@ namespace OfflineTeacher_DBProject {
         }
         
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public LOGSyncTable LOG {
+            get {
+                return this._lOGSyncTable;
+            }
+            set {
+                this.Configuration.SyncTables.Remove(this._lOGSyncTable);
+                this._lOGSyncTable = value;
+                this.Configuration.SyncTables.Add(this._lOGSyncTable);
+            }
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitializeSyncProviders() {
             // Create SyncProviders.
             this.RemoteProvider = new ESCLocalDbServerSyncProvider();
@@ -365,6 +379,9 @@ namespace OfflineTeacher_DBProject {
             this._eTUDESSyncTable = new ETUDESSyncTable();
             this._eTUDESSyncTable.SyncGroup = new Microsoft.Synchronization.Data.SyncGroup("ETUDESSyncTableSyncGroup");
             this.Configuration.SyncTables.Add(this._eTUDESSyncTable);
+            this._lOGSyncTable = new LOGSyncTable();
+            this._lOGSyncTable.SyncGroup = new Microsoft.Synchronization.Data.SyncGroup("LOGSyncTableSyncGroup");
+            this.Configuration.SyncTables.Add(this._lOGSyncTable);
         }
         
         public partial class ANNEESSyncTable : Microsoft.Synchronization.Data.SyncTable {
@@ -667,6 +684,22 @@ namespace OfflineTeacher_DBProject {
             [System.Diagnostics.DebuggerNonUserCodeAttribute()]
             private void InitializeTableOptions() {
                 this.TableName = "ETUDES";
+                this.CreationOption = Microsoft.Synchronization.Data.TableCreationOption.DropExistingOrCreateNewTable;
+            }
+        }
+        
+        public partial class LOGSyncTable : Microsoft.Synchronization.Data.SyncTable {
+            
+            partial void OnInitialized();
+            
+            public LOGSyncTable() {
+                this.InitializeTableOptions();
+                this.OnInitialized();
+            }
+            
+            [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitializeTableOptions() {
+                this.TableName = "LOG";
                 this.CreationOption = Microsoft.Synchronization.Data.TableCreationOption.DropExistingOrCreateNewTable;
             }
         }
@@ -2561,6 +2594,94 @@ namespace OfflineTeacher_DBProject {
         }
     }
     
+    public partial class LOGSyncAdapter : Microsoft.Synchronization.Data.Server.SyncAdapter {
+        
+        partial void OnInitialized();
+        
+        public LOGSyncAdapter() {
+            this.InitializeCommands();
+            this.InitializeAdapterProperties();
+            this.OnInitialized();
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitializeCommands() {
+            // LOGSyncTableInsertCommand command.
+            this.InsertCommand = new System.Data.SqlClient.SqlCommand();
+            this.InsertCommand.CommandText = @"INSERT INTO dbo.[LOG] ([ID_LOG], [ID_USER], [ID_ETUDIANT], [JOUR], [OPERATION], [ANNEE_UNIVERSITAIRE], [MODULE], [ID_MATIERE], [DETAILS], [LastEditDate], [CreationDate]) VALUES (@ID_LOG, @ID_USER, @ID_ETUDIANT, @JOUR, @OPERATION, @ANNEE_UNIVERSITAIRE, @MODULE, @ID_MATIERE, @DETAILS, @LastEditDate, @CreationDate) SET @sync_row_count = @@rowcount";
+            this.InsertCommand.CommandType = System.Data.CommandType.Text;
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ID_LOG", System.Data.SqlDbType.UniqueIdentifier));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ID_USER", System.Data.SqlDbType.Int));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ID_ETUDIANT", System.Data.SqlDbType.Int));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@JOUR", System.Data.SqlDbType.DateTime));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@OPERATION", System.Data.SqlDbType.VarChar));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ANNEE_UNIVERSITAIRE", System.Data.SqlDbType.Int));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@MODULE", System.Data.SqlDbType.VarChar));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ID_MATIERE", System.Data.SqlDbType.Int));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@DETAILS", System.Data.SqlDbType.Text));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@LastEditDate", System.Data.SqlDbType.DateTime));
+            this.InsertCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@CreationDate", System.Data.SqlDbType.DateTime));
+            System.Data.SqlClient.SqlParameter insertcommand_sync_row_countParameter = new System.Data.SqlClient.SqlParameter("@sync_row_count", System.Data.SqlDbType.Int);
+            insertcommand_sync_row_countParameter.Direction = System.Data.ParameterDirection.Output;
+            this.InsertCommand.Parameters.Add(insertcommand_sync_row_countParameter);
+            // LOGSyncTableDeleteCommand command.
+            this.DeleteCommand = new System.Data.SqlClient.SqlCommand();
+            this.DeleteCommand.CommandText = "DELETE FROM dbo.[LOG] WHERE ([ID_LOG] = @ID_LOG) AND (@sync_force_write = 1 OR ([" +
+                "LastEditDate] <= @sync_last_received_anchor)) SET @sync_row_count = @@rowcount";
+            this.DeleteCommand.CommandType = System.Data.CommandType.Text;
+            this.DeleteCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ID_LOG", System.Data.SqlDbType.UniqueIdentifier));
+            this.DeleteCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@sync_force_write", System.Data.SqlDbType.Bit));
+            this.DeleteCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@sync_last_received_anchor", System.Data.SqlDbType.DateTime));
+            System.Data.SqlClient.SqlParameter deletecommand_sync_row_countParameter = new System.Data.SqlClient.SqlParameter("@sync_row_count", System.Data.SqlDbType.Int);
+            deletecommand_sync_row_countParameter.Direction = System.Data.ParameterDirection.Output;
+            this.DeleteCommand.Parameters.Add(deletecommand_sync_row_countParameter);
+            // LOGSyncTableUpdateCommand command.
+            this.UpdateCommand = new System.Data.SqlClient.SqlCommand();
+            this.UpdateCommand.CommandText = @"UPDATE dbo.[LOG] SET [ID_USER] = @ID_USER, [ID_ETUDIANT] = @ID_ETUDIANT, [JOUR] = @JOUR, [OPERATION] = @OPERATION, [ANNEE_UNIVERSITAIRE] = @ANNEE_UNIVERSITAIRE, [MODULE] = @MODULE, [ID_MATIERE] = @ID_MATIERE, [DETAILS] = @DETAILS, [LastEditDate] = @LastEditDate, [CreationDate] = @CreationDate WHERE ([ID_LOG] = @ID_LOG) AND (@sync_force_write = 1 OR ([LastEditDate] <= @sync_last_received_anchor)) SET @sync_row_count = @@rowcount";
+            this.UpdateCommand.CommandType = System.Data.CommandType.Text;
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ID_USER", System.Data.SqlDbType.Int));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ID_ETUDIANT", System.Data.SqlDbType.Int));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@JOUR", System.Data.SqlDbType.DateTime));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@OPERATION", System.Data.SqlDbType.VarChar));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ANNEE_UNIVERSITAIRE", System.Data.SqlDbType.Int));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@MODULE", System.Data.SqlDbType.VarChar));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ID_MATIERE", System.Data.SqlDbType.Int));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@DETAILS", System.Data.SqlDbType.Text));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@LastEditDate", System.Data.SqlDbType.DateTime));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@CreationDate", System.Data.SqlDbType.DateTime));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ID_LOG", System.Data.SqlDbType.UniqueIdentifier));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@sync_force_write", System.Data.SqlDbType.Bit));
+            this.UpdateCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@sync_last_received_anchor", System.Data.SqlDbType.DateTime));
+            System.Data.SqlClient.SqlParameter updatecommand_sync_row_countParameter = new System.Data.SqlClient.SqlParameter("@sync_row_count", System.Data.SqlDbType.Int);
+            updatecommand_sync_row_countParameter.Direction = System.Data.ParameterDirection.Output;
+            this.UpdateCommand.Parameters.Add(updatecommand_sync_row_countParameter);
+            // LOGSyncTableSelectConflictUpdatedRowsCommand command.
+            this.SelectConflictUpdatedRowsCommand = new System.Data.SqlClient.SqlCommand();
+            this.SelectConflictUpdatedRowsCommand.CommandText = "SELECT [ID_LOG], [ID_USER], [ID_ETUDIANT], [JOUR], [OPERATION], [ANNEE_UNIVERSITA" +
+                "IRE], [MODULE], [ID_MATIERE], [DETAILS], [LastEditDate], [CreationDate] FROM dbo" +
+                ".[LOG] WHERE ([ID_LOG] = @ID_LOG)";
+            this.SelectConflictUpdatedRowsCommand.CommandType = System.Data.CommandType.Text;
+            this.SelectConflictUpdatedRowsCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ID_LOG", System.Data.SqlDbType.UniqueIdentifier));
+            // LOGSyncTableSelectIncrementalInsertsCommand command.
+            this.SelectIncrementalInsertsCommand = new System.Data.SqlClient.SqlCommand();
+            this.SelectIncrementalInsertsCommand.CommandText = @"SELECT [ID_LOG], [ID_USER], [ID_ETUDIANT], [JOUR], [OPERATION], [ANNEE_UNIVERSITAIRE], [MODULE], [ID_MATIERE], [DETAILS], [LastEditDate], [CreationDate] FROM dbo.[LOG] WHERE ([CreationDate] > @sync_last_received_anchor AND [CreationDate] <= @sync_new_received_anchor)";
+            this.SelectIncrementalInsertsCommand.CommandType = System.Data.CommandType.Text;
+            this.SelectIncrementalInsertsCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@sync_last_received_anchor", System.Data.SqlDbType.DateTime));
+            this.SelectIncrementalInsertsCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@sync_new_received_anchor", System.Data.SqlDbType.DateTime));
+            // LOGSyncTableSelectIncrementalUpdatesCommand command.
+            this.SelectIncrementalUpdatesCommand = new System.Data.SqlClient.SqlCommand();
+            this.SelectIncrementalUpdatesCommand.CommandText = @"SELECT [ID_LOG], [ID_USER], [ID_ETUDIANT], [JOUR], [OPERATION], [ANNEE_UNIVERSITAIRE], [MODULE], [ID_MATIERE], [DETAILS], [LastEditDate], [CreationDate] FROM dbo.[LOG] WHERE ([LastEditDate] > @sync_last_received_anchor AND [LastEditDate] <= @sync_new_received_anchor AND [CreationDate] <= @sync_last_received_anchor)";
+            this.SelectIncrementalUpdatesCommand.CommandType = System.Data.CommandType.Text;
+            this.SelectIncrementalUpdatesCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@sync_last_received_anchor", System.Data.SqlDbType.DateTime));
+            this.SelectIncrementalUpdatesCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@sync_new_received_anchor", System.Data.SqlDbType.DateTime));
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitializeAdapterProperties() {
+            this.TableName = "LOG";
+        }
+    }
+    
     public partial class ESCLocalDbServerSyncProvider : Microsoft.Synchronization.Data.Server.DbServerSyncProvider {
         
         private ANNEESSyncAdapter _aNNEESSyncAdapter;
@@ -2600,6 +2721,8 @@ namespace OfflineTeacher_DBProject {
         private USERS_SPECIALITESSyncAdapter _uSERS_SPECIALITESSyncAdapter;
         
         private ETUDESSyncAdapter _eTUDESSyncAdapter;
+        
+        private LOGSyncAdapter _lOGSyncAdapter;
         
         partial void OnInitialized();
         
@@ -2809,6 +2932,16 @@ namespace OfflineTeacher_DBProject {
         }
         
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public LOGSyncAdapter LOGSyncAdapter {
+            get {
+                return this._lOGSyncAdapter;
+            }
+            set {
+                this._lOGSyncAdapter = value;
+            }
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitializeConnection(string connectionString) {
             this.Connection = new System.Data.SqlClient.SqlConnection(connectionString);
         }
@@ -2854,6 +2987,8 @@ namespace OfflineTeacher_DBProject {
             this.SyncAdapters.Add(this._uSERS_SPECIALITESSyncAdapter);
             this._eTUDESSyncAdapter = new ETUDESSyncAdapter();
             this.SyncAdapters.Add(this._eTUDESSyncAdapter);
+            this._lOGSyncAdapter = new LOGSyncAdapter();
+            this.SyncAdapters.Add(this._lOGSyncAdapter);
         }
         
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]

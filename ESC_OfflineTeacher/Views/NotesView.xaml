@@ -291,14 +291,14 @@
                         <TextBox Grid.Row="0" Text="{Binding SearchTextDette,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Margin="1" BorderBrush="Black"></TextBox>
 
                     </Grid>
-                    <StackPanel>
+                    <StackPanel  Grid.Row="1">
                         <StackPanel.Resources>                            
                             <FrameworkElement x:Key="ProxyElement"
                          DataContext="{Binding}"/>
                         </StackPanel.Resources>
                         <ContentControl Visibility="Collapsed"
                 Content="{StaticResource ProxyElement}"/>
-                        <DataGrid  Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding ListNotesDettes}">
+                        <DataGrid  AutoGenerateColumns="False" ItemsSource="{Binding ListNotesDettes}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Matricule" IsReadOnly="True"
                                     Binding="{Binding Matricule}" MinWidth="100"/>
