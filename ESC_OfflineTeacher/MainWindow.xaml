@@ -16,7 +16,7 @@
         GlowBrush="{DynamicResource AccentColorBrush}"
         WindowTransitionsEnabled="False"
         WindowStartupLocation="CenterScreen"
-        DataContext="{Binding Main, Source={StaticResource Locator}}"  ShowIconOnTitleBar="True" >
+        DataContext="{Binding Main, Source={StaticResource Locator}}"  ShowIconOnTitleBar="True" Background="WhiteSmoke">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -118,7 +118,7 @@
         </Grid.ColumnDefinitions>
         <Frame Grid.Row="0" Grid.Column="0"  x:Name="MainFrame" VerticalContentAlignment="Center"
                HorizontalContentAlignment="Center" VerticalAlignment="Stretch" 
-               HorizontalAlignment="Stretch" NavigationUIVisibility="Hidden" BorderBrush="Black" 
-               BorderThickness="2" Margin="2"/>
+               HorizontalAlignment="Stretch" NavigationUIVisibility="Hidden" 
+               Margin="2"/>
     </Grid>
 </controls:MetroWindow>
