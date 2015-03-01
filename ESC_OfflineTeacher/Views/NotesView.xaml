@@ -28,6 +28,7 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -58,7 +59,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0" Content="Nombre des étudiants" HorizontalAlignment="Center"/>
-                    <Label Grid.Row="1" HorizontalAlignment="Center" Content="{Binding NbEtdiants}" FontSize="20" Foreground="White"/>
+                    <Label Grid.Row="1" HorizontalAlignment="Center" Content="{Binding ListNotesExamins.Count}" FontSize="20" Foreground="White"/>
                 </Grid>
                 <Grid  Grid.Row="2" Margin="5" Background="{StaticResource AccentColorBrush}">
                     <Grid.RowDefinitions>
@@ -128,12 +129,16 @@
                     </ComboBox>
                 </Grid>
                 <Grid Grid.Row="4" Margin="5" Background="{StaticResource AccentColorBrush}" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>                        
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Row="0" Content="Examin" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                    <ComboBox  Grid.Row="0" Grid.Column="1" Margin="5"
+                    <Label  Grid.Row="0" Content="Examin" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <ComboBox   Grid.Row="0" Grid.Column="1" Margin="5"
                        VerticalContentAlignment="Center"
                        HorizontalAlignment="Stretch"                 
                        DisplayMemberPath="DESIGNATION_LATIN"
@@ -141,12 +146,14 @@
                        ItemsSource="{Binding ExaminList}"
                        SelectedItem="{Binding SelectedExamin,Mode=TwoWay}">
                     </ComboBox>
+                    <Label Content="Afficher Tous" Grid.Row="1" Grid.Column="0"></Label>
+                    <CheckBox Grid.Row="1" Grid.Column="1" ></CheckBox>
                 </Grid>
             </Grid>
         </Border>
         <GridSplitter Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Width="5" HorizontalAlignment="Center"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="2">
-            <Button ToolTip="Exporter les modification" Content="Synchronize"  Command="{Binding SyncCommand}"/>
+            <Button ToolTip="Exporter les modification" Content="Synchroniser"  Command="{Binding SyncCommand}"/>
         </StackPanel>
         <controls:MetroAnimatedTabControl Grid.Row="1" Grid.Column="2">
             <controls:MetroTabItem Header="Notes Examins">
@@ -156,6 +163,25 @@
                         <RowDefinition Height="*"/>                        
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <Grid.Resources>
+                <ControlTemplate x:Key="SelectedItemTemplate">
+                    <Image Source="../Assets/search.png"></Image>
+                </ControlTemplate>
+                <ControlTemplate x:Key="ItemsTemplate">
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox Margin="1" IsChecked="{Binding IsSelected,Mode=TwoWay}"/>
+                        <TextBlock Text="{Binding Name}" Margin="1"/>
+                    </StackPanel>
+                </ControlTemplate>
+                <DataTemplate x:Key="CbxSearchTemplate">
+                    <Control x:Name="theControl" Focusable="False" Template="{StaticResource ItemsTemplate}" />
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ComboBoxItem}}, Path=IsSelected}" Value="{x:Null}">
+                            <Setter TargetName="theControl" Property="Template" Value="{StaticResource SelectedItemTemplate}" />
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </Grid.Resources>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
@@ -163,16 +189,17 @@
                             <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <controls:DropDownButton  Grid.Row="0" Grid.Column="0" Margin="2"
+                        <!--<controls:DropDownButton   Grid.Column="0" Margin="2"
                             VerticalContentAlignment="Center"
                             HorizontalAlignment="Stretch"
-                            Content="Rechercher par"
-                            DisplayMemberPath="Matricule"
+                            Content="Rechercher par"                            
                             HorizontalContentAlignment="Center"                                        
                             ItemsSource="{Binding RechercherParList}">
-                        </controls:DropDownButton>
-                        <TextBox Grid.Row="0" Text="{Binding SearchText,Mode=TwoWay}" Grid.Column="1" Margin="1" BorderBrush="Black"></TextBox>
-                    </Grid>
+                        </controls:DropDownButton>-->
+                        <ComboBox Grid.Column="0" Grid.Row="0" SelectedItem="{Binding RechercherParList[0],Mode=OneTime}"
+                                  Margin="2" ItemsSource="{Binding RechercherParList,Mode=TwoWay}" ItemTemplate="{StaticResource CbxSearchTemplate}"/>
+                        <TextBox Grid.Row="0" Text="{Binding SearchText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Margin="1" BorderBrush="Black"></TextBox>
+                    </Grid>                    
                     <DataGrid  Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding ListNotesExamins}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Matricule" IsReadOnly="True"
@@ -194,7 +221,8 @@
                                                       StringFormat="N" 
                                                       Minimum="0" MinWidth="40"/>-->
                         </DataGrid.Columns>
-                    </DataGrid>                    
+                    </DataGrid>
+                    
                 </Grid>
             </controls:MetroTabItem>
             <controls:MetroTabItem Header="Notes Dettes">
@@ -262,6 +290,7 @@
                 </Rectangle>
             </Button>
         </StackPanel>
+        <controls:MetroProgressBar Grid.Row="3" Maximum="100" Visibility="{Binding PbVisibility}"  Value="{Binding PbValue,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Column="0" Grid.ColumnSpan="3"/>
     </Grid>
 
 </Page>
