@@ -31,7 +31,7 @@ namespace ESC_OfflineTeacher.ViewModel
         private ObservableCollection<EtudiantNote> _listNotesExaminsForSearch;
         private ObservableCollection<EtudiantNoteDette> _listNotesDettesForSearch;
 
-        
+
         // Create a BackgroundWorker object to synchronize without blocking
         // the UI thread
         private BackgroundWorker backgroundWorker1;
@@ -46,7 +46,7 @@ namespace ESC_OfflineTeacher.ViewModel
         private ObservableCollection<EXAMEN> _examinList;
         private String _nbEtudiants = "";
         private string _currentYear = "";
-        private ObservableCollection<SearchiTem> _rechercherParList;
+        private ObservableCollection<SearchItem> _rechercherParList;
         private String _searchText = "";
         private bool _sideBarIsOpen;
         private ENSEIGNANT _loggedInTeacher;
@@ -136,6 +136,7 @@ namespace ESC_OfflineTeacher.ViewModel
 
                 _specialiteList = value;
                 RaisePropertyChanged();
+                SelectedSpecialite = _specialiteList.FirstOrDefault();
             }
         }
         public ObservableCollection<MATIERE> MatiereList
@@ -154,6 +155,7 @@ namespace ESC_OfflineTeacher.ViewModel
 
                 _matiereList = value;
                 RaisePropertyChanged();
+                SelectedMatiere = _matiereList.FirstOrDefault();
             }
         }
         public ObservableCollection<MODES_ETUDES> SemestreList
@@ -172,6 +174,7 @@ namespace ESC_OfflineTeacher.ViewModel
 
                 _semestreList = value;
                 RaisePropertyChanged();
+                SelectedSemester = _semestreList.FirstOrDefault();
             }
         }
         public ObservableCollection<SECTION> SectionList
@@ -190,6 +193,7 @@ namespace ESC_OfflineTeacher.ViewModel
 
                 _sectionList = value;
                 RaisePropertyChanged();
+                SelectedSection = _sectionList.FirstOrDefault();
             }
         }
         public ObservableCollection<GROUPE> GroupeList
@@ -208,6 +212,7 @@ namespace ESC_OfflineTeacher.ViewModel
 
                 _groupeList = value;
                 RaisePropertyChanged();
+                SelectedGroupe = _groupeList.FirstOrDefault();
             }
         }
         public ObservableCollection<EXAMEN> ExaminList
@@ -226,6 +231,7 @@ namespace ESC_OfflineTeacher.ViewModel
 
                 _examinList = value;
                 RaisePropertyChanged();
+                SelectedExamin = _examinList.FirstOrDefault();
             }
         }
         public String NbEtdiants
@@ -246,7 +252,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 RaisePropertyChanged();
             }
         }
-        public ObservableCollection<SearchiTem> RechercherParList
+        public ObservableCollection<SearchItem> RechercherParList
         {
             get
             {
@@ -281,8 +287,8 @@ namespace ESC_OfflineTeacher.ViewModel
                 _searchText = value;
                 RaisePropertyChanged();
 
-                
-                var seachText = _searchText.ToLower();                
+
+                var seachText = _searchText.ToLower();
                 if (seachText != "")
                 {
                     var matricule = RechercherParList[0].IsSelected;
@@ -541,7 +547,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 _pbValue = value;
                 RaisePropertyChanged();
             }
-        } 
+        }
         public Visibility PbVisibility
         {
             get
@@ -571,13 +577,13 @@ namespace ESC_OfflineTeacher.ViewModel
                     ?? (_syncCommand = new RelayCommand(
                     () =>
                     {
-                        if (!_syncBackgroundWorker.IsBusy)                        
-                        _syncBackgroundWorker.RunWorkerAsync();
+                        if (!_syncBackgroundWorker.IsBusy)
+                            _syncBackgroundWorker.RunWorkerAsync();
 
                     }));
             }
         }
-       
+
         private RelayCommand _noteViewLoadedCommand;
         public RelayCommand NoteViewLoadedCommand
         {
@@ -654,31 +660,28 @@ namespace ESC_OfflineTeacher.ViewModel
                 "Note",
                 "Rattrapage"
             };
-            RechercherParList=new ObservableCollection<SearchiTem>()
+            RechercherParList = new ObservableCollection<SearchItem>()
             {
-                new SearchiTem()
+                new SearchItem()
                 {
                     Name = "Matricule",
                     IsSelected = true
                 },
-                 new SearchiTem()
+                 new SearchItem()
                 {
                     Name = "Nom",
                     IsSelected = true
                 },
-                 new SearchiTem()
+                 new SearchItem()
                 {
                     Name = "Prenom",
                     IsSelected = true
-                }
-               
+                }               
             };
-
         }
         private void InitializeBackgroundWorker()
         {
-            _syncBackgroundWorker=new BackgroundWorker();
-            _syncBackgroundWorker.WorkerReportsProgress = true;
+            _syncBackgroundWorker = new BackgroundWorker { WorkerReportsProgress = true };
             _syncBackgroundWorker.DoWork += new DoWorkEventHandler(_syncBackgroundWorker_DoWork);
             _syncBackgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(_syncBackgroundWorker_RunWorkerCompleted);
             _syncBackgroundWorker.ProgressChanged += new ProgressChangedEventHandler(_syncBackgroundWorker_ProgressChanged);
@@ -686,36 +689,38 @@ namespace ESC_OfflineTeacher.ViewModel
 
         private void _syncBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-                             
+
         }
 
         private void _syncBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             Debug.WriteLine("Data Synchronization Completed.");
             PbVisibility = Visibility.Collapsed;
-          //  Application.Current.MainWindow.Cursor = Cursors.Arrow;
+            //  Application.Current.MainWindow.Cursor = Cursors.Arrow;
         }
 
         private void _syncBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            
-                Debug.WriteLine("Starting Data Synchronization Process...");
-                // Application.Current.MainWindow.Cursor = Cursors.Wait;
-                PbVisibility = Visibility.Visible;
-                PbValue = 0;
-                ESCLocalDbSyncAgent agent = new ESCLocalDbSyncAgent();
-                agent.LocalProvider = new ESCLocalDbClientSyncProvider();
-                agent.RemoteProvider = new ESCLocalDbServerSyncProvider();
-                agent.SessionProgress += new EventHandler<Microsoft.Synchronization.SessionProgressEventArgs>(agent_SessionProgress);
-                ((ESCLocalDbClientSyncProvider)agent.LocalProvider).ApplyChangeFailed += new EventHandler<Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs>(Local_ApplyChangeFailed);
-                ((ESCLocalDbServerSyncProvider)agent.RemoteProvider).ApplyChangeFailed += new EventHandler<Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs>(Remote_ApplyChangeFailed);
 
-                e.Result = agent.Synchronize();             
-           
+            Debug.WriteLine("Starting Data Synchronization Process...");
+            // Application.Current.MainWindow.Cursor = Cursors.Wait;
+            PbVisibility = Visibility.Visible;
+            PbValue = 0;
+            var agent = new ESCLocalDbSyncAgent
+            {
+                LocalProvider = new ESCLocalDbClientSyncProvider(),
+                RemoteProvider = new ESCLocalDbServerSyncProvider()
+            };
+            agent.SessionProgress += new EventHandler<Microsoft.Synchronization.SessionProgressEventArgs>(agent_SessionProgress);
+            ((ESCLocalDbClientSyncProvider)agent.LocalProvider).ApplyChangeFailed += new EventHandler<Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs>(Local_ApplyChangeFailed);
+            ((ESCLocalDbServerSyncProvider)agent.RemoteProvider).ApplyChangeFailed += new EventHandler<Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs>(Remote_ApplyChangeFailed);
+
+            e.Result = agent.Synchronize();
+
         }
         void agent_SessionProgress(object sender, Microsoft.Synchronization.SessionProgressEventArgs e)
         {
-            PbValue = e.PercentCompleted;           
+            PbValue = e.PercentCompleted;
         }
 
         void Local_ApplyChangeFailed(object sender, Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs e)
@@ -788,7 +793,7 @@ namespace ESC_OfflineTeacher.ViewModel
 
     }
 
-    public class SearchiTem
+    public class SearchItem
     {
         public String Name { get; set; }
         public bool IsSelected { get; set; }
