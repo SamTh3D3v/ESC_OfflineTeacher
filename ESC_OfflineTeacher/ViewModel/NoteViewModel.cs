@@ -565,6 +565,25 @@ namespace ESC_OfflineTeacher.ViewModel
                 _pbVisibility = value;
                 RaisePropertyChanged();
             }
+        }   
+        private bool _progressRingIsActive = false;      
+        public bool ProgressRingIsActive
+        {
+            get
+            {
+                return _progressRingIsActive;
+            }
+
+            set
+            {
+                if (_progressRingIsActive == value)
+                {
+                    return;
+                }
+
+                _progressRingIsActive = value;
+                RaisePropertyChanged();
+            }
         }
         #endregion
         #region Commands
@@ -696,6 +715,7 @@ namespace ESC_OfflineTeacher.ViewModel
         {
             Debug.WriteLine("Data Synchronization Completed.");
             PbVisibility = Visibility.Collapsed;
+            ProgressRingIsActive = false;
             //  Application.Current.MainWindow.Cursor = Cursors.Arrow;
         }
 
@@ -705,6 +725,7 @@ namespace ESC_OfflineTeacher.ViewModel
             Debug.WriteLine("Starting Data Synchronization Process...");
             // Application.Current.MainWindow.Cursor = Cursors.Wait;
             PbVisibility = Visibility.Visible;
+            ProgressRingIsActive = true;
             PbValue = 0;
             var agent = new ESCLocalDbSyncAgent
             {

@@ -153,6 +153,7 @@
         </Border>
         <GridSplitter Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Width="5" HorizontalAlignment="Center"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="2">
+            <controls:ProgressRing Foreground="{DynamicResource AccentColorBrush}" IsLarge="False"  IsActive="{Binding ProgressRingIsActive}" Height="40"  Width="40"/>
             <Button ToolTip="Exporter les modification" Content="Synchroniser"  Command="{Binding SyncCommand}"/>
         </StackPanel>
         <controls:MetroAnimatedTabControl Grid.Row="1" Grid.Column="2">
