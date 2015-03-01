@@ -103,7 +103,6 @@
                    Text="Déconnexion" />
                         </StackPanel>
                     </Button>
-
                 </Grid>
             </controls:Flyout>
         </controls:FlyoutsControl>

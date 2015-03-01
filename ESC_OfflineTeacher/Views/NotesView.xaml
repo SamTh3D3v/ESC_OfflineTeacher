@@ -7,7 +7,7 @@
         xmlns:ignore="http://www.ignore.com"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:command="http://www.galasoft.ch/mvvmlight"
-        mc:Ignorable="d ignore" d:DesignHeight="600"
+        mc:Ignorable="d ignore" d:DesignHeight="600" d:DesignWidth="1000"
         DataContext="{Binding NoteViewModel, Source={StaticResource Locator}}" Background="WhiteSmoke" >
     <Page.Resources>
         <ResourceDictionary>
@@ -171,8 +171,9 @@
                             </Style>
                         </ComboBox.Style>
                     </ComboBox>
+                   <!--using this have some dawbacks-->
                     <Label Content="Afficher Tous" Grid.Row="1" Grid.Column="0"></Label>
-                    <CheckBox Grid.Row="1" Grid.Column="1" ></CheckBox>
+                    <CheckBox Margin="5" Grid.Row="1" Grid.Column="1" IsChecked="{Binding AfficherTousExamin,Mode=TwoWay}" ></CheckBox>
                 </Grid>
             </Grid>
         </Border>
@@ -290,7 +291,14 @@
                         <TextBox Grid.Row="0" Text="{Binding SearchTextDette,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Margin="1" BorderBrush="Black"></TextBox>
 
                     </Grid>
-                    <DataGrid  Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding ListNotesDettes}">
+                    <StackPanel>
+                        <StackPanel.Resources>                            
+                            <FrameworkElement x:Key="ProxyElement"
+                         DataContext="{Binding}"/>
+                        </StackPanel.Resources>
+                        <ContentControl Visibility="Collapsed"
+                Content="{StaticResource ProxyElement}"/>
+                        <DataGrid  Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding ListNotesDettes}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Matricule" IsReadOnly="True"
                                     Binding="{Binding Matricule}" MinWidth="100"/>
@@ -298,17 +306,19 @@
                                     Binding="{Binding Nom}" MinWidth="150"/>
                             <DataGridTextColumn Header="Prenom" IsReadOnly="True"
                                     Binding="{Binding Prenom}" MinWidth="150"/>
-                            <controls:DataGridNumericUpDownColumn Header="NOTE" 
+                            <controls:DataGridNumericUpDownColumn Header="NOTE" Visibility="{Binding DataContext.NoteDetteColVisibility,Source={StaticResource ProxyElement}}"
                                                       Binding="{Binding Note,Mode=TwoWay}" 
-                                                      StringFormat="N" MaxWidth="20"
-                                                      Minimum="0"  IsReadOnly="False" />
+                                                      StringFormat="N" Maximum="20" MaxWidth="100"
+                                                      Minimum="0"  IsReadOnly="False" >                                
+                            </controls:DataGridNumericUpDownColumn>
                             <controls:DataGridNumericUpDownColumn Header="RATTRAPAGE" 
-                                                      Binding="{Binding NoteRattrapage,Mode=TwoWay}" IsReadOnly="False" 
+                                                      Binding="{Binding NoteRattrapage,Mode=TwoWay}" IsReadOnly="False" Visibility="{Binding DataContext.RattrapageDetteColVisibility,Source={StaticResource ProxyElement}}"
                                                       StringFormat="N" 
                                                       Minimum="0" Maximum="20" />
 
                         </DataGrid.Columns>
                     </DataGrid>
+                        </StackPanel>
                 </Grid>
             </controls:MetroTabItem>
         </controls:MetroAnimatedTabControl>

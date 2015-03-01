@@ -27,7 +27,7 @@ namespace ESC_OfflineTeacher.ViewModel
         private readonly IFrameNavigationService _navigationService;
         private ObservableCollection<EtudiantNote> _listNotesExamins;
         private ObservableCollection<EtudiantNoteDette> _listNotesDettes;
-
+        private bool _progressRingIsActive = false;   
         private ObservableCollection<EtudiantNote> _listNotesExaminsForSearch;
         private ObservableCollection<EtudiantNoteDette> _listNotesDettesForSearch;
 
@@ -57,6 +57,9 @@ namespace ESC_OfflineTeacher.ViewModel
         private SECTION _selectedSection;
         private GROUPE _selectedGroupe;
         private EXAMEN _selectedExamen;
+        private bool _afficherTousExamin = false;
+        private Visibility _noteDetteColVisibility;
+        private Visibility _rattrapageDetteColVisibility;
 
 
         private IEnumerable<GROUPE> _allGroupesList;
@@ -550,8 +553,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 RefreshNoteStudentList();
                 RefreshNoteDetteStudentList();
             }
-        }      
-        
+        }             
         public String SelectedExaminDette
         {
             get
@@ -560,14 +562,20 @@ namespace ESC_OfflineTeacher.ViewModel
             }
 
             set
-            {
-                if (_selectedExaminDette == value)
-                {
-                    return;
-                }
-
+            {               
                 _selectedExaminDette = value;
                 RaisePropertyChanged();
+                if (_selectedExaminDette == ListExaminDette[0] && !AfficherTousExamin)
+                {
+                    NoteDetteColVisibility = Visibility.Visible;
+                    RattrapageDetteColVisibility = Visibility.Collapsed;
+                }
+                else if (_selectedExaminDette == ListExaminDette[1] && !AfficherTousExamin)
+                {
+                    NoteDetteColVisibility = Visibility.Collapsed;
+                    RattrapageDetteColVisibility = Visibility.Visible;
+                }
+                
             }
         }
         public ObservableCollection<String> ListExaminDette
@@ -624,8 +632,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 _pbVisibility = value;
                 RaisePropertyChanged();
             }
-        }   
-        private bool _progressRingIsActive = false;      
+        }              
         public bool ProgressRingIsActive
         {
             get
@@ -641,6 +648,72 @@ namespace ESC_OfflineTeacher.ViewModel
                 }
 
                 _progressRingIsActive = value;
+                RaisePropertyChanged();
+            }
+        }
+        
+        
+        public bool AfficherTousExamin
+        {
+            get
+            {
+                return _afficherTousExamin;
+            }
+
+            set
+            {
+                if (_afficherTousExamin == value)
+                {
+                    return;
+                }
+
+                _afficherTousExamin = value;
+                RaisePropertyChanged();
+                if (_afficherTousExamin)
+                {
+                    NoteDetteColVisibility = Visibility.Visible;
+                    RattrapageDetteColVisibility = Visibility.Visible; 
+                }
+                else
+                {
+                    SelectedExaminDette = SelectedExaminDette;
+                }
+                    
+            }
+        }
+        public Visibility NoteDetteColVisibility
+        {
+            get
+            {
+                return _noteDetteColVisibility;
+            }
+
+            set
+            {
+                if (_noteDetteColVisibility == value)
+                {
+                    return;
+                }
+
+                _noteDetteColVisibility = value;
+                RaisePropertyChanged();
+            }
+        }    
+        public Visibility RattrapageDetteColVisibility
+        {
+            get
+            {
+                return _rattrapageDetteColVisibility;
+            }
+
+            set
+            {
+                if (_rattrapageDetteColVisibility == value)
+                {
+                    return;
+                }
+
+                _rattrapageDetteColVisibility = value;
                 RaisePropertyChanged();
             }
         }
@@ -718,7 +791,8 @@ namespace ESC_OfflineTeacher.ViewModel
                     ?? (_cancelCommand = new RelayCommand(
                     () =>
                     {
-
+                        RefreshNoteStudentList();
+                        RefreshNoteDetteStudentList();
                     }));
             }
         }
