@@ -131,7 +131,7 @@
                 <Grid Grid.Row="4" Margin="5" Background="{StaticResource AccentColorBrush}" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>                        
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="100"/>
@@ -161,28 +161,28 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
-                        <RowDefinition Height="*"/>                        
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                         <Grid.Resources>
-                <ControlTemplate x:Key="SelectedItemTemplate">
-                    <Image Source="../Assets/search.png"></Image>
-                </ControlTemplate>
-                <ControlTemplate x:Key="ItemsTemplate">
-                    <StackPanel Orientation="Horizontal">
-                        <CheckBox Margin="1" IsChecked="{Binding IsSelected,Mode=TwoWay}"/>
-                        <TextBlock Text="{Binding Name}" Margin="1"/>
-                    </StackPanel>
-                </ControlTemplate>
-                <DataTemplate x:Key="CbxSearchTemplate">
-                    <Control x:Name="theControl" Focusable="False" Template="{StaticResource ItemsTemplate}" />
-                    <DataTemplate.Triggers>
-                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ComboBoxItem}}, Path=IsSelected}" Value="{x:Null}">
-                            <Setter TargetName="theControl" Property="Template" Value="{StaticResource SelectedItemTemplate}" />
-                        </DataTrigger>
-                    </DataTemplate.Triggers>
-                </DataTemplate>
-            </Grid.Resources>
+                            <ControlTemplate x:Key="SelectedItemTemplate">
+                                <Image Source="../Assets/search.png"></Image>
+                            </ControlTemplate>
+                            <ControlTemplate x:Key="ItemsTemplate">
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox Margin="1" IsChecked="{Binding IsSelected,Mode=TwoWay}"/>
+                                    <TextBlock Text="{Binding Name}" Margin="1"/>
+                                </StackPanel>
+                            </ControlTemplate>
+                            <DataTemplate x:Key="CbxSearchTemplate">
+                                <Control x:Name="theControl" Focusable="False" Template="{StaticResource ItemsTemplate}" />
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ComboBoxItem}}, Path=IsSelected}" Value="{x:Null}">
+                                        <Setter TargetName="theControl" Property="Template" Value="{StaticResource SelectedItemTemplate}" />
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </Grid.Resources>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
@@ -200,7 +200,7 @@
                         <ComboBox Grid.Column="0" Grid.Row="0" SelectedItem="{Binding RechercherParList[0],Mode=OneTime}"
                                   Margin="2" ItemsSource="{Binding RechercherParList,Mode=TwoWay}" ItemTemplate="{StaticResource CbxSearchTemplate}"/>
                         <TextBox Grid.Row="0" Text="{Binding SearchText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Margin="1" BorderBrush="Black"></TextBox>
-                    </Grid>                    
+                    </Grid>
                     <DataGrid  Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding ListNotesExamins}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Matricule" IsReadOnly="True"
@@ -223,11 +223,30 @@
                                                       Minimum="0" MinWidth="40"/>-->
                         </DataGrid.Columns>
                     </DataGrid>
-                    
+
                 </Grid>
             </controls:MetroTabItem>
             <controls:MetroTabItem Header="Notes Dettes">
                 <Grid>
+                    <Grid.Resources>
+                        <ControlTemplate x:Key="SelectedItemTemplate">
+                            <Image Source="../Assets/search.png"></Image>
+                        </ControlTemplate>
+                        <ControlTemplate x:Key="ItemsTemplate">
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox Margin="1" IsChecked="{Binding IsSelected,Mode=TwoWay}"/>
+                                <TextBlock Text="{Binding Name}" Margin="1"/>
+                            </StackPanel>
+                        </ControlTemplate>
+                        <DataTemplate x:Key="CbxSearchTemplate">
+                            <Control x:Name="theControl" Focusable="False" Template="{StaticResource ItemsTemplate}" />
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ComboBoxItem}}, Path=IsSelected}" Value="{x:Null}">
+                                    <Setter TargetName="theControl" Property="Template" Value="{StaticResource SelectedItemTemplate}" />
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </Grid.Resources>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="*"/>
@@ -241,15 +260,10 @@
                             <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <controls:DropDownButton  Grid.Row="0" Grid.Column="0" Margin="2"
-                             VerticalContentAlignment="Center"
-                             HorizontalAlignment="Stretch"
-                             Content="Rechercher par"
-                             DisplayMemberPath="Matricule"
-                             HorizontalContentAlignment="Center"                                        
-                             ItemsSource="{Binding RechercherParList}">
-                        </controls:DropDownButton>
-                        <TextBox Grid.Row="0" Text="{Binding SearchText,Mode=TwoWay}" Grid.Column="1" Margin="1" BorderBrush="Black"></TextBox>
+                        <ComboBox Grid.Column="0" Grid.Row="0" SelectedItem="{Binding RechercherParList[0],Mode=OneTime}"
+                                  Margin="2" ItemsSource="{Binding RechercherParList,Mode=TwoWay}" ItemTemplate="{StaticResource CbxSearchTemplate}"/>
+                        <TextBox Grid.Row="0" Text="{Binding SearchTextDette,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Margin="1" BorderBrush="Black"></TextBox>
+
                     </Grid>
                     <DataGrid  Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding ListNotesDettes}">
                         <DataGrid.Columns>

@@ -48,6 +48,7 @@ namespace ESC_OfflineTeacher.ViewModel
         private string _currentYear = "";
         private ObservableCollection<SearchItem> _rechercherParList;
         private String _searchText = "";
+        private String _searchTextDette = "";
         private bool _sideBarIsOpen;
         private ENSEIGNANT _loggedInTeacher;
         private SPECIALITE _selectedSpecialite;
@@ -303,6 +304,42 @@ namespace ESC_OfflineTeacher.ViewModel
                 else
                 {
                     RefreshNoteStudentList();
+                }
+            }
+        }
+        public String SearchTextDette
+        {
+            get
+            {
+                return _searchTextDette;
+            }
+
+            set
+            {
+                if (_searchTextDette == value)
+                {
+                    return;
+                }
+
+                _searchTextDette = value;
+                RaisePropertyChanged();
+
+
+                var seachTextDette = _searchTextDette.ToLower();
+                if (seachTextDette != "")
+                {
+                    var matricule = RechercherParList[0].IsSelected;
+                    var nom = RechercherParList[1].IsSelected;
+                    var prenom = RechercherParList[2].IsSelected;
+
+                    ListNotesDettes = new ObservableCollection<EtudiantNoteDette>(_listNotesDettesForSearch.Where(x =>
+                           x.Matricule.ToLower().Contains(seachTextDette) && matricule
+                        || x.Nom.ToLower().Contains(seachTextDette) && nom
+                        || x.Prenom.ToLower().Contains(seachTextDette) && prenom));
+                }
+                else
+                {
+                    RefreshNoteDetteStudentList();
                 }
             }
         }
