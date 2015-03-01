@@ -65,6 +65,7 @@ namespace ESC_OfflineTeacher.ViewModel
         private ObservableCollection<String> _listExaminDette;
         private int _pbValue;
         private Visibility _pbVisibility = Visibility.Collapsed;
+        private String _selectedExaminDette;
         #endregion
         #region Properties
         public string CurrentYear
@@ -235,6 +236,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 SelectedExamin = _examinList.FirstOrDefault();
             }
         }
+        
         public String NbEtdiants
         {
             get
@@ -548,6 +550,25 @@ namespace ESC_OfflineTeacher.ViewModel
                 RefreshNoteStudentList();
                 RefreshNoteDetteStudentList();
             }
+        }      
+        
+        public String SelectedExaminDette
+        {
+            get
+            {
+                return _selectedExaminDette;
+            }
+
+            set
+            {
+                if (_selectedExaminDette == value)
+                {
+                    return;
+                }
+
+                _selectedExaminDette = value;
+                RaisePropertyChanged();
+            }
         }
         public ObservableCollection<String> ListExaminDette
         {
@@ -565,6 +586,7 @@ namespace ESC_OfflineTeacher.ViewModel
 
                 _listExaminDette = value;
                 RaisePropertyChanged();
+                SelectedExaminDette = _listExaminDette.FirstOrDefault();
             }
         }
         public int PbValue

@@ -59,7 +59,20 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0" Content="Nombre des étudiants" HorizontalAlignment="Center"/>
-                    <Label Grid.Row="1" HorizontalAlignment="Center" Content="{Binding ListNotesExamins.Count}" FontSize="20" Foreground="White"/>
+                    <Label Grid.Row="1" HorizontalAlignment="Center" FontSize="20" Foreground="White">
+                        <Label.Style>
+                            <Style>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SelectedIndex,ElementName=TabCtl}" Value="0">
+                                        <Setter Property="Label.Content" Value="{Binding ListNotesExamins.Count}"></Setter>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding SelectedIndex,ElementName=TabCtl}" Value="1">
+                                        <Setter Property="Label.Content" Value="{Binding ListNotesDettes.Count}"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Label.Style>
+                    </Label>
                 </Grid>
                 <Grid  Grid.Row="2" Margin="5" Background="{StaticResource AccentColorBrush}">
                     <Grid.RowDefinitions>
@@ -140,11 +153,23 @@
                     <Label  Grid.Row="0" Content="Examin" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                     <ComboBox   Grid.Row="0" Grid.Column="1" Margin="5"
                        VerticalContentAlignment="Center"
-                       HorizontalAlignment="Stretch"                 
-                       DisplayMemberPath="DESIGNATION_LATIN"
-                       HorizontalContentAlignment="Center"                                          
-                       ItemsSource="{Binding ExaminList}"
-                       SelectedItem="{Binding SelectedExamin,Mode=TwoWay}">
+                       HorizontalAlignment="Stretch"                                        
+                       HorizontalContentAlignment="Center">
+                        <ComboBox.Style>
+                            <Style>
+                                <Style.Triggers>
+                                    <DataTrigger  Binding="{Binding SelectedIndex, ElementName=TabCtl}" Value="0">
+                                        <Setter Property="ComboBox.ItemsSource" Value="{Binding ExaminList}"></Setter>
+                                        <Setter Property="ComboBox.DisplayMemberPath" Value="DESIGNATION_LATIN"></Setter>
+                                        <Setter Property="ComboBox.SelectedItem" Value="{Binding SelectedExamin,Mode=TwoWay}"></Setter>
+                                    </DataTrigger>
+                                    <DataTrigger  Binding="{Binding SelectedIndex, ElementName=TabCtl}" Value="1">
+                                        <Setter Property="ComboBox.ItemsSource" Value="{Binding ListExaminDette}"></Setter>
+                                        <Setter Property="ComboBox.SelectedItem" Value="{Binding SelectedExaminDette,Mode=TwoWay}"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ComboBox.Style>
                     </ComboBox>
                     <Label Content="Afficher Tous" Grid.Row="1" Grid.Column="0"></Label>
                     <CheckBox Grid.Row="1" Grid.Column="1" ></CheckBox>
@@ -156,7 +181,7 @@
             <controls:ProgressRing Foreground="{DynamicResource AccentColorBrush}" IsLarge="False"  IsActive="{Binding ProgressRingIsActive}" Height="40"  Width="40"/>
             <Button ToolTip="Exporter les modification" Content="Synchroniser"  Command="{Binding SyncCommand}"/>
         </StackPanel>
-        <controls:MetroAnimatedTabControl Grid.Row="1" Grid.Column="2">
+        <controls:MetroAnimatedTabControl x:Name="TabCtl" Grid.Row="1" Grid.Column="2">
             <controls:MetroTabItem Header="Notes Examins">
                 <Grid>
                     <Grid.RowDefinitions>
