@@ -288,8 +288,7 @@
                         </Grid.ColumnDefinitions>
                         <ComboBox Grid.Column="0" Grid.Row="0" SelectedItem="{Binding RechercherParList[0],Mode=OneTime}"
                                   Margin="2" ItemsSource="{Binding RechercherParList,Mode=TwoWay}" ItemTemplate="{StaticResource CbxSearchTemplate}"/>
-                        <TextBox Grid.Row="0" Text="{Binding SearchTextDette,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Margin="1" BorderBrush="Black"></TextBox>
-
+                        <TextBox Grid.Row="0" Text="{Binding SearchTextDette,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Margin="1" BorderBrush="Black"/>
                     </Grid>
                     <StackPanel  Grid.Row="1">
                         <StackPanel.Resources>                            

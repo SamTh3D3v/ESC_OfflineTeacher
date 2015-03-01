@@ -4,11 +4,14 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
 using ESC_OfflineTeacher.Model;
+using ESC_OfflineTeacher.Properties;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Synchronization.Data;
@@ -779,6 +782,12 @@ namespace ESC_OfflineTeacher.ViewModel
                             n.NOTE_RATTRAPAGE = etudiantNoteDette.NoteRattrapage;
                         }
                         _context.SaveChanges();
+
+
+                        GetHashCode()
+                       Settings.Default.HashValue                                             
+
+                        
                     }));
             }
         }
@@ -867,11 +876,19 @@ namespace ESC_OfflineTeacher.ViewModel
             };
             agent.SessionProgress += new EventHandler<Microsoft.Synchronization.SessionProgressEventArgs>(agent_SessionProgress);
             ((ESCLocalDbClientSyncProvider)agent.LocalProvider).ApplyChangeFailed += new EventHandler<Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs>(Local_ApplyChangeFailed);
+            ((ESCLocalDbClientSyncProvider)agent.LocalProvider).ChangesSelected += new EventHandler<Microsoft.Synchronization.Data.ChangesSelectedEventArgs>(Local_ChangedSelected);
             ((ESCLocalDbServerSyncProvider)agent.RemoteProvider).ApplyChangeFailed += new EventHandler<Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs>(Remote_ApplyChangeFailed);
 
             e.Result = agent.Synchronize();
 
         }
+
+        private void Local_ChangedSelected(object sender, ChangesSelectedEventArgs e)
+        {            
+            //e.Session
+        }
+
+
         void agent_SessionProgress(object sender, Microsoft.Synchronization.SessionProgressEventArgs e)
         {
             PbValue = e.PercentCompleted;
@@ -940,6 +957,17 @@ namespace ESC_OfflineTeacher.ViewModel
                                  NoteRattrapage = x.noteRattrapage
                              }));
                 _listNotesDettesForSearch = new ObservableCollection<EtudiantNoteDette>(ListNotesDettes);
+            }
+        }
+
+        public string ComputeHash(string fileName)
+        {
+            using (var md5 = MD5.Create())
+            {
+                using (var stream = File.OpenRead(fileName))
+                {
+                    return BitConverter.ToString(md5.ComputeHash(stream));
+                }
             }
         }
         #endregion
