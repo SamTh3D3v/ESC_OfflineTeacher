@@ -92,10 +92,10 @@ namespace ESC_OfflineTeacher.ViewModel
                         () =>
                         {
                             _navigationService.NavigateTo("LoginView");
-                            using (var context=new LocalDbEntities())
+                            using (var context = new LocalDbEntities())
                             {
                                 LoggedInUser = context.ENSEIGNANTS.First(x => x.ID_ENSEIGNANT == 2);
-                                ListSpeciliteEns=new ObservableCollection<SPECIALITE>(context.ENS_SPEMAT.Where(x=>x.ID_ENSEIGNANT==LoggedInUser.ID_ENSEIGNANT).Select(x=>x.SPECIALITE).Distinct().ToList());
+                                ListSpeciliteEns = new ObservableCollection<SPECIALITE>(context.ENS_SPEMAT.Where(x => x.ID_ENSEIGNANT == LoggedInUser.ID_ENSEIGNANT).Select(x => x.SPECIALITE).Distinct().ToList());
                             }
                          
                         }));

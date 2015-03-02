@@ -747,6 +747,7 @@ namespace ESC_OfflineTeacher.ViewModel
                     ?? (_noteViewLoadedCommand = new RelayCommand(
                     () =>
                     {
+
                         //the loggin is using a wcf service where the returned data is of USER type
                         LoggedInTeacher = _context.ENSEIGNANTS.First(x => x.ID_ENSEIGNANT == 2);
                         CurrentYear = _context.ANNEES.Max(x => x.ANNEE_UNIVERSITAIRE).ToString(CultureInfo.InvariantCulture);
@@ -770,22 +771,35 @@ namespace ESC_OfflineTeacher.ViewModel
                         var cy = int.Parse(CurrentYear);
                         foreach (var etudiantNote in ListNotesExamins)
                         {
-                            _context.NOTES_EXAMEN.First(x => x.ID_ETUDIANT == etudiantNote.IdEtudiant && x.ANNEE_UNIVERSITAIRE == cy &&
-                                                             x.ID_MATIERE == SelectedMatiere.ID_MATIERE && x.ID_EXAMEN == _selectedExamen.ID_EXAMEN).NOTE =
-                                etudiantNote.Note;
+                            var oldNote =
+                                _context.NOTES_EXAMEN.First(
+                                    x => x.ID_ETUDIANT == etudiantNote.IdEtudiant && x.ANNEE_UNIVERSITAIRE == cy &&
+                                         x.ID_MATIERE == SelectedMatiere.ID_MATIERE &&
+                                         x.ID_EXAMEN == _selectedExamen.ID_EXAMEN).NOTE;
+                            if (oldNote != etudiantNote.Note)
+                            {
+                                LOG_SaisieNotes(etudiantNote.IdEtudiant,SelectedMatiere.ID_MATIERE,oldNote, etudiantNote.Note, false);
+                                oldNote = etudiantNote.Note;
+                            }                            
                         }
                         foreach (var etudiantNoteDette in ListNotesDettes)
                         {
-                            var n = _context.NOTE_DETTE.First(x => x.ID_ETUDIANT == etudiantNoteDette.IdEtudiant && x.ANNEE_PASSAGE_DETTE == cy &&
+                            var old = _context.NOTE_DETTE.First(x => x.ID_ETUDIANT == etudiantNoteDette.IdEtudiant && x.ANNEE_PASSAGE_DETTE == cy &&
                                                                    x.ID_MATIERE == SelectedMatiere.ID_MATIERE);
-                            n.NOTE = etudiantNoteDette.Note;
-                            n.NOTE_RATTRAPAGE = etudiantNoteDette.NoteRattrapage;
+                            var oldNote=old.NOTE ;
+                            var oldNoteRattrapage=old.NOTE_RATTRAPAGE ;
+                            if (oldNote != etudiantNoteDette.Note || oldNoteRattrapage != etudiantNoteDette.NoteRattrapage)
+                            {
+                                LOG_SaisieNotes(etudiantNoteDette.IdEtudiant, SelectedMatiere.ID_MATIERE, oldNote, etudiantNoteDette.Note, true, oldNoteRattrapage, etudiantNoteDette.NoteRattrapage);
+                                oldNote = etudiantNoteDette.Note;
+                                oldNoteRattrapage = etudiantNoteDette.NoteRattrapage;
+                            }
                         }
                         _context.SaveChanges();
 
 
-                        GetHashCode()
-                       Settings.Default.HashValue                                             
+                       // GetHashCode();
+                       //Settings.Default.HashValue                                             
 
                         
                     }));
@@ -970,6 +984,29 @@ namespace ESC_OfflineTeacher.ViewModel
                 }
             }
         }
+
+        //log modifications
+
+        public void LOG_SaisieNotes(int? idEtudiant,int? idMatiere,double? oldNote, double? newNote, bool dette, double? oldNoteRattrapage=null, double? newNoteRattrapage=null)
+        {
+            const string details = "[MACHINE={0}];[ACTION=Modification d'une note d'un étudiant];[{1}]";                      
+            _context.LOGs.AddObject(new LOG()
+            {
+                ID_LOG = new Guid(),
+                ID_ETUDIANT = idEtudiant,
+                ID_USER = (int) LoggedInTeacher.ID_USER,
+                JOUR = DateTime.Now,
+                OPERATION = "Modifier",                
+                ANNEE_UNIVERSITAIRE = int.Parse(CurrentYear),
+                ID_MATIERE = idMatiere,
+                MODULE = "SaisieNotes",
+                DETAILS = (!dette)?String.Format(details, System.Environment.MachineName, "[" + SelectedExamin.DESIGNATION + "=" + oldNote + "-->" + SelectedExamin.DESIGNATION + "=" + newNote + "]"):
+                                   String.Format(details, System.Environment.MachineName, "[ancienne note=" + oldNote + "-->" + "nouvelle note=" + newNote + "];[ancienne note rattrapage=" + oldNoteRattrapage + "-->" + "nouvelle note=" + newNoteRattrapage + "];"),
+                
+            });
+        }
+
+       
         #endregion
 
 
