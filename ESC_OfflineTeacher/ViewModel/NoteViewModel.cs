@@ -992,7 +992,7 @@ namespace ESC_OfflineTeacher.ViewModel
             const string details = "[MACHINE={0}];[ACTION=Modification d'une note d'un étudiant];[{1}]";                      
             _context.LOGs.AddObject(new LOG()
             {
-                ID_LOG = new Guid(),
+                ID_LOG = Guid.NewGuid(),
                 ID_ETUDIANT = idEtudiant,
                 ID_USER = (int) LoggedInTeacher.ID_USER,
                 JOUR = DateTime.Now,

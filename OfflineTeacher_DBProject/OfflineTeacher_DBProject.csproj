@@ -137,6 +137,7 @@
     <Content Include="SQLScripts\ESCLocalDb.dbo.EXAMENS.sql" />
     <Content Include="SQLScripts\ESCLocalDb.dbo.EXAMENS_ANNEES_MODES_ETUDES.sql" />
     <Content Include="SQLScripts\ESCLocalDb.dbo.GROUPES.sql" />
+    <Content Include="SQLScripts\ESCLocalDb.dbo.LOG.sql" />
     <Content Include="SQLScripts\ESCLocalDb.dbo.MATIERES.sql" />
     <Content Include="SQLScripts\ESCLocalDb.dbo.MODES_ETUDES.sql" />
     <Content Include="SQLScripts\ESCLocalDb.dbo.NOTE.sql" />
@@ -170,6 +171,7 @@
     <Content Include="SQLUndoScripts\ESCLocalDb.dbo.EXAMENS.undo.sql" />
     <Content Include="SQLUndoScripts\ESCLocalDb.dbo.EXAMENS_ANNEES_MODES_ETUDES.undo.sql" />
     <Content Include="SQLUndoScripts\ESCLocalDb.dbo.GROUPES.undo.sql" />
+    <Content Include="SQLUndoScripts\ESCLocalDb.dbo.LOG.undo.sql" />
     <Content Include="SQLUndoScripts\ESCLocalDb.dbo.MATIERES.undo.sql" />
     <Content Include="SQLUndoScripts\ESCLocalDb.dbo.MODES_ETUDES.undo.sql" />
     <Content Include="SQLUndoScripts\ESCLocalDb.dbo.NOTE.undo.sql" />
