@@ -768,6 +768,9 @@ namespace ESC_OfflineTeacher.ViewModel
                     ?? (_saveCommand = new RelayCommand(
                     () =>
                     {
+                        var res = AppDomain.CurrentDomain.BaseDirectory.ToString() + "SGSDB.sdf";
+                        var hashRes = ComputeHash(res);
+                        Debug.WriteLine(hashRes);
                         var cy = int.Parse(CurrentYear);
                         foreach (var etudiantNote in ListNotesExamins)
                         {
@@ -779,7 +782,10 @@ namespace ESC_OfflineTeacher.ViewModel
                             if (oldNote != etudiantNote.Note)
                             {
                                 LOG_SaisieNotes(etudiantNote.IdEtudiant,SelectedMatiere.ID_MATIERE,oldNote, etudiantNote.Note, false);
-                                oldNote = etudiantNote.Note;
+                                _context.NOTES_EXAMEN.First(
+                                    x => x.ID_ETUDIANT == etudiantNote.IdEtudiant && x.ANNEE_UNIVERSITAIRE == cy &&
+                                         x.ID_MATIERE == SelectedMatiere.ID_MATIERE &&
+                                         x.ID_EXAMEN == _selectedExamen.ID_EXAMEN).NOTE = etudiantNote.Note;
                             }                            
                         }
                         foreach (var etudiantNoteDette in ListNotesDettes)
@@ -791,17 +797,24 @@ namespace ESC_OfflineTeacher.ViewModel
                             if (oldNote != etudiantNoteDette.Note || oldNoteRattrapage != etudiantNoteDette.NoteRattrapage)
                             {
                                 LOG_SaisieNotes(etudiantNoteDette.IdEtudiant, SelectedMatiere.ID_MATIERE, oldNote, etudiantNoteDette.Note, true, oldNoteRattrapage, etudiantNoteDette.NoteRattrapage);
-                                oldNote = etudiantNoteDette.Note;
-                                oldNoteRattrapage = etudiantNoteDette.NoteRattrapage;
+                                _context.NOTE_DETTE.First(x => x.ID_ETUDIANT == etudiantNoteDette.IdEtudiant && x.ANNEE_PASSAGE_DETTE == cy &&
+                                                                   x.ID_MATIERE == SelectedMatiere.ID_MATIERE).NOTE = etudiantNoteDette.Note;
+                                _context.NOTE_DETTE.First(x => x.ID_ETUDIANT == etudiantNoteDette.IdEtudiant && x.ANNEE_PASSAGE_DETTE == cy &&
+                                                                  x.ID_MATIERE == SelectedMatiere.ID_MATIERE).NOTE_RATTRAPAGE = etudiantNoteDette.NoteRattrapage;
                             }
                         }
+                       // _context.SaveChanges();
                         _context.SaveChanges();
-
-
-                       // GetHashCode();
-                       //Settings.Default.HashValue                                             
-
                         
+
+                         hashRes = ComputeHash(res);
+                         Debug.WriteLine(hashRes);
+                        
+
+                        //Settings.Default.HashValue = hashRes;
+                        
+
+
                     }));
             }
         }
@@ -975,13 +988,17 @@ namespace ESC_OfflineTeacher.ViewModel
         }
 
         public string ComputeHash(string fileName)
-        {
+        {                        
             using (var md5 = MD5.Create())
             {
+                string to = "\\res.sdf";
+                File.Copy(fileName,to,true);
                 using (var stream = File.OpenRead(fileName))
+                //using (var stream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
                 {
                     return BitConverter.ToString(md5.ComputeHash(stream));
                 }
+
             }
         }
 
