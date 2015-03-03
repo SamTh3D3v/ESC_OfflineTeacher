@@ -26,10 +26,9 @@
     </i:Interaction.Triggers>
     <Grid Background="WhiteSmoke">
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>            
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -181,10 +180,73 @@
             </Grid>
         </Border>
         <GridSplitter Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Width="5" HorizontalAlignment="Center"/>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="2">
-            <controls:ProgressRing Foreground="{DynamicResource AccentColorBrush}" IsLarge="False"  IsActive="{Binding ProgressRingIsActive}" Height="40"  Width="40"/>
-            <Button ToolTip="{DynamicResource SynchroniserToolTip}" Content="{DynamicResource Synchroniser}"  Command="{Binding SyncCommand}"/>
-        </StackPanel>
+        <Grid  HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <Label Content="import" Grid.Column="0" Grid.Row="1"></Label>
+            <Label Content="export" Grid.Column="1" Grid.Row="1"></Label>
+            <Label Content="enregistrer" Grid.Column="4" Grid.Row="1"></Label>
+            <Label Content="annuler" Grid.Column="5" Grid.Row="1"></Label>
+            <Label Content="synchroniser" Grid.Column="6" Grid.Row="1"></Label>
+            
+            
+
+            <Button Grid.Row="0"  ToolTip="{DynamicResource CancelTooltip}" Grid.Column="0" Width="55" Height="55" VerticalAlignment="Bottom" Command="{Binding CancelCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+                <Rectangle Width="20" Height="20">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Fill"
+                                     Visual="{StaticResource appbar_arrow_down}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+            <Button  Grid.Row="0" Grid.Column="1" ToolTip="{DynamicResource CancelTooltip}" Width="55" Height="55" VerticalAlignment="Bottom" Command="{Binding CancelCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+                <Rectangle Width="20" Height="20">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Fill"
+                                     Visual="{StaticResource appbar_arrow_up}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+
+
+            <controls:ProgressRing Grid.Row="0" Grid.Column="3" VerticalAlignment="Center"  HorizontalAlignment="Right" Foreground="{DynamicResource AccentColorBrush}" IsLarge="False"  IsActive="{Binding ProgressRingIsActive}" Height="55"  Width="55"/>
+            <Button Grid.Column="4" Grid.Row="0" ToolTip="{DynamicResource SaveTooltip}" HorizontalAlignment="Center" Width="55" Height="55" VerticalAlignment="Bottom" Command="{Binding SaveCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+                <Rectangle Width="20" Height="20">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Fill"
+                                     Visual="{StaticResource appbar_save}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+            <Button Grid.Row="0" Grid.Column="5"  ToolTip="{DynamicResource CancelTooltip}" HorizontalAlignment="Center" Width="55" Height="55" VerticalAlignment="Bottom" Command="{Binding CancelCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+                <Rectangle Width="20" Height="20">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Fill"
+                                     Visual="{StaticResource appbar_cancel}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+            <Button Grid.Row="0" Background="DeepSkyBlue" ToolTip="{DynamicResource SynchroniserToolTip}" Grid.Column="6" HorizontalAlignment="Right" Width="80" Height="80" VerticalAlignment="Top" Command="{Binding SyncCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+                <Rectangle Width="20" Height="20">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Fill"
+                                     Visual="{StaticResource appbar_cell_merge}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+        </Grid>
         <controls:MetroAnimatedTabControl x:Name="TabCtl" Grid.Row="1" Grid.Column="2">
             <controls:MetroTabItem Header="{DynamicResource NotesExamens}">
                 <Grid>
@@ -232,13 +294,13 @@
                     </Grid>
                     <DataGrid  Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding ListNotesExamins}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Matricule" IsReadOnly="True"
+                            <DataGridTextColumn Header="{DynamicResource Matricule}" IsReadOnly="True"
                                     Binding="{Binding Matricule}" MinWidth="100" />
-                            <DataGridTextColumn Header="Nom" IsReadOnly="True"
+                            <DataGridTextColumn Header="{DynamicResource Nom}" IsReadOnly="True"
                                     Binding="{Binding Nom}" MinWidth="150"/>
-                            <DataGridTextColumn Header="Prenom" IsReadOnly="True"
+                            <DataGridTextColumn Header="{DynamicResource Prenom}" IsReadOnly="True"
                                     Binding="{Binding Prenom}" MinWidth="150"/>
-                            <controls:DataGridNumericUpDownColumn Header="NOTE" IsReadOnly="False" 
+                            <controls:DataGridNumericUpDownColumn Header="{DynamicResource Note}" IsReadOnly="False" 
                                                       Binding="{Binding Note,Mode=TwoWay}" 
                                                       StringFormat="N" 
                                                       Minimum="0" Maximum="20" MinWidth="40"/>
@@ -323,26 +385,8 @@
                         </StackPanel>
                 </Grid>
             </controls:MetroTabItem>
-        </controls:MetroAnimatedTabControl>
-        <StackPanel Grid.Column="2" Grid.Row="2"  Orientation="Horizontal" HorizontalAlignment="Right" >
-            <Button ToolTip="{DynamicResource SaveTooltip}" Width="55" Height="55" VerticalAlignment="Top" Command="{Binding SaveCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
-                <Rectangle Width="20" Height="20">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill"
-                                     Visual="{StaticResource appbar_save}" />
-                    </Rectangle.Fill>
-                </Rectangle>
-            </Button>
-            <Button ToolTip="{DynamicResource CancelTooltip}" Width="55" Height="55" VerticalAlignment="Top" Command="{Binding CancelCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
-                <Rectangle Width="20" Height="20">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill"
-                                     Visual="{StaticResource appbar_cancel}" />
-                    </Rectangle.Fill>
-                </Rectangle>
-            </Button>
-        </StackPanel>
-        <controls:MetroProgressBar Grid.Row="3" Maximum="100" Visibility="{Binding PbVisibility}"  Value="{Binding PbValue,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Column="0" Grid.ColumnSpan="3"/>
+        </controls:MetroAnimatedTabControl>        
+        <controls:MetroProgressBar Grid.Row="2" Maximum="100" Visibility="{Binding PbVisibility}"  Value="{Binding PbValue,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Column="0" Grid.ColumnSpan="3"/>
     </Grid>
 
 </Page>
