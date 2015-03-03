@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using OfflineTeacher_DBProject;
 
 
@@ -17,10 +18,50 @@ namespace ESC_OfflineTeacher.ViewModel
         private bool _navigationSource;
         private ObservableCollection<SPECIALITE> _listSpeciliteEns;
         private ENSEIGNANT _loggedInUser  ;
-        private bool _langueInterfaceFr;
-        private bool _langueInterfaceAr;
+        private bool _langueInterfaceFr=true;
+        private bool _langueInterfaceAr=false;
+        private bool _langueContenuFr = true;
+        private bool _langueContenuAr = false;
         #endregion
         #region Properties
+        public bool LangueContenuFr
+        {
+            get
+            {
+                return _langueContenuFr;
+            }
+
+            set
+            {
+                if (_langueContenuFr == value)
+                {
+                    return;
+                }
+
+                _langueContenuFr = value;
+                RaisePropertyChanged();
+                Messenger.Default.Send<bool>(_langueContenuFr, "LangFr");
+                
+            }
+        }
+        public bool LangueContenuAr
+        {
+            get
+            {
+                return _langueContenuAr;
+            }
+
+            set
+            {
+                if (_langueContenuAr == value)
+                {
+                    return;
+                }
+
+                _langueContenuAr = value;
+                RaisePropertyChanged();                                
+            }
+        }
 
         public bool LangueInterfaceFr
         {

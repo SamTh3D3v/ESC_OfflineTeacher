@@ -125,6 +125,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\Microsoft SDKs\Microsoft Sync Framework\v1.0\Runtime\ADO.NET\V2.0\x64\Microsoft.Synchronization.Data.SqlServerCe.dll</HintPath>
     </Reference>
+    <Reference Include="QuickConverter">
+      <HintPath>..\Assemblies\QuickConverter.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -157,6 +160,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\FlyoutOpenConverter.cs" />
+    <Compile Include="Converters\DisplayMemberPathConverter.cs" />
     <Compile Include="Model\EtudiantNote.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModel\IFrameNavigationService.cs" />

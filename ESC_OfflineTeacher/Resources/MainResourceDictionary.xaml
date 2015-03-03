@@ -11,5 +11,6 @@
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />      
     </ResourceDictionary.MergedDictionaries>
-    <converters:FlyoutOpenConverter x:Key="FlyoutOpenConverter"/>   
+    <converters:FlyoutOpenConverter x:Key="FlyoutOpenConverter"/>
+    <converters:DisplayMemberPathConverter x:Key="DisplayMemberPathConverter"/> 
 </ResourceDictionary>

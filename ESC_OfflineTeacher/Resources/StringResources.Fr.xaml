@@ -34,5 +34,6 @@
     <system:String x:Key="CancelTooltip">Annuler les changement</system:String>        
     <system:String x:Key="Login">Utilisateur</system:String>        
     <system:String x:Key="MotDePasse">Mot de passe</system:String>        
-    <system:String x:Key="Connextion">Connection</system:String>        
+    <system:String x:Key="Connextion">Connection</system:String>
+    <system:Boolean x:Key="LangueContenuFr">true</system:Boolean>        
 </ResourceDictionary>

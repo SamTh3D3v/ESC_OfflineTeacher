@@ -7,7 +7,8 @@
         xmlns:ignore="http://www.ignore.com"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:command="http://www.galasoft.ch/mvvmlight"
-        mc:Ignorable="d ignore" d:DesignHeight="600" d:DesignWidth="1000"
+      xmlns:qc="clr-namespace:QuickConverter;assembly=QuickConverter"
+        mc:Ignorable="d ignore" d:DesignHeight="600" d:DesignWidth="1000"      
         DataContext="{Binding NoteViewModel, Source={StaticResource Locator}}" Background="WhiteSmoke" >
     <Page.Resources>
         <ResourceDictionary>
@@ -88,16 +89,17 @@
 
                     <ComboBox  Grid.Row="0" Grid.Column="1" Margin="5"
                          VerticalContentAlignment="Center"
-                         HorizontalAlignment="Stretch"                 
-                         DisplayMemberPath="DESIGNATION_LATIN"
+                         HorizontalAlignment="Stretch"                                          
+                         DisplayMemberPath="{Binding LangContentFr,Converter={StaticResource DisplayMemberPathConverter}}"                               
                          HorizontalContentAlignment="Center"                                
                          ItemsSource="{Binding SpecialiteList}"
                          SelectedItem="{Binding SelectedSpecialite,Mode=TwoWay}">
+                      
                     </ComboBox>
                     <ComboBox  Grid.Row="1" Grid.Column="1" Margin="5"
                          VerticalContentAlignment="Center"
                          HorizontalAlignment="Stretch"                 
-                         DisplayMemberPath="DESIGNATION_LATIN"
+                         DisplayMemberPath="{Binding LangContentFr,Converter={StaticResource DisplayMemberPathConverter}}"
                          HorizontalContentAlignment="Center"                                          
                          ItemsSource="{Binding MatiereList}"
                          SelectedItem="{Binding SelectedMatiere}">
@@ -119,7 +121,7 @@
                     <ComboBox  Grid.Row="0" Grid.Column="1" Margin="5"
                        VerticalContentAlignment="Center"
                        HorizontalAlignment="Stretch"                 
-                       DisplayMemberPath="DESIGNATION_LATIN"
+                       DisplayMemberPath="{Binding LangContentFr,Converter={StaticResource DisplayMemberPathConverter}}"
                        HorizontalContentAlignment="Center"                               
                        ItemsSource="{Binding SemestreList}"
                        SelectedItem="{Binding SelectedSemester,Mode=TwoWay}">
@@ -160,12 +162,13 @@
                                 <Style.Triggers>
                                     <DataTrigger  Binding="{Binding SelectedIndex, ElementName=TabCtl}" Value="0">
                                         <Setter Property="ComboBox.ItemsSource" Value="{Binding ExaminList}"></Setter>
-                                        <Setter Property="ComboBox.DisplayMemberPath" Value="DESIGNATION_LATIN"></Setter>
+                                        <Setter Property="ComboBox.DisplayMemberPath" Value="{Binding LangContentFr,Converter={StaticResource DisplayMemberPathConverter}}"></Setter>
                                         <Setter Property="ComboBox.SelectedItem" Value="{Binding SelectedExamin,Mode=TwoWay}"></Setter>
                                     </DataTrigger>
                                     <DataTrigger  Binding="{Binding SelectedIndex, ElementName=TabCtl}" Value="1">
                                         <Setter Property="ComboBox.ItemsSource" Value="{Binding ListExaminDette}"></Setter>
                                         <Setter Property="ComboBox.SelectedItem" Value="{Binding SelectedExaminDette,Mode=TwoWay}"></Setter>
+                                        <Setter Property="ComboBox.DisplayMemberPath" Value="{Binding LangContentFr,Converter={StaticResource DisplayMemberPathConverter}}"></Setter>
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>

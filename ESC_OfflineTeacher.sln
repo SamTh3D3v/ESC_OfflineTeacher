@@ -5,8 +5,6 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESC_OfflineTeacher", "ESC_OfflineTeacher\ESC_OfflineTeacher.csproj", "{552177FB-1089-4BC4-B074-E3E6370125FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncLibrary", "SyncLibrary\SyncLibrary.csproj", "{5AEF7747-4766-4AFD-9509-71241DEC734E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfflineTeacher_DBProject", "OfflineTeacher_DBProject\OfflineTeacher_DBProject.csproj", "{B8B56E81-6095-4B37-A782-F20B5EC93D05}"
 EndProject
 Global
@@ -35,20 +33,6 @@ Global
 		{552177FB-1089-4BC4-B074-E3E6370125FC}.Release|x64.ActiveCfg = Release|x64
 		{552177FB-1089-4BC4-B074-E3E6370125FC}.Release|x64.Build.0 = Release|x64
 		{552177FB-1089-4BC4-B074-E3E6370125FC}.Release|x86.ActiveCfg = Release|Any CPU
-		{5AEF7747-4766-4AFD-9509-71241DEC734E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5AEF7747-4766-4AFD-9509-71241DEC734E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5AEF7747-4766-4AFD-9509-71241DEC734E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{5AEF7747-4766-4AFD-9509-71241DEC734E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{5AEF7747-4766-4AFD-9509-71241DEC734E}.Debug|x64.ActiveCfg = Debug|x64
-		{5AEF7747-4766-4AFD-9509-71241DEC734E}.Debug|x64.Build.0 = Debug|x64
-		{5AEF7747-4766-4AFD-9509-71241DEC734E}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{5AEF7747-4766-4AFD-9509-71241DEC734E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5AEF7747-4766-4AFD-9509-71241DEC734E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5AEF7747-4766-4AFD-9509-71241DEC734E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{5AEF7747-4766-4AFD-9509-71241DEC734E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{5AEF7747-4766-4AFD-9509-71241DEC734E}.Release|x64.ActiveCfg = Release|x64
-		{5AEF7747-4766-4AFD-9509-71241DEC734E}.Release|x64.Build.0 = Release|x64
-		{5AEF7747-4766-4AFD-9509-71241DEC734E}.Release|x86.ActiveCfg = Release|Any CPU
 		{B8B56E81-6095-4B37-A782-F20B5EC93D05}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{B8B56E81-6095-4B37-A782-F20B5EC93D05}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{B8B56E81-6095-4B37-A782-F20B5EC93D05}.Debug|Mixed Platforms.Build.0 = Debug|x86

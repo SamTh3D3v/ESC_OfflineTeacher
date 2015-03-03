@@ -14,6 +14,7 @@ using ESC_OfflineTeacher.Model;
 using ESC_OfflineTeacher.Properties;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Synchronization.Data;
@@ -70,12 +71,31 @@ namespace ESC_OfflineTeacher.ViewModel
         private IEnumerable<GROUPE> _allGroupesList;
         private IEnumerable<SECTION> _allSectionsList;
 
-        private ObservableCollection<String> _listExaminDette;
+        private ObservableCollection<ExaminDette> _listExaminDette;
         private int _pbValue;
         private Visibility _pbVisibility = Visibility.Collapsed;
-        private String _selectedExaminDette;
+        private ExaminDette _selectedExaminDette;
+        private bool _langContentFr=true;
         #endregion
         #region Properties
+        public bool LangContentFr
+        {
+            get
+            {
+                return _langContentFr;
+            }
+
+            set
+            {
+                if (_langContentFr == value)
+                {
+                    return;
+                }
+
+                _langContentFr = value;
+                RaisePropertyChanged();
+            }
+        }
         public string CurrentYear
         {
             get
@@ -559,7 +579,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 RefreshNoteDetteStudentList();
             }
         }
-        public String SelectedExaminDette
+        public ExaminDette SelectedExaminDette
         {
             get
             {
@@ -570,12 +590,14 @@ namespace ESC_OfflineTeacher.ViewModel
             {
                 _selectedExaminDette = value;
                 RaisePropertyChanged();
-                if (_selectedExaminDette == ListExaminDette[0] && !AfficherTousExamin)
+                if (_selectedExaminDette==null)
+                return;
+                if (_selectedExaminDette.DESIGNATION_LATIN == ListExaminDette[0].DESIGNATION_LATIN && !AfficherTousExamin)
                 {
                     NoteDetteColVisibility = Visibility.Visible;
                     RattrapageDetteColVisibility = Visibility.Collapsed;
                 }
-                else if (_selectedExaminDette == ListExaminDette[1] && !AfficherTousExamin)
+                else if (_selectedExaminDette.DESIGNATION_LATIN == ListExaminDette[1].DESIGNATION_LATIN && !AfficherTousExamin)
                 {
                     NoteDetteColVisibility = Visibility.Collapsed;
                     RattrapageDetteColVisibility = Visibility.Visible;
@@ -583,7 +605,7 @@ namespace ESC_OfflineTeacher.ViewModel
 
             }
         }
-        public ObservableCollection<String> ListExaminDette
+        public ObservableCollection<ExaminDette> ListExaminDette
         {
             get
             {
@@ -864,10 +886,19 @@ namespace ESC_OfflineTeacher.ViewModel
 
             ListNotesExamins = new ObservableCollection<EtudiantNote>();
             ListNotesDettes = new ObservableCollection<EtudiantNoteDette>();
-            ListExaminDette = new ObservableCollection<string>()
+            ListExaminDette = new ObservableCollection<ExaminDette>()
             {
-                "Note",
-                "Rattrapage"
+                new ExaminDette()
+                {
+                    DESIGNATION = "النقطة" ,
+                    DESIGNATION_LATIN = "Note"
+                },
+                new ExaminDette()
+                {
+                    DESIGNATION = "الاستدراك",
+                    DESIGNATION_LATIN = "Rattrapage"
+                }
+ 
             };
             RechercherParList = new ObservableCollection<SearchItem>()
             {
@@ -887,6 +918,12 @@ namespace ESC_OfflineTeacher.ViewModel
                     IsSelected = true
                 }               
             };
+            if (_navigationService.Parameter != null)
+                LangContentFr = (bool) _navigationService.Parameter;
+            Messenger.Default.Register<bool>(this,"LangFr", (fr) =>
+            {
+                LangContentFr = fr;
+            });
         }
         private void InitializeBackgroundWorker()
         {
@@ -1052,6 +1089,13 @@ namespace ESC_OfflineTeacher.ViewModel
     {
         public String Name { get; set; }
         public bool IsSelected { get; set; }
+    }
+
+    public class ExaminDette
+    {
+        public String DESIGNATION { get; set; }
+        public String DESIGNATION_LATIN { get; set; }
+        
     }
 
 }

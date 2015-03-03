@@ -15,7 +15,8 @@ namespace ESC_OfflineTeacher.ViewModel
     class FrameNavigationService : IFrameNavigationService,INotifyPropertyChanged
     {
         private readonly Dictionary<string, Uri> _pagesByKey;
-        private readonly List<string> _historic; 
+        private readonly List<string> _historic;        
+        public bool LangContentFr { get; set; }
         public FrameNavigationService()
         {
             _pagesByKey = new Dictionary<string, Uri>();

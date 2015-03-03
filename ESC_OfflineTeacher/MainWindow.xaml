@@ -99,11 +99,11 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="15" Foreground="White"  Margin="5,2,2,2" Content="{DynamicResource LangueInteface}"/>
-                                <RadioButton GroupName="langueInterface" Content="{DynamicResource Francais}" Grid.Row="1" Grid.Column="1" IsChecked="{Binding LangueInterfaceFr,Mode=TwoWay}"/>
+                                <RadioButton GroupName="langueInterface" Content="{DynamicResource Francais}" Grid.Row="1" Grid.Column="1"  IsChecked="{Binding LangueInterfaceFr,Mode=TwoWay}"/>
                                 <RadioButton GroupName="langueInterface" Content="{DynamicResource Arab}" Grid.Row="2" Grid.Column="1" IsChecked="{Binding LangueInterfaceAr,Mode=TwoWay}"/>
                                 <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" FontSize="15" Foreground="White" Margin="5,2,2,2" Content="{DynamicResource LangueContenue}"/>
-                                <RadioButton GroupName="langueContenue" Content="{DynamicResource Francais}" Grid.Row="4" Grid.Column="1"/>
-                                <RadioButton GroupName="langueContenue" Content="{DynamicResource Arab}" Grid.Row="5" Grid.Column="1"/>
+                                <RadioButton GroupName="langueContenue" Content="{DynamicResource Francais}" IsChecked="{Binding LangueContenuFr,Mode=TwoWay}" Grid.Row="4" Grid.Column="1"/>
+                                <RadioButton GroupName="langueContenue" Content="{DynamicResource Arab}" IsChecked="{Binding LangueContenuAr,Mode=TwoWay}" Grid.Row="5" Grid.Column="1"/>
                             </Grid>                                                       
                         </Grid>
                     </Border>
