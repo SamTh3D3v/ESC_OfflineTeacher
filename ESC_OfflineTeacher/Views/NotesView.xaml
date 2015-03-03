@@ -183,7 +183,7 @@
             <Button ToolTip="Exporter les modification" Content="Synchroniser"  Command="{Binding SyncCommand}"/>
         </StackPanel>
         <controls:MetroAnimatedTabControl x:Name="TabCtl" Grid.Row="1" Grid.Column="2">
-            <controls:MetroTabItem Header="Notes Examins">
+            <controls:MetroTabItem Header="Notes Examens">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
@@ -334,7 +334,7 @@
                 <Rectangle Width="20" Height="20">
                     <Rectangle.Fill>
                         <VisualBrush Stretch="Fill"
-                                     Visual="{StaticResource appbar_delete}" />
+                                     Visual="{StaticResource appbar_cancel}" />
                     </Rectangle.Fill>
                 </Rectangle>
             </Button>
