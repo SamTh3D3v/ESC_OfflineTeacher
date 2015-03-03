@@ -17,9 +17,56 @@ namespace ESC_OfflineTeacher.ViewModel
         private bool _navigationSource;
         private ObservableCollection<SPECIALITE> _listSpeciliteEns;
         private ENSEIGNANT _loggedInUser  ;
-      
+        private bool _langueInterfaceFr;
+        private bool _langueInterfaceAr;
         #endregion
         #region Properties
+
+        public bool LangueInterfaceFr
+        {
+            get
+            {
+                return _langueInterfaceFr;
+            }
+
+            set
+            {
+                if (_langueInterfaceFr == value)
+                {
+                    return;
+                }
+
+                _langueInterfaceFr = value;
+                RaisePropertyChanged();
+                if (_langueInterfaceFr)
+                {
+                    App.SelectCulture("Fr");
+                }
+            }
+        }
+
+        public bool LangueInterfaceAr
+        {
+            get
+            {
+                return _langueInterfaceAr;
+            }
+
+            set
+            {
+                if (_langueInterfaceAr == value)
+                {
+                    return;
+                }
+
+                _langueInterfaceAr = value;
+                RaisePropertyChanged();
+                if (_langueInterfaceAr)
+                {
+                    App.SelectCulture("Ar");                    
+                }
+            }
+        }
 
         public IFrameNavigationService FrameNavigationService
         {

@@ -50,7 +50,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Content="Année Universitaire" HorizontalAlignment="Center"/>
+                    <Label Grid.Row="0" Content="{DynamicResource AnneeUniversitaire}" HorizontalAlignment="Center"/>
                     <Label Grid.Row="1" HorizontalAlignment="Center" Content="{Binding CurrentYear}" FontSize="20" Foreground="White"/>
                 </Grid>
                 <Grid  Grid.Row="1" Margin="5" Background="{StaticResource AccentColorBrush}" >
@@ -58,7 +58,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Content="Nombre des étudiants" HorizontalAlignment="Center"/>
+                    <Label Grid.Row="0" Content="{DynamicResource NombreDesEtudiants}" HorizontalAlignment="Center"/>
                     <Label Grid.Row="1" HorizontalAlignment="Center" FontSize="20" Foreground="White">
                         <Label.Style>
                             <Style>
@@ -83,8 +83,8 @@
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="Spécialité" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                    <Label Content="Matiere" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <Label Content="{DynamicResource Specilite}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <Label Content="{DynamicResource Matiere}" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 
                     <ComboBox  Grid.Row="0" Grid.Column="1" Margin="5"
                          VerticalContentAlignment="Center"
@@ -113,9 +113,9 @@
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="Semèstre" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                    <Label Content="Section" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                    <Label Content="Groupe" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <Label Content="{DynamicResource Semestre}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <Label Content="{DynamicResource Section}" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <Label Content="{DynamicResource Groupe}" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                     <ComboBox  Grid.Row="0" Grid.Column="1" Margin="5"
                        VerticalContentAlignment="Center"
                        HorizontalAlignment="Stretch"                 
@@ -150,7 +150,7 @@
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Label  Grid.Row="0" Content="Examin" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <Label  Grid.Row="0" Content="{DynamicResource Examin}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                     <ComboBox   Grid.Row="0" Grid.Column="1" Margin="5"
                        VerticalContentAlignment="Center"
                        HorizontalAlignment="Stretch"                                        
@@ -172,7 +172,7 @@
                         </ComboBox.Style>
                     </ComboBox>
                    <!--using this have some dawbacks-->
-                    <Label Content="Afficher Tous" Grid.Row="1" Grid.Column="0"></Label>
+                    <Label Content="{DynamicResource AfficherTous}" Grid.Row="1" Grid.Column="0"></Label>
                     <CheckBox Margin="5" Grid.Row="1" Grid.Column="1" IsChecked="{Binding AfficherTousExamin,Mode=TwoWay}" ></CheckBox>
                 </Grid>
             </Grid>
@@ -180,10 +180,10 @@
         <GridSplitter Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Width="5" HorizontalAlignment="Center"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="2">
             <controls:ProgressRing Foreground="{DynamicResource AccentColorBrush}" IsLarge="False"  IsActive="{Binding ProgressRingIsActive}" Height="40"  Width="40"/>
-            <Button ToolTip="Exporter les modification" Content="Synchroniser"  Command="{Binding SyncCommand}"/>
+            <Button ToolTip="{DynamicResource SynchroniserToolTip}" Content="{DynamicResource Synchroniser}"  Command="{Binding SyncCommand}"/>
         </StackPanel>
         <controls:MetroAnimatedTabControl x:Name="TabCtl" Grid.Row="1" Grid.Column="2">
-            <controls:MetroTabItem Header="Notes Examens">
+            <controls:MetroTabItem Header="{DynamicResource NotesExamens}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
@@ -252,7 +252,7 @@
 
                 </Grid>
             </controls:MetroTabItem>
-            <controls:MetroTabItem Header="Notes Dettes">
+            <controls:MetroTabItem Header="{DynamicResource NotesDettes}">
                 <Grid>
                     <Grid.Resources>
                         <ControlTemplate x:Key="SelectedItemTemplate">
@@ -299,18 +299,18 @@
                 Content="{StaticResource ProxyElement}"/>
                         <DataGrid  AutoGenerateColumns="False" ItemsSource="{Binding ListNotesDettes}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Matricule" IsReadOnly="True"
+                            <DataGridTextColumn Header="{DynamicResource Matricule}" IsReadOnly="True"
                                     Binding="{Binding Matricule}" MinWidth="100"/>
-                            <DataGridTextColumn Header="Nom" IsReadOnly="True"
+                            <DataGridTextColumn Header="{DynamicResource Nom}" IsReadOnly="True"
                                     Binding="{Binding Nom}" MinWidth="150"/>
-                            <DataGridTextColumn Header="Prenom" IsReadOnly="True"
+                            <DataGridTextColumn Header="{DynamicResource Prenom}" IsReadOnly="True"
                                     Binding="{Binding Prenom}" MinWidth="150"/>
-                            <controls:DataGridNumericUpDownColumn Header="NOTE" Visibility="{Binding DataContext.NoteDetteColVisibility,Source={StaticResource ProxyElement}}"
+                            <controls:DataGridNumericUpDownColumn Header="{DynamicResource Note}" Visibility="{Binding DataContext.NoteDetteColVisibility,Source={StaticResource ProxyElement}}"
                                                       Binding="{Binding Note,Mode=TwoWay}" 
                                                       StringFormat="N" Maximum="20" MaxWidth="100"
                                                       Minimum="0"  IsReadOnly="False" >                                
                             </controls:DataGridNumericUpDownColumn>
-                            <controls:DataGridNumericUpDownColumn Header="RATTRAPAGE" 
+                            <controls:DataGridNumericUpDownColumn Header="{DynamicResource Rattrapage}" 
                                                       Binding="{Binding NoteRattrapage,Mode=TwoWay}" IsReadOnly="False" Visibility="{Binding DataContext.RattrapageDetteColVisibility,Source={StaticResource ProxyElement}}"
                                                       StringFormat="N" 
                                                       Minimum="0" Maximum="20" />
@@ -322,7 +322,7 @@
             </controls:MetroTabItem>
         </controls:MetroAnimatedTabControl>
         <StackPanel Grid.Column="2" Grid.Row="2"  Orientation="Horizontal" HorizontalAlignment="Right" >
-            <Button ToolTip="Enregistrer les modification" Width="55" Height="55" VerticalAlignment="Top" Command="{Binding SaveCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+            <Button ToolTip="{DynamicResource SaveTooltip}" Width="55" Height="55" VerticalAlignment="Top" Command="{Binding SaveCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
                 <Rectangle Width="20" Height="20">
                     <Rectangle.Fill>
                         <VisualBrush Stretch="Fill"
@@ -330,7 +330,7 @@
                     </Rectangle.Fill>
                 </Rectangle>
             </Button>
-            <Button ToolTip="Annuler les changement" Width="55" Height="55" VerticalAlignment="Top" Command="{Binding CancelCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+            <Button ToolTip="{DynamicResource CancelTooltip}" Width="55" Height="55" VerticalAlignment="Top" Command="{Binding CancelCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
                 <Rectangle Width="20" Height="20">
                     <Rectangle.Fill>
                         <VisualBrush Stretch="Fill"

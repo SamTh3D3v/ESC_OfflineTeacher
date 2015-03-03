@@ -9,7 +9,7 @@
         xmlns:command="http://www.galasoft.ch/mvvmlight"
         xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
         mc:Ignorable="d ignore"
-        Title="Offline Teacher"
+        Title="{DynamicResource WindowTitle}"
         Height="600"
         Width="800"
         EnableDWMDropShadow="True"
@@ -46,7 +46,7 @@
                     </Rectangle>
                     <TextBlock Margin="4 0 0 0"
                    VerticalAlignment="Center"
-                   Text="Paramètre" />
+                   Text="{DynamicResource Settings}" />
                 </StackPanel>
             </Button>
             <Button Click="UserButton_OnClick">
@@ -67,7 +67,7 @@
     </controls:MetroWindow.RightWindowCommands>
     <controls:MetroWindow.Flyouts>
         <controls:FlyoutsControl >
-            <controls:Flyout x:Name="SettingsFlyout" Header="Settings" Position="Right" HorizontalAlignment="Stretch"  Theme="Dark" Width="300">
+            <controls:Flyout x:Name="SettingsFlyout" Header="{DynamicResource Settings}" Position="Right" HorizontalAlignment="Stretch"  Theme="Dark" Width="300">
                 <Grid  Margin="5,40,5,5" HorizontalAlignment="Stretch">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -83,7 +83,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Border Grid.Row="0" Grid.Column="0" BorderBrush="White" BorderThickness="1">
-                                <Label Margin="5,2,2,2" Content="Langue" FontSize="15" Foreground="White"/>
+                                <Label Margin="5,2,2,2" Content="{DynamicResource Langue}" FontSize="15" Foreground="White"/>
                             </Border>
                             <Grid Grid.Row="1">
                                 <Grid.RowDefinitions>
@@ -98,13 +98,12 @@
                                     <ColumnDefinition Width="100"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                
-                                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="15" Foreground="White"  Margin="5,2,2,2" Content="Langue Inteface"/>
-                                <RadioButton GroupName="langueInterface" Content="francais" Grid.Row="1" Grid.Column="1"/>
-                                <RadioButton GroupName="langueInterface" Content="arab" Grid.Row="2" Grid.Column="1"/>
-                                <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" FontSize="15" Foreground="White" Margin="5,2,2,2" Content="Langue contenue"/>
-                                <RadioButton GroupName="langueContenue" Content="francais" Grid.Row="4" Grid.Column="1"/>
-                                <RadioButton GroupName="langueContenue" Content="arab" Grid.Row="5" Grid.Column="1"/>
+                                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="15" Foreground="White"  Margin="5,2,2,2" Content="{DynamicResource LangueInteface}"/>
+                                <RadioButton GroupName="langueInterface" Content="{DynamicResource Francais}" Grid.Row="1" Grid.Column="1" IsChecked="{Binding LangueInterfaceFr,Mode=TwoWay}"/>
+                                <RadioButton GroupName="langueInterface" Content="{DynamicResource Arab}" Grid.Row="2" Grid.Column="1" IsChecked="{Binding LangueInterfaceAr,Mode=TwoWay}"/>
+                                <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" FontSize="15" Foreground="White" Margin="5,2,2,2" Content="{DynamicResource LangueContenue}"/>
+                                <RadioButton GroupName="langueContenue" Content="{DynamicResource Francais}" Grid.Row="4" Grid.Column="1"/>
+                                <RadioButton GroupName="langueContenue" Content="{DynamicResource Arab}" Grid.Row="5" Grid.Column="1"/>
                             </Grid>                                                       
                         </Grid>
                     </Border>
@@ -113,10 +112,9 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            
+                            </Grid.RowDefinitions>                            
                             <Border Grid.Row="0" Grid.Column="0" BorderBrush="White" BorderThickness="1">
-                                <Label Margin="5,2,2,2" Content="Theme" FontSize="15" Foreground="White"/>
+                                <Label Margin="5,2,2,2" Content="{DynamicResource Theme}" FontSize="15" Foreground="White"/>
                             </Border>
                             <Grid Grid.Row="1">
                                 <Grid.RowDefinitions>
@@ -127,8 +125,8 @@
                                     <ColumnDefinition Width="100"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <RadioButton GroupName="themeGroupe" Content="Dark" Grid.Column="1" Grid.Row="0"/>
-                                <RadioButton GroupName="themeGroupe" Content="Light" Grid.Column="1" Grid.Row="1"/>                               
+                                <RadioButton GroupName="themeGroupe" Content="{DynamicResource Dark}" Grid.Column="1" Grid.Row="0"/>
+                                <RadioButton GroupName="themeGroupe" Content="{DynamicResource Light}" Grid.Column="1" Grid.Row="1"/>                               
                             </Grid>
                         </Grid>                       
                     </Border>
@@ -139,14 +137,11 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Label Margin="20,2,2,2" Content="parametre" FontSize="15" Grid.Row="0" Grid.Column="0" Foreground="White"/>
-
                         </Grid>
                     </Border>-->
-
-
                 </Grid>
             </controls:Flyout>
-            <controls:Flyout x:Name="DisconnectFlyout" Header="Information"    Position="Right"   Theme="Accent">
+            <controls:Flyout x:Name="DisconnectFlyout" Header="{DynamicResource Information}"    Position="Right"   Theme="Accent">
                 <Grid  Margin="5,40,5,5" HorizontalAlignment="Right">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -154,25 +149,23 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-
                     <Border Grid.Row="0" BorderThickness="1" BorderBrush="White" Margin="0,5,0,5">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="100"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Margin="20,2,2,2" Content="Nom" FontSize="15" Grid.Row="0" Grid.Column="0" Foreground="White"/>
+                            <Label Margin="20,2,2,2" Content="{DynamicResource Nom}" FontSize="15" Grid.Row="0" Grid.Column="0" Foreground="White"/>
                             <Label Margin="2" Content="{Binding LoggedInUser.NOM_LATIN}"  Foreground="LightBlue" Grid.Column="1"/>
                         </Grid>
                     </Border>
-
                     <Border Grid.Row="1" BorderThickness="1" BorderBrush="White" Margin="0,5,0,5">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="100"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Margin="20,2,2,2" Content="Prenom" FontSize="15" Grid.Column="0" Foreground="White"/>
+                            <Label Margin="20,2,2,2" Content="{DynamicResource Prenom}" FontSize="15" Grid.Column="0" Foreground="White"/>
                             <Label Margin="2" Content="{Binding LoggedInUser.PRENOM_LATIN}"  Foreground="LightBlue" Grid.Column="1"/>
                         </Grid>
                     </Border>
@@ -182,7 +175,7 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <Label Margin="20,2,2,2" Content="Specilité" FontSize="15" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Left" Foreground="White"/>
+                            <Label Margin="20,2,2,2" Content="{DynamicResource Specilite}" FontSize="15" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Left" Foreground="White"/>
                             <ListView Background="{x:Null}"  Margin="2"   ItemsSource="{Binding ListSpeciliteEns}" Foreground="LightBlue" DisplayMemberPath="DESIGNATION_LATIN" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch">
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="ListViewItem">
@@ -193,7 +186,6 @@
                             </ListView>
                         </Grid>
                     </Border>
-
                     <Button Visibility="Collapsed" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom" IsEnabled="False">
                         <StackPanel Orientation="Horizontal">
                             <Rectangle Width="20" Height="20"
