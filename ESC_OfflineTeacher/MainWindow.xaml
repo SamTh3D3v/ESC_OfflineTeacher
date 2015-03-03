@@ -25,9 +25,9 @@
                 <ResourceDictionary Source="/Resources/Icons.xaml" />
                 <ResourceDictionary Source="Resources/MainResourceDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>      
+        </ResourceDictionary>
     </controls:MetroWindow.Resources>
-    
+
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <command:EventToCommand Command="{Binding Mode=OneWay,Path=MainWindowLoadedCommand}" PassEventArgsToCommand="True"/>
@@ -67,10 +67,7 @@
     </controls:MetroWindow.RightWindowCommands>
     <controls:MetroWindow.Flyouts>
         <controls:FlyoutsControl >
-            <controls:Flyout x:Name="SettingsFlyout" Header="Settings" Position="Top" Height="300" Theme="Dark">
-
-            </controls:Flyout>
-            <controls:Flyout x:Name="DisconnectFlyout" Header="Information"    Position="Top"  Height="auto" Theme="Accent">
+            <controls:Flyout x:Name="SettingsFlyout" Header="Settings" Position="Right"  Theme="Dark" Width="200">
                 <Grid  Margin="5,40,5,5" HorizontalAlignment="Right">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -78,20 +75,90 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150"/>
-                        <ColumnDefinition Width="200"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Margin="20,2,2,2" Content="Nom" Grid.Row="0" Grid.Column="0" Foreground="White"/>
-                    <Label Margin="2" Content="{Binding LoggedInUser.NOM_LATIN}" Grid.Row="0" Foreground="LightBlue" Grid.Column="1"/>
 
-                    <Label Margin="20,2,2,2" Content="Prenom" Grid.Row="1" Grid.Column="0" Foreground="White"/>
-                    <Label Margin="2" Content="{Binding LoggedInUser.PRENOM_LATIN}" Grid.Row="1" Foreground="LightBlue" Grid.Column="1"/>
+                    <Border Grid.Row="0" BorderThickness="1" BorderBrush="White" Margin="0,5,0,5">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Margin="20,2,2,2" Content="Langue" FontSize="15" Grid.Row="0" Grid.Column="0" Foreground="White"/>
+                            
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="1" BorderThickness="1" BorderBrush="White" Margin="0,5,0,5">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Margin="20,2,2,2" Content="Theme" FontSize="15" Grid.Row="0" Grid.Column="0" Foreground="White"/>
 
-                    <Label Margin="20,2,2,2" Content="Specilité" Grid.Row="2" Grid.Column="0" Foreground="White"/>
-                    <ComboBox Margin="2"  ItemsSource="{Binding ListSpeciliteEns}" Foreground="LightBlue" DisplayMemberPath="DESIGNATION_LATIN" Grid.Row="2" Grid.Column="1"/>
-                    
-                    <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="2" BorderThickness="1" BorderBrush="White" Margin="0,5,0,5">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Margin="20,2,2,2" Content="parametre" FontSize="15" Grid.Row="0" Grid.Column="0" Foreground="White"/>
+
+                        </Grid>
+                    </Border>
+
+
+                </Grid>
+            </controls:Flyout>
+            <controls:Flyout x:Name="DisconnectFlyout" Header="Information"    Position="Right"   Theme="Accent">
+                <Grid  Margin="5,40,5,5" HorizontalAlignment="Right">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" BorderThickness="1" BorderBrush="White" Margin="0,5,0,5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Margin="20,2,2,2" Content="Nom" FontSize="15" Grid.Row="0" Grid.Column="0" Foreground="White"/>
+                            <Label Margin="2" Content="{Binding LoggedInUser.NOM_LATIN}"  Foreground="LightBlue" Grid.Column="1"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Row="1" BorderThickness="1" BorderBrush="White" Margin="0,5,0,5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Margin="20,2,2,2" Content="Prenom" FontSize="15" Grid.Column="0" Foreground="White"/>
+                            <Label Margin="2" Content="{Binding LoggedInUser.PRENOM_LATIN}"  Foreground="LightBlue" Grid.Column="1"/>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="2" BorderThickness="1" BorderBrush="White" Margin="0,5,0,5">
+                        <Grid>
+                            <Grid.RowDefinitions >
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Margin="20,2,2,2" Content="Specilité" FontSize="15" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Left" Foreground="White"/>
+                            <ListView Background="{x:Null}"  Margin="2"   ItemsSource="{Binding ListSpeciliteEns}" Foreground="LightBlue" DisplayMemberPath="DESIGNATION_LATIN" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch">
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="FontSize" Value="14" />
+                                        <Setter Property="Foreground" Value="White" />
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+                            </ListView>
+                        </Grid>
+                    </Border>
+
+                    <Button Visibility="Collapsed" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom" IsEnabled="False">
                         <StackPanel Orientation="Horizontal">
                             <Rectangle Width="20" Height="20"
                    Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
