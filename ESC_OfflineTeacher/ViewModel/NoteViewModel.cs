@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Documents;
@@ -19,6 +20,7 @@ using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Synchronization.Data;
 using Microsoft.Synchronization.Data.SqlServerCe;
+using Microsoft.Win32;
 using OfflineTeacher_DBProject;
 
 
@@ -874,6 +876,78 @@ namespace ESC_OfflineTeacher.ViewModel
                     }));
             }
         }
+        private RelayCommand _importDataBaseCommand;
+        public RelayCommand ImportDataBaseCommand
+        {
+            get
+            {
+                return _importDataBaseCommand
+                    ?? (_importDataBaseCommand = new RelayCommand(async () =>
+                    {
+                        var dlg = new OpenFileDialog
+                        {
+                            DefaultExt = ".sdf",
+                            Filter = "SqlCE database (.sdf)|*.sdf",
+                            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+                        };
+                        if (dlg.ShowDialog() == true)
+                        {
+                            try
+                            {                                
+                                string fileName = dlg.FileName;
+                                var hashReader=new StreamReader(fileName+".hash");
+                                var hash = ComputeHash(fileName);
+                                if (!hash.Equals(hashReader.ReadLine().Trim()))
+                                {
+                                    _controller = await ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("impossible d'importer le fichier", "le fichier que vous voulez importer est interrompu ... "));
+                                    return;
+                                }
+                                Settings.Default["HashValue"] = ComputeHash(fileName, _localDbPath);
+                                Settings.Default.Save();
+                            }
+                            catch (Exception e)
+                            {
+                                Debug.WriteLine("In StreamReader Exception ->" + e.Message);
+                            }
+                        }
+                        
+                    }));
+            }
+        }
+        private RelayCommand _exportDataBaseCommand;
+        public RelayCommand ExportDataBaseCommand
+        {
+            get
+            {
+                return _exportDataBaseCommand
+                    ?? (_exportDataBaseCommand = new RelayCommand(async () =>
+                    {
+                        //export the database and the hash file
+                        var dlg = new SaveFileDialog
+                        {
+                            DefaultExt = ".sdf",
+                            Filter = "SqlCE database (.sdf)|*.sdf",
+                            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+                        };
+                        if (dlg.ShowDialog() == true)
+                        {
+                            try
+                            {
+                                string fileName = dlg.FileName;                              
+                                var hash=ComputeHash(_localDbPath,fileName);
+                                var strWritter = new StreamWriter(fileName + ".hash");
+                                await strWritter.WriteLineAsync(hash);                                
+                                strWritter.Close();
+
+                            }
+                            catch (Exception e)
+                            {
+                                Debug.WriteLine("In StreamReader Exception ->" + e.Message);
+                            }
+                        }                     
+                    }));
+            }
+        }
         #endregion
         #region Ctors and Methods
         public NoteViewModel(IFrameNavigationService navigationService)
@@ -1048,20 +1122,27 @@ namespace ESC_OfflineTeacher.ViewModel
             }
         }
 
-        public string ComputeHash(string fileName)
+        public string ComputeHash(string fileName,string exportTo=null)
         {
             using (var md5 = MD5.Create())
             {
-                string to = "\\res.sdf";
+
+                string to = exportTo ?? "\\res.sdf";
                 File.Copy(fileName, to, true);
-                using (var stream = File.OpenRead(to))
-                //using (var stream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+                string res="";
+                using (var stream = File.OpenRead(to))                
                 {
-                    return BitConverter.ToString(md5.ComputeHash(stream));
+                     res= BitConverter.ToString(md5.ComputeHash(stream));
                 }
+                if (exportTo==null)
+                {
+                    File.Delete(to);
+                }
+                return res;
 
             }
         }
+
 
         //log modifications
         public void LOG_SaisieNotes(int? idEtudiant, int? idMatiere, double? oldNote, double? newNote, bool dette, double? oldNoteRattrapage = null, double? newNoteRattrapage = null)

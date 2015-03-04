@@ -195,15 +195,15 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             
-            <Label Content="import" Grid.Column="0" Grid.Row="1"></Label>
-            <Label Content="export" Grid.Column="1" Grid.Row="1"></Label>
-            <Label Content="enregistrer" Grid.Column="4" Grid.Row="1"></Label>
-            <Label Content="annuler" Grid.Column="5" Grid.Row="1"></Label>
-            <Label Content="synchroniser" Grid.Column="6" Grid.Row="1"></Label>
+            <Label Content="{DynamicResource Import}" Grid.Column="0" Grid.Row="1"></Label>
+            <Label Content="{DynamicResource Export}" Grid.Column="1" Grid.Row="1"></Label>
+            <Label Content="{DynamicResource Enregistrer}" Grid.Column="4" Grid.Row="1"></Label>
+            <Label Content="{DynamicResource Annuler}" Grid.Column="5" Grid.Row="1"></Label>
+            <Label Content="{DynamicResource Synchroniser}" Grid.Column="6" Grid.Row="1"></Label>
             
             
 
-            <Button Grid.Row="0"  ToolTip="{DynamicResource CancelTooltip}" Grid.Column="0" Width="55" Height="55" VerticalAlignment="Bottom" Command="{Binding CancelCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+            <Button Grid.Row="0"  ToolTip="{DynamicResource CancelTooltip}" Grid.Column="0" Width="55" Height="55" VerticalAlignment="Bottom" Command="{Binding ImportDataBaseCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
                 <Rectangle Width="20" Height="20">
                     <Rectangle.Fill>
                         <VisualBrush Stretch="Fill"
@@ -211,7 +211,7 @@
                     </Rectangle.Fill>
                 </Rectangle>
             </Button>
-            <Button  Grid.Row="0" Grid.Column="1" ToolTip="{DynamicResource CancelTooltip}" Width="55" Height="55" VerticalAlignment="Bottom" Command="{Binding CancelCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+            <Button  Grid.Row="0" Grid.Column="1" ToolTip="{DynamicResource CancelTooltip}" Width="55" Height="55" VerticalAlignment="Bottom" Command="{Binding ExportDataBaseCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
                 <Rectangle Width="20" Height="20">
                     <Rectangle.Fill>
                         <VisualBrush Stretch="Fill"
@@ -221,7 +221,7 @@
             </Button>
 
 
-            <controls:ProgressRing Grid.Row="0" Grid.Column="3" VerticalAlignment="Center"  HorizontalAlignment="Right" Foreground="{DynamicResource AccentColorBrush}" IsLarge="False"  IsActive="{Binding ProgressRingIsActive}" Height="55"  Width="55"/>
+            <controls:ProgressRing Grid.Row="0" Grid.Column="3" VerticalAlignment="Bottom"  HorizontalAlignment="Right" Foreground="{DynamicResource AccentColorBrush}" IsLarge="False"  IsActive="{Binding ProgressRingIsActive}" Height="50"  Width="50"/>
             <Button Grid.Column="4" Grid.Row="0" ToolTip="{DynamicResource SaveTooltip}" HorizontalAlignment="Center" Width="55" Height="55" VerticalAlignment="Bottom" Command="{Binding SaveCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
                 <Rectangle Width="20" Height="20">
                     <Rectangle.Fill>

@@ -35,5 +35,9 @@
     <system:String x:Key="Login">المستخدم</system:String>
     <system:String x:Key="MotDePasse">كلمة السر</system:String>
     <system:String x:Key="Connextion">دخول</system:String>
+    <system:String x:Key="Import">توريد</system:String>
+    <system:String x:Key="Export">تصدير</system:String>
+    <system:String x:Key="Enregistrer">حفظ</system:String>
+    <system:String x:Key="Annuler">الغاء</system:String>
     <system:Boolean x:Key="LangueContenuFr">true</system:Boolean>
 </ResourceDictionary>

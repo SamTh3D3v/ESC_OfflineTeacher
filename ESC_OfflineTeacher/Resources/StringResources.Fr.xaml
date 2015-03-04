@@ -35,5 +35,9 @@
     <system:String x:Key="Login">Utilisateur</system:String>        
     <system:String x:Key="MotDePasse">Mot de passe</system:String>        
     <system:String x:Key="Connextion">Connection</system:String>
+    <system:String x:Key="Import">import</system:String>
+    <system:String x:Key="Export">export</system:String>
+    <system:String x:Key="Enregistrer">enregistrer</system:String>
+    <system:String x:Key="Annuler">annuler</system:String>    
     <system:Boolean x:Key="LangueContenuFr">true</system:Boolean>        
 </ResourceDictionary>
