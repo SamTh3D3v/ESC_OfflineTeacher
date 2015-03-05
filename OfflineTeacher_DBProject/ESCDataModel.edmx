@@ -28,166 +28,11 @@
           <EntitySet Name="SPECIALITES" EntityType="SGSDBModel.Store.SPECIALITES" store:Type="Tables" />
           <EntitySet Name="SPECIALITES_ANNEES_MODES_ETUDES" EntityType="SGSDBModel.Store.SPECIALITES_ANNEES_MODES_ETUDES" store:Type="Tables" />
           <EntitySet Name="SPECIALITES_MATIERES" EntityType="SGSDBModel.Store.SPECIALITES_MATIERES" store:Type="Tables" />
+          <EntitySet Name="UserPreferences" EntityType="SGSDBModel.Store.UserPreferences" store:Type="Tables" />
           <EntitySet Name="USERS_SPECIALITES" EntityType="SGSDBModel.Store.USERS_SPECIALITES" store:Type="Tables" />
           <AssociationSet Name="__syncArticles_FK" Association="SGSDBModel.Store.__syncArticles_FK">
             <End Role="__syncSubscriptions" EntitySet="__syncSubscriptions" />
             <End Role="__syncArticles" EntitySet="__syncArticles" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_EnsSpeMat_Annee" Association="SGSDBModel.Store.Relation_EnsSpeMat_Annee">
-            <End Role="ANNEES" EntitySet="ANNEES" />
-            <End Role="ENS_SPEMAT" EntitySet="ENS_SPEMAT" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_EnsSpeMat_Enseigant" Association="SGSDBModel.Store.Relation_EnsSpeMat_Enseigant">
-            <End Role="ENSEIGNANTS" EntitySet="ENSEIGNANTS" />
-            <End Role="ENS_SPEMAT" EntitySet="ENS_SPEMAT" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_EnsSpeMat_Matiere" Association="SGSDBModel.Store.Relation_EnsSpeMat_Matiere">
-            <End Role="MATIERES" EntitySet="MATIERES" />
-            <End Role="ENS_SPEMAT" EntitySet="ENS_SPEMAT" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_EnsSpeMat_Specialite" Association="SGSDBModel.Store.Relation_EnsSpeMat_Specialite">
-            <End Role="SPECIALITES" EntitySet="SPECIALITES" />
-            <End Role="ENS_SPEMAT" EntitySet="ENS_SPEMAT" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_Etude_Annee" Association="SGSDBModel.Store.Relation_Etude_Annee">
-            <End Role="ANNEES" EntitySet="ANNEES" />
-            <End Role="ETUDES" EntitySet="ETUDES" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_Etude_Etudiant" Association="SGSDBModel.Store.Relation_Etude_Etudiant">
-            <End Role="ETUDIANTS" EntitySet="ETUDIANTS" />
-            <End Role="ETUDES" EntitySet="ETUDES" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_Etude_Groupe" Association="SGSDBModel.Store.Relation_Etude_Groupe">
-            <End Role="GROUPES" EntitySet="GROUPES" />
-            <End Role="ETUDES" EntitySet="ETUDES" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_Etude_Section" Association="SGSDBModel.Store.Relation_Etude_Section">
-            <End Role="SECTIONS" EntitySet="SECTIONS" />
-            <End Role="ETUDES" EntitySet="ETUDES" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_Etude_Specialite" Association="SGSDBModel.Store.Relation_Etude_Specialite">
-            <End Role="SPECIALITES" EntitySet="SPECIALITES" />
-            <End Role="ETUDES" EntitySet="ETUDES" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_ExamAnneeModeEtude_Annee" Association="SGSDBModel.Store.Relation_ExamAnneeModeEtude_Annee">
-            <End Role="ANNEES" EntitySet="ANNEES" />
-            <End Role="EXAMENS_ANNEES_MODES_ETUDES" EntitySet="EXAMENS_ANNEES_MODES_ETUDES" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_ExaminAnneeModeEtude_Examin" Association="SGSDBModel.Store.Relation_ExaminAnneeModeEtude_Examin">
-            <End Role="EXAMENS" EntitySet="EXAMENS" />
-            <End Role="EXAMENS_ANNEES_MODES_ETUDES" EntitySet="EXAMENS_ANNEES_MODES_ETUDES" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_ExaminAnneeModeEtude_ModeEtude" Association="SGSDBModel.Store.Relation_ExaminAnneeModeEtude_ModeEtude">
-            <End Role="MODES_ETUDES" EntitySet="MODES_ETUDES" />
-            <End Role="EXAMENS_ANNEES_MODES_ETUDES" EntitySet="EXAMENS_ANNEES_MODES_ETUDES" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_ExaminAnneeModeEtude_Specilite" Association="SGSDBModel.Store.Relation_ExaminAnneeModeEtude_Specilite">
-            <End Role="SPECIALITES" EntitySet="SPECIALITES" />
-            <End Role="EXAMENS_ANNEES_MODES_ETUDES" EntitySet="EXAMENS_ANNEES_MODES_ETUDES" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_Groupe_Section" Association="SGSDBModel.Store.Relation_Groupe_Section">
-            <End Role="SECTIONS" EntitySet="SECTIONS" />
-            <End Role="GROUPES" EntitySet="GROUPES" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_Note_AnneeUniversitaire" Association="SGSDBModel.Store.Relation_Note_AnneeUniversitaire">
-            <End Role="ANNEES" EntitySet="ANNEES" />
-            <End Role="NOTE" EntitySet="NOTE" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_Note_Etudiant" Association="SGSDBModel.Store.Relation_Note_Etudiant">
-            <End Role="ETUDIANTS" EntitySet="ETUDIANTS" />
-            <End Role="NOTE" EntitySet="NOTE" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_Note_Matiere" Association="SGSDBModel.Store.Relation_Note_Matiere">
-            <End Role="MATIERES" EntitySet="MATIERES" />
-            <End Role="NOTE" EntitySet="NOTE" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_NoteDette_Annee" Association="SGSDBModel.Store.Relation_NoteDette_Annee">
-            <End Role="ANNEES" EntitySet="ANNEES" />
-            <End Role="NOTE_DETTE" EntitySet="NOTE_DETTE" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_NoteDette_AnneeDette" Association="SGSDBModel.Store.Relation_NoteDette_AnneeDette">
-            <End Role="ANNEES" EntitySet="ANNEES" />
-            <End Role="NOTE_DETTE" EntitySet="NOTE_DETTE" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_NoteDette_Etudiant" Association="SGSDBModel.Store.Relation_NoteDette_Etudiant">
-            <End Role="ETUDIANTS" EntitySet="ETUDIANTS" />
-            <End Role="NOTE_DETTE" EntitySet="NOTE_DETTE" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_NoteDette_Matiere" Association="SGSDBModel.Store.Relation_NoteDette_Matiere">
-            <End Role="MATIERES" EntitySet="MATIERES" />
-            <End Role="NOTE_DETTE" EntitySet="NOTE_DETTE" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_NoteExamin_Annee" Association="SGSDBModel.Store.Relation_NoteExamin_Annee">
-            <End Role="ANNEES" EntitySet="ANNEES" />
-            <End Role="NOTES_EXAMEN" EntitySet="NOTES_EXAMEN" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_NoteExamin_Etudiant" Association="SGSDBModel.Store.Relation_NoteExamin_Etudiant">
-            <End Role="ETUDIANTS" EntitySet="ETUDIANTS" />
-            <End Role="NOTES_EXAMEN" EntitySet="NOTES_EXAMEN" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_NoteExamin_Examin" Association="SGSDBModel.Store.Relation_NoteExamin_Examin">
-            <End Role="EXAMENS" EntitySet="EXAMENS" />
-            <End Role="NOTES_EXAMEN" EntitySet="NOTES_EXAMEN" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_NoteExamin_Matiere" Association="SGSDBModel.Store.Relation_NoteExamin_Matiere">
-            <End Role="MATIERES" EntitySet="MATIERES" />
-            <End Role="NOTES_EXAMEN" EntitySet="NOTES_EXAMEN" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_Section_Annee" Association="SGSDBModel.Store.Relation_Section_Annee">
-            <End Role="ANNEES" EntitySet="ANNEES" />
-            <End Role="SECTIONS" EntitySet="SECTIONS" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_Section_Specialite" Association="SGSDBModel.Store.Relation_Section_Specialite">
-            <End Role="SPECIALITES" EntitySet="SPECIALITES" />
-            <End Role="SECTIONS" EntitySet="SECTIONS" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_SpecialiteAnneeModeEtude_ModeEtude" Association="SGSDBModel.Store.Relation_SpecialiteAnneeModeEtude_ModeEtude">
-            <End Role="MODES_ETUDES" EntitySet="MODES_ETUDES" />
-            <End Role="SPECIALITES_ANNEES_MODES_ETUDES" EntitySet="SPECIALITES_ANNEES_MODES_ETUDES" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_SpecialiteMatiere_Categorie" Association="SGSDBModel.Store.Relation_SpecialiteMatiere_Categorie">
-            <End Role="CATEGORIES" EntitySet="CATEGORIES" />
-            <End Role="SPECIALITES_MATIERES" EntitySet="SPECIALITES_MATIERES" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_SpecialiteMatiere_ModeEtude" Association="SGSDBModel.Store.Relation_SpecialiteMatiere_ModeEtude">
-            <End Role="MODES_ETUDES" EntitySet="MODES_ETUDES" />
-            <End Role="SPECIALITES_MATIERES" EntitySet="SPECIALITES_MATIERES" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_SpeciliteAnneeModeEtude_Annee" Association="SGSDBModel.Store.Relation_SpeciliteAnneeModeEtude_Annee">
-            <End Role="ANNEES" EntitySet="ANNEES" />
-            <End Role="SPECIALITES_ANNEES_MODES_ETUDES" EntitySet="SPECIALITES_ANNEES_MODES_ETUDES" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_SpeciliteAnneeModeEtude_Specilite" Association="SGSDBModel.Store.Relation_SpeciliteAnneeModeEtude_Specilite">
-            <End Role="SPECIALITES" EntitySet="SPECIALITES" />
-            <End Role="SPECIALITES_ANNEES_MODES_ETUDES" EntitySet="SPECIALITES_ANNEES_MODES_ETUDES" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_SpeciliteMatiere_Matiere" Association="SGSDBModel.Store.Relation_SpeciliteMatiere_Matiere">
-            <End Role="MATIERES" EntitySet="MATIERES" />
-            <End Role="SPECIALITES_MATIERES" EntitySet="SPECIALITES_MATIERES" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_SpeciliteMatiere_Specialite" Association="SGSDBModel.Store.Relation_SpeciliteMatiere_Specialite">
-            <End Role="SPECIALITES" EntitySet="SPECIALITES" />
-            <End Role="SPECIALITES_MATIERES" EntitySet="SPECIALITES_MATIERES" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_UserSpecialite_Annee" Association="SGSDBModel.Store.Relation_UserSpecialite_Annee">
-            <End Role="ANNEES" EntitySet="ANNEES" />
-            <End Role="USERS_SPECIALITES" EntitySet="USERS_SPECIALITES" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_UserSpecialite_Groupe" Association="SGSDBModel.Store.Relation_UserSpecialite_Groupe">
-            <End Role="GROUPES" EntitySet="GROUPES" />
-            <End Role="USERS_SPECIALITES" EntitySet="USERS_SPECIALITES" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_UserSpecialite_Matiere" Association="SGSDBModel.Store.Relation_UserSpecialite_Matiere">
-            <End Role="MATIERES" EntitySet="MATIERES" />
-            <End Role="USERS_SPECIALITES" EntitySet="USERS_SPECIALITES" />
-          </AssociationSet>
-          <AssociationSet Name="Relation_UserSpecialite_Specialite" Association="SGSDBModel.Store.Relation_UserSpecialite_Specialite">
-            <End Role="SPECIALITES" EntitySet="SPECIALITES" />
-            <End Role="USERS_SPECIALITES" EntitySet="USERS_SPECIALITES" />
-          </AssociationSet>
-          <AssociationSet Name="RelationSpeciliteMatiere_Annee" Association="SGSDBModel.Store.RelationSpeciliteMatiere_Annee">
-            <End Role="ANNEES" EntitySet="ANNEES" />
-            <End Role="SPECIALITES_MATIERES" EntitySet="SPECIALITES_MATIERES" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="__syncArticles">
@@ -650,6 +495,16 @@
           <Property Name="__sysInsertTxBsn" Type="bigint" />
           <Property Name="__sysTrackingContext" Type="uniqueidentifier" />
         </EntityType>
+        <EntityType Name="UserPreferences">
+          <Key>
+            <PropertyRef Name="IdUser" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="EnsId" />
+          </Key>
+          <Property Name="IdUser" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="EnsId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="USERS_SPECIALITES">
           <Key>
             <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
@@ -680,474 +535,6 @@
             </Principal>
             <Dependent Role="__syncArticles">
               <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_EnsSpeMat_Annee">
-          <End Role="ANNEES" Type="SGSDBModel.Store.ANNEES" Multiplicity="1" />
-          <End Role="ENS_SPEMAT" Type="SGSDBModel.Store.ENS_SPEMAT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ANNEES">
-              <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
-            </Principal>
-            <Dependent Role="ENS_SPEMAT">
-              <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_EnsSpeMat_Enseigant">
-          <End Role="ENSEIGNANTS" Type="SGSDBModel.Store.ENSEIGNANTS" Multiplicity="1" />
-          <End Role="ENS_SPEMAT" Type="SGSDBModel.Store.ENS_SPEMAT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ENSEIGNANTS">
-              <PropertyRef Name="ID_ENSEIGNANT" />
-            </Principal>
-            <Dependent Role="ENS_SPEMAT">
-              <PropertyRef Name="ID_ENSEIGNANT" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_EnsSpeMat_Matiere">
-          <End Role="MATIERES" Type="SGSDBModel.Store.MATIERES" Multiplicity="1" />
-          <End Role="ENS_SPEMAT" Type="SGSDBModel.Store.ENS_SPEMAT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MATIERES">
-              <PropertyRef Name="ID_MATIERE" />
-            </Principal>
-            <Dependent Role="ENS_SPEMAT">
-              <PropertyRef Name="ID_MATIERE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_EnsSpeMat_Specialite">
-          <End Role="SPECIALITES" Type="SGSDBModel.Store.SPECIALITES" Multiplicity="1" />
-          <End Role="ENS_SPEMAT" Type="SGSDBModel.Store.ENS_SPEMAT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SPECIALITES">
-              <PropertyRef Name="ID_SPECIALITE" />
-            </Principal>
-            <Dependent Role="ENS_SPEMAT">
-              <PropertyRef Name="ID_SPECIALITE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_Etude_Annee">
-          <End Role="ANNEES" Type="SGSDBModel.Store.ANNEES" Multiplicity="1" />
-          <End Role="ETUDES" Type="SGSDBModel.Store.ETUDES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ANNEES">
-              <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
-            </Principal>
-            <Dependent Role="ETUDES">
-              <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_Etude_Etudiant">
-          <End Role="ETUDIANTS" Type="SGSDBModel.Store.ETUDIANTS" Multiplicity="1" />
-          <End Role="ETUDES" Type="SGSDBModel.Store.ETUDES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ETUDIANTS">
-              <PropertyRef Name="ID_ETUDIANT" />
-            </Principal>
-            <Dependent Role="ETUDES">
-              <PropertyRef Name="ID_ETUDIANT" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_Etude_Groupe">
-          <End Role="GROUPES" Type="SGSDBModel.Store.GROUPES" Multiplicity="0..1" />
-          <End Role="ETUDES" Type="SGSDBModel.Store.ETUDES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GROUPES">
-              <PropertyRef Name="ID_GROUPE" />
-            </Principal>
-            <Dependent Role="ETUDES">
-              <PropertyRef Name="ID_GROUPE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_Etude_Section">
-          <End Role="SECTIONS" Type="SGSDBModel.Store.SECTIONS" Multiplicity="0..1" />
-          <End Role="ETUDES" Type="SGSDBModel.Store.ETUDES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SECTIONS">
-              <PropertyRef Name="ID_SECTION" />
-            </Principal>
-            <Dependent Role="ETUDES">
-              <PropertyRef Name="ID_SECTION" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_Etude_Specialite">
-          <End Role="SPECIALITES" Type="SGSDBModel.Store.SPECIALITES" Multiplicity="0..1" />
-          <End Role="ETUDES" Type="SGSDBModel.Store.ETUDES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SPECIALITES">
-              <PropertyRef Name="ID_SPECIALITE" />
-            </Principal>
-            <Dependent Role="ETUDES">
-              <PropertyRef Name="ID_SPECIALITE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_ExamAnneeModeEtude_Annee">
-          <End Role="ANNEES" Type="SGSDBModel.Store.ANNEES" Multiplicity="1" />
-          <End Role="EXAMENS_ANNEES_MODES_ETUDES" Type="SGSDBModel.Store.EXAMENS_ANNEES_MODES_ETUDES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ANNEES">
-              <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
-            </Principal>
-            <Dependent Role="EXAMENS_ANNEES_MODES_ETUDES">
-              <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_ExaminAnneeModeEtude_Examin">
-          <End Role="EXAMENS" Type="SGSDBModel.Store.EXAMENS" Multiplicity="1" />
-          <End Role="EXAMENS_ANNEES_MODES_ETUDES" Type="SGSDBModel.Store.EXAMENS_ANNEES_MODES_ETUDES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EXAMENS">
-              <PropertyRef Name="ID_EXAMEN" />
-            </Principal>
-            <Dependent Role="EXAMENS_ANNEES_MODES_ETUDES">
-              <PropertyRef Name="ID_EXAMEN" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_ExaminAnneeModeEtude_ModeEtude">
-          <End Role="MODES_ETUDES" Type="SGSDBModel.Store.MODES_ETUDES" Multiplicity="1" />
-          <End Role="EXAMENS_ANNEES_MODES_ETUDES" Type="SGSDBModel.Store.EXAMENS_ANNEES_MODES_ETUDES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MODES_ETUDES">
-              <PropertyRef Name="ID_MODE_ETUDE" />
-            </Principal>
-            <Dependent Role="EXAMENS_ANNEES_MODES_ETUDES">
-              <PropertyRef Name="ID_MODE_ETUDE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_ExaminAnneeModeEtude_Specilite">
-          <End Role="SPECIALITES" Type="SGSDBModel.Store.SPECIALITES" Multiplicity="1" />
-          <End Role="EXAMENS_ANNEES_MODES_ETUDES" Type="SGSDBModel.Store.EXAMENS_ANNEES_MODES_ETUDES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SPECIALITES">
-              <PropertyRef Name="ID_SPECIALITE" />
-            </Principal>
-            <Dependent Role="EXAMENS_ANNEES_MODES_ETUDES">
-              <PropertyRef Name="ID_SPECIALITE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_Groupe_Section">
-          <End Role="SECTIONS" Type="SGSDBModel.Store.SECTIONS" Multiplicity="0..1" />
-          <End Role="GROUPES" Type="SGSDBModel.Store.GROUPES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SECTIONS">
-              <PropertyRef Name="ID_SECTION" />
-            </Principal>
-            <Dependent Role="GROUPES">
-              <PropertyRef Name="ID_SECTION" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_Note_AnneeUniversitaire">
-          <End Role="ANNEES" Type="SGSDBModel.Store.ANNEES" Multiplicity="1" />
-          <End Role="NOTE" Type="SGSDBModel.Store.NOTE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ANNEES">
-              <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
-            </Principal>
-            <Dependent Role="NOTE">
-              <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_Note_Etudiant">
-          <End Role="ETUDIANTS" Type="SGSDBModel.Store.ETUDIANTS" Multiplicity="1" />
-          <End Role="NOTE" Type="SGSDBModel.Store.NOTE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ETUDIANTS">
-              <PropertyRef Name="ID_ETUDIANT" />
-            </Principal>
-            <Dependent Role="NOTE">
-              <PropertyRef Name="ID_ETUDIANT" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_Note_Matiere">
-          <End Role="MATIERES" Type="SGSDBModel.Store.MATIERES" Multiplicity="1" />
-          <End Role="NOTE" Type="SGSDBModel.Store.NOTE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MATIERES">
-              <PropertyRef Name="ID_MATIERE" />
-            </Principal>
-            <Dependent Role="NOTE">
-              <PropertyRef Name="ID_MATIERE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_NoteDette_Annee">
-          <End Role="ANNEES" Type="SGSDBModel.Store.ANNEES" Multiplicity="1" />
-          <End Role="NOTE_DETTE" Type="SGSDBModel.Store.NOTE_DETTE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ANNEES">
-              <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
-            </Principal>
-            <Dependent Role="NOTE_DETTE">
-              <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_NoteDette_AnneeDette">
-          <End Role="ANNEES" Type="SGSDBModel.Store.ANNEES" Multiplicity="1" />
-          <End Role="NOTE_DETTE" Type="SGSDBModel.Store.NOTE_DETTE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ANNEES">
-              <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
-            </Principal>
-            <Dependent Role="NOTE_DETTE">
-              <PropertyRef Name="ANNEE_PASSAGE_DETTE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_NoteDette_Etudiant">
-          <End Role="ETUDIANTS" Type="SGSDBModel.Store.ETUDIANTS" Multiplicity="1" />
-          <End Role="NOTE_DETTE" Type="SGSDBModel.Store.NOTE_DETTE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ETUDIANTS">
-              <PropertyRef Name="ID_ETUDIANT" />
-            </Principal>
-            <Dependent Role="NOTE_DETTE">
-              <PropertyRef Name="ID_ETUDIANT" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_NoteDette_Matiere">
-          <End Role="MATIERES" Type="SGSDBModel.Store.MATIERES" Multiplicity="1" />
-          <End Role="NOTE_DETTE" Type="SGSDBModel.Store.NOTE_DETTE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MATIERES">
-              <PropertyRef Name="ID_MATIERE" />
-            </Principal>
-            <Dependent Role="NOTE_DETTE">
-              <PropertyRef Name="ID_MATIERE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_NoteExamin_Annee">
-          <End Role="ANNEES" Type="SGSDBModel.Store.ANNEES" Multiplicity="1" />
-          <End Role="NOTES_EXAMEN" Type="SGSDBModel.Store.NOTES_EXAMEN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ANNEES">
-              <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
-            </Principal>
-            <Dependent Role="NOTES_EXAMEN">
-              <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_NoteExamin_Etudiant">
-          <End Role="ETUDIANTS" Type="SGSDBModel.Store.ETUDIANTS" Multiplicity="1" />
-          <End Role="NOTES_EXAMEN" Type="SGSDBModel.Store.NOTES_EXAMEN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ETUDIANTS">
-              <PropertyRef Name="ID_ETUDIANT" />
-            </Principal>
-            <Dependent Role="NOTES_EXAMEN">
-              <PropertyRef Name="ID_ETUDIANT" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_NoteExamin_Examin">
-          <End Role="EXAMENS" Type="SGSDBModel.Store.EXAMENS" Multiplicity="1" />
-          <End Role="NOTES_EXAMEN" Type="SGSDBModel.Store.NOTES_EXAMEN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EXAMENS">
-              <PropertyRef Name="ID_EXAMEN" />
-            </Principal>
-            <Dependent Role="NOTES_EXAMEN">
-              <PropertyRef Name="ID_EXAMEN" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_NoteExamin_Matiere">
-          <End Role="MATIERES" Type="SGSDBModel.Store.MATIERES" Multiplicity="1" />
-          <End Role="NOTES_EXAMEN" Type="SGSDBModel.Store.NOTES_EXAMEN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MATIERES">
-              <PropertyRef Name="ID_MATIERE" />
-            </Principal>
-            <Dependent Role="NOTES_EXAMEN">
-              <PropertyRef Name="ID_MATIERE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_Section_Annee">
-          <End Role="ANNEES" Type="SGSDBModel.Store.ANNEES" Multiplicity="0..1" />
-          <End Role="SECTIONS" Type="SGSDBModel.Store.SECTIONS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ANNEES">
-              <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
-            </Principal>
-            <Dependent Role="SECTIONS">
-              <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_Section_Specialite">
-          <End Role="SPECIALITES" Type="SGSDBModel.Store.SPECIALITES" Multiplicity="0..1" />
-          <End Role="SECTIONS" Type="SGSDBModel.Store.SECTIONS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SPECIALITES">
-              <PropertyRef Name="ID_SPECIALITE" />
-            </Principal>
-            <Dependent Role="SECTIONS">
-              <PropertyRef Name="ID_SPECIALITE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_SpecialiteAnneeModeEtude_ModeEtude">
-          <End Role="MODES_ETUDES" Type="SGSDBModel.Store.MODES_ETUDES" Multiplicity="1" />
-          <End Role="SPECIALITES_ANNEES_MODES_ETUDES" Type="SGSDBModel.Store.SPECIALITES_ANNEES_MODES_ETUDES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MODES_ETUDES">
-              <PropertyRef Name="ID_MODE_ETUDE" />
-            </Principal>
-            <Dependent Role="SPECIALITES_ANNEES_MODES_ETUDES">
-              <PropertyRef Name="ID_MODE_ETUDE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_SpecialiteMatiere_Categorie">
-          <End Role="CATEGORIES" Type="SGSDBModel.Store.CATEGORIES" Multiplicity="0..1" />
-          <End Role="SPECIALITES_MATIERES" Type="SGSDBModel.Store.SPECIALITES_MATIERES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CATEGORIES">
-              <PropertyRef Name="ID_CATEGORIE" />
-            </Principal>
-            <Dependent Role="SPECIALITES_MATIERES">
-              <PropertyRef Name="ID_CATEGORIE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_SpecialiteMatiere_ModeEtude">
-          <End Role="MODES_ETUDES" Type="SGSDBModel.Store.MODES_ETUDES" Multiplicity="1" />
-          <End Role="SPECIALITES_MATIERES" Type="SGSDBModel.Store.SPECIALITES_MATIERES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MODES_ETUDES">
-              <PropertyRef Name="ID_MODE_ETUDE" />
-            </Principal>
-            <Dependent Role="SPECIALITES_MATIERES">
-              <PropertyRef Name="ID_MODE_ETUDE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_SpeciliteAnneeModeEtude_Annee">
-          <End Role="ANNEES" Type="SGSDBModel.Store.ANNEES" Multiplicity="1" />
-          <End Role="SPECIALITES_ANNEES_MODES_ETUDES" Type="SGSDBModel.Store.SPECIALITES_ANNEES_MODES_ETUDES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ANNEES">
-              <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
-            </Principal>
-            <Dependent Role="SPECIALITES_ANNEES_MODES_ETUDES">
-              <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_SpeciliteAnneeModeEtude_Specilite">
-          <End Role="SPECIALITES" Type="SGSDBModel.Store.SPECIALITES" Multiplicity="1" />
-          <End Role="SPECIALITES_ANNEES_MODES_ETUDES" Type="SGSDBModel.Store.SPECIALITES_ANNEES_MODES_ETUDES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SPECIALITES">
-              <PropertyRef Name="ID_SPECIALITE" />
-            </Principal>
-            <Dependent Role="SPECIALITES_ANNEES_MODES_ETUDES">
-              <PropertyRef Name="ID_SPECIALITE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_SpeciliteMatiere_Matiere">
-          <End Role="MATIERES" Type="SGSDBModel.Store.MATIERES" Multiplicity="1" />
-          <End Role="SPECIALITES_MATIERES" Type="SGSDBModel.Store.SPECIALITES_MATIERES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MATIERES">
-              <PropertyRef Name="ID_MATIERE" />
-            </Principal>
-            <Dependent Role="SPECIALITES_MATIERES">
-              <PropertyRef Name="ID_MATIERE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_SpeciliteMatiere_Specialite">
-          <End Role="SPECIALITES" Type="SGSDBModel.Store.SPECIALITES" Multiplicity="1" />
-          <End Role="SPECIALITES_MATIERES" Type="SGSDBModel.Store.SPECIALITES_MATIERES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SPECIALITES">
-              <PropertyRef Name="ID_SPECIALITE" />
-            </Principal>
-            <Dependent Role="SPECIALITES_MATIERES">
-              <PropertyRef Name="ID_SPECIALITE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_UserSpecialite_Annee">
-          <End Role="ANNEES" Type="SGSDBModel.Store.ANNEES" Multiplicity="1" />
-          <End Role="USERS_SPECIALITES" Type="SGSDBModel.Store.USERS_SPECIALITES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ANNEES">
-              <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
-            </Principal>
-            <Dependent Role="USERS_SPECIALITES">
-              <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_UserSpecialite_Groupe">
-          <End Role="GROUPES" Type="SGSDBModel.Store.GROUPES" Multiplicity="1" />
-          <End Role="USERS_SPECIALITES" Type="SGSDBModel.Store.USERS_SPECIALITES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GROUPES">
-              <PropertyRef Name="ID_GROUPE" />
-            </Principal>
-            <Dependent Role="USERS_SPECIALITES">
-              <PropertyRef Name="ID_GROUPE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_UserSpecialite_Matiere">
-          <End Role="MATIERES" Type="SGSDBModel.Store.MATIERES" Multiplicity="1" />
-          <End Role="USERS_SPECIALITES" Type="SGSDBModel.Store.USERS_SPECIALITES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MATIERES">
-              <PropertyRef Name="ID_MATIERE" />
-            </Principal>
-            <Dependent Role="USERS_SPECIALITES">
-              <PropertyRef Name="ID_MATIERE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Relation_UserSpecialite_Specialite">
-          <End Role="SPECIALITES" Type="SGSDBModel.Store.SPECIALITES" Multiplicity="1" />
-          <End Role="USERS_SPECIALITES" Type="SGSDBModel.Store.USERS_SPECIALITES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SPECIALITES">
-              <PropertyRef Name="ID_SPECIALITE" />
-            </Principal>
-            <Dependent Role="USERS_SPECIALITES">
-              <PropertyRef Name="ID_SPECIALITE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="RelationSpeciliteMatiere_Annee">
-          <End Role="ANNEES" Type="SGSDBModel.Store.ANNEES" Multiplicity="1" />
-          <End Role="SPECIALITES_MATIERES" Type="SGSDBModel.Store.SPECIALITES_MATIERES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ANNEES">
-              <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
-            </Principal>
-            <Dependent Role="SPECIALITES_MATIERES">
-              <PropertyRef Name="ANNEE_UNIVERSITAIRE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1339,6 +726,7 @@
             <End Role="ETUDE" EntitySet="ETUDES" />
           </AssociationSet>
           <EntitySet Name="LOGs" EntityType="SGSDBModel.LOG" />
+          <EntitySet Name="UserPreferences" EntityType="SGSDBModel.UserPreference" />
         </EntityContainer>
         <EntityType Name="C__syncArticles">
           <Key>
@@ -2381,6 +1769,16 @@
           <Property Type="Int64" Name="C__sysInsertTxBsn" />
           <Property Type="Guid" Name="C__sysTrackingContext" />
         </EntityType>
+        <EntityType Name="UserPreference">
+          <Key>
+            <PropertyRef Name="IdUser" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="EnsId" />
+          </Key>
+          <Property Type="Int32" Name="IdUser" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="EnsId" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2866,6 +2264,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="UserPreferences">
+            <EntityTypeMapping TypeName="SGSDBModel.UserPreference">
+              <MappingFragment StoreEntitySet="UserPreferences">
+                <ScalarProperty Name="EnsId" ColumnName="EnsId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -3296,6 +2703,7 @@
           <ConnectorPoint PointX="11.5" PointY="21.021162050781257" />
         </AssociationConnector>
         <EntityTypeShape EntityType="SGSDBModel.LOG" Width="1.5" PointX="9.375" PointY="0.75" Height="3.7109993489583246" />
+        <EntityTypeShape EntityType="SGSDBModel.UserPreference" Width="1.5" PointX="5.375" PointY="0.75" Height="1.5956835937500102" />
       </Diagram>
     </Diagrams>
   </Designer>

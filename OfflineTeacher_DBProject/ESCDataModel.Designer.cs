@@ -477,6 +477,22 @@ namespace OfflineTeacher_DBProject
             }
         }
         private ObjectSet<LOG> _LOGs;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<UserPreference> UserPreferences
+        {
+            get
+            {
+                if ((_UserPreferences == null))
+                {
+                    _UserPreferences = base.CreateObjectSet<UserPreference>("UserPreferences");
+                }
+                return _UserPreferences;
+            }
+        }
+        private ObjectSet<UserPreference> _UserPreferences;
 
         #endregion
 
@@ -664,6 +680,14 @@ namespace OfflineTeacher_DBProject
         public void AddToLOGs(LOG lOG)
         {
             base.AddObject("LOGs", lOG);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the UserPreferences EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToUserPreferences(UserPreference userPreference)
+        {
+            base.AddObject("UserPreferences", userPreference);
         }
 
         #endregion
@@ -11871,6 +11895,121 @@ namespace OfflineTeacher_DBProject
 
         #endregion
 
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SGSDBModel", Name="UserPreference")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class UserPreference : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new UserPreference object.
+        /// </summary>
+        /// <param name="idUser">Initial value of the IdUser property.</param>
+        /// <param name="userName">Initial value of the UserName property.</param>
+        /// <param name="ensId">Initial value of the EnsId property.</param>
+        public static UserPreference CreateUserPreference(global::System.Int32 idUser, global::System.String userName, global::System.Int32 ensId)
+        {
+            UserPreference userPreference = new UserPreference();
+            userPreference.IdUser = idUser;
+            userPreference.UserName = userName;
+            userPreference.EnsId = ensId;
+            return userPreference;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 IdUser
+        {
+            get
+            {
+                return _IdUser;
+            }
+            set
+            {
+                if (_IdUser != value)
+                {
+                    OnIdUserChanging(value);
+                    ReportPropertyChanging("IdUser");
+                    _IdUser = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("IdUser");
+                    OnIdUserChanged();
+                }
+            }
+        }
+        private global::System.Int32 _IdUser;
+        partial void OnIdUserChanging(global::System.Int32 value);
+        partial void OnIdUserChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String UserName
+        {
+            get
+            {
+                return _UserName;
+            }
+            set
+            {
+                if (_UserName != value)
+                {
+                    OnUserNameChanging(value);
+                    ReportPropertyChanging("UserName");
+                    _UserName = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("UserName");
+                    OnUserNameChanged();
+                }
+            }
+        }
+        private global::System.String _UserName;
+        partial void OnUserNameChanging(global::System.String value);
+        partial void OnUserNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 EnsId
+        {
+            get
+            {
+                return _EnsId;
+            }
+            set
+            {
+                if (_EnsId != value)
+                {
+                    OnEnsIdChanging(value);
+                    ReportPropertyChanging("EnsId");
+                    _EnsId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("EnsId");
+                    OnEnsIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _EnsId;
+        partial void OnEnsIdChanging(global::System.Int32 value);
+        partial void OnEnsIdChanged();
+
+        #endregion
+
+    
     }
     
     /// <summary>

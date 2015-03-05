@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -943,6 +944,12 @@ namespace ESC_OfflineTeacher.ViewModel
 
             InitializeBackgroundWorker();
 
+
+            ////#To Resync The Db 
+            //_syncBackgroundWorker.RunWorkerAsync();
+            //return;
+            ////
+
             ListNotesExamins = new ObservableCollection<EtudiantNote>();
             ListNotesDettes = new ObservableCollection<EtudiantNoteDette>();
             ListExaminDette = new ObservableCollection<ExaminDette>()
@@ -980,9 +987,19 @@ namespace ESC_OfflineTeacher.ViewModel
             if (_navigationService.Parameter != null)
             {
                 LoggedInTeacher = ((UserPreferences) _navigationService.Parameter).Enseignant;
+                //if it is the first sync, the above object is null .. -> force resync then update it 
+                if (LoggedInTeacher==null)
+                {
+                    Task.Run(() => _syncBackgroundWorker.RunWorkerAsync()).ContinueWith((x) =>
+                            {
+                                LoggedInTeacher =
+                                    _context.ENSEIGNANTS.First(
+                                        y => y.ID_USER == ((UserPreferences)_navigationService.Parameter).IdUser);
+                                Messenger.Default.Send<ENSEIGNANT>(LoggedInTeacher, "Login");
+                            }); 
+                }
                 LangContentFr = ((UserPreferences)_navigationService.Parameter).LangContFr;
-            }
-                
+            }                
             Messenger.Default.Register<bool>(this,"LangFr", (fr) =>
             {
                 LangContentFr = fr;

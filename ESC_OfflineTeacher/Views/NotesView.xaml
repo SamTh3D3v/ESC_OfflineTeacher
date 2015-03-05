@@ -216,7 +216,7 @@
 
 
 
-            <Button Grid.Row="0"  ToolTip="{DynamicResource CancelTooltip}" Grid.Column="0" Width="55" Height="55" VerticalAlignment="Bottom" Command="{Binding ImportDataBaseCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+            <Button Grid.Row="0"  ToolTip="{DynamicResource ImportTooltip}" Grid.Column="0" Width="55" Height="55" VerticalAlignment="Bottom" Command="{Binding ImportDataBaseCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
                 <Rectangle Width="20" Height="20">
                     <Rectangle.Fill>
                         <VisualBrush Stretch="Fill"
@@ -224,7 +224,7 @@
                     </Rectangle.Fill>
                 </Rectangle>
             </Button>
-            <Button  Grid.Row="0" Grid.Column="1" ToolTip="{DynamicResource CancelTooltip}" Width="55" Height="55" VerticalAlignment="Bottom" Command="{Binding ExportDataBaseCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+            <Button  Grid.Row="0" Grid.Column="1" ToolTip="{DynamicResource ExportTooltip}" Width="55" Height="55" VerticalAlignment="Bottom" Command="{Binding ExportDataBaseCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
                 <Rectangle Width="20" Height="20">
                     <Rectangle.Fill>
                         <VisualBrush Stretch="Fill"
