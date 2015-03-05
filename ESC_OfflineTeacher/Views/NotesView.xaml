@@ -297,7 +297,8 @@
                             <DataGridTextColumn Header="{DynamicResource Matricule}" IsReadOnly="True"
                                     Binding="{Binding Matricule}" MinWidth="100" />
                             <DataGridTextColumn Header="{DynamicResource Nom}" IsReadOnly="True"
-                                    Binding="{Binding Nom}" MinWidth="150"/>
+                                    Binding="{Binding Nom}" MinWidth="150">                                
+                            </DataGridTextColumn>
                             <DataGridTextColumn Header="{DynamicResource Prenom}" IsReadOnly="True"
                                     Binding="{Binding Prenom}" MinWidth="150"/>
                             <controls:DataGridNumericUpDownColumn Header="{DynamicResource Note}" IsReadOnly="False" 

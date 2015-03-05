@@ -993,7 +993,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 }               
             };
             if (_navigationService.Parameter != null)
-                LangContentFr = (bool) _navigationService.Parameter;
+                LangContentFr = ((UserPreferences)_navigationService.Parameter).LangContFr;
             Messenger.Default.Register<bool>(this,"LangFr", (fr) =>
             {
                 LangContentFr = fr;

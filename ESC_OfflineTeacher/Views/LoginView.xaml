@@ -28,7 +28,7 @@
         </Grid.ColumnDefinitions>
         <Label Content="{DynamicResource Login}" Foreground="White" FontSize="15" Grid.Column="0" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Center"/>
         <Label Grid.Row="1" Grid.Column="0" Foreground="White" FontSize="15" Content="{DynamicResource MotDePasse}" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Center" />
-        <TextBox BorderBrush="{DynamicResource TextBoxBorderBrush}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch"   TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Margin="5"/>
+        <TextBox BorderBrush="{DynamicResource TextBoxBorderBrush}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch"   TextWrapping="Wrap" Text="{Binding UserName}" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Margin="5"/>
         <PasswordBox x:Name="PBox"  Grid.Column="1" HorizontalAlignment="Stretch" Margin="5" Grid.Row="1" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
         <Button Content="{DynamicResource Connextion}" Foreground="WhiteSmoke" FontSize="16" Grid.Row="2" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=PBox}" Grid.Column="1" Margin="5" Height="40" Width="150" VerticalAlignment="Top" Style="{StaticResource AccentedSquareButtonStyle}"/>
     </Grid>
