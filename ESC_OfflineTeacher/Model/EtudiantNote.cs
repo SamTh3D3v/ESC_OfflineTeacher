@@ -12,6 +12,8 @@ namespace ESC_OfflineTeacher.Model
         public string Matricule { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }
+        public string NomLatin { get; set; }
+        public string PrenomLatin { get; set; }
         public double? Note { get; set; }
         //public double? NoteRattrapage { get; set; }
         //public double? NoteParticipation { get; set; }        

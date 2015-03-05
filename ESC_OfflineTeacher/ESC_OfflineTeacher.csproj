@@ -161,6 +161,8 @@
     </ApplicationDefinition>
     <Compile Include="Converters\FlyoutOpenConverter.cs" />
     <Compile Include="Converters\DisplayMemberPathConverter.cs" />
+    <Compile Include="Converters\NomConverter.cs" />
+    <Compile Include="Converters\PrenomConverter.cs" />
     <Compile Include="Model\EtudiantNote.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Service References\SGS\Reference.cs">

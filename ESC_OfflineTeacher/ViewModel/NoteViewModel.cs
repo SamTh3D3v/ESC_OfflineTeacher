@@ -1088,6 +1088,8 @@ namespace ESC_OfflineTeacher.ViewModel
                                  Matricule = x.etudiant.MATRICULE,
                                  Nom = x.etudiant.NOM,
                                  Prenom = x.etudiant.PRENOM,
+                                 NomLatin = x.etudiant.NOM_LATIN,
+                                 PrenomLatin = x.etudiant.PRENOM_LATIN,
                                  Note = x.note
                              }));
                 _listNotesExaminsForSearch = new ObservableCollection<EtudiantNote>(ListNotesExamins);
@@ -1115,6 +1117,8 @@ namespace ESC_OfflineTeacher.ViewModel
                                  Matricule = x.etudiant.MATRICULE,
                                  Nom = x.etudiant.NOM,
                                  Prenom = x.etudiant.PRENOM,
+                                 NomLatin = x.etudiant.NOM_LATIN,
+                                 PrenomLatin = x.etudiant.PRENOM_LATIN,
                                  Note = x.note,
                                  NoteRattrapage = x.noteRattrapage
                              }));

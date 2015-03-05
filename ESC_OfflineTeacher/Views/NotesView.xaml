@@ -28,7 +28,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>            
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -93,7 +93,7 @@
                          HorizontalContentAlignment="Center"                                
                          ItemsSource="{Binding SpecialiteList}"
                          SelectedItem="{Binding SelectedSpecialite,Mode=TwoWay}">
-                      
+
                     </ComboBox>
                     <ComboBox  Grid.Row="1" Grid.Column="1" Margin="5"
                          VerticalContentAlignment="Center"
@@ -173,7 +173,7 @@
                             </Style>
                         </ComboBox.Style>
                     </ComboBox>
-                   <!--using this have some dawbacks-->
+                    <!--using this have some dawbacks-->
                     <Label Content="{DynamicResource AfficherTous}" Grid.Row="1" Grid.Column="0"></Label>
                     <CheckBox Margin="5" Grid.Row="1" Grid.Column="1" IsChecked="{Binding AfficherTousExamin,Mode=TwoWay}" ></CheckBox>
                 </Grid>
@@ -194,14 +194,14 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            
+
             <Label Content="{DynamicResource Import}" Grid.Column="0" Grid.Row="1"></Label>
             <Label Content="{DynamicResource Export}" Grid.Column="1" Grid.Row="1"></Label>
             <Label Content="{DynamicResource Enregistrer}" Grid.Column="4" Grid.Row="1"></Label>
             <Label Content="{DynamicResource Annuler}" Grid.Column="5" Grid.Row="1"></Label>
             <Label Content="{DynamicResource Synchroniser}" Grid.Column="6" Grid.Row="1"></Label>
-            
-            
+
+
 
             <Button Grid.Row="0"  ToolTip="{DynamicResource CancelTooltip}" Grid.Column="0" Width="55" Height="55" VerticalAlignment="Bottom" Command="{Binding ImportDataBaseCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
                 <Rectangle Width="20" Height="20">
@@ -292,12 +292,19 @@
                                   Margin="2" ItemsSource="{Binding RechercherParList,Mode=TwoWay}" ItemTemplate="{StaticResource CbxSearchTemplate}"/>
                         <TextBox Grid.Row="0" Text="{Binding SearchText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Margin="1" BorderBrush="Black"></TextBox>
                     </Grid>
-                    <DataGrid  Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding ListNotesExamins}">
+                    <DataGrid x:Name="NoteDataGrid"  Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding ListNotesExamins}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="{DynamicResource Matricule}" IsReadOnly="True"
                                     Binding="{Binding Matricule}" MinWidth="100" />
                             <DataGridTextColumn Header="{DynamicResource Nom}" IsReadOnly="True"
-                                    Binding="{Binding Nom}" MinWidth="150">                                
+                                     MinWidth="150">
+                                <DataGridTextColumn.Binding>
+                                    <MultiBinding Converter="{StaticResource NomConverter}">
+                                        <Binding Path="DataContext.LangContentFr"  ElementName="NoteDataGrid"></Binding>
+                                        <Binding Path="NomLatin"/>
+                                        <Binding Path="Nom"/>                                        
+                                    </MultiBinding>
+                                </DataGridTextColumn.Binding>
                             </DataGridTextColumn>
                             <DataGridTextColumn Header="{DynamicResource Prenom}" IsReadOnly="True"
                                     Binding="{Binding Prenom}" MinWidth="150"/>
@@ -357,36 +364,36 @@
                         <TextBox Grid.Row="0" Text="{Binding SearchTextDette,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Margin="1" BorderBrush="Black"/>
                     </Grid>
                     <StackPanel  Grid.Row="1">
-                        <StackPanel.Resources>                            
+                        <StackPanel.Resources>
                             <FrameworkElement x:Key="ProxyElement"
                          DataContext="{Binding}"/>
                         </StackPanel.Resources>
                         <ContentControl Visibility="Collapsed"
                 Content="{StaticResource ProxyElement}"/>
                         <DataGrid  AutoGenerateColumns="False" ItemsSource="{Binding ListNotesDettes}">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="{DynamicResource Matricule}" IsReadOnly="True"
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="{DynamicResource Matricule}" IsReadOnly="True"
                                     Binding="{Binding Matricule}" MinWidth="100"/>
-                            <DataGridTextColumn Header="{DynamicResource Nom}" IsReadOnly="True"
+                                <DataGridTextColumn Header="{DynamicResource Nom}" IsReadOnly="True"
                                     Binding="{Binding Nom}" MinWidth="150"/>
-                            <DataGridTextColumn Header="{DynamicResource Prenom}" IsReadOnly="True"
+                                <DataGridTextColumn Header="{DynamicResource Prenom}" IsReadOnly="True"
                                     Binding="{Binding Prenom}" MinWidth="150"/>
-                            <controls:DataGridNumericUpDownColumn Header="{DynamicResource Note}" Visibility="{Binding DataContext.NoteDetteColVisibility,Source={StaticResource ProxyElement}}"
+                                <controls:DataGridNumericUpDownColumn Header="{DynamicResource Note}" Visibility="{Binding DataContext.NoteDetteColVisibility,Source={StaticResource ProxyElement}}"
                                                       Binding="{Binding Note,Mode=TwoWay}" 
                                                       StringFormat="N" Maximum="20" MaxWidth="100"
-                                                      Minimum="0"  IsReadOnly="False" >                                
-                            </controls:DataGridNumericUpDownColumn>
-                            <controls:DataGridNumericUpDownColumn Header="{DynamicResource Rattrapage}" 
+                                                      Minimum="0"  IsReadOnly="False" >
+                                </controls:DataGridNumericUpDownColumn>
+                                <controls:DataGridNumericUpDownColumn Header="{DynamicResource Rattrapage}" 
                                                       Binding="{Binding NoteRattrapage,Mode=TwoWay}" IsReadOnly="False" Visibility="{Binding DataContext.RattrapageDetteColVisibility,Source={StaticResource ProxyElement}}"
                                                       StringFormat="N" 
                                                       Minimum="0" Maximum="20" />
 
-                        </DataGrid.Columns>
-                    </DataGrid>
-                        </StackPanel>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
                 </Grid>
             </controls:MetroTabItem>
-        </controls:MetroAnimatedTabControl>        
+        </controls:MetroAnimatedTabControl>
         <controls:MetroProgressBar Grid.Row="2" Maximum="100" Visibility="{Binding PbVisibility}"  Value="{Binding PbValue,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Column="0" Grid.ColumnSpan="3"/>
     </Grid>
 
