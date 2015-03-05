@@ -177,16 +177,7 @@ namespace ESC_OfflineTeacher.ViewModel
             {
                 return _mainWindowLoadedCommand
                     ?? (_mainWindowLoadedCommand = new RelayCommand(
-                        () =>
-                        {
-                            _navigationService.NavigateTo("LoginView");
-                            using (var context = new LocalDbEntities())
-                            {
-                                LoggedInUser = context.ENSEIGNANTS.First(x => x.ID_ENSEIGNANT == 2);
-                                ListSpeciliteEns = new ObservableCollection<SPECIALITE>(context.ENS_SPEMAT.Where(x => x.ID_ENSEIGNANT == LoggedInUser.ID_ENSEIGNANT).Select(x => x.SPECIALITE).Distinct().ToList());
-                            }
-                         
-                        }));
+                        () => _navigationService.NavigateTo("LoginView")));
             }
         }        
         #endregion
@@ -194,6 +185,12 @@ namespace ESC_OfflineTeacher.ViewModel
         public MainViewModel(IFrameNavigationService navigationService)
         {
             _navigationService = navigationService;
+            Messenger.Default.Register<ENSEIGNANT>(this, "Login", (ens) =>
+            {
+                LoggedInUser = ens;
+                var context = new LocalDbEntities();
+                ListSpeciliteEns = new ObservableCollection<SPECIALITE>(context.ENS_SPEMAT.Where(x => x.ID_ENSEIGNANT == LoggedInUser.ID_ENSEIGNANT).Select(x => x.SPECIALITE).Distinct().ToList());
+            });
         }
         #endregion
     }

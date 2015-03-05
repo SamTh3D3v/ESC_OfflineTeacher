@@ -24,7 +24,7 @@
     <system:String x:Key="Examin">الامتحان</system:String>
     <system:String x:Key="AfficherTous">أظهر الكل</system:String>
     <system:String x:Key="NotesExamens">نقطة الامتحان</system:String>
-    <system:String x:Key="NotesDettes">نفطة الامتحان التعويضي</system:String>
+    <system:String x:Key="NotesDettes">نقطة الامتحان التعويضي</system:String>
     <system:String x:Key="Matricule">رقم الطالب</system:String>
     <system:String x:Key="Note">النقطة</system:String>
     <system:String x:Key="Rattrapage">الاستدراك</system:String>
