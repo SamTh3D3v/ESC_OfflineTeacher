@@ -175,7 +175,20 @@
                     </ComboBox>
                     <!--using this have some dawbacks-->
                     <Label Content="{DynamicResource AfficherTous}" Grid.Row="1" Grid.Column="0"></Label>
-                    <CheckBox Margin="5" Grid.Row="1" Grid.Column="1" IsChecked="{Binding AfficherTousExamin,Mode=TwoWay}" ></CheckBox>
+                    <CheckBox Margin="5" Grid.Row="1" Grid.Column="1" IsChecked="{Binding AfficherTousExamin,Mode=TwoWay}" >
+                        <CheckBox.Style>
+                            <Style TargetType="CheckBox">
+                                <Style.Triggers>
+                                    <DataTrigger  Binding="{Binding SelectedIndex, ElementName=TabCtl}" Value="0">
+                                        <Setter Property="CheckBox.Visibility" Value="Collapsed"></Setter>                                       
+                                    </DataTrigger>
+                                    <DataTrigger  Binding="{Binding SelectedIndex, ElementName=TabCtl}" Value="1">
+                                        <Setter Property="CheckBox.Visibility" Value="Visible"></Setter>                                      
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </CheckBox.Style>
+                    </CheckBox>
                 </Grid>
             </Grid>
         </Border>

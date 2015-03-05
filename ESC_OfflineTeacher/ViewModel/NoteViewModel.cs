@@ -782,10 +782,8 @@ namespace ESC_OfflineTeacher.ViewModel
                 return _noteViewLoadedCommand
                     ?? (_noteViewLoadedCommand = new RelayCommand(
                     () =>
-                    {
-
-                        //the loggin is using a wcf service where the returned data is of USER type
-                        LoggedInTeacher = _context.ENSEIGNANTS.First(x => x.ID_ENSEIGNANT == 2);
+                    {                        
+                        //the loggin is using a wcf service where the returned data is of USER type                        
                         CurrentYear = _context.ANNEES.Max(x => x.ANNEE_UNIVERSITAIRE).ToString(CultureInfo.InvariantCulture);
 
                         var cy = int.Parse(CurrentYear);
@@ -993,7 +991,11 @@ namespace ESC_OfflineTeacher.ViewModel
                 }               
             };
             if (_navigationService.Parameter != null)
+            {
+                LoggedInTeacher = ((UserPreferences) _navigationService.Parameter).Enseignant;
                 LangContentFr = ((UserPreferences)_navigationService.Parameter).LangContFr;
+            }
+                
             Messenger.Default.Register<bool>(this,"LangFr", (fr) =>
             {
                 LangContentFr = fr;
