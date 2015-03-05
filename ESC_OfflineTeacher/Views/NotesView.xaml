@@ -302,12 +302,20 @@
                                     <MultiBinding Converter="{StaticResource NomConverter}">
                                         <Binding Path="DataContext.LangContentFr"  ElementName="NoteDataGrid"></Binding>
                                         <Binding Path="NomLatin"/>
-                                        <Binding Path="Nom"/>                                        
+                                        <Binding Path="Nom"/>
                                     </MultiBinding>
                                 </DataGridTextColumn.Binding>
                             </DataGridTextColumn>
                             <DataGridTextColumn Header="{DynamicResource Prenom}" IsReadOnly="True"
-                                    Binding="{Binding Prenom}" MinWidth="150"/>
+                                     MinWidth="150">
+                                <DataGridTextColumn.Binding>
+                                    <MultiBinding Converter="{StaticResource NomConverter}">
+                                        <Binding Path="DataContext.LangContentFr"  ElementName="NoteDataGrid"></Binding>
+                                        <Binding Path="PrenomLatin"/>
+                                        <Binding Path="Prenom"/>
+                                    </MultiBinding>
+                                </DataGridTextColumn.Binding>
+                            </DataGridTextColumn>
                             <controls:DataGridNumericUpDownColumn Header="{DynamicResource Note}" IsReadOnly="False" 
                                                       Binding="{Binding Note,Mode=TwoWay}" 
                                                       StringFormat="N" 

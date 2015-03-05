@@ -13,6 +13,5 @@
     </ResourceDictionary.MergedDictionaries>
     <converters:FlyoutOpenConverter x:Key="FlyoutOpenConverter"/>
     <converters:DisplayMemberPathConverter x:Key="DisplayMemberPathConverter"/>
-    <converters:NomConverter x:Key="NomConverter"/>
-    <converters:PrenomConverter x:Key="PrenomConverter"/>
+    <converters:NomConverter x:Key="NomConverter"/>    
 </ResourceDictionary>
