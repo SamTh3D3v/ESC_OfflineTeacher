@@ -39,13 +39,10 @@ namespace ESC_OfflineTeacher.ViewModel
         private ObservableCollection<EtudiantNote> _listNotesExaminsForSearch;
         private ObservableCollection<EtudiantNoteDette> _listNotesDettesForSearch;
         private MessageDialogResult _controller;
-        private string _localDbPath;
-        // Create a BackgroundWorker object to synchronize without blocking
-        // the UI thread
+        private string _localDbPath;      
         private BackgroundWorker backgroundWorker1;
         private LocalDbEntities _context;
         private BackgroundWorker _syncBackgroundWorker;
-
         private ObservableCollection<SPECIALITE> _specialiteList;
         private ObservableCollection<MATIERE> _matiereList;
         private ObservableCollection<MODES_ETUDES> _semestreList;
@@ -68,11 +65,8 @@ namespace ESC_OfflineTeacher.ViewModel
         private bool _afficherTousExamin = false;
         private Visibility _noteDetteColVisibility;
         private Visibility _rattrapageDetteColVisibility;
-
-
         private IEnumerable<GROUPE> _allGroupesList;
         private IEnumerable<SECTION> _allSectionsList;
-
         private ObservableCollection<ExaminDette> _listExaminDette;
         private int _pbValue;
         private Visibility _pbVisibility = Visibility.Collapsed;
@@ -266,7 +260,6 @@ namespace ESC_OfflineTeacher.ViewModel
                 SelectedExamin = _examinList.FirstOrDefault();
             }
         }
-
         public String NbEtdiants
         {
             get
@@ -680,8 +673,6 @@ namespace ESC_OfflineTeacher.ViewModel
                 RaisePropertyChanged();
             }
         }
-
-
         public bool AfficherTousExamin
         {
             get
@@ -785,7 +776,6 @@ namespace ESC_OfflineTeacher.ViewModel
                     {                        
                         //the loggin is using a wcf service where the returned data is of USER type                        
                         CurrentYear = _context.ANNEES.Max(x => x.ANNEE_UNIVERSITAIRE).ToString(CultureInfo.InvariantCulture);
-
                         var cy = int.Parse(CurrentYear);
                         var userSpecialite = _context.USERS_SPECIALITES.Where(x => x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == LoggedInTeacher.ID_USER).ToList();
                         SpecialiteList = new ObservableCollection<SPECIALITE>(userSpecialite.Select(x => x.SPECIALITE).Distinct().ToList());
@@ -854,9 +844,6 @@ namespace ESC_OfflineTeacher.ViewModel
                         var hashValue = ComputeHash(_localDbPath);
                         Settings.Default["HashValue"] = hashValue;
                         Settings.Default.Save();
-
-
-
                     }));
             }
         }
