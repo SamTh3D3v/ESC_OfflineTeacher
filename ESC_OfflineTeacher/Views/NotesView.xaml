@@ -174,7 +174,20 @@
                         </ComboBox.Style>
                     </ComboBox>
                     <!--using this have some dawbacks-->
-                    <Label Content="{DynamicResource AfficherTous}" Grid.Row="1" Grid.Column="0"></Label>
+                    <Label Content="{DynamicResource AfficherTous}" Grid.Row="1" Grid.Column="0">
+                        <Label.Style>
+                            <Style TargetType="Label">
+                                <Style.Triggers>
+                                    <DataTrigger  Binding="{Binding SelectedIndex, ElementName=TabCtl}" Value="0">
+                                        <Setter Property="Label.Visibility" Value="Collapsed"></Setter>
+                                    </DataTrigger>
+                                    <DataTrigger  Binding="{Binding SelectedIndex, ElementName=TabCtl}" Value="1">
+                                        <Setter Property="Label.Visibility" Value="Visible"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Label.Style>
+                    </Label>
                     <CheckBox Margin="5" Grid.Row="1" Grid.Column="1" IsChecked="{Binding AfficherTousExamin,Mode=TwoWay}" >
                         <CheckBox.Style>
                             <Style TargetType="CheckBox">
