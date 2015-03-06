@@ -9,8 +9,8 @@
     <system:String x:Key="Francais">francais</system:String>
     <system:String x:Key="Arab">arab</system:String>
     <system:String x:Key="Theme">Theme</system:String>
-    <system:String x:Key="Dark">Dark</system:String>
-    <system:String x:Key="Light">Light</system:String>
+    <system:String x:Key="Gris">Gris</system:String>
+    <system:String x:Key="Blue">Blue</system:String>
     <system:String x:Key="Information">Information</system:String>
     <system:String x:Key="Nom">Nom</system:String>
     <system:String x:Key="Prenom">Prenom</system:String>

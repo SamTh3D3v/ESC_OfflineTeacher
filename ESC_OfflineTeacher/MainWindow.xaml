@@ -18,7 +18,8 @@
         WindowTransitionsEnabled="False"
         WindowStartupLocation="CenterScreen"
         DataContext="{Binding Main, Source={StaticResource Locator}}" 
-                      ShowIconOnTitleBar="True" Background="WhiteSmoke" WindowTitleBrush="{DynamicResource BlackBrush}">
+                      ShowIconOnTitleBar="True" Background="WhiteSmoke" 
+                      WindowTitleBrush="{Binding GlobalThemeBrush}">
     <controls:MetroWindow.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -67,7 +68,7 @@
     </controls:MetroWindow.RightWindowCommands>
     <controls:MetroWindow.Flyouts>
         <controls:FlyoutsControl >
-            <controls:Flyout x:Name="SettingsFlyout" Header="{DynamicResource Settings}" Position="Right" HorizontalAlignment="Stretch"  Theme="Dark" Width="300">
+            <controls:Flyout x:Name="SettingsFlyout" Header="{DynamicResource Settings}" Position="Right" HorizontalAlignment="Stretch"  Background="{Binding GlobalThemeBrush}" Width="300">
                 <Grid  Margin="5,40,5,5" HorizontalAlignment="Stretch">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -125,14 +126,14 @@
                                     <ColumnDefinition Width="100"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <RadioButton GroupName="themeGroupe" Content="{DynamicResource Dark}" Grid.Column="1" Grid.Row="0"/>
-                                <RadioButton GroupName="themeGroupe" Content="{DynamicResource Light}" Grid.Column="1" Grid.Row="1"/>                               
+                                <RadioButton GroupName="themeGroupe" Content="{DynamicResource Gris}" Grid.Column="1" Grid.Row="0" IsChecked="{Binding IsBlackTheme,Mode=TwoWay}"/>
+                                <RadioButton GroupName="themeGroupe" Content="{DynamicResource Blue}" Grid.Column="1" Grid.Row="1" />                               
                             </Grid>
                         </Grid>                       
                     </Border>                   
                 </Grid>
             </controls:Flyout>
-            <controls:Flyout x:Name="DisconnectFlyout" Header="{DynamicResource Information}"    Position="Right"   Theme="Accent">
+            <controls:Flyout x:Name="DisconnectFlyout" Header="{DynamicResource Information}"    Position="Right"  Background="{Binding GlobalThemeBrush}">
                 <Grid  Margin="5,40,5,5" HorizontalAlignment="Right">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>

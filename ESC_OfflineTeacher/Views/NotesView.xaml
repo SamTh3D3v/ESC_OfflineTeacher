@@ -45,7 +45,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Grid  Grid.Row="0" Margin="5" Background="{StaticResource AccentColorBrush}" >
+                <Grid  Grid.Row="0" Margin="5" Background="{Binding GlobalThemeBrush}" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -53,7 +53,7 @@
                     <Label Grid.Row="0" Content="{DynamicResource AnneeUniversitaire}" HorizontalAlignment="Center"/>
                     <Label Grid.Row="1" HorizontalAlignment="Center" Content="{Binding CurrentYear}" FontSize="20" Foreground="White"/>
                 </Grid>
-                <Grid  Grid.Row="1" Margin="5" Background="{StaticResource AccentColorBrush}" >
+                <Grid  Grid.Row="1" Margin="5" Background="{Binding GlobalThemeBrush}" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -74,7 +74,7 @@
                         </Label.Style>
                     </Label>
                 </Grid>
-                <Grid  Grid.Row="2" Margin="5" Background="{StaticResource AccentColorBrush}">
+                <Grid  Grid.Row="2" Margin="5" Background="{Binding GlobalThemeBrush}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -104,7 +104,7 @@
                          SelectedItem="{Binding SelectedMatiere}">
                     </ComboBox>
                 </Grid>
-                <Grid Grid.Row="3" Margin="5" Background="{StaticResource AccentColorBrush}">
+                <Grid Grid.Row="3" Margin="5" Background="{Binding GlobalThemeBrush}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -142,7 +142,7 @@
                        SelectedItem="{Binding SelectedGroupe,Mode=TwoWay}">
                     </ComboBox>
                 </Grid>
-                <Grid Grid.Row="4" Margin="5" Background="{StaticResource AccentColorBrush}" >
+                <Grid Grid.Row="4" Margin="5" Background="{Binding GlobalThemeBrush}" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -251,7 +251,7 @@
                     </Rectangle.Fill>
                 </Rectangle>
             </Button>
-            <Button Grid.Row="0" Background="DeepSkyBlue" ToolTip="{DynamicResource SynchroniserToolTip}" Grid.Column="6" HorizontalAlignment="Right" Width="80" Height="80" VerticalAlignment="Top" Command="{Binding SyncCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+            <Button Grid.Row="0" Background="{Binding GlobalThemeBrush}" ToolTip="{DynamicResource SynchroniserToolTip}" Grid.Column="6" HorizontalAlignment="Right" Width="80" Height="80" VerticalAlignment="Top" Command="{Binding SyncCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
                 <Rectangle Width="20" Height="20">
                     <Rectangle.Fill>
                         <VisualBrush Stretch="Fill"

@@ -36,10 +36,7 @@ namespace ESC_OfflineTeacher.ViewModel
 
             set
             {
-                if (_globaleThemeBrush.Equals(value))
-                {
-                    return;
-                }
+                
 
                 _globaleThemeBrush = value;
                 RaisePropertyChanged();
@@ -63,7 +60,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 RaisePropertyChanged();
                 if (_isBlackTheme)
                 {
-                    GlobalThemeBrush = new SolidColorBrush(Colors.Black);
+                    GlobalThemeBrush = new SolidColorBrush(Colors.DarkGray);
                     Messenger.Default.Send<NotificationMessage>(new NotificationMessage("IsBlack"));
                 }
                 else
@@ -239,6 +236,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 var context = new LocalDbEntities();
                 ListSpeciliteEns = new ObservableCollection<SPECIALITE>(context.ENS_SPEMAT.Where(x => x.ID_ENSEIGNANT == LoggedInUser.ID_ENSEIGNANT).Select(x => x.SPECIALITE).Distinct().ToList());
             });
+            GlobalThemeBrush = new SolidColorBrush(Colors.DarkGray);
         }
         #endregion
     }

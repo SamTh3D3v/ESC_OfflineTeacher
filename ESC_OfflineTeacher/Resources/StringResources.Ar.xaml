@@ -9,8 +9,8 @@
     <system:String x:Key="Francais">الفرنسية</system:String>
     <system:String x:Key="Arab">العربية</system:String>
     <system:String x:Key="Theme">اللون</system:String>
-    <system:String x:Key="Dark">غامق</system:String>
-    <system:String x:Key="Light">فاتح</system:String>
+    <system:String x:Key="Gris">رمادي</system:String>
+    <system:String x:Key="Blue">أزرق</system:String>
     <system:String x:Key="Information">معلومات</system:String>
     <system:String x:Key="Nom">الاسم</system:String>
     <system:String x:Key="Prenom">اللقب</system:String>

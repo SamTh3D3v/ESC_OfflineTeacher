@@ -86,11 +86,7 @@ namespace ESC_OfflineTeacher.ViewModel
 
             set
             {
-                if (_globaleThemeBrush.Equals(value))
-                {
-                    return;
-                }
-
+             
                 _globaleThemeBrush = value;
                 RaisePropertyChanged();
             }
@@ -1029,13 +1025,14 @@ namespace ESC_OfflineTeacher.ViewModel
                 switch (message.Notification)
                 {
                     case "IsBlack":
-                        GlobalThemeBrush = new SolidColorBrush(Colors.Black);
+                        GlobalThemeBrush = new SolidColorBrush(Colors.DarkGray);
                         break;
                     case "IsBlue":
                         GlobalThemeBrush = new SolidColorBrush(Colors.CornflowerBlue);
                         break;
                 }
             });
+            GlobalThemeBrush = new SolidColorBrush(Colors.DarkGray);
         }
         private void InitializeBackgroundWorker()
         {
