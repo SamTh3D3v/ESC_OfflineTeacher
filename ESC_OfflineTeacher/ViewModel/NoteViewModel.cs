@@ -1024,15 +1024,15 @@ namespace ESC_OfflineTeacher.ViewModel
             {
                 switch (message.Notification)
                 {
-                    case "IsBlack":
-                        GlobalThemeBrush = new SolidColorBrush(Colors.DarkGray);
+                    case "IsDark":
+                        GlobalThemeBrush = App.Dark;
                         break;
-                    case "IsBlue":
-                        GlobalThemeBrush = new SolidColorBrush(Colors.CornflowerBlue);
+                    case "IsLight":
+                        GlobalThemeBrush = App.Light;
                         break;
                 }
             });
-            GlobalThemeBrush = new SolidColorBrush(Colors.DarkGray);
+            GlobalThemeBrush = App.Dark;
         }
         private void InitializeBackgroundWorker()
         {

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows;
+using System.Windows.Media;
 using ESC_OfflineTeacher.Annotations;
 using GalaSoft.MvvmLight.Threading;
 
@@ -15,6 +16,8 @@ namespace ESC_OfflineTeacher
     /// </summary>
     public partial class App : Application
     {
+        public static SolidColorBrush Dark = new SolidColorBrush(Colors.DarkGray);
+        public static SolidColorBrush Light = new SolidColorBrush(Colors.DeepSkyBlue);
         static App()
         {
             DispatcherHelper.Initialize();

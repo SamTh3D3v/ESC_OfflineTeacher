@@ -60,13 +60,13 @@ namespace ESC_OfflineTeacher.ViewModel
                 RaisePropertyChanged();
                 if (_isBlackTheme)
                 {
-                    GlobalThemeBrush = new SolidColorBrush(Colors.DarkGray);
-                    Messenger.Default.Send<NotificationMessage>(new NotificationMessage("IsBlack"));
+                    GlobalThemeBrush = App.Dark;
+                    Messenger.Default.Send<NotificationMessage>(new NotificationMessage("IsDark"));
                 }
                 else
                 {
-                    GlobalThemeBrush = new SolidColorBrush(Colors.CornflowerBlue);
-                    Messenger.Default.Send<NotificationMessage>(new NotificationMessage("IsBlue"));
+                    GlobalThemeBrush = App.Light;
+                    Messenger.Default.Send<NotificationMessage>(new NotificationMessage("IsLight"));
                 }                                                                   
             }
         }
@@ -236,7 +236,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 var context = new LocalDbEntities();
                 ListSpeciliteEns = new ObservableCollection<SPECIALITE>(context.ENS_SPEMAT.Where(x => x.ID_ENSEIGNANT == LoggedInUser.ID_ENSEIGNANT).Select(x => x.SPECIALITE).Distinct().ToList());
             });
-            GlobalThemeBrush = new SolidColorBrush(Colors.DarkGray);
+            GlobalThemeBrush = App.Dark;
         }
         #endregion
     }
