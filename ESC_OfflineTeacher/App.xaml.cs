@@ -23,9 +23,7 @@ namespace ESC_OfflineTeacher
             QuickConverter.EquationTokenizer.AddNamespace(typeof(System.Windows.Visibility));
 
         }
-        
-
-       
+              
         public static void SelectCulture(string culture)
         {               
             var dictionaryList = Application.Current.Resources.MergedDictionaries.ToList();
@@ -44,9 +42,7 @@ namespace ESC_OfflineTeacher
             {
                 Application.Current.Resources.MergedDictionaries.Remove(resourceDictionary);
                 Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
-            }              
-            //Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(culture);
-            //Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
+            }                                      
         }
         
 

@@ -17,7 +17,8 @@
         GlowBrush="{DynamicResource AccentColorBrush}"
         WindowTransitionsEnabled="False"
         WindowStartupLocation="CenterScreen"
-        DataContext="{Binding Main, Source={StaticResource Locator}}"  ShowIconOnTitleBar="True" Background="WhiteSmoke">
+        DataContext="{Binding Main, Source={StaticResource Locator}}" 
+                      ShowIconOnTitleBar="True" Background="WhiteSmoke" WindowTitleBrush="{DynamicResource BlackBrush}">
     <controls:MetroWindow.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -128,16 +129,7 @@
                                 <RadioButton GroupName="themeGroupe" Content="{DynamicResource Light}" Grid.Column="1" Grid.Row="1"/>                               
                             </Grid>
                         </Grid>                       
-                    </Border>
-                    <!--<Border Grid.Row="2" BorderThickness="1" BorderBrush="White" Margin="0,5,0,5">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Label Margin="20,2,2,2" Content="parametre" FontSize="15" Grid.Row="0" Grid.Column="0" Foreground="White"/>
-                        </Grid>
-                    </Border>-->
+                    </Border>                   
                 </Grid>
             </controls:Flyout>
             <controls:Flyout x:Name="DisconnectFlyout" Header="{DynamicResource Information}"    Position="Right"   Theme="Accent">

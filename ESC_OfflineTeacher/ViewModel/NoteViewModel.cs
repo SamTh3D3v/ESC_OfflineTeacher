@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
 using ESC_OfflineTeacher.Model;
 using ESC_OfflineTeacher.Properties;
 using GalaSoft.MvvmLight;
@@ -73,8 +74,27 @@ namespace ESC_OfflineTeacher.ViewModel
         private Visibility _pbVisibility = Visibility.Collapsed;
         private ExaminDette _selectedExaminDette;
         private bool _langContentFr=true;
+        private SolidColorBrush _globaleThemeBrush;
         #endregion
-        #region Properties
+        #region Properties        
+        public SolidColorBrush GlobalThemeBrush
+        {
+            get
+            {
+                return _globaleThemeBrush;
+            }
+
+            set
+            {
+                if (_globaleThemeBrush.Equals(value))
+                {
+                    return;
+                }
+
+                _globaleThemeBrush = value;
+                RaisePropertyChanged();
+            }
+        }
         public bool LangContentFr
         {
             get
@@ -1003,6 +1023,18 @@ namespace ESC_OfflineTeacher.ViewModel
             Messenger.Default.Register<bool>(this,"LangFr", (fr) =>
             {
                 LangContentFr = fr;
+            });
+            Messenger.Default.Register<NotificationMessage>(this, (message) =>
+            {
+                switch (message.Notification)
+                {
+                    case "IsBlack":
+                        GlobalThemeBrush = new SolidColorBrush(Colors.Black);
+                        break;
+                    case "IsBlue":
+                        GlobalThemeBrush = new SolidColorBrush(Colors.CornflowerBlue);
+                        break;
+                }
             });
         }
         private void InitializeBackgroundWorker()

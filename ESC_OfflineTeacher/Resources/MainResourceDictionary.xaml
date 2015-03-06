@@ -13,5 +13,7 @@
     </ResourceDictionary.MergedDictionaries>
     <converters:FlyoutOpenConverter x:Key="FlyoutOpenConverter"/>
     <converters:DisplayMemberPathConverter x:Key="DisplayMemberPathConverter"/>
-    <converters:NomConverter x:Key="NomConverter"/>    
+    <converters:NomConverter x:Key="NomConverter"/>
+    <SolidColorBrush x:Key="BlueTheme" Color="CornflowerBlue"/>
+    <SolidColorBrush x:Key="BlackTheme" Color="Black"/>
 </ResourceDictionary>

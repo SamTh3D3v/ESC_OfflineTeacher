@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Media;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -22,8 +23,56 @@ namespace ESC_OfflineTeacher.ViewModel
         private bool _langueInterfaceAr=false;
         private bool _langueContenuFr = true;
         private bool _langueContenuAr = false;
+        private bool _isBlackTheme = true;
+        private SolidColorBrush _globaleThemeBrush;
         #endregion
-        #region Properties
+        #region Properties                
+        public SolidColorBrush GlobalThemeBrush
+        {
+            get
+            {
+                return _globaleThemeBrush;
+            }
+
+            set
+            {
+                if (_globaleThemeBrush.Equals(value))
+                {
+                    return;
+                }
+
+                _globaleThemeBrush = value;
+                RaisePropertyChanged();
+            }
+        }
+        public bool IsBlackTheme
+        {
+            get
+            {
+                return _isBlackTheme;
+            }
+
+            set
+            {
+                if (_isBlackTheme == value)
+                {
+                    return;
+                }
+
+                _isBlackTheme = value;
+                RaisePropertyChanged();
+                if (_isBlackTheme)
+                {
+                    GlobalThemeBrush = new SolidColorBrush(Colors.Black);
+                    Messenger.Default.Send<NotificationMessage>(new NotificationMessage("IsBlack"));
+                }
+                else
+                {
+                    GlobalThemeBrush = new SolidColorBrush(Colors.CornflowerBlue);
+                    Messenger.Default.Send<NotificationMessage>(new NotificationMessage("IsBlue"));
+                }                                                                   
+            }
+        }
         public bool LangueContenuFr
         {
             get
@@ -62,7 +111,6 @@ namespace ESC_OfflineTeacher.ViewModel
                 RaisePropertyChanged();                                
             }
         }
-
         public bool LangueInterfaceFr
         {
             get
