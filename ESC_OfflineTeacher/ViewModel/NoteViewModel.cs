@@ -42,7 +42,8 @@ namespace ESC_OfflineTeacher.ViewModel
         private ObservableCollection<EtudiantNoteDette> _listNotesDettesForSearch;
         private MessageDialogResult _controller;
         private string _localDbPath;      
-        private BackgroundWorker backgroundWorker1;
+        private BackgroundWorker _refreshListNoteBackgroundWorker;
+        private BackgroundWorker _refreshListNoteDetteBackgroundWorker;
         private LocalDbEntities _context;
         private BackgroundWorker _syncBackgroundWorker;
         private ObservableCollection<SPECIALITE> _specialiteList;
@@ -443,13 +444,8 @@ namespace ESC_OfflineTeacher.ViewModel
                 {
                     var matiereInUserSpecialite = _context.USERS_SPECIALITES.Where(x => x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == LoggedInTeacher.ID_USER && x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE).Select(x => x.MATIERE).Distinct();
                     MatiereList = new ObservableCollection<MATIERE>(matiereInUserSpecialite.ToList());
-                    var groupeList =
-                   _context.USERS_SPECIALITES.Where(
-                       x =>
-                           x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == _loggedInTeacher.ID_USER &&
-                           x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE).Select(x => x.GROUPE).Distinct().ToList();
-
-                    SectionList = new ObservableCollection<SECTION>(groupeList.Select(x => x.SECTION).Distinct());
+                    SelectedMatiere = MatiereList.FirstOrDefault();
+                    
                 }
                 else
                 {
@@ -486,6 +482,17 @@ namespace ESC_OfflineTeacher.ViewModel
 
                 _selectedMatiere = value;
                 RaisePropertyChanged();
+                if (_selectedMatiere!=null)
+                {
+                    var cy = int.Parse(CurrentYear);
+                    var groupeList =
+                   _context.USERS_SPECIALITES.Where(
+                       x =>
+                           x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == _loggedInTeacher.ID_USER &&
+                           x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE && x.ID_MATIERE == SelectedMatiere.ID_MATIERE).Select(x => x.GROUPE).Distinct().ToList();
+
+                    SectionList = new ObservableCollection<SECTION>(groupeList.Select(x => x.SECTION).Distinct());
+                }
                 RefreshNoteStudentList();
                 RefreshNoteDetteStudentList();
             }
@@ -538,7 +545,7 @@ namespace ESC_OfflineTeacher.ViewModel
                         new ObservableCollection<GROUPE>(_context.USERS_SPECIALITES.Where(
                             x =>
                                 x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == _loggedInTeacher.ID_USER &&
-                                x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE && x.ID_MATIERE==_selectedMatiere.ID_MATIERE).Select(x => x.GROUPE).Distinct());
+                                x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE && x.ID_MATIERE==_selectedMatiere.ID_MATIERE).Select(x => x.GROUPE).Where(g=>g.ID_SECTION==_selectedSection.ID_SECTION).Distinct());
                     RefreshNoteStudentList();
                     RefreshNoteDetteStudentList();
                 }
@@ -957,8 +964,29 @@ namespace ESC_OfflineTeacher.ViewModel
         {
             _navigationService = navigationService;
             _context = new LocalDbEntities();
+            Initialisation();               
+            Messenger.Default.Register<bool>(this,"LangFr", (fr) =>
+            {
+                LangContentFr = fr;
+            });
+            Messenger.Default.Register<NotificationMessage>(this, (message) =>
+            {
+                switch (message.Notification)
+                {
+                    case "IsDark":
+                        GlobalThemeBrush = App.Dark;
+                        break;
+                    case "IsLight":
+                        GlobalThemeBrush = App.Light;
+                        break;
+                }
+            });
+            
+        }
+        private void Initialisation()
+        {
             _localDbPath = AppDomain.CurrentDomain.BaseDirectory.ToString(CultureInfo.InvariantCulture) + "SGSDB.sdf";
-            InitializeBackgroundWorker();
+            InitializeSyncBackgroundWorker();
             ListNotesExamins = new ObservableCollection<EtudiantNote>();
             ListNotesDettes = new ObservableCollection<EtudiantNoteDette>();
             ListExaminDette = new ObservableCollection<ExaminDette>()
@@ -995,39 +1023,23 @@ namespace ESC_OfflineTeacher.ViewModel
             };
             if (_navigationService.Parameter != null)
             {
-                LoggedInTeacher = ((UserPreferences) _navigationService.Parameter).Enseignant;
+                LoggedInTeacher = ((UserPreferences)_navigationService.Parameter).Enseignant;
                 //if it is the first sync, the above object is null .. -> force resync then update it 
-                if (LoggedInTeacher==null)
+                if (LoggedInTeacher == null)
                 {
                     Task.Run(() => _syncBackgroundWorker.RunWorkerAsync()).ContinueWith((x) =>
-                            {
-                                LoggedInTeacher =
-                                    _context.ENSEIGNANTS.First(
-                                        y => y.ID_USER == ((UserPreferences)_navigationService.Parameter).IdUser);
-                                Messenger.Default.Send<ENSEIGNANT>(LoggedInTeacher, "Login");
-                            }); 
+                    {
+                        LoggedInTeacher =
+                            _context.ENSEIGNANTS.First(
+                                y => y.ID_USER == ((UserPreferences)_navigationService.Parameter).IdUser);
+                        Messenger.Default.Send<ENSEIGNANT>(LoggedInTeacher, "Login");
+                    });
                 }
                 LangContentFr = ((UserPreferences)_navigationService.Parameter).LangContFr;
-            }                
-            Messenger.Default.Register<bool>(this,"LangFr", (fr) =>
-            {
-                LangContentFr = fr;
-            });
-            Messenger.Default.Register<NotificationMessage>(this, (message) =>
-            {
-                switch (message.Notification)
-                {
-                    case "IsDark":
-                        GlobalThemeBrush = App.Dark;
-                        break;
-                    case "IsLight":
-                        GlobalThemeBrush = App.Light;
-                        break;
-                }
-            });
+            }
             GlobalThemeBrush = App.Dark;
         }
-        private void InitializeBackgroundWorker()
+        private void InitializeSyncBackgroundWorker()
         {
             _syncBackgroundWorker = new BackgroundWorker { WorkerReportsProgress = true };
             _syncBackgroundWorker.DoWork += new DoWorkEventHandler(_syncBackgroundWorker_DoWork);

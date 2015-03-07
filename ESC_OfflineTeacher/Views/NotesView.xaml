@@ -306,21 +306,23 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <!--<controls:DropDownButton   Grid.Column="0" Margin="2"
-                            VerticalContentAlignment="Center"
-                            HorizontalAlignment="Stretch"
-                            Content="Rechercher par"                            
-                            HorizontalContentAlignment="Center"                                        
-                            ItemsSource="{Binding RechercherParList}">
-                        </controls:DropDownButton>-->
+                        </Grid.ColumnDefinitions>                       
                         <ComboBox Grid.Column="0" Grid.Row="0" SelectedItem="{Binding RechercherParList[0],Mode=OneTime}"
                                   Margin="2" ItemsSource="{Binding RechercherParList,Mode=TwoWay}" ItemTemplate="{StaticResource CbxSearchTemplate}"/>
                         <TextBox Grid.Row="0" Text="{Binding SearchText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Margin="1" BorderBrush="Black"></TextBox>
                     </Grid>
                     <DataGrid x:Name="NoteDataGrid"  Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding ListNotesExamins}">
+                        <DataGrid.Resources>
+                            <Style TargetType="DataGridCell">
+                                <Style.Triggers>
+                                    <Trigger Property="IsReadOnly" Value="True">
+                                        <Setter Property="IsTabStop" Value="False"/>                                        
+                                    </Trigger>                                  
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.Resources>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="{DynamicResource Matricule}" IsReadOnly="True"
+                            <DataGridTextColumn Header="{DynamicResource Matricule}" IsReadOnly="True" 
                                     Binding="{Binding Matricule}" MinWidth="100" />
                             <DataGridTextColumn Header="{DynamicResource Nom}" IsReadOnly="True"
                                      MinWidth="150">
