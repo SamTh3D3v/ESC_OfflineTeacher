@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.ignore.com"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d ignore" Width="500" Height="140"
         DataContext="{Binding LoginViewModel, Source={StaticResource Locator}}" Background="WhiteSmoke">
     <Page.Resources>
@@ -26,13 +27,14 @@
             <ColumnDefinition Width="91*"/>
             <ColumnDefinition Width="209*"/>
             <ColumnDefinition Width="40*"/>
+            <ColumnDefinition Width="40*"/>
         </Grid.ColumnDefinitions>
         <Label Content="{DynamicResource Login}" Foreground="White" FontSize="15" Grid.Column="0" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Center"/>
         <Label Grid.Row="1" Grid.Column="0" Foreground="White" FontSize="15" Content="{DynamicResource MotDePasse}" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Center" />
-        <TextBox BorderBrush="{DynamicResource TextBoxBorderBrush}" Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch"   TextWrapping="Wrap" Text="{Binding UserName}" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Margin="5"/>
-        <PasswordBox x:Name="PBox"  Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="5" Grid.Row="1" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+        <TextBox BorderBrush="{DynamicResource TextBoxBorderBrush}" Grid.ColumnSpan="3" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch"   TextWrapping="Wrap" Text="{Binding UserName}" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Margin="5"/>
+        <PasswordBox x:Name="PBox"  Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Margin="5" Grid.Row="1" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
         <Button Content="{DynamicResource Connextion}" Background="{Binding GlobalThemeBrush}" Foreground="WhiteSmoke" FontSize="16" Grid.Row="2" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=PBox}" Grid.Column="1" Margin="5" Height="40" Width="150" VerticalAlignment="Top" Style="{StaticResource AccentedSquareButtonStyle}"/>
-        <Button Grid.Row="2"  ToolTip="{DynamicResource ImportTooltip}" Grid.Column="2" Width="40" Height="40" VerticalAlignment="Center" Background="WhiteSmoke" Command="{Binding ImportDataBaseCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+        <Button Grid.Row="2"  ToolTip="{DynamicResource ImportTooltip}" Grid.Column="3" Width="40" Height="40" VerticalAlignment="Center" Background="WhiteSmoke" Command="{Binding ImportDataBaseCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
             <Rectangle Width="20" Height="20">
                 <Rectangle.Fill>
                     <VisualBrush Stretch="Fill"
@@ -40,5 +42,6 @@
                 </Rectangle.Fill>
             </Rectangle>
         </Button>
+        <controls:ProgressRing Grid.Row="2" Grid.Column="2" VerticalAlignment="Center"  HorizontalAlignment="Center" Foreground="{DynamicResource AccentColorBrush}" IsLarge="True"  IsActive="{Binding ProgressRingIsActive}" Height="40"  Width="40"/>
     </Grid>
 </Page>
