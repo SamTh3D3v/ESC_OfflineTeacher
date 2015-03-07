@@ -538,7 +538,7 @@ namespace ESC_OfflineTeacher.ViewModel
                         new ObservableCollection<GROUPE>(_context.USERS_SPECIALITES.Where(
                             x =>
                                 x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == _loggedInTeacher.ID_USER &&
-                                x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE).Select(x => x.GROUPE).Distinct());
+                                x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE && x.ID_MATIERE==_selectedMatiere.ID_MATIERE).Select(x => x.GROUPE).Distinct());
                     RefreshNoteStudentList();
                     RefreshNoteDetteStudentList();
                 }
@@ -546,6 +546,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 {
                     GroupeList = new ObservableCollection<GROUPE>();
                     ListNotesExamins = new ObservableCollection<EtudiantNote>();
+                    ListNotesDettes = new ObservableCollection<EtudiantNoteDette>();
                 }
 
 
@@ -957,15 +958,7 @@ namespace ESC_OfflineTeacher.ViewModel
             _navigationService = navigationService;
             _context = new LocalDbEntities();
             _localDbPath = AppDomain.CurrentDomain.BaseDirectory.ToString(CultureInfo.InvariantCulture) + "SGSDB.sdf";
-
             InitializeBackgroundWorker();
-
-
-            ////#To Resync The Db 
-            //_syncBackgroundWorker.RunWorkerAsync();
-            //return;
-            ////
-
             ListNotesExamins = new ObservableCollection<EtudiantNote>();
             ListNotesDettes = new ObservableCollection<EtudiantNoteDette>();
             ListExaminDette = new ObservableCollection<ExaminDette>()
