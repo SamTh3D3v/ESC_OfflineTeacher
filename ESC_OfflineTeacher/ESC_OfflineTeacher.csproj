@@ -92,6 +92,9 @@
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logoesc.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight">
       <HintPath>..\packages\MvvmLightLibs.5.1.1.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
@@ -141,6 +144,7 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Channels" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.1.1.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -223,10 +227,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Skins\MainSkin.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\LoginView.xaml">
       <SubType>Form</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -281,11 +281,7 @@
     </None>
     <Resource Include="Resources\Entypo.ttf" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Design\" />
-    <Folder Include="Helpers\" />
-    <Folder Include="Service\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\WindowsIcons-license.txt" />
   </ItemGroup>
@@ -365,6 +361,9 @@
   <ItemGroup>
     <Resource Include="Assets\export.png" />
     <Resource Include="Assets\import.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="logoesc.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

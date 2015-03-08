@@ -19,7 +19,7 @@
     <system:String x:Key="NombreDesEtudiants">عدد الطلبة</system:String>
     <system:String x:Key="Matiere">المادة</system:String>
     <system:String x:Key="Semestre">السداسي</system:String>
-    <system:String x:Key="Section">الفصل</system:String>
+    <system:String x:Key="Section">المجموعة</system:String>
     <system:String x:Key="Groupe">الفوج</system:String>
     <system:String x:Key="Examin">الامتحان</system:String>
     <system:String x:Key="AfficherTous">أظهر الكل</system:String>

@@ -1025,8 +1025,7 @@ namespace ESC_OfflineTeacher.ViewModel
             
         }
         private void Initialisation()
-        {
-            
+        {            
             InitializeSyncBackgroundWorker();          
             ListNotesExamins = new ObservableCollection<EtudiantNote>();
             ListNotesDettes = new ObservableCollection<EtudiantNoteDette>();
