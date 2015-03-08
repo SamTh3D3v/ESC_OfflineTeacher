@@ -88,6 +88,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 RaisePropertyChanged();
                 Messenger.Default.Send<bool>(_langueContenuFr, "LangFr");
                 
+                
             }
         }
         public bool LangueContenuAr
@@ -128,6 +129,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 {
                     App.SelectCulture("Fr");
                 }
+                Messenger.Default.Send<bool>(_langueInterfaceFr, "LangFrInterface");
             }
         }
 
