@@ -17,7 +17,7 @@
         </ResourceDictionary>
     </Page.Resources>
 
-    <Grid Background="{Binding GlobalThemeBrush}">
+    <Grid x:Name="dGrid" Background="{Binding GlobalThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>

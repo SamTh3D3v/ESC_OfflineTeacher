@@ -14,6 +14,7 @@ namespace ESC_OfflineTeacher.Views
         public LoginView()
         {
             InitializeComponent();
+            
         }
     }
 }

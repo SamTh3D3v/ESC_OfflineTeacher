@@ -149,7 +149,15 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Label Margin="20,2,2,2" Content="{DynamicResource Nom}" FontSize="15" Grid.Row="0" Grid.Column="0" Foreground="White"/>
-                            <Label Margin="2" Content="{Binding LoggedInUser.NOM_LATIN}"  Foreground="LightBlue" Grid.Column="1"/>
+                            <Label Margin="2"   Foreground="LightBlue" Grid.Column="1">
+                                <Label.Content>
+                                    <MultiBinding Converter="{StaticResource NomConverter}">
+                                        <Binding Path="LangueContenuFr"  ></Binding>
+                                        <Binding Path="LoggedInUser.NOM_LATIN"/>
+                                        <Binding Path="LoggedInUser.NOM"/>
+                                    </MultiBinding>
+                                </Label.Content>                                                                
+                            </Label>
                         </Grid>
                     </Border>
                     <Border Grid.Row="1" BorderThickness="1" BorderBrush="White" Margin="0,5,0,5">
@@ -169,7 +177,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Label Margin="20,2,2,2" Content="{DynamicResource Specilite}" FontSize="15" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Left" Foreground="White"/>
-                            <ListView Background="{x:Null}"  Margin="2"   ItemsSource="{Binding ListSpeciliteEns}" Foreground="LightBlue" DisplayMemberPath="DESIGNATION_LATIN" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch">
+                            <ListView Background="{x:Null}"  Margin="2"   ItemsSource="{Binding ListSpeciliteEns}" Foreground="LightBlue" DisplayMemberPath="{Binding LangueContenuFr,Converter={StaticResource DisplayMemberPathConverter}}" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch">
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="ListViewItem">
                                         <Setter Property="FontSize" Value="14" />

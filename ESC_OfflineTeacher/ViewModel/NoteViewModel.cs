@@ -1052,6 +1052,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 LangContentFr = ((UserPreferences)_navigationService.Parameter).LangContFr;
             }
             GlobalThemeBrush = App.Dark;
+            AfficherTousExamin = true;
         }
         private void InitializeSyncBackgroundWorker()
         {
