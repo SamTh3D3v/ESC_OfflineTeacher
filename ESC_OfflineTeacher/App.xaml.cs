@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace ESC_OfflineTeacher
     {
         public static SolidColorBrush Dark = new SolidColorBrush(Colors.LightGray);
         public static SolidColorBrush Light = new SolidColorBrush(Color.FromRgb(8,111,158));
+        public static string LocalDbPath = AppDomain.CurrentDomain.BaseDirectory.ToString(CultureInfo.InvariantCulture) + "SGSDB.sdf";
         public App()
             : base()
         {

@@ -31,9 +31,7 @@ namespace ESC_OfflineTeacher.ViewModel
 {
 
     public class NoteViewModel : ViewModelBase
-    {
-        #region Consts
-        #endregion
+    {   
         #region Fields
         private readonly IFrameNavigationService _navigationService;
         private ObservableCollection<EtudiantNote> _listNotesExamins;
@@ -41,10 +39,7 @@ namespace ESC_OfflineTeacher.ViewModel
         private bool _progressRingIsActive = false;
         private ObservableCollection<EtudiantNote> _listNotesExaminsForSearch;
         private ObservableCollection<EtudiantNoteDette> _listNotesDettesForSearch;
-        private MessageDialogResult _controller;
-        private string _localDbPath;      
-        private BackgroundWorker _refreshListNoteBackgroundWorker;
-        private BackgroundWorker _refreshListNoteDetteBackgroundWorker;
+        private MessageDialogResult _controller;             
         private LocalDbEntities _context;
         private BackgroundWorker _syncBackgroundWorker;
         private ObservableCollection<SPECIALITE> _specialiteList;
@@ -77,7 +72,7 @@ namespace ESC_OfflineTeacher.ViewModel
         private ExaminDette _selectedExaminDette;
         private bool _langContentFr=true;
         private SolidColorBrush _globaleThemeBrush;
-        private bool _LangInterfaceFr = true;
+        private bool _langInterfaceFr = true;
         #endregion
         #region Properties        
         public SolidColorBrush GlobalThemeBrush
@@ -98,17 +93,17 @@ namespace ESC_OfflineTeacher.ViewModel
         {
             get
             {
-                return _LangInterfaceFr;
+                return _langInterfaceFr;
             }
 
             set
             {
-                if (_LangInterfaceFr == value)
+                if (_langInterfaceFr == value)
                 {
                     return;
                 }
 
-                _LangInterfaceFr = value;
+                _langInterfaceFr = value;
                 RaisePropertyChanged();
             }
         }
@@ -197,7 +192,6 @@ namespace ESC_OfflineTeacher.ViewModel
                 {
                     return;
                 }
-
                 _specialiteList = value;
                 RaisePropertyChanged();
                 SelectedSpecialite = _specialiteList.First();
@@ -482,11 +476,6 @@ namespace ESC_OfflineTeacher.ViewModel
                     ListNotesExamins = new ObservableCollection<EtudiantNote>();
                     ListNotesDettes = new ObservableCollection<EtudiantNoteDette>();
                 }
-
-                //set the semesters and the needed exam for this year 
-                
-                
-
             }
         }
         public MATIERE SelectedMatiere
@@ -513,7 +502,6 @@ namespace ESC_OfflineTeacher.ViewModel
                        x =>
                            x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == _loggedInTeacher.ID_USER &&
                            x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE && x.ID_MATIERE == SelectedMatiere.ID_MATIERE).Select(x => x.GROUPE).Distinct().ToList();
-
                     SectionList = new ObservableCollection<SECTION>(groupeList.Select(x => x.SECTION).Distinct());
                 }
                 RefreshNoteStudentList();
@@ -798,17 +786,18 @@ namespace ESC_OfflineTeacher.ViewModel
                 return _syncCommand
                     ?? (_syncCommand = new RelayCommand(async () =>
                     {                        
-                        if ((string)Settings.Default["HashValue"] == "")
-                        {
-                            Settings.Default["HashValue"] = ComputeHash(_localDbPath);
-                            Settings.Default.Save();
-                        }
-                        //if (!ComputeHash(_localDbPath).Equals(Settings.Default["HashValue"]))
+                        //if ((string)Settings.Default["HashValue"] == "")
+                        //{
+                        //    Settings.Default["HashValue"] = ComputeHash(_localDbPath);
+                        //    Settings.Default.Save();
+                        //}
+                        //else if (!ComputeHash(_localDbPath).Equals(Settings.Default["HashValue"]))
                         //{
                         //    //the database has been modified outside of the application 
-                        //    _controller = await((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("impossible de synchronizer", "la base de donné a été modifié en dehors de l'application... "));                            
+                        //    _controller = await ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("impossible de synchronizer", "la base de donné a été modifié en dehors de l'application... "));
                         //    return;
                         //}
+                        Save();
                         if (!_syncBackgroundWorker.IsBusy)
                             _syncBackgroundWorker.RunWorkerAsync();
 
@@ -831,9 +820,7 @@ namespace ESC_OfflineTeacher.ViewModel
                             var cy = int.Parse(CurrentYear);
                             var userSpecialite = _context.USERS_SPECIALITES.Where(x => x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == LoggedInTeacher.ID_USER).ToList();
                             SpecialiteList = new ObservableCollection<SPECIALITE>(userSpecialite.Select(x => x.SPECIALITE).Distinct().ToList()); 
-                        }
-                       
-
+                        }                      
                     }));
             }
         }
@@ -843,28 +830,23 @@ namespace ESC_OfflineTeacher.ViewModel
             get
             {
                 return _saveCommand
-                    ?? (_saveCommand = new RelayCommand(async () =>
-                    {                        
-                       Save();
-                    }));
+                    ?? (_saveCommand = new RelayCommand(async () => Save()));
             }
         }
 
         private async void Save()
         {
-            if ((string)Settings.Default["HashValue"] == "")
-            {
-                Settings.Default["HashValue"] = ComputeHash(_localDbPath);
-                Settings.Default.Save();
-            }
-
-            //if (!ComputeHash(_localDbPath).Equals(Settings.Default["HashValue"]))
+            //if ((string)Settings.Default["HashValue"] == "")
+            //{
+            //    Settings.Default["HashValue"] = ComputeHash(_localDbPath);
+            //    Settings.Default.Save();
+            //}
+            //else if(!ComputeHash(_localDbPath).Equals(Settings.Default["HashValue"]))
             //{
             //    //the database has been modified outside of the application 
-            //    _controller = await((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("impossible d'enregistrer", "la base de donné a été modifié en dehors de l'application... "));
+            //    _controller = await ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("impossible d'enregistrer", "la base de donné a été modifié en dehors de l'application... "));
             //    return;
             //}
-
             var cy = int.Parse(CurrentYear);
             foreach (var etudiantNote in ListNotesExamins)
             {
@@ -898,7 +880,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 }
             }
             _context.SaveChanges();
-            var hashValue = ComputeHash(_localDbPath);
+            var hashValue = ComputeHash(App.LocalDbPath);
             Settings.Default["HashValue"] = hashValue;
             Settings.Default.Save();
         }
@@ -935,14 +917,14 @@ namespace ESC_OfflineTeacher.ViewModel
                             try
                             {                                
                                 string fileName = dlg.FileName;
-                                var hashReader=new StreamReader(fileName+".hash");
-                                var hash = ComputeHash(fileName);
+                                //var hashReader=new StreamReader(fileName+".hash");
+                                //var hash = ComputeHash(fileName);
                                 //if (!hash.Equals(hashReader.ReadLine().Trim()))
                                 //{
                                 //    _controller = await ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("impossible d'importer le fichier", "le fichier que vous voulez importer est interrompu ... "));
                                 //    return;
                                 //}
-                                Settings.Default["HashValue"] = ComputeHash(fileName, _localDbPath);
+                                Settings.Default["HashValue"] = ComputeHash(fileName, App.LocalDbPath);
                                 Settings.Default.Save();
                                 _context.Dispose();
                                 _context=new LocalDbEntities();
@@ -952,7 +934,7 @@ namespace ESC_OfflineTeacher.ViewModel
                             }
                             catch (Exception e)
                             {
-                                Debug.WriteLine("In StreamReader Exception ->" + e.Message);
+                                var _controller = ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("Erreur d'importation ", "le fichier que vous voulez importer est interrompu ... "));                                
                             }
                         }
                         
@@ -979,7 +961,7 @@ namespace ESC_OfflineTeacher.ViewModel
                             try
                             {
                                 string fileName = dlg.FileName;                              
-                                var hash=ComputeHash(_localDbPath,fileName);
+                                var hash=ComputeHash(App.LocalDbPath,fileName);
                                 var strWritter = new StreamWriter(fileName + ".hash");
                                 await strWritter.WriteLineAsync(hash);                                
                                 strWritter.Close();
@@ -987,7 +969,7 @@ namespace ESC_OfflineTeacher.ViewModel
                             }
                             catch (Exception e)
                             {
-                                Debug.WriteLine("In StreamReader Exception ->" + e.Message);
+                                var _controller = ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("Erreur d'éxportation ", "probleme d'éxportation du base de données ... "));                                
                             }
                         }                     
                     }));
@@ -996,12 +978,10 @@ namespace ESC_OfflineTeacher.ViewModel
         #endregion
         #region Ctors and Methods
         public NoteViewModel(IFrameNavigationService navigationService)
-        {
-            _localDbPath = AppDomain.CurrentDomain.BaseDirectory.ToString(CultureInfo.InvariantCulture) + "SGSDB.sdf";            
-            _navigationService = navigationService;
-            _context = new LocalDbEntities();
+        {                       
+            _navigationService = navigationService;            
+            _context = new LocalDbEntities();            
             Initialisation();
-            var am = ComputeHash(_localDbPath);
             Messenger.Default.Register<bool>(this,"LangFr", (fr) =>
             {
                 LangContentFr = fr;
@@ -1027,10 +1007,7 @@ namespace ESC_OfflineTeacher.ViewModel
         private void Initialisation()
         {
             
-            InitializeSyncBackgroundWorker();
-            //// ## For Resync Purpuse
-            //_syncBackgroundWorker.RunWorkerAsync();
-            //return;
+            InitializeSyncBackgroundWorker();          
             ListNotesExamins = new ObservableCollection<EtudiantNote>();
             ListNotesDettes = new ObservableCollection<EtudiantNoteDette>();
             ListExaminDette = new ObservableCollection<ExaminDette>()
@@ -1071,14 +1048,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 //if it is the first sync, the above object is null .. -> force resync then update it 
                 if (LoggedInTeacher == null)
                 {
-                    _syncBackgroundWorker.RunWorkerAsync();
-                    //Task.Run(() => _syncBackgroundWorker.RunWorkerAsync()).ContinueWith((x) =>
-                    //{
-                    //    LoggedInTeacher =
-                    //        _context.ENSEIGNANTS.First(
-                    //            y => y.ID_USER == ((UserPreferences)_navigationService.Parameter).IdUser);
-                    //    Messenger.Default.Send<ENSEIGNANT>(LoggedInTeacher, "Login");
-                    //});
+                    _syncBackgroundWorker.RunWorkerAsync();                   
                 }
                 LangContentFr = ((UserPreferences)_navigationService.Parameter).LangContFr;
             }
@@ -1090,27 +1060,23 @@ namespace ESC_OfflineTeacher.ViewModel
             _syncBackgroundWorker = new BackgroundWorker { WorkerReportsProgress = true };
             _syncBackgroundWorker.DoWork += new DoWorkEventHandler(_syncBackgroundWorker_DoWork);
             _syncBackgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(_syncBackgroundWorker_RunWorkerCompleted);
-            _syncBackgroundWorker.ProgressChanged += new ProgressChangedEventHandler(_syncBackgroundWorker_ProgressChanged);
-        }
-
-        private void _syncBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-        }
-
+           // _syncBackgroundWorker.ProgressChanged += new ProgressChangedEventHandler(_syncBackgroundWorker_ProgressChanged);
+        }       
         private async void _syncBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            Debug.WriteLine("Data Synchronization Completed.");
+        {            
             PbVisibility = Visibility.Collapsed;
             ProgressRingIsActive = false;
-            //  Application.Current.MainWindow.Cursor = Cursors.Arrow;                        
-            Settings.Default["HashValue"] = ComputeHash(_localDbPath);
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                Application.Current.MainWindow.Cursor = Cursors.Arrow;
+            }));                                  
+            Settings.Default["HashValue"] = ComputeHash(App.LocalDbPath);
             Settings.Default.Save();
             _context.Dispose();
             _context=new LocalDbEntities();           
             LoggedInTeacher =_context.ENSEIGNANTS.First(
                                 y => y.ID_USER == ((UserPreferences)_navigationService.Parameter).IdUser);
             Messenger.Default.Send<ENSEIGNANT>(LoggedInTeacher, "Login");
-
             CurrentYear = _context.ANNEES.Max(x => x.ANNEE_UNIVERSITAIRE).ToString(CultureInfo.InvariantCulture);
             var cy = int.Parse(CurrentYear);
             var userSpecialite = _context.USERS_SPECIALITES.Where(x => x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == LoggedInTeacher.ID_USER).ToList();
@@ -1122,8 +1088,7 @@ namespace ESC_OfflineTeacher.ViewModel
 
         private void _syncBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-
-            Debug.WriteLine("Starting Data Synchronization Process...");
+            
             // Application.Current.MainWindow.Cursor = Cursors.Wait;
             PbVisibility = Visibility.Visible;
             ProgressRingIsActive = true;
@@ -1134,33 +1099,24 @@ namespace ESC_OfflineTeacher.ViewModel
                 RemoteProvider = new ESCLocalDbServerSyncProvider()
             };
             agent.SessionProgress += new EventHandler<Microsoft.Synchronization.SessionProgressEventArgs>(agent_SessionProgress);            
-            ((ESCLocalDbClientSyncProvider)agent.LocalProvider).ApplyChangeFailed += new EventHandler<Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs>(Local_ApplyChangeFailed);
-            ((ESCLocalDbClientSyncProvider)agent.LocalProvider).ChangesSelected += new EventHandler<Microsoft.Synchronization.Data.ChangesSelectedEventArgs>(Local_ChangedSelected);
+            ((ESCLocalDbClientSyncProvider)agent.LocalProvider).ApplyChangeFailed += new EventHandler<Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs>(Local_ApplyChangeFailed);          
             ((ESCLocalDbServerSyncProvider)agent.RemoteProvider).ApplyChangeFailed += new EventHandler<Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs>(Remote_ApplyChangeFailed);            
-
             e.Result = agent.Synchronize();
-
         }
-
-        private void Local_ChangedSelected(object sender, ChangesSelectedEventArgs e)
-        {
-            //e.Session
-        }
-
 
         async void agent_SessionProgress(object sender, Microsoft.Synchronization.SessionProgressEventArgs e)
         {
             PbValue = e.PercentCompleted;             
         }
 
-        void Local_ApplyChangeFailed(object sender, Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs e)
+        async void Local_ApplyChangeFailed(object sender, Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs e)
         {
-            throw new NotImplementedException();
+            var _controller = await((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("Problem de synchronization", "problème lors de application des changement a la base local ... "));
         }
 
-        void Remote_ApplyChangeFailed(object sender, Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs e)
+        async void Remote_ApplyChangeFailed(object sender, Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs e)
         {
-            throw new NotImplementedException();
+            var _controller = await((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("Problem de synchronization", "problème lors de application des changement a la base distante ... "));
         }
 
         private void RefreshNoteStudentList()
@@ -1263,18 +1219,4 @@ namespace ESC_OfflineTeacher.ViewModel
         }
         #endregion
     }
-
-    public class SearchItem
-    {
-        public String Name { get; set; }
-        public bool IsSelected { get; set; }
-    }
-
-    public class ExaminDette
-    {
-        public String DESIGNATION { get; set; }
-        public String DESIGNATION_LATIN { get; set; }
-        
-    }
-
 }

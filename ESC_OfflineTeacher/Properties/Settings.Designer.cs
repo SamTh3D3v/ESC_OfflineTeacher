@@ -23,12 +23,15 @@ namespace ESC_OfflineTeacher.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string HashValue {
             get {
                 return ((string)(this["HashValue"]));
+            }
+            set {
+                this["HashValue"] = value;
             }
         }
     }

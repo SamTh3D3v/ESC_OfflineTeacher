@@ -11,9 +11,7 @@ using OfflineTeacher_DBProject;
 namespace ESC_OfflineTeacher.ViewModel
 {
     public class MainViewModel : ViewModelBase
-    {
-        #region Conts
-        #endregion
+    {      
         #region Fields
         private readonly IFrameNavigationService _navigationService;
         private bool _navigationSource;
@@ -132,7 +130,6 @@ namespace ESC_OfflineTeacher.ViewModel
                 Messenger.Default.Send<bool>(_langueInterfaceFr, "LangFrInterface");
             }
         }
-
         public bool LangueInterfaceAr
         {
             get
@@ -155,7 +152,6 @@ namespace ESC_OfflineTeacher.ViewModel
                 }
             }
         }
-
         public IFrameNavigationService FrameNavigationService
         {
             get { return _navigationService; }
@@ -213,8 +209,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 _listSpeciliteEns = value;
                 RaisePropertyChanged();
             }
-        }
-       
+        }       
         #endregion
         #region Commands
         private RelayCommand _mainWindowLoadedCommand;
