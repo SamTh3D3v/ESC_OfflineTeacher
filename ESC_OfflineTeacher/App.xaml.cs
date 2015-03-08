@@ -8,6 +8,8 @@ using System.Windows;
 using System.Windows.Media;
 using ESC_OfflineTeacher.Annotations;
 using GalaSoft.MvvmLight.Threading;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace ESC_OfflineTeacher
 {
@@ -18,13 +20,18 @@ namespace ESC_OfflineTeacher
     {
         public static SolidColorBrush Dark = new SolidColorBrush(Colors.DarkGray);
         public static SolidColorBrush Light = new SolidColorBrush(Colors.DeepSkyBlue);
-        static App()
+        public App()
+            : base()
         {
+            this.Dispatcher.UnhandledException += OnDispatcherUnhandledException;
             DispatcherHelper.Initialize();
-            // Setup Quick Converter.            
-            QuickConverter.EquationTokenizer.AddNamespace(typeof(object));
-            QuickConverter.EquationTokenizer.AddNamespace(typeof(System.Windows.Visibility));
+        }
 
+        async void OnDispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            var errorMessage = string.Format("An unhandled exception occurred: {0}", e.Exception.Message);
+            var controller = await ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("Opération non permise, Details :", errorMessage));            
+            e.Handled = true;
         }
               
         public static void SelectCulture(string culture)
