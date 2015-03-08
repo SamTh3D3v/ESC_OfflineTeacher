@@ -18,8 +18,8 @@ namespace ESC_OfflineTeacher
     /// </summary>
     public partial class App : Application
     {
-        public static SolidColorBrush Dark = new SolidColorBrush(Colors.DarkGray);
-        public static SolidColorBrush Light = new SolidColorBrush(Colors.DeepSkyBlue);
+        public static SolidColorBrush Dark = new SolidColorBrush(Colors.LightGray);
+        public static SolidColorBrush Light = new SolidColorBrush(Color.FromRgb(8,111,158));
         public App()
             : base()
         {

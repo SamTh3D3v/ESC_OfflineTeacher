@@ -29,9 +29,10 @@
             <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
-        <Label Content="{DynamicResource Login}" Foreground="White" FontSize="15" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Center">
+        <Label Content="{DynamicResource Login}" FontSize="15" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Center">
             <Label.Style>
                 <Style TargetType="{x:Type Label}">
+                    <Setter Property="Foreground" Value="White"></Setter>
                     <Style.Triggers>
                         <DataTrigger  Binding="{Binding LangInterfaceFr}" Value="True">
                             <Setter Property="Grid.Column" Value="0"/>
@@ -40,13 +41,19 @@
                             <Setter Property="Grid.Column" Value="2"/>
                             <Setter Property="Grid.ColumnSpan" Value="2"/>
                         </DataTrigger>
+                        <DataTrigger  Binding="{Binding GlobalThemeBrush.Color}" Value="LightGray">
+                            <Setter Property="Foreground" Value="Black"/>
+                        </DataTrigger>
+                        
+
                     </Style.Triggers>
                 </Style>
             </Label.Style>
         </Label>
-        <Label Grid.Row="1"  Foreground="White" FontSize="15" Content="{DynamicResource MotDePasse}" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Center" >
+        <Label Grid.Row="1"  FontSize="15" Content="{DynamicResource MotDePasse}" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Center" >
             <Label.Style>
                 <Style TargetType="{x:Type Label}">
+                    <Setter Property="Foreground" Value="White"></Setter>
                     <Style.Triggers>
                         <DataTrigger  Binding="{Binding LangInterfaceFr}" Value="True">
                             <Setter Property="Grid.Column" Value="0"/>
@@ -54,6 +61,9 @@
                         <DataTrigger  Binding="{Binding LangInterfaceFr}" Value="False">
                             <Setter Property="Grid.Column" Value="2"/>
                             <Setter Property="Grid.ColumnSpan" Value="2"/>
+                        </DataTrigger>
+                        <DataTrigger  Binding="{Binding GlobalThemeBrush.Color}" Value="LightGray">
+                            <Setter Property="Foreground" Value="Black"/>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
@@ -91,7 +101,9 @@
                 </Style>
             </PasswordBox.Style>
         </PasswordBox>
-        <Button Content="{DynamicResource Connextion}" Background="{Binding GlobalThemeBrush}" Foreground="WhiteSmoke" FontSize="16" Grid.Row="2" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=PBox}" Grid.Column="1" Margin="5" Height="40" Width="150" VerticalAlignment="Top" Style="{StaticResource AccentedSquareButtonStyle}"/>
+        <Button Content="{DynamicResource Connextion}" Background="{Binding GlobalThemeBrush}" Foreground="Black" FontSize="16" Grid.Row="2" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=PBox}" Grid.Column="1" Margin="5" Height="40" Width="150" VerticalAlignment="Top" Style="{StaticResource AccentedSquareButtonStyle}">
+           
+        </Button>
         <Button Grid.Row="2"  ToolTip="{DynamicResource ImportTooltip}" Grid.Column="3" Width="40" Height="40" VerticalAlignment="Center" Background="WhiteSmoke" Command="{Binding ImportDataBaseCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
             <Rectangle Width="20" Height="20">
                 <Rectangle.Fill>
