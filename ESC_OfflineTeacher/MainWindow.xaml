@@ -147,16 +147,43 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="100"/>
                                 <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="100"/>
                             </Grid.ColumnDefinitions>
-                            <Label Margin="20,2,2,2" Content="{DynamicResource Nom}" FontSize="15" Grid.Row="0" Grid.Column="0" Foreground="White"/>
-                            <Label Margin="2"   Foreground="LightBlue" Grid.Column="1">
+                            <Label Margin="20,2,2,2"  Content="{DynamicResource Nom}" HorizontalAlignment="Center" FontSize="15" Grid.Row="0" Foreground="White">
+                                <Label.Style>
+                                    <Style TargetType="{x:Type Label}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding LangueInterfaceFr}" Value="true">
+                                                <Setter Property="Grid.Column" Value="0"/>                                                
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding LangueInterfaceFr}" Value="False">
+                                                <Setter Property="Grid.Column" Value="2"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Label.Style>
+                            </Label>
+                            <Label Margin="2" HorizontalAlignment="Center"  Grid.ColumnSpan="2" Foreground="LightBlue">
                                 <Label.Content>
                                     <MultiBinding Converter="{StaticResource NomConverter}">
                                         <Binding Path="LangueContenuFr"  ></Binding>
                                         <Binding Path="LoggedInUser.NOM_LATIN"/>
                                         <Binding Path="LoggedInUser.NOM"/>
                                     </MultiBinding>
-                                </Label.Content>                                                                
+                                </Label.Content>
+                                <Label.Style>
+                                    <Style TargetType="{x:Type Label}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding LangueInterfaceFr}" Value="true">
+                                                <Setter Property="Grid.Column" Value="1"/>
+                                                
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding LangueInterfaceFr}" Value="False">
+                                                <Setter Property="Grid.Column" Value="0"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Label.Style>
                             </Label>
                         </Grid>
                     </Border>
@@ -165,9 +192,44 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="100"/>
                                 <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="100"/>
                             </Grid.ColumnDefinitions>
-                            <Label Margin="20,2,2,2" Content="{DynamicResource Prenom}" FontSize="15" Grid.Column="0" Foreground="White"/>
-                            <Label Margin="2" Content="{Binding LoggedInUser.PRENOM_LATIN}"  Foreground="LightBlue" Grid.Column="1"/>
+                            <Label Margin="20,2,2,2" Content="{DynamicResource Prenom}" HorizontalAlignment="Center" FontSize="15"  Foreground="White">
+                                <Label.Style>
+                                    <Style TargetType="{x:Type Label}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding LangueInterfaceFr}" Value="true">
+                                                <Setter Property="Grid.Column" Value="0"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding LangueInterfaceFr}" Value="False">
+                                                <Setter Property="Grid.Column" Value="2"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Label.Style>
+                            </Label>
+                            <Label Margin="2"  Grid.ColumnSpan="2" HorizontalAlignment="Center"  Foreground="LightBlue" >
+                                <Label.Content>
+                                    <MultiBinding Converter="{StaticResource NomConverter}">
+                                        <Binding Path="LangueContenuFr"  ></Binding>
+                                        <Binding Path="LoggedInUser.PRENOM_LATIN"/>
+                                        <Binding Path="LoggedInUser.PRENOM"/>
+                                    </MultiBinding>
+                                </Label.Content>
+                                <Label.Style>
+                                    <Style TargetType="{x:Type Label}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding LangueInterfaceFr}" Value="true">
+                                                <Setter Property="Grid.Column" Value="1"/>
+
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding LangueInterfaceFr}" Value="False">
+                                                <Setter Property="Grid.Column" Value="0"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Label.Style>
+                            </Label>
                         </Grid>
                     </Border>
                     <Border Grid.Row="2" BorderThickness="1" BorderBrush="White" Margin="0,5,0,5">
