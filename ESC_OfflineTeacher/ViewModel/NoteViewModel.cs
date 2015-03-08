@@ -20,6 +20,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using Microsoft.Synchronization;
 using Microsoft.Synchronization.Data;
 using Microsoft.Synchronization.Data.SqlServerCe;
 using Microsoft.Win32;
@@ -463,6 +464,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 SemestreList = new ObservableCollection<MODES_ETUDES>(modeEtudes.Select(x => x.MODES_ETUDES).Distinct().ToList());
                 RefreshNoteStudentList();
                 RefreshNoteDetteStudentList();
+                
 
             }
         }
@@ -771,18 +773,18 @@ namespace ESC_OfflineTeacher.ViewModel
             {
                 return _syncCommand
                     ?? (_syncCommand = new RelayCommand(async () =>
-                    {
+                    {                        
                         if ((string)Settings.Default["HashValue"] == "")
                         {
                             Settings.Default["HashValue"] = ComputeHash(_localDbPath);
                             Settings.Default.Save();
                         }
-                        if (!ComputeHash(_localDbPath).Equals(Settings.Default["HashValue"]))
-                        {
-                            //the database has been modified outside of the application 
-                            _controller = await((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("impossible de synchronizer", "la base de donné a été modifié en dehors de l'application... "));                            
-                            return;
-                        }
+                        //if (!ComputeHash(_localDbPath).Equals(Settings.Default["HashValue"]))
+                        //{
+                        //    //the database has been modified outside of the application 
+                        //    _controller = await((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("impossible de synchronizer", "la base de donné a été modifié en dehors de l'application... "));                            
+                        //    return;
+                        //}
                         if (!_syncBackgroundWorker.IsBusy)
                             _syncBackgroundWorker.RunWorkerAsync();
 
@@ -798,12 +800,13 @@ namespace ESC_OfflineTeacher.ViewModel
                 return _noteViewLoadedCommand
                     ?? (_noteViewLoadedCommand = new RelayCommand(
                     () =>
-                    {                        
+                    {
                         //the loggin is using a wcf service where the returned data is of USER type                        
                         CurrentYear = _context.ANNEES.Max(x => x.ANNEE_UNIVERSITAIRE).ToString(CultureInfo.InvariantCulture);
                         var cy = int.Parse(CurrentYear);
                         var userSpecialite = _context.USERS_SPECIALITES.Where(x => x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == LoggedInTeacher.ID_USER).ToList();
                         SpecialiteList = new ObservableCollection<SPECIALITE>(userSpecialite.Select(x => x.SPECIALITE).Distinct().ToList());
+                       
 
                     }));
             }
@@ -815,62 +818,63 @@ namespace ESC_OfflineTeacher.ViewModel
             {
                 return _saveCommand
                     ?? (_saveCommand = new RelayCommand(async () =>
-                    {
-
-                        
-                        if ((string)Settings.Default["HashValue"] == "")
-                        {
-                            Settings.Default["HashValue"] = ComputeHash(_localDbPath);
-                            Settings.Default.Save();
-                        }
-
-                        if (!ComputeHash(_localDbPath).Equals(Settings.Default["HashValue"]))
-                        {
-                            //the database has been modified outside of the application 
-                            _controller = await ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("impossible d'enregistrer", "la base de donné a été modifié en dehors de l'application... "));                                                    
-                            return;
-                        }
-
-                        var cy = int.Parse(CurrentYear);
-                        foreach (var etudiantNote in ListNotesExamins)
-                        {
-                            var oldNote =
-                                _context.NOTES_EXAMEN.First(
-                                    x => x.ID_ETUDIANT == etudiantNote.IdEtudiant && x.ANNEE_UNIVERSITAIRE == cy &&
-                                         x.ID_MATIERE == SelectedMatiere.ID_MATIERE &&
-                                         x.ID_EXAMEN == _selectedExamen.ID_EXAMEN).NOTE;
-                            if (oldNote != etudiantNote.Note)
-                            {
-                                LOG_SaisieNotes(etudiantNote.IdEtudiant, SelectedMatiere.ID_MATIERE, oldNote, etudiantNote.Note, false);
-                                _context.NOTES_EXAMEN.First(
-                                    x => x.ID_ETUDIANT == etudiantNote.IdEtudiant && x.ANNEE_UNIVERSITAIRE == cy &&
-                                         x.ID_MATIERE == SelectedMatiere.ID_MATIERE &&
-                                         x.ID_EXAMEN == _selectedExamen.ID_EXAMEN).NOTE = etudiantNote.Note;
-                            }
-                        }
-                        foreach (var etudiantNoteDette in ListNotesDettes)
-                        {
-                            var old = _context.NOTE_DETTE.First(x => x.ID_ETUDIANT == etudiantNoteDette.IdEtudiant && x.ANNEE_PASSAGE_DETTE == cy &&
-                                                                   x.ID_MATIERE == SelectedMatiere.ID_MATIERE);
-                            var oldNote = old.NOTE;
-                            var oldNoteRattrapage = old.NOTE_RATTRAPAGE;
-                            if (oldNote != etudiantNoteDette.Note || oldNoteRattrapage != etudiantNoteDette.NoteRattrapage)
-                            {
-                                LOG_SaisieNotes(etudiantNoteDette.IdEtudiant, SelectedMatiere.ID_MATIERE, oldNote, etudiantNoteDette.Note, true, oldNoteRattrapage, etudiantNoteDette.NoteRattrapage);
-                                _context.NOTE_DETTE.First(x => x.ID_ETUDIANT == etudiantNoteDette.IdEtudiant && x.ANNEE_PASSAGE_DETTE == cy &&
-                                                                   x.ID_MATIERE == SelectedMatiere.ID_MATIERE).NOTE = etudiantNoteDette.Note;
-                                _context.NOTE_DETTE.First(x => x.ID_ETUDIANT == etudiantNoteDette.IdEtudiant && x.ANNEE_PASSAGE_DETTE == cy &&
-                                                                  x.ID_MATIERE == SelectedMatiere.ID_MATIERE).NOTE_RATTRAPAGE = etudiantNoteDette.NoteRattrapage;
-                            }
-                        }
-                        _context.SaveChanges();
-
-
-                        var hashValue = ComputeHash(_localDbPath);
-                        Settings.Default["HashValue"] = hashValue;
-                        Settings.Default.Save();
+                    {                        
+                       Save();
                     }));
             }
+        }
+
+        private async void Save()
+        {
+            if ((string)Settings.Default["HashValue"] == "")
+            {
+                Settings.Default["HashValue"] = ComputeHash(_localDbPath);
+                Settings.Default.Save();
+            }
+
+            //if (!ComputeHash(_localDbPath).Equals(Settings.Default["HashValue"]))
+            //{
+            //    //the database has been modified outside of the application 
+            //    _controller = await((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("impossible d'enregistrer", "la base de donné a été modifié en dehors de l'application... "));
+            //    return;
+            //}
+
+            var cy = int.Parse(CurrentYear);
+            foreach (var etudiantNote in ListNotesExamins)
+            {
+                var oldNote =
+                    _context.NOTES_EXAMEN.First(
+                        x => x.ID_ETUDIANT == etudiantNote.IdEtudiant && x.ANNEE_UNIVERSITAIRE == cy &&
+                             x.ID_MATIERE == SelectedMatiere.ID_MATIERE &&
+                             x.ID_EXAMEN == _selectedExamen.ID_EXAMEN).NOTE;
+                if (oldNote != etudiantNote.Note)
+                {
+                    LOG_SaisieNotes(etudiantNote.IdEtudiant, SelectedMatiere.ID_MATIERE, oldNote, etudiantNote.Note, false);
+                    _context.NOTES_EXAMEN.First(
+                        x => x.ID_ETUDIANT == etudiantNote.IdEtudiant && x.ANNEE_UNIVERSITAIRE == cy &&
+                             x.ID_MATIERE == SelectedMatiere.ID_MATIERE &&
+                             x.ID_EXAMEN == _selectedExamen.ID_EXAMEN).NOTE = etudiantNote.Note;
+                }
+            }
+            foreach (var etudiantNoteDette in ListNotesDettes)
+            {
+                var old = _context.NOTE_DETTE.First(x => x.ID_ETUDIANT == etudiantNoteDette.IdEtudiant && x.ANNEE_PASSAGE_DETTE == cy &&
+                                                       x.ID_MATIERE == SelectedMatiere.ID_MATIERE);
+                var oldNote = old.NOTE;
+                var oldNoteRattrapage = old.NOTE_RATTRAPAGE;
+                if (oldNote != etudiantNoteDette.Note || oldNoteRattrapage != etudiantNoteDette.NoteRattrapage)
+                {
+                    LOG_SaisieNotes(etudiantNoteDette.IdEtudiant, SelectedMatiere.ID_MATIERE, oldNote, etudiantNoteDette.Note, true, oldNoteRattrapage, etudiantNoteDette.NoteRattrapage);
+                    _context.NOTE_DETTE.First(x => x.ID_ETUDIANT == etudiantNoteDette.IdEtudiant && x.ANNEE_PASSAGE_DETTE == cy &&
+                                                       x.ID_MATIERE == SelectedMatiere.ID_MATIERE).NOTE = etudiantNoteDette.Note;
+                    _context.NOTE_DETTE.First(x => x.ID_ETUDIANT == etudiantNoteDette.IdEtudiant && x.ANNEE_PASSAGE_DETTE == cy &&
+                                                      x.ID_MATIERE == SelectedMatiere.ID_MATIERE).NOTE_RATTRAPAGE = etudiantNoteDette.NoteRattrapage;
+                }
+            }
+            _context.SaveChanges();
+            var hashValue = ComputeHash(_localDbPath);
+            Settings.Default["HashValue"] = hashValue;
+            Settings.Default.Save();
         }
         private RelayCommand _cancelCommand;
         public RelayCommand CancelCommand
@@ -907,13 +911,18 @@ namespace ESC_OfflineTeacher.ViewModel
                                 string fileName = dlg.FileName;
                                 var hashReader=new StreamReader(fileName+".hash");
                                 var hash = ComputeHash(fileName);
-                                if (!hash.Equals(hashReader.ReadLine().Trim()))
-                                {
-                                    _controller = await ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("impossible d'importer le fichier", "le fichier que vous voulez importer est interrompu ... "));
-                                    return;
-                                }
+                                //if (!hash.Equals(hashReader.ReadLine().Trim()))
+                                //{
+                                //    _controller = await ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("impossible d'importer le fichier", "le fichier que vous voulez importer est interrompu ... "));
+                                //    return;
+                                //}
                                 Settings.Default["HashValue"] = ComputeHash(fileName, _localDbPath);
                                 Settings.Default.Save();
+                                _context.Dispose();
+                                _context=new LocalDbEntities();
+                                RefreshNoteStudentList();
+                                RefreshNoteDetteStudentList();
+
                             }
                             catch (Exception e)
                             {
@@ -962,9 +971,11 @@ namespace ESC_OfflineTeacher.ViewModel
         #region Ctors and Methods
         public NoteViewModel(IFrameNavigationService navigationService)
         {
+            _localDbPath = AppDomain.CurrentDomain.BaseDirectory.ToString(CultureInfo.InvariantCulture) + "SGSDB.sdf";            
             _navigationService = navigationService;
             _context = new LocalDbEntities();
-            Initialisation();               
+            Initialisation();
+            var am = ComputeHash(_localDbPath);
             Messenger.Default.Register<bool>(this,"LangFr", (fr) =>
             {
                 LangContentFr = fr;
@@ -985,8 +996,11 @@ namespace ESC_OfflineTeacher.ViewModel
         }
         private void Initialisation()
         {
-            _localDbPath = AppDomain.CurrentDomain.BaseDirectory.ToString(CultureInfo.InvariantCulture) + "SGSDB.sdf";
+            
             InitializeSyncBackgroundWorker();
+            //// ## For Resync Purpuse
+            //_syncBackgroundWorker.RunWorkerAsync();
+            //return;
             ListNotesExamins = new ObservableCollection<EtudiantNote>();
             ListNotesDettes = new ObservableCollection<EtudiantNoteDette>();
             ListExaminDette = new ObservableCollection<ExaminDette>()
@@ -1049,7 +1063,6 @@ namespace ESC_OfflineTeacher.ViewModel
 
         private void _syncBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-
         }
 
         private async void _syncBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -1060,6 +1073,10 @@ namespace ESC_OfflineTeacher.ViewModel
             //  Application.Current.MainWindow.Cursor = Cursors.Arrow;                        
             Settings.Default["HashValue"] = ComputeHash(_localDbPath);
             Settings.Default.Save();
+            _context.Dispose();
+            _context=new LocalDbEntities();
+            RefreshNoteStudentList();
+            RefreshNoteDetteStudentList();
 
         }
 
@@ -1076,10 +1093,10 @@ namespace ESC_OfflineTeacher.ViewModel
                 LocalProvider = new ESCLocalDbClientSyncProvider(),
                 RemoteProvider = new ESCLocalDbServerSyncProvider()
             };
-            agent.SessionProgress += new EventHandler<Microsoft.Synchronization.SessionProgressEventArgs>(agent_SessionProgress);
+            agent.SessionProgress += new EventHandler<Microsoft.Synchronization.SessionProgressEventArgs>(agent_SessionProgress);            
             ((ESCLocalDbClientSyncProvider)agent.LocalProvider).ApplyChangeFailed += new EventHandler<Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs>(Local_ApplyChangeFailed);
             ((ESCLocalDbClientSyncProvider)agent.LocalProvider).ChangesSelected += new EventHandler<Microsoft.Synchronization.Data.ChangesSelectedEventArgs>(Local_ChangedSelected);
-            ((ESCLocalDbServerSyncProvider)agent.RemoteProvider).ApplyChangeFailed += new EventHandler<Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs>(Remote_ApplyChangeFailed);
+            ((ESCLocalDbServerSyncProvider)agent.RemoteProvider).ApplyChangeFailed += new EventHandler<Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs>(Remote_ApplyChangeFailed);            
 
             e.Result = agent.Synchronize();
 
@@ -1093,7 +1110,7 @@ namespace ESC_OfflineTeacher.ViewModel
 
         async void agent_SessionProgress(object sender, Microsoft.Synchronization.SessionProgressEventArgs e)
         {
-            PbValue = e.PercentCompleted;           
+            PbValue = e.PercentCompleted;             
         }
 
         void Local_ApplyChangeFailed(object sender, Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs e)
@@ -1171,7 +1188,7 @@ namespace ESC_OfflineTeacher.ViewModel
             using (var md5 = MD5.Create())
             {
 
-                string to = exportTo ?? "\\res.sdf";
+                string to = exportTo ?? "\\res.sdf";                
                 File.Copy(fileName, to, true);
                 string res="";
                 using (var stream = File.OpenRead(to))                
@@ -1183,12 +1200,9 @@ namespace ESC_OfflineTeacher.ViewModel
                     File.Delete(to);
                 }
                 return res;
-
             }
         }
-
-
-        //log modifications
+        
         public void LOG_SaisieNotes(int? idEtudiant, int? idMatiere, double? oldNote, double? newNote, bool dette, double? oldNoteRattrapage = null, double? newNoteRattrapage = null)
         {
             const string details = "[MACHINE={0}];[ACTION=Modification d'une note d'un étudiant];[{1}]";
