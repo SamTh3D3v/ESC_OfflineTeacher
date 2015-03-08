@@ -50,18 +50,52 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Content="{DynamicResource AnneeUniversitaire}" HorizontalAlignment="Center"/>
-                    <Label Grid.Row="1" HorizontalAlignment="Center" Content="{Binding CurrentYear}" FontSize="20" Foreground="White"/>
+                    <Label Grid.Row="0" Content="{DynamicResource AnneeUniversitaire}" HorizontalAlignment="Center" FontSize="14">
+                        <Label.Style>
+                            <Style TargetType="{x:Type Label}">
+                                <Setter Property="Foreground" Value="White"/>
+                                <Style.Triggers>
+                                    <DataTrigger  Binding="{Binding GlobalThemeBrush.Color}" Value="LightGray">
+                                        <Setter Property="Foreground" Value="Black"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Label.Style>
+                    </Label>
+                    <Label Grid.Row="1" HorizontalAlignment="Center" Content="{Binding CurrentYear}" FontSize="20" >
+                        <Label.Style>
+                            <Style TargetType="{x:Type Label}">
+                                <Setter Property="Foreground" Value="White"/>
+                                <Style.Triggers>
+                                    <DataTrigger  Binding="{Binding GlobalThemeBrush.Color}" Value="LightGray">
+                                        <Setter Property="Foreground" Value="Black"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Label.Style>
+                    </Label>
                 </Grid>
                 <Grid  Grid.Row="1" Margin="5" Background="{Binding GlobalThemeBrush}" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Content="{DynamicResource NombreDesEtudiants}" HorizontalAlignment="Center"/>
-                    <Label Grid.Row="1" HorizontalAlignment="Center" FontSize="20" Foreground="White">
+                    <Label Grid.Row="0" Content="{DynamicResource NombreDesEtudiants}" HorizontalAlignment="Center" FontSize="14">
                         <Label.Style>
-                            <Style>
+                            <Style TargetType="{x:Type Label}">
+                                <Setter Property="Foreground" Value="White"/>
+                                <Style.Triggers>
+                                    <DataTrigger  Binding="{Binding GlobalThemeBrush.Color}" Value="LightGray">
+                                        <Setter Property="Foreground" Value="Black"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Label.Style>
+                    </Label>
+                    <Label Grid.Row="1" HorizontalAlignment="Center" FontSize="20" >
+                        <Label.Style>
+                            <Style TargetType="{x:Type Label}">
+                                <Setter Property="Foreground" Value="White"/>
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding SelectedIndex,ElementName=TabCtl}" Value="0">
                                         <Setter Property="Label.Content" Value="{Binding ListNotesExamins.Count}"></Setter>
@@ -69,7 +103,10 @@
                                     <DataTrigger Binding="{Binding SelectedIndex,ElementName=TabCtl}" Value="1">
                                         <Setter Property="Label.Content" Value="{Binding ListNotesDettes.Count}"></Setter>
                                     </DataTrigger>
-                                </Style.Triggers>
+                                    <DataTrigger  Binding="{Binding GlobalThemeBrush.Color}" Value="LightGray">
+                                        <Setter Property="Foreground" Value="Black"/>
+                                    </DataTrigger>
+                                </Style.Triggers>                                
                             </Style>
                         </Label.Style>
                     </Label>
@@ -85,10 +122,10 @@
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
                     <Label Style="{StaticResource MultiLangLabel}" Content="{DynamicResource Specilite}" Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Left">
-                       
+
                     </Label>
                     <Label Style="{StaticResource MultiLangLabel}" Content="{DynamicResource Matiere}" Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Left">
-                       
+
                     </Label>
 
                     <ComboBox   Grid.Row="0"  Margin="5" Style="{StaticResource MultiLanCombox}"
@@ -98,7 +135,7 @@
                          HorizontalContentAlignment="Center"                                
                          ItemsSource="{Binding SpecialiteList}"
                          SelectedItem="{Binding SelectedSpecialite,Mode=TwoWay}">
-                        
+
 
                     </ComboBox>
                     <ComboBox  Grid.Row="1" Margin="5" Style="{StaticResource MultiLanCombox}"
@@ -201,10 +238,10 @@
                             <Style TargetType="CheckBox">
                                 <Style.Triggers>
                                     <DataTrigger  Binding="{Binding SelectedIndex, ElementName=TabCtl}" Value="0">
-                                        <Setter Property="CheckBox.Visibility" Value="Collapsed"></Setter>                                       
+                                        <Setter Property="CheckBox.Visibility" Value="Collapsed"></Setter>
                                     </DataTrigger>
                                     <DataTrigger  Binding="{Binding SelectedIndex, ElementName=TabCtl}" Value="1">
-                                        <Setter Property="CheckBox.Visibility" Value="Visible"></Setter>                                      
+                                        <Setter Property="CheckBox.Visibility" Value="Visible"></Setter>
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -270,7 +307,7 @@
             </Button>
             <Button Grid.Row="0" Background="{Binding GlobalThemeBrush}" ToolTip="{DynamicResource SynchroniserToolTip}" Grid.Column="6" HorizontalAlignment="Right" Width="80" Height="80" VerticalAlignment="Top" Command="{Binding SyncCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
                 <Rectangle Width="30" Height="30">
-                    <Rectangle.Fill>                     
+                    <Rectangle.Fill>
                         <ImageBrush ImageSource="../Assets/sync.png" ></ImageBrush>
                     </Rectangle.Fill>
                 </Rectangle>
@@ -309,7 +346,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>                       
+                        </Grid.ColumnDefinitions>
                         <ComboBox Grid.Column="0" Grid.Row="0" SelectedItem="{Binding RechercherParList[0],Mode=OneTime}"
                                   Margin="2" ItemsSource="{Binding RechercherParList,Mode=TwoWay}" ItemTemplate="{StaticResource CbxSearchTemplate}"/>
                         <TextBox Grid.Row="0" Text="{Binding SearchText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Margin="1" BorderBrush="Black"></TextBox>
@@ -319,8 +356,8 @@
                             <Style TargetType="DataGridCell">
                                 <Style.Triggers>
                                     <Trigger Property="IsReadOnly" Value="True">
-                                        <Setter Property="IsTabStop" Value="False"/>                                        
-                                    </Trigger>                                  
+                                        <Setter Property="IsTabStop" Value="False"/>
+                                    </Trigger>
                                 </Style.Triggers>
                             </Style>
                         </DataGrid.Resources>
