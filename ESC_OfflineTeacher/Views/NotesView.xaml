@@ -82,20 +82,26 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="{DynamicResource Specilite}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                    <Label Content="{DynamicResource Matiere}" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <Label Style="{StaticResource MultiLangLabel}" Content="{DynamicResource Specilite}" Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Left">
+                       
+                    </Label>
+                    <Label Style="{StaticResource MultiLangLabel}" Content="{DynamicResource Matiere}" Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Left">
+                       
+                    </Label>
 
-                    <ComboBox  Grid.Row="0" Grid.Column="1" Margin="5"
+                    <ComboBox  Grid.Row="0"  Margin="5" Style="{StaticResource MultiLanCombox}"
                          VerticalContentAlignment="Center"
                          HorizontalAlignment="Stretch"                                          
                          DisplayMemberPath="{Binding LangContentFr,Converter={StaticResource DisplayMemberPathConverter}}"                               
                          HorizontalContentAlignment="Center"                                
                          ItemsSource="{Binding SpecialiteList}"
                          SelectedItem="{Binding SelectedSpecialite,Mode=TwoWay}">
+                        
 
                     </ComboBox>
-                    <ComboBox  Grid.Row="1" Grid.Column="1" Margin="5"
+                    <ComboBox  Grid.Row="1" Margin="5" Style="{StaticResource MultiLanCombox}"
                          VerticalContentAlignment="Center"
                          HorizontalAlignment="Stretch"                 
                          DisplayMemberPath="{Binding LangContentFr,Converter={StaticResource DisplayMemberPathConverter}}"
@@ -113,11 +119,12 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="{DynamicResource Semestre}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                    <Label Content="{DynamicResource Section}" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                    <Label Content="{DynamicResource Groupe}" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                    <ComboBox  Grid.Row="0" Grid.Column="1" Margin="5"
+                    <Label Content="{DynamicResource Semestre}" Grid.Row="0" Style="{StaticResource MultiLangLabel}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <Label Content="{DynamicResource Section}" Grid.Row="1" Style="{StaticResource MultiLangLabel}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <Label Content="{DynamicResource Groupe}" Grid.Row="2" Style="{StaticResource MultiLangLabel}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <ComboBox  Grid.Row="0" Style="{StaticResource MultiLanCombox}" Margin="5"
                        VerticalContentAlignment="Center"
                        HorizontalAlignment="Stretch"                 
                        DisplayMemberPath="{Binding LangContentFr,Converter={StaticResource DisplayMemberPathConverter}}"
@@ -125,7 +132,7 @@
                        ItemsSource="{Binding SemestreList}"
                        SelectedItem="{Binding SelectedSemester,Mode=TwoWay}">
                     </ComboBox>
-                    <ComboBox  Grid.Row="1" Grid.Column="1" Margin="5"
+                    <ComboBox  Grid.Row="1" Style="{StaticResource MultiLanCombox}" Margin="5"
                        VerticalContentAlignment="Center"
                        HorizontalAlignment="Stretch"                 
                        DisplayMemberPath="DESIGNATION_SECTION"
@@ -133,7 +140,7 @@
                        ItemsSource="{Binding SectionList}"
                        SelectedItem="{Binding SelectedSection,Mode=TwoWay}">
                     </ComboBox>
-                    <ComboBox Grid.Row="2" Grid.Column="1" Margin="5"
+                    <ComboBox Grid.Row="2" Style="{StaticResource MultiLanCombox}" Margin="5"
                        VerticalContentAlignment="Center"
                        HorizontalAlignment="Stretch"                 
                        DisplayMemberPath="DESIGNATION_GROUPE"
@@ -150,14 +157,15 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
-                    <Label  Grid.Row="0" Content="{DynamicResource Examin}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                    <ComboBox   Grid.Row="0" Grid.Column="1" Margin="5"
+                    <Label  Grid.Row="0" Style="{StaticResource MultiLangLabel}" Content="{DynamicResource Examin}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <ComboBox   Grid.Row="0"  Margin="5"
                        VerticalContentAlignment="Center"
                        HorizontalAlignment="Stretch"                                        
                        HorizontalContentAlignment="Center">
-                        <ComboBox.Style>
-                            <Style>
+                        <ComboBox.Style >
+                            <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MultiLanCombox}">
                                 <Style.Triggers>
                                     <DataTrigger  Binding="{Binding SelectedIndex, ElementName=TabCtl}" Value="0">
                                         <Setter Property="ComboBox.ItemsSource" Value="{Binding ExaminList}"></Setter>
@@ -174,9 +182,9 @@
                         </ComboBox.Style>
                     </ComboBox>
                     <!--using this have some dawbacks-->
-                    <Label Content="{DynamicResource AfficherTous}" Grid.Row="1" Grid.Column="0">
+                    <Label Content="{DynamicResource AfficherTous}" Grid.Row="1" >
                         <Label.Style>
-                            <Style TargetType="Label">
+                            <Style TargetType="Label" BasedOn="{StaticResource MultiLangLabel}">
                                 <Style.Triggers>
                                     <DataTrigger  Binding="{Binding SelectedIndex, ElementName=TabCtl}" Value="0">
                                         <Setter Property="Label.Visibility" Value="Collapsed"></Setter>
@@ -188,7 +196,7 @@
                             </Style>
                         </Label.Style>
                     </Label>
-                    <CheckBox Margin="5" Grid.Row="1" Grid.Column="1" IsChecked="{Binding AfficherTousExamin,Mode=TwoWay}" >
+                    <CheckBox Margin="5" Grid.Row="1" HorizontalAlignment="Center" Grid.Column="1" IsChecked="{Binding AfficherTousExamin,Mode=TwoWay}" >
                         <CheckBox.Style>
                             <Style TargetType="CheckBox">
                                 <Style.Triggers>

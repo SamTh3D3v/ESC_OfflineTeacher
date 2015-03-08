@@ -77,6 +77,7 @@ namespace ESC_OfflineTeacher.ViewModel
         private ExaminDette _selectedExaminDette;
         private bool _langContentFr=true;
         private SolidColorBrush _globaleThemeBrush;
+        private bool _LangInterfaceFr = true;
         #endregion
         #region Properties        
         public SolidColorBrush GlobalThemeBrush
@@ -90,6 +91,24 @@ namespace ESC_OfflineTeacher.ViewModel
             {
              
                 _globaleThemeBrush = value;
+                RaisePropertyChanged();
+            }
+        }
+        public bool LangInterfaceFr
+        {
+            get
+            {
+                return _LangInterfaceFr;
+            }
+
+            set
+            {
+                if (_LangInterfaceFr == value)
+                {
+                    return;
+                }
+
+                _LangInterfaceFr = value;
                 RaisePropertyChanged();
             }
         }
@@ -979,6 +998,10 @@ namespace ESC_OfflineTeacher.ViewModel
             Messenger.Default.Register<bool>(this,"LangFr", (fr) =>
             {
                 LangContentFr = fr;
+            });
+            Messenger.Default.Register<bool>(this, "LangFrInterface", (fr) =>
+            {
+                LangInterfaceFr = fr;
             });
             Messenger.Default.Register<NotificationMessage>(this, (message) =>
             {

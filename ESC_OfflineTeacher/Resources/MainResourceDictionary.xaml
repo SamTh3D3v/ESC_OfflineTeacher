@@ -11,6 +11,27 @@
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />      
     </ResourceDictionary.MergedDictionaries>
+    <Style TargetType="{x:Type ComboBox}" x:Key="MultiLanCombox">
+        <Setter Property="Grid.ColumnSpan" Value="2"></Setter>
+        <Style.Triggers>
+            <DataTrigger  Binding="{Binding LangInterfaceFr}" Value="True">
+                <Setter Property="Grid.Column" Value="1"/>
+            </DataTrigger>
+            <DataTrigger  Binding="{Binding LangInterfaceFr}" Value="False">
+                <Setter Property="Grid.Column" Value="0"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="{x:Type Label}" x:Key="MultiLangLabel">
+        <Style.Triggers>
+            <DataTrigger  Binding="{Binding LangInterfaceFr}" Value="True">
+                <Setter Property="Grid.Column" Value="0"/>
+            </DataTrigger>
+            <DataTrigger  Binding="{Binding LangInterfaceFr}" Value="False">
+                <Setter Property="Grid.Column" Value="2"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
     <converters:FlyoutOpenConverter x:Key="FlyoutOpenConverter"/>
     <converters:DisplayMemberPathConverter x:Key="DisplayMemberPathConverter"/>
     <converters:NomConverter x:Key="NomConverter"/>
