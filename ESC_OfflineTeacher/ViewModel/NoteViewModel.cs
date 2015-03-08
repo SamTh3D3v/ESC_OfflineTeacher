@@ -200,7 +200,7 @@ namespace ESC_OfflineTeacher.ViewModel
 
                 _specialiteList = value;
                 RaisePropertyChanged();
-                SelectedSpecialite = _specialiteList.FirstOrDefault();
+                SelectedSpecialite = _specialiteList.First();
             }
         }
         public ObservableCollection<MATIERE> MatiereList
@@ -451,7 +451,7 @@ namespace ESC_OfflineTeacher.ViewModel
 
             set
             {
-                if (_selectedSpecialite == value)
+                if (_selectedSpecialite == value )
                 {
                     return;
                 }
@@ -465,6 +465,13 @@ namespace ESC_OfflineTeacher.ViewModel
                     var matiereInUserSpecialite = _context.USERS_SPECIALITES.Where(x => x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == LoggedInTeacher.ID_USER && x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE).Select(x => x.MATIERE).Distinct();
                     MatiereList = new ObservableCollection<MATIERE>(matiereInUserSpecialite.ToList());
                     SelectedMatiere = MatiereList.FirstOrDefault();
+                    var modeEtudes =
+                    _context.EXAMENS_ANNEES_MODES_ETUDES.Where(
+                        x => x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE &&
+                             x.ANNEE_UNIVERSITAIRE == cy).ToList();
+                    SemestreList = new ObservableCollection<MODES_ETUDES>(modeEtudes.Select(x => x.MODES_ETUDES).Distinct().ToList());
+                    RefreshNoteStudentList();
+                    RefreshNoteDetteStudentList();
                     
                 }
                 else
@@ -473,16 +480,11 @@ namespace ESC_OfflineTeacher.ViewModel
                     SectionList = new ObservableCollection<SECTION>();
                     GroupeList = new ObservableCollection<GROUPE>();
                     ListNotesExamins = new ObservableCollection<EtudiantNote>();
+                    ListNotesDettes = new ObservableCollection<EtudiantNoteDette>();
                 }
 
                 //set the semesters and the needed exam for this year 
-                var modeEtudes =
-                    _context.EXAMENS_ANNEES_MODES_ETUDES.Where(
-                        x => x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE &&
-                             x.ANNEE_UNIVERSITAIRE == cy).ToList();
-                SemestreList = new ObservableCollection<MODES_ETUDES>(modeEtudes.Select(x => x.MODES_ETUDES).Distinct().ToList());
-                RefreshNoteStudentList();
-                RefreshNoteDetteStudentList();
+                
                 
 
             }
@@ -534,13 +536,16 @@ namespace ESC_OfflineTeacher.ViewModel
 
                 _selectedSemester = value;
                 RaisePropertyChanged();
-                var cy = int.Parse(CurrentYear);
-                var modeEtudes =
-                    _context.EXAMENS_ANNEES_MODES_ETUDES.Where(x => x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE &&
-                             x.ANNEE_UNIVERSITAIRE == cy && x.ID_MODE_ETUDE == _selectedSemester.ID_MODE_ETUDE).ToList();
-                ExaminList = new ObservableCollection<EXAMEN>(modeEtudes.Select(x => x.EXAMEN).ToList());
-                RefreshNoteStudentList();
-                RefreshNoteDetteStudentList();
+                if (_selectedSemester!=null && _selectedSpecialite!=null)
+                {
+                    var cy = int.Parse(CurrentYear);
+                    var modeEtudes =
+                        _context.EXAMENS_ANNEES_MODES_ETUDES.Where(x => x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE &&
+                                 x.ANNEE_UNIVERSITAIRE == cy && x.ID_MODE_ETUDE == _selectedSemester.ID_MODE_ETUDE).ToList();
+                    ExaminList = new ObservableCollection<EXAMEN>(modeEtudes.Select(x => x.EXAMEN).ToList());
+                    RefreshNoteStudentList();
+                    RefreshNoteDetteStudentList(); 
+                }
             }
         }
         public SECTION SelectedSection
@@ -819,12 +824,14 @@ namespace ESC_OfflineTeacher.ViewModel
                 return _noteViewLoadedCommand
                     ?? (_noteViewLoadedCommand = new RelayCommand(
                     () =>
-                    {
-                        //the loggin is using a wcf service where the returned data is of USER type                        
-                        CurrentYear = _context.ANNEES.Max(x => x.ANNEE_UNIVERSITAIRE).ToString(CultureInfo.InvariantCulture);
-                        var cy = int.Parse(CurrentYear);
-                        var userSpecialite = _context.USERS_SPECIALITES.Where(x => x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == LoggedInTeacher.ID_USER).ToList();
-                        SpecialiteList = new ObservableCollection<SPECIALITE>(userSpecialite.Select(x => x.SPECIALITE).Distinct().ToList());
+                    {                                           
+                        if (LoggedInTeacher!=null)
+                        {
+                            CurrentYear = _context.ANNEES.Max(x => x.ANNEE_UNIVERSITAIRE).ToString(CultureInfo.InvariantCulture);
+                            var cy = int.Parse(CurrentYear);
+                            var userSpecialite = _context.USERS_SPECIALITES.Where(x => x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == LoggedInTeacher.ID_USER).ToList();
+                            SpecialiteList = new ObservableCollection<SPECIALITE>(userSpecialite.Select(x => x.SPECIALITE).Distinct().ToList()); 
+                        }
                        
 
                     }));
@@ -1064,13 +1071,14 @@ namespace ESC_OfflineTeacher.ViewModel
                 //if it is the first sync, the above object is null .. -> force resync then update it 
                 if (LoggedInTeacher == null)
                 {
-                    Task.Run(() => _syncBackgroundWorker.RunWorkerAsync()).ContinueWith((x) =>
-                    {
-                        LoggedInTeacher =
-                            _context.ENSEIGNANTS.First(
-                                y => y.ID_USER == ((UserPreferences)_navigationService.Parameter).IdUser);
-                        Messenger.Default.Send<ENSEIGNANT>(LoggedInTeacher, "Login");
-                    });
+                    _syncBackgroundWorker.RunWorkerAsync();
+                    //Task.Run(() => _syncBackgroundWorker.RunWorkerAsync()).ContinueWith((x) =>
+                    //{
+                    //    LoggedInTeacher =
+                    //        _context.ENSEIGNANTS.First(
+                    //            y => y.ID_USER == ((UserPreferences)_navigationService.Parameter).IdUser);
+                    //    Messenger.Default.Send<ENSEIGNANT>(LoggedInTeacher, "Login");
+                    //});
                 }
                 LangContentFr = ((UserPreferences)_navigationService.Parameter).LangContFr;
             }
@@ -1099,6 +1107,15 @@ namespace ESC_OfflineTeacher.ViewModel
             Settings.Default.Save();
             _context.Dispose();
             _context=new LocalDbEntities();
+           
+            LoggedInTeacher =
+                            _context.ENSEIGNANTS.First(
+                                y => y.ID_USER == ((UserPreferences)_navigationService.Parameter).IdUser);
+            Messenger.Default.Send<ENSEIGNANT>(LoggedInTeacher, "Login");
+            CurrentYear = _context.ANNEES.Max(x => x.ANNEE_UNIVERSITAIRE).ToString(CultureInfo.InvariantCulture);
+            var cy = int.Parse(CurrentYear);
+            var userSpecialite = _context.USERS_SPECIALITES.Where(x => x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == LoggedInTeacher.ID_USER).ToList();
+            SpecialiteList = new ObservableCollection<SPECIALITE>(userSpecialite.Select(x => x.SPECIALITE).Distinct().ToList()); 
             RefreshNoteStudentList();
             RefreshNoteDetteStudentList();
 
