@@ -1106,12 +1106,11 @@ namespace ESC_OfflineTeacher.ViewModel
             Settings.Default["HashValue"] = ComputeHash(_localDbPath);
             Settings.Default.Save();
             _context.Dispose();
-            _context=new LocalDbEntities();
-           
-            LoggedInTeacher =
-                            _context.ENSEIGNANTS.First(
+            _context=new LocalDbEntities();           
+            LoggedInTeacher =_context.ENSEIGNANTS.First(
                                 y => y.ID_USER == ((UserPreferences)_navigationService.Parameter).IdUser);
             Messenger.Default.Send<ENSEIGNANT>(LoggedInTeacher, "Login");
+
             CurrentYear = _context.ANNEES.Max(x => x.ANNEE_UNIVERSITAIRE).ToString(CultureInfo.InvariantCulture);
             var cy = int.Parse(CurrentYear);
             var userSpecialite = _context.USERS_SPECIALITES.Where(x => x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == LoggedInTeacher.ID_USER).ToList();
