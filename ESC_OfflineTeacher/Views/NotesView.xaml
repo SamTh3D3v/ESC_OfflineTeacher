@@ -277,7 +277,8 @@
             <Button Background="{Binding GlobalThemeBrush}" Grid.Row="0"  ToolTip="{DynamicResource ImportTooltip}" Grid.Column="0" Width="55" Height="55" VerticalAlignment="Bottom" Command="{Binding ImportDataBaseCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
                 <Rectangle Width="30" Height="30">
                     <Rectangle.Fill>
-                        <ImageBrush ImageSource="../Assets/import.png" ></ImageBrush>
+                        <ImageBrush  ImageSource="../Assets/import.png" >                            
+                        </ImageBrush>
                     </Rectangle.Fill>
                 </Rectangle>
             </Button>
