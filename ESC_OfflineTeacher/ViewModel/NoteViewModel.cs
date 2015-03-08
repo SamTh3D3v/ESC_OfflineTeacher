@@ -798,17 +798,18 @@ namespace ESC_OfflineTeacher.ViewModel
                 return _syncCommand
                     ?? (_syncCommand = new RelayCommand(async () =>
                     {                        
-                        if ((string)Settings.Default["HashValue"] == "")
-                        {
-                            Settings.Default["HashValue"] = ComputeHash(_localDbPath);
-                            Settings.Default.Save();
-                        }
-                        //if (!ComputeHash(_localDbPath).Equals(Settings.Default["HashValue"]))
+                        //if ((string)Settings.Default["HashValue"] == "")
+                        //{
+                        //    Settings.Default["HashValue"] = ComputeHash(_localDbPath);
+                        //    Settings.Default.Save();
+                        //}
+                        //else if (!ComputeHash(_localDbPath).Equals(Settings.Default["HashValue"]))
                         //{
                         //    //the database has been modified outside of the application 
-                        //    _controller = await((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("impossible de synchronizer", "la base de donné a été modifié en dehors de l'application... "));                            
+                        //    _controller = await ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("impossible de synchronizer", "la base de donné a été modifié en dehors de l'application... "));
                         //    return;
                         //}
+                        Save();
                         if (!_syncBackgroundWorker.IsBusy)
                             _syncBackgroundWorker.RunWorkerAsync();
 
@@ -857,13 +858,12 @@ namespace ESC_OfflineTeacher.ViewModel
                 Settings.Default["HashValue"] = ComputeHash(_localDbPath);
                 Settings.Default.Save();
             }
-
-            //if (!ComputeHash(_localDbPath).Equals(Settings.Default["HashValue"]))
-            //{
-            //    //the database has been modified outside of the application 
-            //    _controller = await((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("impossible d'enregistrer", "la base de donné a été modifié en dehors de l'application... "));
-            //    return;
-            //}
+            else if(!ComputeHash(_localDbPath).Equals(Settings.Default["HashValue"]))
+            {
+                //the database has been modified outside of the application 
+                _controller = await ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("impossible d'enregistrer", "la base de donné a été modifié en dehors de l'application... "));
+                return;
+            }
 
             var cy = int.Parse(CurrentYear);
             foreach (var etudiantNote in ListNotesExamins)
@@ -937,13 +937,13 @@ namespace ESC_OfflineTeacher.ViewModel
                                 string fileName = dlg.FileName;
                                 var hashReader=new StreamReader(fileName+".hash");
                                 var hash = ComputeHash(fileName);
-                                //if (!hash.Equals(hashReader.ReadLine().Trim()))
-                                //{
-                                //    _controller = await ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("impossible d'importer le fichier", "le fichier que vous voulez importer est interrompu ... "));
-                                //    return;
-                                //}
-                                Settings.Default["HashValue"] = ComputeHash(fileName, _localDbPath);
-                                Settings.Default.Save();
+                                if (!hash.Equals(hashReader.ReadLine().Trim()))
+                                {
+                                    _controller = await ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("impossible d'importer le fichier", "le fichier que vous voulez importer est interrompu ... "));
+                                    return;
+                                }
+                                //Settings.Default["HashValue"] = ComputeHash(fileName, _localDbPath);
+                                //Settings.Default.Save();
                                 _context.Dispose();
                                 _context=new LocalDbEntities();
                                 RefreshNoteStudentList();
@@ -999,9 +999,15 @@ namespace ESC_OfflineTeacher.ViewModel
         {
             _localDbPath = AppDomain.CurrentDomain.BaseDirectory.ToString(CultureInfo.InvariantCulture) + "SGSDB.sdf";            
             _navigationService = navigationService;
+            var am3 = ComputeHash(_localDbPath);
             _context = new LocalDbEntities();
+            var am2 = ComputeHash(_localDbPath);
             Initialisation();
             var am = ComputeHash(_localDbPath);
+
+
+
+
             Messenger.Default.Register<bool>(this,"LangFr", (fr) =>
             {
                 LangContentFr = fr;

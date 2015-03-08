@@ -35,7 +35,7 @@
     <system:String x:Key="Login">المستخدم</system:String>
     <system:String x:Key="MotDePasse">كلمة السر</system:String>
     <system:String x:Key="Connextion">دخول</system:String>
-    <system:String x:Key="Import">توريد</system:String>
+    <system:String x:Key="Import">ايراد</system:String>
     <system:String x:Key="Export">تصدير</system:String>
     <system:String x:Key="ImportTooltip">توريد قاعدة البيانات</system:String>
     <system:String x:Key="ExportTooltip">اصدار قاعدة البيانات</system:String>

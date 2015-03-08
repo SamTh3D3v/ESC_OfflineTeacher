@@ -35,7 +35,7 @@
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Border  x:Name="NavFlyout" Grid.Row="0" Grid.RowSpan="2"  Grid.Column="0"   Visibility="{Binding FrameNavigationService.CurrentPageKey,Converter={StaticResource FlyoutOpenConverter}}"   Width="400" >
+        <Border  x:Name="NavFlyout" Grid.Row="0" Grid.RowSpan="2"  Grid.Column="0"   Visibility="{Binding FrameNavigationService.CurrentPageKey,Converter={StaticResource FlyoutOpenConverter}}"    >           
             <Grid Background="WhiteSmoke" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
