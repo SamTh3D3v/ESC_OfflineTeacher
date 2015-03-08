@@ -12,7 +12,8 @@
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />      
     </ResourceDictionary.MergedDictionaries>
     <Style TargetType="{x:Type ComboBox}" x:Key="MultiLanCombox">
-        <Setter Property="Grid.ColumnSpan" Value="2"></Setter>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Grid.ColumnSpan" Value="2"/>
         <Style.Triggers>
             <DataTrigger  Binding="{Binding LangInterfaceFr}" Value="True">
                 <Setter Property="Grid.Column" Value="1"/>

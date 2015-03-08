@@ -91,7 +91,7 @@
                        
                     </Label>
 
-                    <ComboBox  Grid.Row="0"  Margin="5" Style="{StaticResource MultiLanCombox}"
+                    <ComboBox   Grid.Row="0"  Margin="5" Style="{StaticResource MultiLanCombox}"
                          VerticalContentAlignment="Center"
                          HorizontalAlignment="Stretch"                                          
                          DisplayMemberPath="{Binding LangContentFr,Converter={StaticResource DisplayMemberPathConverter}}"                               
@@ -229,54 +229,49 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Label Content="{DynamicResource Import}" Grid.Column="0" Grid.Row="1"></Label>
-            <Label Content="{DynamicResource Export}" Grid.Column="1" Grid.Row="1"></Label>
-            <Label Content="{DynamicResource Enregistrer}" Grid.Column="4" Grid.Row="1"></Label>
-            <Label Content="{DynamicResource Annuler}" Grid.Column="5" Grid.Row="1"></Label>
-            <Label Content="{DynamicResource Synchroniser}" Grid.Column="6" Grid.Row="1"></Label>
+            <Label Content="{DynamicResource Import}" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1"></Label>
+            <Label Content="{DynamicResource Export}" HorizontalAlignment="Center"  Grid.Column="1" Grid.Row="1"></Label>
+            <Label Content="{DynamicResource Enregistrer}" HorizontalAlignment="Center"  Grid.Column="4" Grid.Row="1"></Label>
+            <Label Content="{DynamicResource Annuler}" Grid.Column="5" HorizontalAlignment="Center"  Grid.Row="1"></Label>
+            <Label Content="{DynamicResource Synchroniser}" Grid.Column="6" HorizontalAlignment="Center"  Grid.Row="1"></Label>
 
 
 
-            <Button Grid.Row="0"  ToolTip="{DynamicResource ImportTooltip}" Grid.Column="0" Width="55" Height="55" VerticalAlignment="Bottom" Command="{Binding ImportDataBaseCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
-                <Rectangle Width="20" Height="20">
+            <Button Background="{Binding GlobalThemeBrush}" Grid.Row="0"  ToolTip="{DynamicResource ImportTooltip}" Grid.Column="0" Width="55" Height="55" VerticalAlignment="Bottom" Command="{Binding ImportDataBaseCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+                <Rectangle Width="30" Height="30">
                     <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill"
-                                     Visual="{StaticResource appbar_arrow_down}" />
+                        <ImageBrush ImageSource="../Assets/import.png" ></ImageBrush>
                     </Rectangle.Fill>
                 </Rectangle>
             </Button>
-            <Button  Grid.Row="0" Grid.Column="1" ToolTip="{DynamicResource ExportTooltip}" Width="55" Height="55" VerticalAlignment="Bottom" Command="{Binding ExportDataBaseCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
-                <Rectangle Width="20" Height="20">
+            <Button Background="{Binding GlobalThemeBrush}"  Grid.Row="0" Grid.Column="1" ToolTip="{DynamicResource ExportTooltip}" Width="55" Height="55" VerticalAlignment="Bottom" Command="{Binding ExportDataBaseCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+                <Rectangle Width="30" Height="30">
                     <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill"
-                                     Visual="{StaticResource appbar_arrow_up}" />
+                        <ImageBrush ImageSource="../Assets/export.png" ></ImageBrush>
                     </Rectangle.Fill>
                 </Rectangle>
             </Button>
 
 
             <controls:ProgressRing Grid.Row="0" Grid.Column="3" VerticalAlignment="Bottom"  HorizontalAlignment="Right" Foreground="{DynamicResource AccentColorBrush}" IsLarge="False"  IsActive="{Binding ProgressRingIsActive}" Height="50"  Width="50"/>
-            <Button Grid.Column="4" Grid.Row="0" ToolTip="{DynamicResource SaveTooltip}" HorizontalAlignment="Center" Width="55" Height="55" VerticalAlignment="Bottom" Command="{Binding SaveCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
-                <Rectangle Width="20" Height="20">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill"
-                                     Visual="{StaticResource appbar_save}" />
+            <Button Background="{Binding GlobalThemeBrush}" Grid.Column="4" Grid.Row="0" ToolTip="{DynamicResource SaveTooltip}" HorizontalAlignment="Center" Width="55" Height="55" VerticalAlignment="Bottom" Command="{Binding SaveCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+                <Rectangle  Width="30" Height="30" >
+                    <Rectangle.Fill >
+                        <ImageBrush ImageSource="../Assets/save.png" ></ImageBrush>
                     </Rectangle.Fill>
                 </Rectangle>
             </Button>
-            <Button Grid.Row="0" Grid.Column="5"  ToolTip="{DynamicResource CancelTooltip}" HorizontalAlignment="Center" Width="55" Height="55" VerticalAlignment="Bottom" Command="{Binding CancelCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
-                <Rectangle Width="20" Height="20">
+            <Button Background="{Binding GlobalThemeBrush}" Grid.Row="0" Grid.Column="5"  ToolTip="{DynamicResource CancelTooltip}" HorizontalAlignment="Center" Width="55" Height="55" VerticalAlignment="Bottom" Command="{Binding CancelCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+                <Rectangle Width="30" Height="30">
                     <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill"
-                                     Visual="{StaticResource appbar_cancel}" />
+                        <ImageBrush ImageSource="../Assets/cancel.png" ></ImageBrush>
                     </Rectangle.Fill>
                 </Rectangle>
             </Button>
             <Button Grid.Row="0" Background="{Binding GlobalThemeBrush}" ToolTip="{DynamicResource SynchroniserToolTip}" Grid.Column="6" HorizontalAlignment="Right" Width="80" Height="80" VerticalAlignment="Top" Command="{Binding SyncCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
-                <Rectangle Width="20" Height="20">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill"
-                                     Visual="{StaticResource appbar_cell_merge}" />
+                <Rectangle Width="30" Height="30">
+                    <Rectangle.Fill>                     
+                        <ImageBrush ImageSource="../Assets/sync.png" ></ImageBrush>
                     </Rectangle.Fill>
                 </Rectangle>
             </Button>
