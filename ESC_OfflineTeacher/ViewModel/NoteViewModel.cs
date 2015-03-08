@@ -352,11 +352,21 @@ namespace ESC_OfflineTeacher.ViewModel
                     var matricule = RechercherParList[0].IsSelected;
                     var nom = RechercherParList[1].IsSelected;
                     var prenom = RechercherParList[2].IsSelected;
-
-                    ListNotesExamins = new ObservableCollection<EtudiantNote>(_listNotesExaminsForSearch.Where(x =>
-                           x.Matricule.ToLower().Contains(seachText) && matricule
-                        || x.Nom.ToLower().Contains(seachText) && nom
-                        || x.Prenom.ToLower().Contains(seachText) && prenom));
+                    if (LangContentFr)
+                    {
+                        ListNotesExamins = new ObservableCollection<EtudiantNote>(_listNotesExaminsForSearch.Where(x =>
+                          x.Matricule.ToLower().Contains(seachText) && matricule
+                       || x.NomLatin.ToLower().Contains(seachText) && nom
+                       || x.PrenomLatin.ToLower().Contains(seachText) && prenom));
+                    }
+                    else
+                    {
+                        ListNotesExamins = new ObservableCollection<EtudiantNote>(_listNotesExaminsForSearch.Where(x =>
+                          x.Matricule.ToLower().Contains(seachText) && matricule
+                       || x.Nom.ToLower().Contains(seachText) && nom
+                       || x.Prenom.ToLower().Contains(seachText) && prenom));
+                    }
+                   
                 }
                 else
                 {
@@ -388,11 +398,21 @@ namespace ESC_OfflineTeacher.ViewModel
                     var matricule = RechercherParList[0].IsSelected;
                     var nom = RechercherParList[1].IsSelected;
                     var prenom = RechercherParList[2].IsSelected;
-
-                    ListNotesDettes = new ObservableCollection<EtudiantNoteDette>(_listNotesDettesForSearch.Where(x =>
+                    if (LangContentFr)
+                    {
+                        ListNotesDettes = new ObservableCollection<EtudiantNoteDette>(_listNotesDettesForSearch.Where(x =>
+                            x.Matricule.ToLower().Contains(seachTextDette) && matricule
+                         || x.NomLatin.ToLower().Contains(seachTextDette) && nom
+                         || x.PrenomLatin.ToLower().Contains(seachTextDette) && prenom)); 
+                    }
+                    else
+                    {
+                        ListNotesDettes = new ObservableCollection<EtudiantNoteDette>(_listNotesDettesForSearch.Where(x =>
                            x.Matricule.ToLower().Contains(seachTextDette) && matricule
                         || x.Nom.ToLower().Contains(seachTextDette) && nom
                         || x.Prenom.ToLower().Contains(seachTextDette) && prenom));
+                    }
+                    
                 }
                 else
                 {
