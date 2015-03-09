@@ -18,6 +18,7 @@ namespace OfflineTeacher_DBProject {
             this.SPECIALITES.SyncDirection = Microsoft.Synchronization.Data.SyncDirection.DownloadOnly;
             this.SPECIALITES_ANNEES_MODES_ETUDES.SyncDirection = Microsoft.Synchronization.Data.SyncDirection.DownloadOnly;
             this.SPECIALITES_MATIERES.SyncDirection = Microsoft.Synchronization.Data.SyncDirection.DownloadOnly;
+            this.USERS_SPECIALITES.SyncDirection = Microsoft.Synchronization.Data.SyncDirection.DownloadOnly;
             this.NOTES_EXAMEN.SyncDirection = Microsoft.Synchronization.Data.SyncDirection.Bidirectional;
             this.NOTE_DETTE.SyncDirection = Microsoft.Synchronization.Data.SyncDirection.Bidirectional;
             this.LOG.SyncDirection = Microsoft.Synchronization.Data.SyncDirection.UploadOnly;

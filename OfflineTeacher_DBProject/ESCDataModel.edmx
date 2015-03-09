@@ -4,32 +4,32 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SGSDBModel.Store" Alias="Self" Provider="System.Data.SqlServerCe.3.5" ProviderManifestToken="3.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="SGSDBModel.Store" Alias="Self" Provider="System.Data.SqlServerCe.3.5" ProviderManifestToken="3.5" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="SGSDBModelStoreContainer">
-          <EntitySet Name="__syncArticles" EntityType="SGSDBModel.Store.__syncArticles" store:Type="Tables" />
-          <EntitySet Name="__syncSubscriptions" EntityType="SGSDBModel.Store.__syncSubscriptions" store:Type="Tables" />
-          <EntitySet Name="__syncTransactions" EntityType="SGSDBModel.Store.__syncTransactions" store:Type="Tables" />
-          <EntitySet Name="ANNEES" EntityType="SGSDBModel.Store.ANNEES" store:Type="Tables" />
-          <EntitySet Name="CATEGORIES" EntityType="SGSDBModel.Store.CATEGORIES" store:Type="Tables" />
-          <EntitySet Name="ENS_SPEMAT" EntityType="SGSDBModel.Store.ENS_SPEMAT" store:Type="Tables" />
-          <EntitySet Name="ENSEIGNANTS" EntityType="SGSDBModel.Store.ENSEIGNANTS" store:Type="Tables" />
-          <EntitySet Name="ETUDES" EntityType="SGSDBModel.Store.ETUDES" store:Type="Tables" />
-          <EntitySet Name="ETUDIANTS" EntityType="SGSDBModel.Store.ETUDIANTS" store:Type="Tables" />
-          <EntitySet Name="EXAMENS" EntityType="SGSDBModel.Store.EXAMENS" store:Type="Tables" />
-          <EntitySet Name="EXAMENS_ANNEES_MODES_ETUDES" EntityType="SGSDBModel.Store.EXAMENS_ANNEES_MODES_ETUDES" store:Type="Tables" />
-          <EntitySet Name="GROUPES" EntityType="SGSDBModel.Store.GROUPES" store:Type="Tables" />
-          <EntitySet Name="LOG" EntityType="SGSDBModel.Store.LOG" store:Type="Tables" />
-          <EntitySet Name="MATIERES" EntityType="SGSDBModel.Store.MATIERES" store:Type="Tables" />
-          <EntitySet Name="MODES_ETUDES" EntityType="SGSDBModel.Store.MODES_ETUDES" store:Type="Tables" />
-          <EntitySet Name="NOTE" EntityType="SGSDBModel.Store.NOTE" store:Type="Tables" />
-          <EntitySet Name="NOTE_DETTE" EntityType="SGSDBModel.Store.NOTE_DETTE" store:Type="Tables" />
-          <EntitySet Name="NOTES_EXAMEN" EntityType="SGSDBModel.Store.NOTES_EXAMEN" store:Type="Tables" />
-          <EntitySet Name="SECTIONS" EntityType="SGSDBModel.Store.SECTIONS" store:Type="Tables" />
-          <EntitySet Name="SPECIALITES" EntityType="SGSDBModel.Store.SPECIALITES" store:Type="Tables" />
-          <EntitySet Name="SPECIALITES_ANNEES_MODES_ETUDES" EntityType="SGSDBModel.Store.SPECIALITES_ANNEES_MODES_ETUDES" store:Type="Tables" />
-          <EntitySet Name="SPECIALITES_MATIERES" EntityType="SGSDBModel.Store.SPECIALITES_MATIERES" store:Type="Tables" />
-          <EntitySet Name="UserPreferences" EntityType="SGSDBModel.Store.UserPreferences" store:Type="Tables" />
-          <EntitySet Name="USERS_SPECIALITES" EntityType="SGSDBModel.Store.USERS_SPECIALITES" store:Type="Tables" />
+          <EntitySet Name="__syncArticles" EntityType="SGSDBModel.Store.__syncArticles" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="__syncSubscriptions" EntityType="SGSDBModel.Store.__syncSubscriptions" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="__syncTransactions" EntityType="SGSDBModel.Store.__syncTransactions" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="ANNEES" EntityType="SGSDBModel.Store.ANNEES" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="CATEGORIES" EntityType="SGSDBModel.Store.CATEGORIES" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="ENS_SPEMAT" EntityType="SGSDBModel.Store.ENS_SPEMAT" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="ENSEIGNANTS" EntityType="SGSDBModel.Store.ENSEIGNANTS" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="ETUDES" EntityType="SGSDBModel.Store.ETUDES" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="ETUDIANTS" EntityType="SGSDBModel.Store.ETUDIANTS" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="EXAMENS" EntityType="SGSDBModel.Store.EXAMENS" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="EXAMENS_ANNEES_MODES_ETUDES" EntityType="SGSDBModel.Store.EXAMENS_ANNEES_MODES_ETUDES" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="GROUPES" EntityType="SGSDBModel.Store.GROUPES" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="LOG" EntityType="SGSDBModel.Store.LOG" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="MATIERES" EntityType="SGSDBModel.Store.MATIERES" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="MODES_ETUDES" EntityType="SGSDBModel.Store.MODES_ETUDES" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="NOTE" EntityType="SGSDBModel.Store.NOTE" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="NOTE_DETTE" EntityType="SGSDBModel.Store.NOTE_DETTE" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="NOTES_EXAMEN" EntityType="SGSDBModel.Store.NOTES_EXAMEN" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SECTIONS" EntityType="SGSDBModel.Store.SECTIONS" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SPECIALITES" EntityType="SGSDBModel.Store.SPECIALITES" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SPECIALITES_ANNEES_MODES_ETUDES" EntityType="SGSDBModel.Store.SPECIALITES_ANNEES_MODES_ETUDES" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SPECIALITES_MATIERES" EntityType="SGSDBModel.Store.SPECIALITES_MATIERES" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="UserPreferences" EntityType="SGSDBModel.Store.UserPreferences" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="USERS_SPECIALITES" EntityType="SGSDBModel.Store.USERS_SPECIALITES" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
           <AssociationSet Name="__syncArticles_FK" Association="SGSDBModel.Store.__syncArticles_FK">
             <End Role="__syncSubscriptions" EntitySet="__syncSubscriptions" />
             <End Role="__syncArticles" EntitySet="__syncArticles" />
