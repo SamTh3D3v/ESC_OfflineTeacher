@@ -31,7 +31,7 @@ namespace ESC_OfflineTeacher
 
         async void OnDispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            var errorMessage = string.Format("An unhandled exception occurred: {0}", e.Exception.Message);
+            var errorMessage = string.Format("An exception occurred: {0}", e.Exception.Message);
             var controller = await ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("Opération non permise, Details :", errorMessage));            
             e.Handled = true;
         }

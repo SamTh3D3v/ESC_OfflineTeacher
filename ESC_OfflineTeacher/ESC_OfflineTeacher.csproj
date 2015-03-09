@@ -93,7 +93,7 @@
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>logoesc.ico</ApplicationIcon>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight">
@@ -281,7 +281,9 @@
     </None>
     <Resource Include="Resources\Entypo.ttf" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="logo.ico" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\WindowsIcons-license.txt" />
   </ItemGroup>
@@ -361,9 +363,6 @@
   <ItemGroup>
     <Resource Include="Assets\export.png" />
     <Resource Include="Assets\import.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="logoesc.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
