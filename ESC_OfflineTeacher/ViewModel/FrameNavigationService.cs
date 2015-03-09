@@ -14,15 +14,18 @@ namespace ESC_OfflineTeacher.ViewModel
 {
     class FrameNavigationService : IFrameNavigationService,INotifyPropertyChanged
     {
+        #region Fields
         private readonly Dictionary<string, Uri> _pagesByKey;
-        private readonly List<string> _historic;        
+        private readonly List<string> _historic;
+        private string _currentPageKey;  
+        #endregion
+        #region Properties   
         public bool LangContentFr { get; set; }
         public FrameNavigationService()
         {
             _pagesByKey = new Dictionary<string, Uri>();
             _historic = new List<string>();
-        }         
-        private string _currentPageKey  ;                
+        }                               
         public string CurrentPageKey
         {
             get
@@ -41,9 +44,9 @@ namespace ESC_OfflineTeacher.ViewModel
                 OnPropertyChanged("CurrentPageKey");
             }
         }
-        
-
         public object Parameter { get; private set; }
+        #endregion
+        #region Ctors and Methods                
         public void GoBack()
         {
             if (_historic.Count > 1)
@@ -52,7 +55,6 @@ namespace ESC_OfflineTeacher.ViewModel
                 NavigateTo(_historic.Last(), null);
             }
         }
- 
         public void NavigateTo(string pageKey)
         {
             NavigateTo(pageKey, null);
@@ -131,5 +133,6 @@ namespace ESC_OfflineTeacher.ViewModel
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
     }
 }

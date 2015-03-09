@@ -824,7 +824,6 @@ namespace ESC_OfflineTeacher.ViewModel
                     }));
             }
         }
-
         private RelayCommand _noteViewLoadedCommand;
         public RelayCommand NoteViewLoadedCommand
         {
@@ -853,7 +852,6 @@ namespace ESC_OfflineTeacher.ViewModel
                     ?? (_saveCommand = new RelayCommand(async () => Save()));
             }
         }
-
         private async void Save()
         {
             //if ((string)Settings.Default["HashValue"] == "")
@@ -1104,7 +1102,6 @@ namespace ESC_OfflineTeacher.ViewModel
             RefreshNoteDetteStudentList();
 
         }
-
         private void _syncBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             
@@ -1122,22 +1119,18 @@ namespace ESC_OfflineTeacher.ViewModel
             ((ESCLocalDbServerSyncProvider)agent.RemoteProvider).ApplyChangeFailed += new EventHandler<Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs>(Remote_ApplyChangeFailed);            
             e.Result = agent.Synchronize();
         }
-
         async void agent_SessionProgress(object sender, Microsoft.Synchronization.SessionProgressEventArgs e)
         {
             PbValue = e.PercentCompleted;             
         }
-
         async void Local_ApplyChangeFailed(object sender, Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs e)
         {
             var _controller = await((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("Problem de synchronization", "problème lors de application des changement a la base local ... "));
         }
-
         async void Remote_ApplyChangeFailed(object sender, Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs e)
         {
             var _controller = await((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("Problem de synchronization", "problème lors de application des changement a la base distante ... "));
         }
-
         private void RefreshNoteStudentList()
         {
             if (SelectedMatiere != null && SelectedExamin != null && SelectedGroupe != null)
@@ -1197,7 +1190,6 @@ namespace ESC_OfflineTeacher.ViewModel
                 _listNotesDettesForSearch = new ObservableCollection<EtudiantNoteDette>(ListNotesDettes);
             }
         }
-
         public string ComputeHash(string fileName,string exportTo=null)
         {
             using (var md5 = MD5.Create())
@@ -1216,8 +1208,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 }
                 return res;
             }
-        }
-        
+        }     
         public void LOG_SaisieNotes(int? idEtudiant, int? idMatiere, double? oldNote, double? newNote, bool dette, double? oldNoteRattrapage = null, double? newNoteRattrapage = null)
         {
             const string details = "[MACHINE={0}];[ACTION=Modification d'une note d'un étudiant];[{1}]";
