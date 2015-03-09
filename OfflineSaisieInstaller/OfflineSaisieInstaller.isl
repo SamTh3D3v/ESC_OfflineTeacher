@@ -341,18 +341,18 @@
 		<col def="S0">ISDotNetInstallerArgsCommit</col>
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
-		<row><td>ESC_OfflineTeacher.exe</td><td>{B0FC8A7E-B228-4A4F-8AB7-714BEB44CB11}</td><td>INSTALLDIR</td><td>2</td><td/><td>esc_offlineteacher.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>ESC_OfflineTeacher.vshost.exe</td><td>{DD4EFA08-2DA4-4477-BB28-99E2B823B105}</td><td>INSTALLDIR</td><td>2</td><td/><td>esc_offlineteacher.vshost.ex</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>GalaSoft.MvvmLight.Extras.dll</td><td>{61FED3BA-04E5-4446-80E7-76BA14BD06E3}</td><td>INSTALLDIR</td><td>2</td><td/><td>galasoft.mvvmlight.extras.dl</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>GalaSoft.MvvmLight.Platform.dll</td><td>{BD633708-6051-4B2A-9B7C-02B6B3657560}</td><td>INSTALLDIR</td><td>2</td><td/><td>galasoft.mvvmlight.platform.</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>GalaSoft.MvvmLight.dll</td><td>{16910A41-1078-44FA-B27A-504479DC2050}</td><td>INSTALLDIR</td><td>2</td><td/><td>galasoft.mvvmlight.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>ESC_OfflineTeacher.exe</td><td>{0F8C60E4-F735-484F-BE9E-B7DD2DD72CDE}</td><td>INSTALLDIR</td><td>2</td><td/><td>esc_offlineteacher.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>ESC_OfflineTeacher.vshost.exe</td><td>{F90D1866-FB15-4BFE-9075-BF9CE3AB7BA4}</td><td>INSTALLDIR</td><td>2</td><td/><td>esc_offlineteacher.vshost.ex</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>GalaSoft.MvvmLight.Extras.dll</td><td>{4704E30B-EE48-4134-87DC-5D510DC2D944}</td><td>INSTALLDIR</td><td>2</td><td/><td>galasoft.mvvmlight.extras.dl</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>GalaSoft.MvvmLight.Platform.dll</td><td>{14BD2B14-EEA8-4241-AACF-6D420764DA1C}</td><td>INSTALLDIR</td><td>2</td><td/><td>galasoft.mvvmlight.platform.</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>GalaSoft.MvvmLight.dll</td><td>{3B30D6FB-2824-4FE8-A38D-6FF105B660A6}</td><td>INSTALLDIR</td><td>2</td><td/><td>galasoft.mvvmlight.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td>{666777D2-DF61-4899-AB72-30BD26000AAE}</td><td>ProgramFilesFolder</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td>{442524E0-2157-4D20-94FB-CF5035963297}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>MahApps.Metro.dll</td><td>{10426475-C80C-4A14-8D6C-268681D7D57A}</td><td>INSTALLDIR</td><td>2</td><td/><td>mahapps.metro.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Microsoft.Practices.ServiceLocation.dll</td><td>{AB29C46A-89B1-4C76-8C6B-30D9200D9242}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.practices.servicel</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>OfflineTeacher_DBProject.dll</td><td>{B914417F-6DA2-42E1-92D8-C57896B92D47}</td><td>INSTALLDIR</td><td>2</td><td/><td>offlineteacher_dbproject.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>QuickConverter.dll</td><td>{B7BF886A-8A13-445D-821A-6CB5515ADD04}</td><td>INSTALLDIR</td><td>2</td><td/><td>quickconverter.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>System.Windows.Interactivity.dll</td><td>{691FA912-E008-41D8-B736-26CF93317C49}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.windows.interactivity</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>MahApps.Metro.dll</td><td>{57E52250-1714-4DDB-8E35-C86075341A33}</td><td>INSTALLDIR</td><td>2</td><td/><td>mahapps.metro.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Microsoft.Practices.ServiceLocation.dll</td><td>{1C89B48B-7835-4F8C-B349-9F2C00B2DFD0}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.practices.servicel</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>OfflineTeacher_DBProject.dll</td><td>{2210D9B6-F867-44B8-B007-3456F3A20F97}</td><td>INSTALLDIR</td><td>2</td><td/><td>offlineteacher_dbproject.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>QuickConverter.dll</td><td>{1F7C9AF7-0D90-4B7F-965D-2B3F8D3AC347}</td><td>INSTALLDIR</td><td>2</td><td/><td>quickconverter.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>System.Windows.Interactivity.dll</td><td>{FA351427-774A-4355-B301-EB1A2F1113BD}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.windows.interactivity</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
 	<table name="Condition">
@@ -1899,15 +1899,12 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
-		<row><td>esc_offlineteacher.applicati</td><td>ISX_DEFAULTCOMPONENT1</td><td>ESC_OF~1.APP|ESC_OfflineTeacher.application</td><td>0</td><td/><td/><td/><td>1</td><td>G:\ITComp Projects\ESC\ESC_OfflineTeacher\ESC_OfflineTeacher\bin\Debug\ESC_OfflineTeacher.application</td><td>1</td><td/></row>
 		<row><td>esc_offlineteacher.exe</td><td>ESC_OfflineTeacher.exe</td><td>ESC_OF~1.EXE|ESC_OfflineTeacher.exe</td><td>0</td><td/><td/><td/><td>1</td><td>G:\ITComp Projects\ESC\ESC_OfflineTeacher\ESC_OfflineTeacher\bin\Debug\ESC_OfflineTeacher.exe</td><td>1</td><td/></row>
 		<row><td>esc_offlineteacher.exe.codea</td><td>ISX_DEFAULTCOMPONENT1</td><td>ESC_OF~1.XML|ESC_OfflineTeacher.exe.CodeAnalysisLog.xml</td><td>0</td><td/><td/><td/><td>1</td><td>G:\ITComp Projects\ESC\ESC_OfflineTeacher\ESC_OfflineTeacher\bin\Debug\ESC_OfflineTeacher.exe.CodeAnalysisLog.xml</td><td>1</td><td/></row>
 		<row><td>esc_offlineteacher.exe.confi</td><td>ISX_DEFAULTCOMPONENT1</td><td>ESC_OF~1.CON|ESC_OfflineTeacher.exe.config</td><td>0</td><td/><td/><td/><td>1</td><td>G:\ITComp Projects\ESC\ESC_OfflineTeacher\ESC_OfflineTeacher\bin\Debug\ESC_OfflineTeacher.exe.config</td><td>1</td><td/></row>
 		<row><td>esc_offlineteacher.exe.lastc</td><td>ISX_DEFAULTCOMPONENT</td><td>ESC_OF~1.LAS|ESC_OfflineTeacher.exe.lastcodeanalysissucceeded</td><td>0</td><td/><td/><td/><td>1</td><td>G:\ITComp Projects\ESC\ESC_OfflineTeacher\ESC_OfflineTeacher\bin\Debug\ESC_OfflineTeacher.exe.lastcodeanalysissucceeded</td><td>1</td><td/></row>
 		<row><td>esc_offlineteacher.exe.lastc1</td><td>ISX_DEFAULTCOMPONENT1</td><td>ESC_OF~1.LAS|ESC_OfflineTeacher.exe.lastcodeanalysissucceeded</td><td>0</td><td/><td/><td/><td>1</td><td>G:\ITComp Projects\ESC\ESC_OfflineTeacher\ESC_OfflineTeacher\bin\Debug\ESC_OfflineTeacher.exe.lastcodeanalysissucceeded</td><td>1</td><td/></row>
-		<row><td>esc_offlineteacher.exe.manif</td><td>ISX_DEFAULTCOMPONENT1</td><td>ESC_OF~1.MAN|ESC_OfflineTeacher.exe.manifest</td><td>0</td><td/><td/><td/><td>1</td><td>G:\ITComp Projects\ESC\ESC_OfflineTeacher\ESC_OfflineTeacher\bin\Debug\ESC_OfflineTeacher.exe.manifest</td><td>1</td><td/></row>
 		<row><td>esc_offlineteacher.pdb</td><td>ISX_DEFAULTCOMPONENT1</td><td>ESC_OF~1.PDB|ESC_OfflineTeacher.pdb</td><td>0</td><td/><td/><td/><td>1</td><td>G:\ITComp Projects\ESC\ESC_OfflineTeacher\ESC_OfflineTeacher\bin\Debug\ESC_OfflineTeacher.pdb</td><td>1</td><td/></row>
-		<row><td>esc_offlineteacher.vshost.ap</td><td>ISX_DEFAULTCOMPONENT1</td><td>ESC_OF~1.APP|ESC_OfflineTeacher.vshost.application</td><td>0</td><td/><td/><td/><td>1</td><td>G:\ITComp Projects\ESC\ESC_OfflineTeacher\ESC_OfflineTeacher\bin\Debug\ESC_OfflineTeacher.vshost.application</td><td>1</td><td/></row>
 		<row><td>esc_offlineteacher.vshost.ex</td><td>ESC_OfflineTeacher.vshost.exe</td><td>ESC_OF~1.EXE|ESC_OfflineTeacher.vshost.exe</td><td>0</td><td/><td/><td/><td>1</td><td>G:\ITComp Projects\ESC\ESC_OfflineTeacher\ESC_OfflineTeacher\bin\Debug\ESC_OfflineTeacher.vshost.exe</td><td>1</td><td/></row>
 		<row><td>esc_offlineteacher.vshost.ex1</td><td>ISX_DEFAULTCOMPONENT1</td><td>ESC_OF~1.CON|ESC_OfflineTeacher.vshost.exe.config</td><td>0</td><td/><td/><td/><td>1</td><td>G:\ITComp Projects\ESC\ESC_OfflineTeacher\ESC_OfflineTeacher\bin\Debug\ESC_OfflineTeacher.vshost.exe.config</td><td>1</td><td/></row>
 		<row><td>esc_offlineteacher.vshost.ex2</td><td>ISX_DEFAULTCOMPONENT1</td><td>ESC_OF~1.MAN|ESC_OfflineTeacher.vshost.exe.manifest</td><td>0</td><td/><td/><td/><td>1</td><td>G:\ITComp Projects\ESC\ESC_OfflineTeacher\ESC_OfflineTeacher\bin\Debug\ESC_OfflineTeacher.vshost.exe.manifest</td><td>1</td><td/></row>
@@ -1930,8 +1927,6 @@
 		<row><td>quickconverter.dll</td><td>QuickConverter.dll</td><td>QUICKC~1.DLL|QuickConverter.dll</td><td>0</td><td/><td/><td/><td>1</td><td>G:\ITComp Projects\ESC\ESC_OfflineTeacher\ESC_OfflineTeacher\bin\Debug\QuickConverter.dll</td><td>1</td><td/></row>
 		<row><td>sgsdb.sdf</td><td>ISX_DEFAULTCOMPONENT1</td><td>SGSDB.sdf</td><td>0</td><td/><td/><td/><td>1</td><td>G:\ITComp Projects\ESC\ESC_OfflineTeacher\ESC_OfflineTeacher\bin\Debug\SGSDB.sdf</td><td>1</td><td/></row>
 		<row><td>system.windows.interactivity</td><td>System.Windows.Interactivity.dll</td><td>SYSTEM~1.DLL|System.Windows.Interactivity.dll</td><td>0</td><td/><td/><td/><td>1</td><td>G:\ITComp Projects\ESC\ESC_OfflineTeacher\ESC_OfflineTeacher\bin\Debug\System.Windows.Interactivity.dll</td><td>1</td><td/></row>
-		<row><td>test.xml</td><td>ISX_DEFAULTCOMPONENT1</td><td>test.xml</td><td>0</td><td/><td/><td/><td>1</td><td>G:\ITComp Projects\ESC\ESC_OfflineTeacher\ESC_OfflineTeacher\bin\Debug\test.xml</td><td>1</td><td/></row>
-		<row><td>test.xml.txt</td><td>ISX_DEFAULTCOMPONENT1</td><td>TESTXM~1.TXT|test.xml.txt</td><td>0</td><td/><td/><td/><td>1</td><td>G:\ITComp Projects\ESC\ESC_OfflineTeacher\ESC_OfflineTeacher\bin\Debug\test.xml.txt</td><td>1</td><td/></row>
 	</table>
 
 	<table name="FileSFPCatalog">
@@ -1947,6 +1942,7 @@
 	<table name="ISAssistantTag">
 		<col key="yes" def="s72">Tag</col>
 		<col def="S255">Data</col>
+		<row><td>ESC_OfflineTeacher.exe</td><td/></row>
 		<row><td>PROJECT_ASSISTANT_DEFAULT_FEATURE</td><td>AlwaysInstall</td></row>
 		<row><td>PROJECT_ASSISTANT_FEATURES</td><td>NonSelectable</td></row>
 	</table>
@@ -2075,18 +2071,18 @@
 		<col def="S0">FTPLocation</col>
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
-		<row><td>ESC_OfflineTeacher.exe</td><td/><td/><td>_1369C2E5_43D0_44CA_8CF1_A212ABFA3A1A_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>ESC_OfflineTeacher.vshost.exe</td><td/><td/><td>_BF4ADBB7_DCD3_46EE_9EAC_4EF1EE4D9189_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>GalaSoft.MvvmLight.Extras.dll</td><td/><td/><td>_95404A9E_652D_4263_A55D_504E87A4C26E_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>GalaSoft.MvvmLight.Platform.dll</td><td/><td/><td>_8278D295_0A72_419F_8911_3E51EAF961A8_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>GalaSoft.MvvmLight.dll</td><td/><td/><td>_379DA816_C478_4E52_B757_AFC38038CFE2_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>ESC_OfflineTeacher.exe</td><td/><td/><td>_5AD45287_B5A8_44D8_85FA_DF89F60DF517_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>ESC_OfflineTeacher.vshost.exe</td><td/><td/><td>_9E62E2FA_4EE3_47EE_8A48_A1BB27BD6D18_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>GalaSoft.MvvmLight.Extras.dll</td><td/><td/><td>_BBDED5F5_3B1C_45ED_AFE7_F6E1E3C3651C_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>GalaSoft.MvvmLight.Platform.dll</td><td/><td/><td>_F02E5526_8B29_4BE0_9B29_3C5FF8D9CCA5_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>GalaSoft.MvvmLight.dll</td><td/><td/><td>_57B54BD0_3BAD_4A5F_9181_0AE29F409F89_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_696DC450_C9FC_43A7_B45B_1BAAAD98FE0F_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td/><td/><td>_0D8DDD8E_AA2C_4510_A171_9500237E94CD_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>MahApps.Metro.dll</td><td/><td/><td>_A83008AB_66AF_4754_8BF3_98F73226FDA9_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Microsoft.Practices.ServiceLocation.dll</td><td/><td/><td>_FAEC0F49_74AB_4A32_81DD_2ADC9F38C881_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>OfflineTeacher_DBProject.dll</td><td/><td/><td>_9E734740_4BD3_48D4_B7BB_273C5171E21C_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>QuickConverter.dll</td><td/><td/><td>_7CCD9502_C6FF_40AD_9F33_38A5E8A204F9_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>System.Windows.Interactivity.dll</td><td/><td/><td>_63355BE4_1927_4636_9A59_EABEF723C4CD_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>MahApps.Metro.dll</td><td/><td/><td>_4B97752C_C9ED_47F6_809F_51C0E29E12C5_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>Microsoft.Practices.ServiceLocation.dll</td><td/><td/><td>_38958A1F_AFE6_41A2_B91F_3D9906B70447_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>OfflineTeacher_DBProject.dll</td><td/><td/><td>_502EEA10_9649_490E_B8CB_C8B7F54185D2_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>QuickConverter.dll</td><td/><td/><td>_1E51C543_19C1_42E5_A4E2_B8A334B6A82A_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>System.Windows.Interactivity.dll</td><td/><td/><td>_56E8A995_8754_42C2_875E_323D2B8B85FE_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="ISCustomActionReference">
@@ -3519,6 +3515,8 @@
 		<row><td>IDS_SETUPEXE_EXPIRE_MSG</td><td>1033</td><td>This setup works until %s. The setup will now exit.</td><td>0</td><td/><td>1235427040</td></row>
 		<row><td>IDS_SETUPEXE_LAUNCH_COND_E</td><td>1033</td><td>This setup was built with an evaluation version of InstallShield and can only be launched from setup.exe.</td><td>0</td><td/><td>1235427040</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME1</td><td>1033</td><td>Launch |Built</td><td>0</td><td/><td>1235441953</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME2</td><td>1033</td><td>LAUNCH~1.EXE|Launch ESC_OfflineTeacher.exe</td><td>0</td><td/><td>1235467208</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME3</td><td>1033</td><td>LAUNCH~1.EXE|Launch ESC_OfflineTeacher.exe</td><td>0</td><td/><td>1235450025</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO</td><td>1033</td><td>From the list of servers below, select the database server you would like to target.</td><td>0</td><td/><td>1235427040</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_DB</td><td>1033</td><td>From the list of catalog names below, select the database catalog you would like to target.</td><td>0</td><td/><td>1235427040</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_TEMPLATE</td><td>1033</td><td>[IS_SQLBROWSE_INTRO]</td><td>0</td><td/><td>1235427040</td></row>
@@ -3810,6 +3808,8 @@
 		<row><td>ID_STRING1</td><td>1033</td><td>http://www.ITComp-dz.com</td><td>0</td><td/><td>1235465601</td></row>
 		<row><td>ID_STRING2</td><td>1033</td><td>ITComp</td><td>0</td><td/><td>1235441376</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>OFFLIN~1|OfflineSaissie</td><td>0</td><td/><td>1235473729</td></row>
+		<row><td>ID_STRING4</td><td>1033</td><td>LAUNCH~1.EXE|Launch ESC_OfflineTeacher.exe</td><td>0</td><td/><td>1235473352</td></row>
+		<row><td>ID_STRING5</td><td>1033</td><td>LAUNCH~1.EXE|Launch ESC_OfflineTeacher.exe</td><td>0</td><td/><td>1235452073</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>1033</td><td>This feature will remain uninstalled.</td><td>0</td><td/><td>1235427040</td></row>
 	</table>
 
@@ -3918,6 +3918,10 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I2">ISIconIndex</col>
 		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\setupicon.ico</td><td>0</td></row>
+		<row><td>ESC_OfflineTeacher_50DA24FB57BF42D89CC0F93FAB42A140.exe</td><td/><td>G:\ITComp Projects\ESC\ESC_OfflineTeacher\ESC_OfflineTeacher\bin\Debug\ESC_OfflineTeacher.exe</td><td>0</td></row>
+		<row><td>ESC_OfflineTeacher_5EB943B4C2834581996A847465FB1ED1.exe</td><td/><td>C:\Users\Elhamer Oussama\Desktop\logo.ico</td><td>0</td></row>
+		<row><td>ESC_OfflineTeacher_CA900CFE97E245BF86F85C6FD5481136.exe</td><td/><td>G:\ITComp Projects\ESC\ESC_OfflineTeacher\ESC_OfflineTeacher\bin\Debug\ESC_OfflineTeacher.exe</td><td>0</td></row>
+		<row><td>ESC_OfflineTeacher_D85CB751871540C5B804375CE4FEA9C4.exe</td><td/><td>C:\Users\Elhamer Oussama\Desktop\logo.ico</td><td>0</td></row>
 		<row><td>NewShortcut1_57EECD30E9BD4535B72F08542763E2C2.exe</td><td/><td>G:\ITComp Projects\ESC\ESC_OfflineTeacher\ESC_OfflineTeacher\bin\Debug\ESC_OfflineTeacher.exe</td><td>0</td></row>
 	</table>
 
@@ -4505,7 +4509,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="L255">FileName</col>
 		<col def="s72">DirProperty</col>
 		<col def="i2">InstallMode</col>
-		<row><td>NewShortcut1</td><td>ESC_OfflineTeacher.exe</td><td/><td>offlin_1_offlinesaisie</td><td>2</td></row>
+		<row><td>ESC_OfflineTeacher.exe</td><td>ESC_OfflineTeacher.exe</td><td/><td>offlin_1_offlinesaisie</td><td>2</td></row>
 	</table>
 
 	<table name="RemoveIniFile">
@@ -4591,7 +4595,8 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
-		<row><td>NewShortcut1</td><td>offlin_1_offlinesaisie</td><td>##ID_STRING3##</td><td>ESC_OfflineTeacher.exe</td><td>[INSTALLDIR]ESC_OfflineTeacher.exe</td><td/><td/><td/><td>NewShortcut1_57EECD30E9BD4535B72F08542763E2C2.exe</td><td>1</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>ESC_OfflineTeacher.exe</td><td>offlin_1_offlinesaisie</td><td>##IDS_SHORTCUT_DISPLAY_NAME3##</td><td>ESC_OfflineTeacher.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>ESC_OfflineTeacher_D85CB751871540C5B804375CE4FEA9C4.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>ESC_OfflineTeacher.exe1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME3##</td><td>ESC_OfflineTeacher.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>ESC_OfflineTeacher_5EB943B4C2834581996A847465FB1ED1.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="Signature">

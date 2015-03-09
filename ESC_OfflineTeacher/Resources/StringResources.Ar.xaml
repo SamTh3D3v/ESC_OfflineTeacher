@@ -3,7 +3,7 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
     <system:String x:Key="WindowTitle">Offline Saisie</system:String>
     <system:String x:Key="Settings">اعدادات</system:String>
-    <system:String x:Key="Langue">لغة</system:String>
+    <system:String x:Key="Langue">اللغة</system:String>
     <system:String x:Key="LangueInteface">لغة الواجهة</system:String>
     <system:String x:Key="LangueContenue">لغة المحتوى</system:String>
     <system:String x:Key="Francais">الفرنسية</system:String>
@@ -23,8 +23,8 @@
     <system:String x:Key="Groupe">الفوج</system:String>
     <system:String x:Key="Examin">الامتحان</system:String>
     <system:String x:Key="AfficherTous">أظهر الكل</system:String>
-    <system:String x:Key="NotesExamens">نقطة الامتحان</system:String>
-    <system:String x:Key="NotesDettes">نقطة الامتحان التعويضي</system:String>
+    <system:String x:Key="NotesExamens">نقط الامتحان</system:String>
+    <system:String x:Key="NotesDettes">نقط الامتحان التعويضي</system:String>
     <system:String x:Key="Matricule">رقم الطالب</system:String>
     <system:String x:Key="Note">النقطة</system:String>
     <system:String x:Key="Rattrapage">الاستدراك</system:String>
@@ -37,7 +37,7 @@
     <system:String x:Key="Connextion">دخول</system:String>
     <system:String x:Key="Import">ايراد</system:String>
     <system:String x:Key="Export">تصدير</system:String>
-    <system:String x:Key="ImportTooltip">توريد قاعدة البيانات</system:String>
+    <system:String x:Key="ImportTooltip">ايراد قاعدة البيانات</system:String>
     <system:String x:Key="ExportTooltip">اصدار قاعدة البيانات</system:String>
     <system:String x:Key="Enregistrer">حفظ</system:String>
     <system:String x:Key="Annuler">الغاء</system:String>
