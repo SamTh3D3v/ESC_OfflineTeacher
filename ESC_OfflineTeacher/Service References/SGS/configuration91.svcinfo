@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="SI7rxMv6ne/kuF540zPe6/kiT9A=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="FzwPQWaf0hYf8n8ehHfXlFfwGVE=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_AuthenticationService">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_AuthenticationService" contract="SGS.AuthenticationService" bindingType="basicHttpBinding" address="http://tfs2010.itcomp.com:82/master/Offline/OfflineAuthenticationService.svc" bindingConfiguration="BasicHttpBinding_AuthenticationService">
+    <endpoint name="BasicHttpBinding_AuthenticationService" contract="SGS.AuthenticationService" bindingType="basicHttpBinding" address="http://ns4.esc.edu/master/offline/OfflineAuthenticationService.svc" bindingConfiguration="BasicHttpBinding_AuthenticationService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://tfs2010.itcomp.com:82/master/Offline/OfflineAuthenticationService.svc</serializedValue>
+          <serializedValue>http://ns4.esc.edu/master/offline/OfflineAuthenticationService.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

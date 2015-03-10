@@ -817,9 +817,11 @@ namespace ESC_OfflineTeacher.ViewModel
                         //    _controller = await ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("impossible de synchronizer", "la base de donné a été modifié en dehors de l'application... "));
                         //    return;
                         //}
-                        Save();
-                        if (!_syncBackgroundWorker.IsBusy)
-                            _syncBackgroundWorker.RunWorkerAsync();
+                       
+                            Save();
+                            if (!_syncBackgroundWorker.IsBusy)
+                                _syncBackgroundWorker.RunWorkerAsync();
+                       
 
                     }));
             }
@@ -1079,32 +1081,42 @@ namespace ESC_OfflineTeacher.ViewModel
             _syncBackgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(_syncBackgroundWorker_RunWorkerCompleted);
            // _syncBackgroundWorker.ProgressChanged += new ProgressChangedEventHandler(_syncBackgroundWorker_ProgressChanged);
         }       
-        private async void _syncBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {            
-            PbVisibility = Visibility.Collapsed;
-            ProgressRingIsActive = false;
-            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+        private  void _syncBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            try
             {
-                Application.Current.MainWindow.Cursor = Cursors.Arrow;
-            }));                                  
-            Settings.Default["HashValue"] = ComputeHash(App.LocalDbPath);
-            Settings.Default.Save();
-            _context.Dispose();
-            _context=new LocalDbEntities();           
-            LoggedInTeacher =_context.ENSEIGNANTS.First(
-                                y => y.ID_USER == ((UserPreferences)_navigationService.Parameter).IdUser);
-            Messenger.Default.Send<ENSEIGNANT>(LoggedInTeacher, "Login");
-            CurrentYear = _context.ANNEES.Max(x => x.ANNEE_UNIVERSITAIRE).ToString(CultureInfo.InvariantCulture);
-            var cy = int.Parse(CurrentYear);
-            var userSpecialite = _context.USERS_SPECIALITES.Where(x => x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == LoggedInTeacher.ID_USER).ToList();
-            SpecialiteList = new ObservableCollection<SPECIALITE>(userSpecialite.Select(x => x.SPECIALITE).Distinct().ToList()); 
-            RefreshNoteStudentList();
-            RefreshNoteDetteStudentList();
+                PbVisibility = Visibility.Collapsed;
+                ProgressRingIsActive = false;
+                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    Application.Current.MainWindow.Cursor = Cursors.Arrow;
+                }));
+                //Settings.Default["HashValue"] = ComputeHash(App.LocalDbPath);
+                //Settings.Default.Save();
+                _context.Dispose();
+                _context = new LocalDbEntities();
+                LoggedInTeacher = _context.ENSEIGNANTS.First(
+                                    y => y.ID_USER == ((UserPreferences)_navigationService.Parameter).IdUser);
+                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                Messenger.Default.Send<ENSEIGNANT>(LoggedInTeacher, "Login");
+                }));
+                CurrentYear = _context.ANNEES.Max(x => x.ANNEE_UNIVERSITAIRE).ToString(CultureInfo.InvariantCulture);
+                var cy = int.Parse(CurrentYear);
+                var userSpecialite = _context.USERS_SPECIALITES.Where(x => x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == LoggedInTeacher.ID_USER).ToList();
+                SpecialiteList = new ObservableCollection<SPECIALITE>(userSpecialite.Select(x => x.SPECIALITE).Distinct().ToList());
+                RefreshNoteStudentList();
+                RefreshNoteDetteStudentList();
+            }
+            catch (Exception ex)
+            {
+                
+                Debug.WriteLine(ex.Message);
+            }
 
         }
         private void _syncBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            
+        {            
             // Application.Current.MainWindow.Cursor = Cursors.Wait;
             PbVisibility = Visibility.Visible;
             ProgressRingIsActive = true;
@@ -1114,10 +1126,12 @@ namespace ESC_OfflineTeacher.ViewModel
                 LocalProvider = new ESCLocalDbClientSyncProvider(),
                 RemoteProvider = new ESCLocalDbServerSyncProvider()
             };
+            
             agent.SessionProgress += new EventHandler<Microsoft.Synchronization.SessionProgressEventArgs>(agent_SessionProgress);            
             ((ESCLocalDbClientSyncProvider)agent.LocalProvider).ApplyChangeFailed += new EventHandler<Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs>(Local_ApplyChangeFailed);          
-            ((ESCLocalDbServerSyncProvider)agent.RemoteProvider).ApplyChangeFailed += new EventHandler<Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs>(Remote_ApplyChangeFailed);            
-            e.Result = agent.Synchronize();
+            ((ESCLocalDbServerSyncProvider)agent.RemoteProvider).ApplyChangeFailed += new EventHandler<Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs>(Remote_ApplyChangeFailed);
+           
+                e.Result = agent.Synchronize();                                
         }
         async void agent_SessionProgress(object sender, Microsoft.Synchronization.SessionProgressEventArgs e)
         {

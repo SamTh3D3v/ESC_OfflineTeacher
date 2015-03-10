@@ -54,10 +54,18 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Synchronization, Version=1.0.0.0" />
-    <Reference Include="Microsoft.Synchronization.Data, Version=2.0.0.0" />
-    <Reference Include="Microsoft.Synchronization.Data.Server, Version=2.0.0.0" />
-    <Reference Include="Microsoft.Synchronization.Data.SqlServerCe, Version=2.0.0.0" />
+    <Reference Include="Microsoft.Synchronization, Version=1.0.0.0">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Synchronization.Data, Version=2.0.0.0">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Synchronization.Data.Server, Version=2.0.0.0">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Synchronization.Data.SqlServerCe, Version=2.0.0.0">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
@@ -106,6 +114,7 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>

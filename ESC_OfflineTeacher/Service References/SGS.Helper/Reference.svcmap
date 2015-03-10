@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="ebcc8951-9f0c-4f87-bee3-173f3e18e652" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="655525d3-6f11-4927-93c1-337cc025c8bc" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,13 +19,13 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://tfs2010:82/master/offline/offlineservice.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://ns4.esc.edu/master/offline/offlineservice.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="OfflineService.wsdl" MetadataType="Wsdl" ID="4e674fa5-9184-4c31-ae00-39613327e713" SourceId="1" SourceUrl="http://tfs2010.itcomp.com:82/master/offline/OfflineService.svc?wsdl" />
-    <MetadataFile FileName="OfflineService.xsd" MetadataType="Schema" ID="4c988516-0c2a-428f-958b-ea6128ccdddf" SourceId="1" SourceUrl="http://tfs2010.itcomp.com:82/master/offline/OfflineService.svc?xsd=xsd0" />
-    <MetadataFile FileName="OfflineService1.xsd" MetadataType="Schema" ID="3e6c953c-de6a-48f5-bfcb-a6b8690a662c" SourceId="1" SourceUrl="http://tfs2010.itcomp.com:82/master/offline/OfflineService.svc?xsd=xsd1" />
-    <MetadataFile FileName="OfflineService.disco" MetadataType="Disco" ID="5c2a5d5c-b30f-41cc-8dd7-06236f38364e" SourceId="1" SourceUrl="http://tfs2010.itcomp.com:82/master/offline/OfflineService.svc?disco" />
+    <MetadataFile FileName="OfflineService.xsd" MetadataType="Schema" ID="b11e9d71-5a04-4083-9592-1fcb408dfa7b" SourceId="1" SourceUrl="http://ns4.esc.edu/master/offline/OfflineService.svc?xsd=xsd1" />
+    <MetadataFile FileName="OfflineService.wsdl" MetadataType="Wsdl" ID="53034239-e11c-40e4-8140-40cffd605186" SourceId="1" SourceUrl="http://ns4.esc.edu/master/offline/OfflineService.svc?wsdl" />
+    <MetadataFile FileName="OfflineService1.xsd" MetadataType="Schema" ID="65bcb3a3-4070-47a4-bf53-7008f0e739b8" SourceId="1" SourceUrl="http://ns4.esc.edu/master/offline/OfflineService.svc?xsd=xsd0" />
+    <MetadataFile FileName="OfflineService.disco" MetadataType="Disco" ID="f10fa254-e3db-486d-a214-cc77f8ae4529" SourceId="1" SourceUrl="http://ns4.esc.edu/master/offline/OfflineService.svc?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
