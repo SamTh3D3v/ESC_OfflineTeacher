@@ -1115,7 +1115,7 @@ namespace ESC_OfflineTeacher.ViewModel
             }
 
         }
-        private void _syncBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        private async  void _syncBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {            
             // Application.Current.MainWindow.Cursor = Cursors.Wait;
             PbVisibility = Visibility.Visible;
@@ -1130,8 +1130,19 @@ namespace ESC_OfflineTeacher.ViewModel
             agent.SessionProgress += new EventHandler<Microsoft.Synchronization.SessionProgressEventArgs>(agent_SessionProgress);            
             ((ESCLocalDbClientSyncProvider)agent.LocalProvider).ApplyChangeFailed += new EventHandler<Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs>(Local_ApplyChangeFailed);          
             ((ESCLocalDbServerSyncProvider)agent.RemoteProvider).ApplyChangeFailed += new EventHandler<Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs>(Remote_ApplyChangeFailed);
-           
-                e.Result = agent.Synchronize();                                
+
+            try
+            {
+                e.Result = agent.Synchronize();
+            }
+            catch (Exception exception)
+            {
+                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    var controller = ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("Problem d'acces a la base de données", exception.Message));
+                }));
+                               
+            }                             
         }
         async void agent_SessionProgress(object sender, Microsoft.Synchronization.SessionProgressEventArgs e)
         {
