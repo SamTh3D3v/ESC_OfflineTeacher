@@ -24,7 +24,7 @@
     <system:String x:Key="Examin">Examin</system:String>
     <system:String x:Key="AfficherTous">Afficher Tous</system:String>
     <system:String x:Key="NotesExamens">Notes Examens</system:String>
-    <system:String x:Key="NotesDettes">NotesDettes</system:String>
+    <system:String x:Key="NotesDettes">Notes Dettes</system:String>
     <system:String x:Key="Matricule">Matricule</system:String>
     <system:String x:Key="Note">NOTE</system:String>
     <system:String x:Key="Rattrapage">RATTRAPAGE</system:String>

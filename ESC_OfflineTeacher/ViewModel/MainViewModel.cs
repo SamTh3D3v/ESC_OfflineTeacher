@@ -1,30 +1,35 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Windows;
 using System.Windows.Media;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using OfflineTeacher_DBProject;
 
 
 namespace ESC_OfflineTeacher.ViewModel
 {
     public class MainViewModel : ViewModelBase
-    {      
+    {
         #region Fields
         private readonly IFrameNavigationService _navigationService;
         private bool _navigationSource;
         private ObservableCollection<SPECIALITE> _listSpeciliteEns;
-        private ENSEIGNANT _loggedInUser  ;
-        private bool _langueInterfaceFr=true;
-        private bool _langueInterfaceAr=false;
+        private ENSEIGNANT _loggedInUser;
+        private bool _langueInterfaceFr = true;
+        private bool _langueInterfaceAr = false;
         private bool _langueContenuFr = true;
         private bool _langueContenuAr = false;
         private bool _isBlackTheme = true;
         private SolidColorBrush _globaleThemeBrush;
         #endregion
-        #region Properties                
+        #region Properties
         public SolidColorBrush GlobalThemeBrush
         {
             get
@@ -34,7 +39,7 @@ namespace ESC_OfflineTeacher.ViewModel
 
             set
             {
-                
+
 
                 _globaleThemeBrush = value;
                 RaisePropertyChanged();
@@ -65,7 +70,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 {
                     GlobalThemeBrush = App.Light;
                     Messenger.Default.Send<NotificationMessage>(new NotificationMessage("IsLight"));
-                }                                                                   
+                }
             }
         }
         public bool LangueContenuFr
@@ -85,8 +90,8 @@ namespace ESC_OfflineTeacher.ViewModel
                 _langueContenuFr = value;
                 RaisePropertyChanged();
                 Messenger.Default.Send<bool>(_langueContenuFr, "LangFr");
-                
-                
+
+
             }
         }
         public bool LangueContenuAr
@@ -104,7 +109,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 }
 
                 _langueContenuAr = value;
-                RaisePropertyChanged();                                
+                RaisePropertyChanged();
             }
         }
         public bool LangueInterfaceFr
@@ -148,7 +153,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 RaisePropertyChanged();
                 if (_langueInterfaceAr)
                 {
-                    App.SelectCulture("Ar");                    
+                    App.SelectCulture("Ar");
                 }
             }
         }
@@ -209,7 +214,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 _listSpeciliteEns = value;
                 RaisePropertyChanged();
             }
-        }       
+        }
         #endregion
         #region Commands
         private RelayCommand _mainWindowLoadedCommand;
@@ -221,17 +226,38 @@ namespace ESC_OfflineTeacher.ViewModel
                     ?? (_mainWindowLoadedCommand = new RelayCommand(
                         () => _navigationService.NavigateTo("LoginView")));
             }
-        }        
+        }
         #endregion
         #region Ctors and Methods
         public MainViewModel(IFrameNavigationService navigationService)
         {
+            
             _navigationService = navigationService;
             Messenger.Default.Register<ENSEIGNANT>(this, "Login", (ens) =>
             {
                 LoggedInUser = ens;
-                var context = new LocalDbEntities();
-                ListSpeciliteEns = new ObservableCollection<SPECIALITE>(context.ENS_SPEMAT.Where(x => x.ID_ENSEIGNANT == LoggedInUser.ID_ENSEIGNANT).Select(x => x.SPECIALITE).Distinct().ToList());
+                try
+                {
+
+                    if (ens!=null)
+                    {
+
+                        var context = new LocalDbEntities();
+                        ListSpeciliteEns = new ObservableCollection<SPECIALITE>(context.ENS_SPEMAT.Where(x => x.ID_ENSEIGNANT == LoggedInUser.ID_ENSEIGNANT).Select(x => x.SPECIALITE).Distinct().ToList());
+                        
+                    }
+                    else
+                    {
+                        LoggedInUser=new ENSEIGNANT();
+                        ListSpeciliteEns=new ObservableCollection<SPECIALITE>();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var _contoller = ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("Problème d'accés a la base de données local", "La base de données local n'exite pas ou elle est corrompu, importer une nouvelle base de données"));
+                    LoggedInUser = new ENSEIGNANT();
+                    ListSpeciliteEns = new ObservableCollection<SPECIALITE>();                    
+                }
             });
             GlobalThemeBrush = App.Dark;
         }

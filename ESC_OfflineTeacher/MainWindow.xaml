@@ -276,7 +276,7 @@
         </Grid.ColumnDefinitions>
         <Frame Grid.Row="0" Grid.Column="0"  x:Name="MainFrame" VerticalContentAlignment="Center"
                HorizontalContentAlignment="Center" VerticalAlignment="Stretch" 
-               HorizontalAlignment="Stretch" NavigationUIVisibility="Visible" 
+               HorizontalAlignment="Stretch" NavigationUIVisibility="Hidden" 
                Margin="2"/>
     </Grid>
 </controls:MetroWindow>

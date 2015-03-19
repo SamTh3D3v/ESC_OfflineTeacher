@@ -31,7 +31,7 @@ namespace ESC_OfflineTeacher.ViewModel
 {
 
     public class NoteViewModel : ViewModelBase
-    {   
+    {
         #region Fields
         private readonly IFrameNavigationService _navigationService;
         private ObservableCollection<EtudiantNote> _listNotesExamins;
@@ -39,7 +39,7 @@ namespace ESC_OfflineTeacher.ViewModel
         private bool _progressRingIsActive = false;
         private ObservableCollection<EtudiantNote> _listNotesExaminsForSearch;
         private ObservableCollection<EtudiantNoteDette> _listNotesDettesForSearch;
-        private MessageDialogResult _controller;             
+        private MessageDialogResult _controller;
         private LocalDbEntities _context;
         private BackgroundWorker _syncBackgroundWorker;
         private ObservableCollection<SPECIALITE> _specialiteList;
@@ -70,11 +70,11 @@ namespace ESC_OfflineTeacher.ViewModel
         private int _pbValue;
         private Visibility _pbVisibility = Visibility.Collapsed;
         private ExaminDette _selectedExaminDette;
-        private bool _langContentFr=true;
+        private bool _langContentFr = true;
         private SolidColorBrush _globaleThemeBrush;
         private bool _langInterfaceFr = true;
         #endregion
-        #region Properties        
+        #region Properties
         public SolidColorBrush GlobalThemeBrush
         {
             get
@@ -84,7 +84,7 @@ namespace ESC_OfflineTeacher.ViewModel
 
             set
             {
-             
+
                 _globaleThemeBrush = value;
                 RaisePropertyChanged();
             }
@@ -188,13 +188,10 @@ namespace ESC_OfflineTeacher.ViewModel
 
             set
             {
-                if (_specialiteList == value)
-                {
-                    return;
-                }
+
                 _specialiteList = value;
                 RaisePropertyChanged();
-                SelectedSpecialite = _specialiteList.First();
+                SelectedSpecialite = _specialiteList.FirstOrDefault();
             }
         }
         public ObservableCollection<MATIERE> MatiereList
@@ -206,10 +203,6 @@ namespace ESC_OfflineTeacher.ViewModel
 
             set
             {
-                if (_matiereList == value)
-                {
-                    return;
-                }
 
                 _matiereList = value;
                 RaisePropertyChanged();
@@ -244,11 +237,6 @@ namespace ESC_OfflineTeacher.ViewModel
 
             set
             {
-                if (_sectionList == value)
-                {
-                    return;
-                }
-
                 _sectionList = value;
                 RaisePropertyChanged();
                 SelectedSection = _sectionList.FirstOrDefault();
@@ -263,11 +251,6 @@ namespace ESC_OfflineTeacher.ViewModel
 
             set
             {
-                if (_groupeList == value)
-                {
-                    return;
-                }
-
                 _groupeList = value;
                 RaisePropertyChanged();
                 SelectedGroupe = _groupeList.FirstOrDefault();
@@ -282,10 +265,6 @@ namespace ESC_OfflineTeacher.ViewModel
 
             set
             {
-                if (_examinList == value)
-                {
-                    return;
-                }
 
                 _examinList = value;
                 RaisePropertyChanged();
@@ -366,7 +345,7 @@ namespace ESC_OfflineTeacher.ViewModel
                        || x.Nom.ToLower().Contains(seachText) && nom
                        || x.Prenom.ToLower().Contains(seachText) && prenom));
                     }
-                   
+
                 }
                 else
                 {
@@ -403,7 +382,7 @@ namespace ESC_OfflineTeacher.ViewModel
                         ListNotesDettes = new ObservableCollection<EtudiantNoteDette>(_listNotesDettesForSearch.Where(x =>
                             x.Matricule.ToLower().Contains(seachTextDette) && matricule
                          || x.NomLatin.ToLower().Contains(seachTextDette) && nom
-                         || x.PrenomLatin.ToLower().Contains(seachTextDette) && prenom)); 
+                         || x.PrenomLatin.ToLower().Contains(seachTextDette) && prenom));
                     }
                     else
                     {
@@ -412,7 +391,7 @@ namespace ESC_OfflineTeacher.ViewModel
                         || x.Nom.ToLower().Contains(seachTextDette) && nom
                         || x.Prenom.ToLower().Contains(seachTextDette) && prenom));
                     }
-                    
+
                 }
                 else
                 {
@@ -465,10 +444,6 @@ namespace ESC_OfflineTeacher.ViewModel
 
             set
             {
-                if (_selectedSpecialite == value )
-                {
-                    return;
-                }
 
                 _selectedSpecialite = value;
                 RaisePropertyChanged();
@@ -476,17 +451,25 @@ namespace ESC_OfflineTeacher.ViewModel
                 var cy = int.Parse(CurrentYear);
                 if (_selectedSpecialite != null)
                 {
-                    var matiereInUserSpecialite = _context.USERS_SPECIALITES.Where(x => x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == LoggedInTeacher.ID_USER && x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE).Select(x => x.MATIERE).Distinct();
-                    MatiereList = new ObservableCollection<MATIERE>(matiereInUserSpecialite.ToList());
-                    SelectedMatiere = MatiereList.FirstOrDefault();
-                    var modeEtudes =
-                    _context.EXAMENS_ANNEES_MODES_ETUDES.Where(
-                        x => x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE &&
-                             x.ANNEE_UNIVERSITAIRE == cy).ToList();
-                    SemestreList = new ObservableCollection<MODES_ETUDES>(modeEtudes.Select(x => x.MODES_ETUDES).Distinct().ToList());
-                    RefreshNoteStudentList();
-                    RefreshNoteDetteStudentList();
-                    
+                    try
+                    {
+                        var matiereInUserSpecialite = _context.USERS_SPECIALITES.Where(x => x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == LoggedInTeacher.ID_USER && x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE).Select(x => x.MATIERE).Distinct();
+                        MatiereList = new ObservableCollection<MATIERE>(matiereInUserSpecialite.ToList());
+                        SelectedMatiere = MatiereList.FirstOrDefault();
+                        var modeEtudes =
+                        _context.EXAMENS_ANNEES_MODES_ETUDES.Where(
+                            x => x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE &&
+                                 x.ANNEE_UNIVERSITAIRE == cy).ToList();
+                        SemestreList = new ObservableCollection<MODES_ETUDES>(modeEtudes.Select(x => x.MODES_ETUDES).Distinct().ToList());
+                        RefreshNoteStudentList();
+                        RefreshNoteDetteStudentList();
+                    }
+                    catch (Exception ex)
+                    {
+                        var _controller = ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("Probleme interne", "un porblem d'acces a la base de données ... "));
+                        Debug.WriteLine("EF ->" + ex.Message);
+                    }
+
                 }
                 else
                 {
@@ -514,18 +497,26 @@ namespace ESC_OfflineTeacher.ViewModel
 
                 _selectedMatiere = value;
                 RaisePropertyChanged();
-                if (_selectedMatiere!=null)
+                try
                 {
-                    var cy = int.Parse(CurrentYear);
-                    var groupeList =
-                   _context.USERS_SPECIALITES.Where(
-                       x =>
-                           x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == _loggedInTeacher.ID_USER &&
-                           x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE && x.ID_MATIERE == SelectedMatiere.ID_MATIERE).Select(x => x.GROUPE).Distinct().ToList();
-                    SectionList = new ObservableCollection<SECTION>(groupeList.Select(x => x.SECTION).Distinct());
+                    if (_selectedMatiere != null && _selectedSpecialite != null)
+                    {
+                        var cy = int.Parse(CurrentYear);
+                        var groupeList =
+                       _context.USERS_SPECIALITES.Where(
+                           x =>
+                               x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == _loggedInTeacher.ID_USER &&
+                               x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE && x.ID_MATIERE == SelectedMatiere.ID_MATIERE).Select(x => x.GROUPE).Distinct().ToList();
+                        SectionList = new ObservableCollection<SECTION>(groupeList.Select(x => x.SECTION).Distinct());
+                    }
+                    RefreshNoteStudentList();
+                    RefreshNoteDetteStudentList();
                 }
-                RefreshNoteStudentList();
-                RefreshNoteDetteStudentList();
+                catch (Exception ex)
+                {
+                    var _controller = ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("Probleme interne", "un porblem d'acces a la base de données ... "));
+                    Debug.WriteLine("EF ->" + ex.Message);
+                }
             }
         }
         public MODES_ETUDES SelectedSemester
@@ -544,15 +535,24 @@ namespace ESC_OfflineTeacher.ViewModel
 
                 _selectedSemester = value;
                 RaisePropertyChanged();
-                if (_selectedSemester!=null && _selectedSpecialite!=null)
+                if (_selectedSemester != null && _selectedSpecialite != null)
                 {
-                    var cy = int.Parse(CurrentYear);
-                    var modeEtudes =
-                        _context.EXAMENS_ANNEES_MODES_ETUDES.Where(x => x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE &&
-                                 x.ANNEE_UNIVERSITAIRE == cy && x.ID_MODE_ETUDE == _selectedSemester.ID_MODE_ETUDE).ToList();
-                    ExaminList = new ObservableCollection<EXAMEN>(modeEtudes.Select(x => x.EXAMEN).ToList());
-                    RefreshNoteStudentList();
-                    RefreshNoteDetteStudentList(); 
+                    try
+                    {
+                        var cy = int.Parse(CurrentYear);
+                        var modeEtudes =
+                            _context.EXAMENS_ANNEES_MODES_ETUDES.Where(x => x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE &&
+                                     x.ANNEE_UNIVERSITAIRE == cy && x.ID_MODE_ETUDE == _selectedSemester.ID_MODE_ETUDE).ToList();
+                        ExaminList = new ObservableCollection<EXAMEN>(modeEtudes.Select(x => x.EXAMEN).ToList());
+                        RefreshNoteStudentList();
+                        RefreshNoteDetteStudentList();
+                    }
+                    catch (Exception ex)
+                    {
+                        var _controller = ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("Probleme interne", "un porblem d'acces a la base de données ... "));
+                        Debug.WriteLine("EF ->" + ex.Message);
+                    }
+
                 }
             }
         }
@@ -565,23 +565,26 @@ namespace ESC_OfflineTeacher.ViewModel
 
             set
             {
-                if (_selectedSection == value)
-                {
-                    return;
-                }
-
                 _selectedSection = value;
                 RaisePropertyChanged();
-                if (_selectedSection != null)
+                if (_selectedSection != null && _loggedInTeacher != null && _selectedSpecialite != null && _selectedMatiere != null)
                 {
-                    var cy = int.Parse(CurrentYear);
-                    GroupeList =
-                        new ObservableCollection<GROUPE>(_context.USERS_SPECIALITES.Where(
-                            x =>
-                                x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == _loggedInTeacher.ID_USER &&
-                                x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE && x.ID_MATIERE==_selectedMatiere.ID_MATIERE).Select(x => x.GROUPE).Where(g=>g.ID_SECTION==_selectedSection.ID_SECTION).Distinct());
-                    RefreshNoteStudentList();
-                    RefreshNoteDetteStudentList();
+                    try
+                    {
+                        var cy = int.Parse(CurrentYear);
+                        GroupeList =
+                            new ObservableCollection<GROUPE>(_context.USERS_SPECIALITES.Where(
+                                x =>
+                                    x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == _loggedInTeacher.ID_USER &&
+                                    x.ID_SPECIALITE == _selectedSpecialite.ID_SPECIALITE && x.ID_MATIERE == _selectedMatiere.ID_MATIERE).Select(x => x.GROUPE).Where(g => g.ID_SECTION == _selectedSection.ID_SECTION).Distinct());
+                        RefreshNoteStudentList();
+                        RefreshNoteDetteStudentList();
+                    }
+                    catch (Exception ex)
+                    {
+                        var _controller = ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("Probleme interne", "un porblem d'acces a la base de données ... "));
+                        Debug.WriteLine("EF ->" + ex.Message);
+                    }
                 }
                 else
                 {
@@ -609,8 +612,16 @@ namespace ESC_OfflineTeacher.ViewModel
 
                 _selectedGroupe = value;
                 RaisePropertyChanged();
-                RefreshNoteStudentList();
-                RefreshNoteDetteStudentList();
+                try
+                {
+                    RefreshNoteStudentList();
+                    RefreshNoteDetteStudentList();
+                }
+                catch (Exception ex)
+                {
+                    var _controller = ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("Probleme interne", "un porblem d'acces a la base de données ... "));
+                    Debug.WriteLine("EF ->" + ex.Message);
+                }
             }
         }
         public EXAMEN SelectedExamin
@@ -629,8 +640,16 @@ namespace ESC_OfflineTeacher.ViewModel
 
                 _selectedExamen = value;
                 RaisePropertyChanged();
-                RefreshNoteStudentList();
-                RefreshNoteDetteStudentList();
+                try
+                {
+                    RefreshNoteStudentList();
+                    RefreshNoteDetteStudentList();
+                }
+                catch (Exception ex)
+                {
+                    var _controller = ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("Probleme interne", "un porblem d'acces a la base de données ... "));
+                    Debug.WriteLine("EF ->" + ex.Message);
+                }
             }
         }
         public ExaminDette SelectedExaminDette
@@ -644,8 +663,8 @@ namespace ESC_OfflineTeacher.ViewModel
             {
                 _selectedExaminDette = value;
                 RaisePropertyChanged();
-                if (_selectedExaminDette==null)
-                return;
+                if (_selectedExaminDette == null)
+                    return;
                 if (_selectedExaminDette.DESIGNATION_LATIN == ListExaminDette[0].DESIGNATION_LATIN && !AfficherTousExamin)
                 {
                     NoteDetteColVisibility = Visibility.Visible;
@@ -805,24 +824,10 @@ namespace ESC_OfflineTeacher.ViewModel
             {
                 return _syncCommand
                     ?? (_syncCommand = new RelayCommand(async () =>
-                    {                        
-                        //if ((string)Settings.Default["HashValue"] == "")
-                        //{
-                        //    Settings.Default["HashValue"] = ComputeHash(_localDbPath);
-                        //    Settings.Default.Save();
-                        //}
-                        //else if (!ComputeHash(_localDbPath).Equals(Settings.Default["HashValue"]))
-                        //{
-                        //    //the database has been modified outside of the application 
-                        //    _controller = await ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("impossible de synchronizer", "la base de donné a été modifié en dehors de l'application... "));
-                        //    return;
-                        //}
-                       
-                            Save();
-                            if (!_syncBackgroundWorker.IsBusy)
-                                _syncBackgroundWorker.RunWorkerAsync();
-                       
-
+                    {
+                        Save();
+                        if (!_syncBackgroundWorker.IsBusy)
+                            _syncBackgroundWorker.RunWorkerAsync();
                     }));
             }
         }
@@ -834,14 +839,14 @@ namespace ESC_OfflineTeacher.ViewModel
                 return _noteViewLoadedCommand
                     ?? (_noteViewLoadedCommand = new RelayCommand(
                     () =>
-                    {                                           
-                        if (LoggedInTeacher!=null)
+                    {
+                        if (LoggedInTeacher != null)
                         {
                             CurrentYear = _context.ANNEES.Max(x => x.ANNEE_UNIVERSITAIRE).ToString(CultureInfo.InvariantCulture);
                             var cy = int.Parse(CurrentYear);
-                            var userSpecialite = _context.USERS_SPECIALITES.Where(x => x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == LoggedInTeacher.ID_USER).ToList();
-                            SpecialiteList = new ObservableCollection<SPECIALITE>(userSpecialite.Select(x => x.SPECIALITE).Distinct().ToList()); 
-                        }                      
+                            var userSpecialite = _context.USERS_SPECIALITES.Where(x => x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == LoggedInTeacher.ID_USER).Select(x => x).ToList();
+                            SpecialiteList = new ObservableCollection<SPECIALITE>(userSpecialite.Select(x => x.SPECIALITE).Distinct().ToList());
+                        }
                     }));
             }
         }
@@ -856,17 +861,6 @@ namespace ESC_OfflineTeacher.ViewModel
         }
         private async void Save()
         {
-            //if ((string)Settings.Default["HashValue"] == "")
-            //{
-            //    Settings.Default["HashValue"] = ComputeHash(_localDbPath);
-            //    Settings.Default.Save();
-            //}
-            //else if(!ComputeHash(_localDbPath).Equals(Settings.Default["HashValue"]))
-            //{
-            //    //the database has been modified outside of the application 
-            //    _controller = await ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("impossible d'enregistrer", "la base de donné a été modifié en dehors de l'application... "));
-            //    return;
-            //}
             var cy = int.Parse(CurrentYear);
             foreach (var etudiantNote in ListNotesExamins)
             {
@@ -935,7 +929,7 @@ namespace ESC_OfflineTeacher.ViewModel
                         if (dlg.ShowDialog() == true)
                         {
                             try
-                            {                                
+                            {
                                 string fileName = dlg.FileName;
                                 //var hashReader=new StreamReader(fileName+".hash");
                                 //var hash = ComputeHash(fileName);
@@ -947,17 +941,17 @@ namespace ESC_OfflineTeacher.ViewModel
                                 Settings.Default["HashValue"] = ComputeHash(fileName, App.LocalDbPath);
                                 Settings.Default.Save();
                                 _context.Dispose();
-                                _context=new LocalDbEntities();
+                                _context = new LocalDbEntities();
                                 RefreshNoteStudentList();
                                 RefreshNoteDetteStudentList();
 
                             }
                             catch (Exception e)
                             {
-                                var _controller = ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("Erreur d'importation ", "le fichier que vous voulez importer est interrompu ... "));                                
+                                var _controller = ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("Echec d'importation de la base de données ", "La base que vous voulez importer est interrompu ... "));
                             }
                         }
-                        
+
                     }));
             }
         }
@@ -980,29 +974,29 @@ namespace ESC_OfflineTeacher.ViewModel
                         {
                             try
                             {
-                                string fileName = dlg.FileName;                              
-                                var hash=ComputeHash(App.LocalDbPath,fileName);
+                                string fileName = dlg.FileName;
+                                var hash = ComputeHash(App.LocalDbPath, fileName);
                                 var strWritter = new StreamWriter(fileName + ".hash");
-                                await strWritter.WriteLineAsync(hash);                                
+                                await strWritter.WriteLineAsync(hash);
                                 strWritter.Close();
 
                             }
                             catch (Exception e)
                             {
-                                var _controller = ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("Erreur d'éxportation ", "probleme d'éxportation du base de données ... "));                                
+                                var _controller = ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("Echec d'éxportation de la base de données  ", "problème d'éxportation de la base de données ... "));
                             }
-                        }                     
+                        }
                     }));
             }
         }
         #endregion
         #region Ctors and Methods
         public NoteViewModel(IFrameNavigationService navigationService)
-        {                       
-            _navigationService = navigationService;            
-            _context = new LocalDbEntities();            
+        {                        
+            _navigationService = navigationService;
+            _context = new LocalDbEntities();
             Initialisation();
-            Messenger.Default.Register<bool>(this,"LangFr", (fr) =>
+            Messenger.Default.Register<bool>(this, "LangFr", (fr) =>
             {
                 LangContentFr = fr;
             });
@@ -1021,12 +1015,12 @@ namespace ESC_OfflineTeacher.ViewModel
                         GlobalThemeBrush = App.Light;
                         break;
                 }
-            });
-            
+            });                       
+
         }
         private void Initialisation()
-        {            
-            InitializeSyncBackgroundWorker();          
+        {
+            InitializeSyncBackgroundWorker();
             ListNotesExamins = new ObservableCollection<EtudiantNote>();
             ListNotesDettes = new ObservableCollection<EtudiantNoteDette>();
             ListExaminDette = new ObservableCollection<ExaminDette>()
@@ -1067,7 +1061,7 @@ namespace ESC_OfflineTeacher.ViewModel
                 //if it is the first sync, the above object is null .. -> force resync then update it 
                 if (LoggedInTeacher == null)
                 {
-                    _syncBackgroundWorker.RunWorkerAsync();                   
+                    _syncBackgroundWorker.RunWorkerAsync();
                 }
                 LangContentFr = ((UserPreferences)_navigationService.Parameter).LangContFr;
             }
@@ -1079,9 +1073,9 @@ namespace ESC_OfflineTeacher.ViewModel
             _syncBackgroundWorker = new BackgroundWorker { WorkerReportsProgress = true };
             _syncBackgroundWorker.DoWork += new DoWorkEventHandler(_syncBackgroundWorker_DoWork);
             _syncBackgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(_syncBackgroundWorker_RunWorkerCompleted);
-           // _syncBackgroundWorker.ProgressChanged += new ProgressChangedEventHandler(_syncBackgroundWorker_ProgressChanged);
-        }       
-        private  void _syncBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+            // _syncBackgroundWorker.ProgressChanged += new ProgressChangedEventHandler(_syncBackgroundWorker_ProgressChanged);
+        }
+        private void _syncBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             try
             {
@@ -1091,16 +1085,23 @@ namespace ESC_OfflineTeacher.ViewModel
                 {
                     Application.Current.MainWindow.Cursor = Cursors.Arrow;
                 }));
-                //Settings.Default["HashValue"] = ComputeHash(App.LocalDbPath);
-                //Settings.Default.Save();
                 _context.Dispose();
                 _context = new LocalDbEntities();
-                LoggedInTeacher = _context.ENSEIGNANTS.First(
-                                    y => y.ID_USER == ((UserPreferences)_navigationService.Parameter).IdUser);
-                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                if (LoggedInTeacher==null)
                 {
-                Messenger.Default.Send<ENSEIGNANT>(LoggedInTeacher, "Login");
-                }));
+                    LoggedInTeacher = _context.ENSEIGNANTS.FirstOrDefault(
+                                               y => y.ID_USER == ((UserPreferences)_navigationService.Parameter).IdUser); 
+                }
+                if (LoggedInTeacher==null)
+                {
+                    LoggedInTeacher=new ENSEIGNANT()
+                    {
+                        NOM = ((UserPreferences)_navigationService.Parameter).UserName,
+                        ID_USER = ((UserPreferences)_navigationService.Parameter).IdUser,
+                        NOM_LATIN = ((UserPreferences)_navigationService.Parameter).UserName
+                    }; 
+                }
+                Application.Current.Dispatcher.BeginInvoke(new Action(() => Messenger.Default.Send<ENSEIGNANT>(LoggedInTeacher, "Login")));
                 CurrentYear = _context.ANNEES.Max(x => x.ANNEE_UNIVERSITAIRE).ToString(CultureInfo.InvariantCulture);
                 var cy = int.Parse(CurrentYear);
                 var userSpecialite = _context.USERS_SPECIALITES.Where(x => x.ANNEE_UNIVERSITAIRE == cy && x.ID_USER == LoggedInTeacher.ID_USER).ToList();
@@ -1110,13 +1111,13 @@ namespace ESC_OfflineTeacher.ViewModel
             }
             catch (Exception ex)
             {
-                
+                var _controller = ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("Echec d'exportation de la base de données  ", "problème d'éxportation de la base de données ... "));
                 Debug.WriteLine(ex.Message);
             }
 
         }
-        private async  void _syncBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {            
+        private async void _syncBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
             // Application.Current.MainWindow.Cursor = Cursors.Wait;
             PbVisibility = Visibility.Visible;
             ProgressRingIsActive = true;
@@ -1125,11 +1126,12 @@ namespace ESC_OfflineTeacher.ViewModel
             {
                 LocalProvider = new ESCLocalDbClientSyncProvider(),
                 RemoteProvider = new ESCLocalDbServerSyncProvider()
+
             };
-            
-            agent.SessionProgress += new EventHandler<Microsoft.Synchronization.SessionProgressEventArgs>(agent_SessionProgress);            
-            ((ESCLocalDbClientSyncProvider)agent.LocalProvider).ApplyChangeFailed += new EventHandler<Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs>(Local_ApplyChangeFailed);          
-            ((ESCLocalDbServerSyncProvider)agent.RemoteProvider).ApplyChangeFailed += new EventHandler<Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs>(Remote_ApplyChangeFailed);
+
+            agent.SessionProgress += new EventHandler<Microsoft.Synchronization.SessionProgressEventArgs>(agent_SessionProgress);
+            //  ((ESCLocalDbClientSyncProvider)agent.LocalProvider).ApplyChangeFailed += new EventHandler<Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs>(Local_ApplyChangeFailed);          
+            //  ((ESCLocalDbServerSyncProvider)agent.RemoteProvider).ApplyChangeFailed += new EventHandler<Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs>(Remote_ApplyChangeFailed);
 
             try
             {
@@ -1141,99 +1143,113 @@ namespace ESC_OfflineTeacher.ViewModel
                 {
                     var controller = ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("Problem d'acces a la base de données", exception.Message));
                 }));
-                               
-            }                             
+
+            }
         }
         async void agent_SessionProgress(object sender, Microsoft.Synchronization.SessionProgressEventArgs e)
         {
-            PbValue = e.PercentCompleted;             
+            PbValue = e.PercentCompleted;
         }
         async void Local_ApplyChangeFailed(object sender, Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs e)
         {
-            var _controller = await((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("Problem de synchronization", "problème lors de application des changement a la base local ... "));
+            var _controller = await ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("Problème de synchronization", "problème lors de l'application des changement a la base de données local ..."));
         }
         async void Remote_ApplyChangeFailed(object sender, Microsoft.Synchronization.Data.ApplyChangeFailedEventArgs e)
         {
-            var _controller = await((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("Problem de synchronization", "problème lors de application des changement a la base distante ... "));
+            var _controller = await ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("Problème de synchronization", "problème lors de l'application des changement a la base de données distante ..."));
         }
         private void RefreshNoteStudentList()
         {
             if (SelectedMatiere != null && SelectedExamin != null && SelectedGroupe != null)
             {
-                var cy = int.Parse(CurrentYear);
-                ListNotesExamins =
-                    new ObservableCollection<EtudiantNote>(_context.NOTES_EXAMEN.Where(
-                        x => x.ANNEE_UNIVERSITAIRE == cy &&
-                             x.ID_MATIERE == SelectedMatiere.ID_MATIERE &&
-                             x.ID_EXAMEN == SelectedExamin.ID_EXAMEN).Join(_context.ETUDES, note => note.ID_ETUDIANT, etude => etude.ID_ETUDIANT, (note, etude) => new
-                             {
-                                 etudiant = note.ETUDIANT,
-                                 note = note.NOTE,
-                                 groupe = etude.ID_GROUPE,
-                                 Section = etude.ID_SECTION,
-                                 specialite = etude.ID_SPECIALITE
-                             }).Where(x => x.groupe == SelectedGroupe.ID_GROUPE).Select(x => new EtudiantNote()
-                             {
-                                 IdEtudiant = x.etudiant.ID_ETUDIANT,
-                                 Matricule = x.etudiant.MATRICULE,
-                                 Nom = x.etudiant.NOM,
-                                 Prenom = x.etudiant.PRENOM,
-                                 NomLatin = x.etudiant.NOM_LATIN,
-                                 PrenomLatin = x.etudiant.PRENOM_LATIN,
-                                 Note = x.note
-                             }));
-                _listNotesExaminsForSearch = new ObservableCollection<EtudiantNote>(ListNotesExamins);
+                try
+                {
+                    var cy = int.Parse(CurrentYear);
+                    ListNotesExamins =
+                        new ObservableCollection<EtudiantNote>(_context.NOTES_EXAMEN.Where(
+                            x => x.ANNEE_UNIVERSITAIRE == cy &&
+                                 x.ID_MATIERE == SelectedMatiere.ID_MATIERE &&
+                                 x.ID_EXAMEN == SelectedExamin.ID_EXAMEN).Join(_context.ETUDES, note => note.ID_ETUDIANT, etude => etude.ID_ETUDIANT, (note, etude) => new
+                                 {
+                                     etudiant = note.ETUDIANT,
+                                     note = note.NOTE,
+                                     groupe = etude.ID_GROUPE,
+                                     Section = etude.ID_SECTION,
+                                     specialite = etude.ID_SPECIALITE
+                                 }).Where(x => x.groupe == SelectedGroupe.ID_GROUPE).Select(x => new EtudiantNote()
+                                 {
+                                     IdEtudiant = x.etudiant.ID_ETUDIANT,
+                                     Matricule = x.etudiant.MATRICULE,
+                                     Nom = x.etudiant.NOM,
+                                     Prenom = x.etudiant.PRENOM,
+                                     NomLatin = x.etudiant.NOM_LATIN,
+                                     PrenomLatin = x.etudiant.PRENOM_LATIN,
+                                     Note = x.note
+                                 }));
+                    _listNotesExaminsForSearch = new ObservableCollection<EtudiantNote>(ListNotesExamins);
+                }
+                catch (Exception ex)
+                {
+                    var _controller = ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("Une erreur interne", "un porblème d'accés a la base de données locale ... "));
+                }
             }
         }
         private void RefreshNoteDetteStudentList()
         {
             if (SelectedMatiere != null && SelectedGroupe != null)
             {
-                var cy = int.Parse(CurrentYear);
-                ListNotesDettes =
-                    new ObservableCollection<EtudiantNoteDette>(_context.NOTE_DETTE.Where(
-                        x => x.ANNEE_PASSAGE_DETTE == cy &&
-                             x.ID_MATIERE == SelectedMatiere.ID_MATIERE).Join(_context.ETUDES, note => note.ID_ETUDIANT, etude => etude.ID_ETUDIANT, (note, etude) => new
-                             {
-                                 etudiant = note.ETUDIANT,
-                                 note = note.NOTE,
-                                 noteRattrapage = note.NOTE_RATTRAPAGE,
-                                 groupe = etude.ID_GROUPE,
-                                 Section = etude.ID_SECTION,
-                                 specialite = etude.ID_SPECIALITE
-                             }).Where(x => x.groupe == SelectedGroupe.ID_GROUPE).Select(x => new EtudiantNoteDette()
-                             {
-                                 IdEtudiant = x.etudiant.ID_ETUDIANT,
-                                 Matricule = x.etudiant.MATRICULE,
-                                 Nom = x.etudiant.NOM,
-                                 Prenom = x.etudiant.PRENOM,
-                                 NomLatin = x.etudiant.NOM_LATIN,
-                                 PrenomLatin = x.etudiant.PRENOM_LATIN,
-                                 Note = x.note,
-                                 NoteRattrapage = x.noteRattrapage
-                             }));
-                _listNotesDettesForSearch = new ObservableCollection<EtudiantNoteDette>(ListNotesDettes);
+                try
+                {
+                    var cy = int.Parse(CurrentYear);
+                    ListNotesDettes =
+                        new ObservableCollection<EtudiantNoteDette>(_context.NOTE_DETTE.Where(
+                            x => x.ANNEE_PASSAGE_DETTE == cy &&
+                                 x.ID_MATIERE == SelectedMatiere.ID_MATIERE).Join(_context.ETUDES, note => note.ID_ETUDIANT, etude => etude.ID_ETUDIANT, (note, etude) => new
+                                 {
+                                     etudiant = note.ETUDIANT,
+                                     note = note.NOTE,
+                                     noteRattrapage = note.NOTE_RATTRAPAGE,
+                                     groupe = etude.ID_GROUPE,
+                                     Section = etude.ID_SECTION,
+                                     specialite = etude.ID_SPECIALITE
+                                 }).Where(x => x.groupe == SelectedGroupe.ID_GROUPE).Select(x => new EtudiantNoteDette()
+                                 {
+                                     IdEtudiant = x.etudiant.ID_ETUDIANT,
+                                     Matricule = x.etudiant.MATRICULE,
+                                     Nom = x.etudiant.NOM,
+                                     Prenom = x.etudiant.PRENOM,
+                                     NomLatin = x.etudiant.NOM_LATIN,
+                                     PrenomLatin = x.etudiant.PRENOM_LATIN,
+                                     Note = x.note,
+                                     NoteRattrapage = x.noteRattrapage
+                                 }));
+                    _listNotesDettesForSearch = new ObservableCollection<EtudiantNoteDette>(ListNotesDettes);
+                }
+                catch (Exception ex)
+                {
+                    var _controller = ((Application.Current.MainWindow as MetroWindow).ShowMessageAsync("Une erreur interne", "un porblème d'accés a la base de données locale ... "));
+                }
             }
         }
-        public string ComputeHash(string fileName,string exportTo=null)
+        public string ComputeHash(string fileName, string exportTo = null)
         {
             using (var md5 = MD5.Create())
             {
 
-                string to = exportTo ?? "\\res.sdf";                
+                string to = exportTo ?? "\\res.sdf";
                 File.Copy(fileName, to, true);
-                string res="";
-                using (var stream = File.OpenRead(to))                
+                string res = "";
+                using (var stream = File.OpenRead(to))
                 {
-                     res= BitConverter.ToString(md5.ComputeHash(stream));
+                    res = BitConverter.ToString(md5.ComputeHash(stream));
                 }
-                if (exportTo==null)
+                if (exportTo == null)
                 {
                     File.Delete(to);
                 }
                 return res;
             }
-        }     
+        }
         public void LOG_SaisieNotes(int? idEtudiant, int? idMatiere, double? oldNote, double? newNote, bool dette, double? oldNoteRattrapage = null, double? newNoteRattrapage = null)
         {
             const string details = "[MACHINE={0}];[ACTION=Modification d'une note d'un étudiant];[{1}]";

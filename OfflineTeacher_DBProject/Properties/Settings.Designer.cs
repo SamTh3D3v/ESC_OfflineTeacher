@@ -36,7 +36,7 @@ namespace OfflineTeacher_DBProject.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ELHAMER-PC\\SQLEXPRESS;Initial Catalog=SGSDB;Integrated Security=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source = ns4; Initial Catalog=SGSDB;User Id=WebUser; Password=P@$$w0rd;")]
         public string ServerSGSDBConnectionString {
             get {
                 return ((string)(this["ServerSGSDBConnectionString"]));

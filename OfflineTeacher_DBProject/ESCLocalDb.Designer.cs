@@ -1812,14 +1812,6 @@ namespace OfflineTeacher_DBProject {
             System.Data.SqlClient.SqlParameter updatecommand_sync_row_countParameter = new System.Data.SqlClient.SqlParameter("@sync_row_count", System.Data.SqlDbType.Int);
             updatecommand_sync_row_countParameter.Direction = System.Data.ParameterDirection.Output;
             this.UpdateCommand.Parameters.Add(updatecommand_sync_row_countParameter);
-            // NOTES_EXAMENSyncTableSelectConflictDeletedRowsCommand command.
-            this.SelectConflictDeletedRowsCommand = new System.Data.SqlClient.SqlCommand();
-            this.SelectConflictDeletedRowsCommand.CommandText = @"SELECT [ID_ETUDIANT], [ANNEE_UNIVERSITAIRE], [ID_MATIERE], [ID_EXAMEN], [DeletionDate] FROM dbo.NOTES_EXAMEN_Tombstone WHERE ([ID_ETUDIANT] = @ID_ETUDIANT AND [ANNEE_UNIVERSITAIRE] = @ANNEE_UNIVERSITAIRE AND [ID_MATIERE] = @ID_MATIERE AND [ID_EXAMEN] = @ID_EXAMEN)";
-            this.SelectConflictDeletedRowsCommand.CommandType = System.Data.CommandType.Text;
-            this.SelectConflictDeletedRowsCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ID_ETUDIANT", System.Data.SqlDbType.Int));
-            this.SelectConflictDeletedRowsCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ANNEE_UNIVERSITAIRE", System.Data.SqlDbType.Int));
-            this.SelectConflictDeletedRowsCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ID_MATIERE", System.Data.SqlDbType.Int));
-            this.SelectConflictDeletedRowsCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@ID_EXAMEN", System.Data.SqlDbType.Int));
             // NOTES_EXAMENSyncTableSelectConflictUpdatedRowsCommand command.
             this.SelectConflictUpdatedRowsCommand = new System.Data.SqlClient.SqlCommand();
             this.SelectConflictUpdatedRowsCommand.CommandText = @"SELECT [ID_ETUDIANT], [ANNEE_UNIVERSITAIRE], [ID_MATIERE], [ID_EXAMEN], [NOTE], [LastEditDate], [CreationDate] FROM dbo.NOTES_EXAMEN WHERE ([ID_ETUDIANT] = @ID_ETUDIANT AND [ANNEE_UNIVERSITAIRE] = @ANNEE_UNIVERSITAIRE AND [ID_MATIERE] = @ID_MATIERE AND [ID_EXAMEN] = @ID_EXAMEN)";
@@ -1836,16 +1828,6 @@ namespace OfflineTeacher_DBProject {
             this.SelectIncrementalInsertsCommand.CommandType = System.Data.CommandType.Text;
             this.SelectIncrementalInsertsCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@sync_last_received_anchor", System.Data.SqlDbType.DateTime));
             this.SelectIncrementalInsertsCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@sync_new_received_anchor", System.Data.SqlDbType.DateTime));
-            // NOTES_EXAMENSyncTableSelectIncrementalDeletesCommand command.
-            this.SelectIncrementalDeletesCommand = new System.Data.SqlClient.SqlCommand();
-            this.SelectIncrementalDeletesCommand.CommandText = "SELECT [ID_ETUDIANT], [ANNEE_UNIVERSITAIRE], [ID_MATIERE], [ID_EXAMEN], [Deletion" +
-                "Date] FROM dbo.NOTES_EXAMEN_Tombstone WHERE (@sync_initialized = 1 AND [Deletion" +
-                "Date] > @sync_last_received_anchor AND [DeletionDate] <= @sync_new_received_anch" +
-                "or)";
-            this.SelectIncrementalDeletesCommand.CommandType = System.Data.CommandType.Text;
-            this.SelectIncrementalDeletesCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@sync_initialized", System.Data.SqlDbType.Bit));
-            this.SelectIncrementalDeletesCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@sync_last_received_anchor", System.Data.SqlDbType.DateTime));
-            this.SelectIncrementalDeletesCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter("@sync_new_received_anchor", System.Data.SqlDbType.DateTime));
             // NOTES_EXAMENSyncTableSelectIncrementalUpdatesCommand command.
             this.SelectIncrementalUpdatesCommand = new System.Data.SqlClient.SqlCommand();
             this.SelectIncrementalUpdatesCommand.CommandText = @"SELECT [ID_ETUDIANT], [ANNEE_UNIVERSITAIRE], [ID_MATIERE], [ID_EXAMEN], [NOTE], [LastEditDate], [CreationDate] FROM dbo.NOTES_EXAMEN WHERE ([LastEditDate] > @sync_last_received_anchor AND [LastEditDate] <= @sync_new_received_anchor AND [CreationDate] <= @sync_last_received_anchor)";

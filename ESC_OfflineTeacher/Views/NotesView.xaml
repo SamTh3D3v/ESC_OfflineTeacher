@@ -350,7 +350,7 @@
                                   Margin="2" ItemsSource="{Binding RechercherParList,Mode=TwoWay}" ItemTemplate="{StaticResource CbxSearchTemplate}"/>
                         <TextBox Grid.Row="0" Text="{Binding SearchText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Margin="1" BorderBrush="Black"></TextBox>
                     </Grid>
-                    <DataGrid x:Name="NoteDataGrid"  Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding ListNotesExamins}">
+                    <DataGrid x:Name="NoteDataGrid" CanUserAddRows="False" Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding ListNotesExamins}">
                         <DataGrid.Resources>
                             <Style TargetType="DataGridCell">
                                 <Style.Triggers>
@@ -445,7 +445,7 @@
                         </StackPanel.Resources>
                         <ContentControl Visibility="Collapsed"
                 Content="{StaticResource ProxyElement}"/>
-                        <DataGrid x:Name="NoteDetteDataGrid"   AutoGenerateColumns="False" ItemsSource="{Binding ListNotesDettes}">
+                        <DataGrid x:Name="NoteDetteDataGrid"  CanUserAddRows="False"  AutoGenerateColumns="False" ItemsSource="{Binding ListNotesDettes}">
                             <DataGrid.Resources>
                                 <Style TargetType="DataGridCell">
                                     <Style.Triggers>
