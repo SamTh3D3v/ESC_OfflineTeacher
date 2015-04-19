@@ -42,4 +42,6 @@
     <system:String x:Key="Enregistrer">حفظ</system:String>
     <system:String x:Key="Annuler">الغاء</system:String>
     <system:Boolean x:Key="LangueContenuFr">true</system:Boolean>
+    <system:String x:Key="SortMemberPathNom">Nom</system:String>
+    <system:String x:Key="SortMemberPathPrenom">Prenom</system:String>
 </ResourceDictionary>

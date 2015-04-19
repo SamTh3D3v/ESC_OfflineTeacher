@@ -342,12 +342,6 @@
     <Resource Include="Assets\search.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OfflineTeacher_DBProject\OfflineTeacher_DBProject.csproj">
-      <Project>{b8b56e81-6095-4b37-a782-f20b5ec93d05}</Project>
-      <Name>OfflineTeacher_DBProject</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.1">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.5.1 %28x86 and x64%29</ProductName>
@@ -408,6 +402,12 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OfflineTeacher_DBProject\OfflineTeacher_DBProject.csproj">
+      <Project>{b8b56e81-6095-4b37-a782-f20b5ec93d05}</Project>
+      <Name>OfflineTeacher_DBProject</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

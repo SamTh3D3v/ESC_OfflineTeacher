@@ -40,6 +40,8 @@
     <system:String x:Key="ImportTooltip">importer la base de données</system:String>
     <system:String x:Key="ExportTooltip">exporter la base de données</system:String>
     <system:String x:Key="Enregistrer">enregistrer</system:String>
-    <system:String x:Key="Annuler">annuler</system:String>    
-    <system:Boolean x:Key="LangueContenuFr">true</system:Boolean>        
+    <system:String x:Key="Annuler">annuler</system:String>
+    <system:String x:Key="LangueContenuFr">true</system:String>
+    <system:String x:Key="SortMemberPathNom">NomLatin</system:String>
+    <system:String x:Key="SortMemberPathPrenom">PrenomLatin</system:String>        
 </ResourceDictionary>

@@ -26,20 +26,22 @@ namespace OfflineTeacher_DBProject.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=|DataDirectory|\\SGSDB.sdf;Max Database Size=2047")]
-        public string ClientSGSDBConnectionString {
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ELHAMER-PC\\SQLEXPRESS;Initial Catalog=SGSDB;Integrated Security=True;" +
+            "")]
+        public string ServerSGSDBConnectionString {
             get {
-                return ((string)(this["ClientSGSDBConnectionString"]));
+                return ((string)(this["ServerSGSDBConnectionString"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source = ns4; Initial Catalog=SGSDB;User Id=WebUser; Password=P@$$w0rd;")]
-        public string ServerSGSDBConnectionString {
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=|DataDirectory|\\SGSDB.sdf;Password=Password;Persist Security Info=Tru" +
+            "e;Max Database Size=2047")]
+        public string ClientSGSDBConnectionString {
             get {
-                return ((string)(this["ServerSGSDBConnectionString"]));
+                return ((string)(this["ClientSGSDBConnectionString"]));
             }
         }
     }

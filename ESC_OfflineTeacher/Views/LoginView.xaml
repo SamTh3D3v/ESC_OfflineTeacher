@@ -100,7 +100,7 @@
                 </Style>
             </PasswordBox.Style>
         </PasswordBox>
-        <Button Content="{DynamicResource Connextion}" Background="{Binding GlobalThemeBrush}" Foreground="Black" FontSize="16" Grid.Row="2" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=PBox}" Grid.Column="1" Margin="5" Height="40" Width="150" VerticalAlignment="Top" Style="{StaticResource AccentedSquareButtonStyle}">
+        <Button IsDefault="True" Content="{DynamicResource Connextion}" Background="{Binding GlobalThemeBrush}" Foreground="Black" FontSize="16" Grid.Row="2" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=PBox}" Grid.Column="1" Margin="5" Height="40" Width="150" VerticalAlignment="Top" Style="{StaticResource AccentedSquareButtonStyle}">
            
         </Button>
         <Button Grid.Row="2"  ToolTip="{DynamicResource ImportTooltip}" Grid.Column="3" Width="40" Height="40" VerticalAlignment="Center" Background="WhiteSmoke" Command="{Binding ImportDataBaseCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">

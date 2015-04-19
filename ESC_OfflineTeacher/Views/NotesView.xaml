@@ -6,7 +6,8 @@
       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:ignore="http://www.ignore.com"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        xmlns:command="http://www.galasoft.ch/mvvmlight"      
+        xmlns:command="http://www.galasoft.ch/mvvmlight"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d ignore" d:DesignHeight="600" d:DesignWidth="1000"      
         DataContext="{Binding NoteViewModel, Source={StaticResource Locator}}" Background="WhiteSmoke" >
     <Page.Resources>
@@ -350,7 +351,8 @@
                                   Margin="2" ItemsSource="{Binding RechercherParList,Mode=TwoWay}" ItemTemplate="{StaticResource CbxSearchTemplate}"/>
                         <TextBox Grid.Row="0" Text="{Binding SearchText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Margin="1" BorderBrush="Black"></TextBox>
                     </Grid>
-                    <DataGrid x:Name="NoteDataGrid" CanUserAddRows="False" Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding ListNotesExamins}">
+                    <DataGrid CanUserSortColumns="True" x:Name="NoteDataGrid" CanUserAddRows="False" Grid.Row="1"  CanUserReorderColumns="True"
+                 CanUserResizeColumns="True" AutoGenerateColumns="False" ItemsSource="{Binding ListNotesExamins}">                        
                         <DataGrid.Resources>
                             <Style TargetType="DataGridCell">
                                 <Style.Triggers>
@@ -358,12 +360,25 @@
                                         <Setter Property="IsTabStop" Value="False"/>
                                     </Trigger>
                                 </Style.Triggers>
+                            </Style>                           
+                            <Style x:Key="NomStaticResource" TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="Content" Value="{DynamicResource Nom}" />
                             </Style>
+                            <Style x:Key="PrenomStaticResource" TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="Content" Value="{DynamicResource Prenom}" />                                
+                            </Style>
+                            
+                            <Style x:Key="NoteStaticResource" TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="Content" Value="{DynamicResource Note}"></Setter>
+                            </Style>
+                            <Style x:Key="MatriculeStaticResource" TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="Content" Value="{DynamicResource Matricule}"></Setter>
+                            </Style>                            
                         </DataGrid.Resources>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="{DynamicResource Matricule}" IsReadOnly="True" 
+                            <DataGridTextColumn HeaderStyle="{StaticResource  MatriculeStaticResource}" IsReadOnly="True"
                                     Binding="{Binding Matricule}" MinWidth="100" />
-                            <DataGridTextColumn Header="{DynamicResource Nom}" IsReadOnly="True"
+                            <DataGridTextColumn  HeaderStyle="{StaticResource NomStaticResource}" IsReadOnly="True" SortMemberPath="{DynamicResource SortMemberPathNom}"
                                      MinWidth="150">
                                 <DataGridTextColumn.Binding>
                                     <MultiBinding Converter="{StaticResource NomConverter}">
@@ -373,7 +388,7 @@
                                     </MultiBinding>
                                 </DataGridTextColumn.Binding>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="{DynamicResource Prenom}" IsReadOnly="True"
+                            <DataGridTextColumn HeaderStyle="{StaticResource PrenomStaticResource}" IsReadOnly="True" SortMemberPath="{DynamicResource SortMemberPathPrenom}"
                                      MinWidth="150">
                                 <DataGridTextColumn.Binding>
                                     <MultiBinding Converter="{StaticResource NomConverter}">
@@ -383,10 +398,10 @@
                                     </MultiBinding>
                                 </DataGridTextColumn.Binding>
                             </DataGridTextColumn>
-                            <controls:DataGridNumericUpDownColumn Header="{DynamicResource Note}" IsReadOnly="False" 
+                            <controls:DataGridNumericUpDownColumn  HeaderStyle="{StaticResource NoteStaticResource}" Width="*" IsReadOnly="False"  SortMemberPath="Note"
                                                       Binding="{Binding Note,Mode=TwoWay}" 
                                                       StringFormat="N" 
-                                                      Minimum="0" Maximum="20" MinWidth="40"/>
+                                                      Minimum="0" Maximum="20" MinWidth="40" />
                             <!--<controls:DataGridNumericUpDownColumn Header="Participation" 
                                                       Binding="{Binding NoteParticipation}" 
                                                       StringFormat="N" 
